@@ -70,7 +70,7 @@ class RFID(threading.Thread):
     def run(self):
         try:
             print("in run.")
-            while not stopped():
+            while not self._stop_event.isSet():
                 print("Ready For Next")
                 id, text = self.reader.read()
                 print(id)
