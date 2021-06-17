@@ -54,7 +54,7 @@ import threading
 
 class RFID(threading.Thread):
     def __init__(self):
-        # super().__init__()
+        super().__init__()
         self.reader = SimpleMFRC522()
         print("New Class created")
     
@@ -62,7 +62,6 @@ class RFID(threading.Thread):
         try:
             print("in run")
             while True:
-                print('while true')
                 id, text = self.reader.read()
                 print(id)
                 print(text)
