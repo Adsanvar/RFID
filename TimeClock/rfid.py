@@ -54,7 +54,7 @@ import threading
 
 class RFID(threading.Thread):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.reader = SimpleMFRC522()
     
     def run(self):
