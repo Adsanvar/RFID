@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
-from flask import redirect, url_for
+# from flask import redirect, url_for
 
 reader = SimpleMFRC522()
 

@@ -1,4 +1,6 @@
 from flask import Flask
+import threading
+import TimeClock.rfid as RFID
 
 try:
     ##Creates the Flask Application with the configurations 
@@ -11,6 +13,12 @@ try:
         app.register_blueprint(h_bp)
 
         return app
-        
+    
+    def read():
+        x = threading.Thread(target=RFID.read(), daemon=True)
+        x.start()
+    
+    read()
+    
 except:
     raise
