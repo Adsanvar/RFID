@@ -1,5 +1,5 @@
 from flask import Flask
-import threading
+# import threading
 # import TimeClock.rfid as RFID
 from multiprocessing import Process
 import TimeClock.rfid as RFID

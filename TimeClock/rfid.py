@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
+import threading
 # from flask import redirect, url_for
 
 # reader = SimpleMFRC522()
