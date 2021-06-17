@@ -8,11 +8,11 @@ home = Blueprint('home', __name__)
 @home.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        RFID.read() 
+        read() 
         return render_template('index.html')
     else:
         render_template('index.html')
 
-# def read():
-#     x = threading.Thread(target=RFID.read(), daemon=True)
-#     x.start()
+def read():
+    x = threading.Thread(target=RFID.read(), daemon=True)
+    x.start()
