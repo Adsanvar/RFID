@@ -15,6 +15,18 @@ try:
         from TimeClock.controller import home as h_bp
         app.register_blueprint(h_bp)
 
+            # thread = RFID()
+        print("calling process with thread target")
+        RFID().start()
+        # thread.start()
+        # p = Process(target=RFID.start())
+        # p.start() 
+        print("new process with thread started")
         return app
+
+    # read()
+    # def read():
+    #     x = threading.Thread(target=RFID.read())
+    #     x.start()
 except:
     raise
