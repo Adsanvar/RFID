@@ -58,16 +58,19 @@ class RFID(threading.Thread):
         self.reader = SimpleMFRC522()
         print("New Class created")
     
-    def run(self):
+    def run(self, stop):
         try:
             print("in run")
             while True:
-                print("Ready For Next")
-                id, text = self.reader.read()
-                print(id)
-                print(text)
-                # return redirect(url_for('home.login'))
-                time.sleep(5)
+                if stop:
+                    break
+                else:
+                    print("Ready For Next")
+                    id, text = self.reader.read()
+                    print(id)
+                    print(text)
+                    # return redirect(url_for('home.login'))
+                    time.sleep(5)
         except:
             raise
         finally:
@@ -83,4 +86,4 @@ class RFID(threading.Thread):
         finally:
             GPIO.cleanup()
     
-    
+

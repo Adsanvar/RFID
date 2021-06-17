@@ -14,5 +14,5 @@ def index():
 
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
-    thread.join()
+    thread.run(True)
     return redirect('home.index')
