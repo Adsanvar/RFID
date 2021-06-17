@@ -12,7 +12,7 @@ def index():
     else:
         render_template('index.html')
 
-@home.route('/stopReadThread', method=['POST'])
+@home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
     thread.join()
     return redirect('home.index')
