@@ -67,6 +67,8 @@ class RFID(threading.Thread):
                 print(text)
                 # return redirect(url_for('home.login'))
                 time.sleep(5)
+        except:
+            raise
         finally:
                 GPIO.cleanup()
 
@@ -75,5 +77,7 @@ class RFID(threading.Thread):
             print("Place your tag to write")
             self.reader.write(val)
             print("Written")
+        except:
+            raise
         finally:
             GPIO.cleanup()
