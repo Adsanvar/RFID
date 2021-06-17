@@ -15,10 +15,10 @@ try:
         return app
     
     def read():
-        x = threading.Thread(target=RFID.read(), daemon=True)
+        x = threading.Thread(target=RFID.read())
         x.start()
     
     read()
-    
+
 except:
     raise

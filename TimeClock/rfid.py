@@ -15,11 +15,11 @@ def write(val):
 
 def read():
     try:
-        # while True:
-        id, text = reader.read()
-        print(id)
-        print(text)
+        while True:
+            id, text = reader.read()
+            print(id)
+            print(text)
             # return redirect(url_for('home.login'))
-            # time.sleep(5)
+            time.sleep(5)
     finally:
             GPIO.cleanup()
