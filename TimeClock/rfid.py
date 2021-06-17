@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
-import SimpleMFRC522
+from mfrc522 import SimpleMFRC522
 import time
 from flask import redirect, url_for
 
@@ -14,23 +14,13 @@ def write(val):
     finally:
         GPIO.cleanup()
 
-# def read():
-#     try:
-#         while True:
-#             id, text = reader.read()
-#             print(id)
-#             print(text)
-#             # return redirect(url_for('home.login'))
-#             time.sleep(5)
-#     finally:
-#             GPIO.cleanup()
-
-try:
-    while True:
-        id, text = reader.read()
-        print(id)
-        print(text)
-        # return redirect(url_for('home.login'))
-        time.sleep(5)
-finally:
-        GPIO.cleanup()
+def read():
+    try:
+        while True:
+            id, text = reader.read()
+            print(id)
+            print(text)
+            # return redirect(url_for('home.login'))
+            time.sleep(5)
+    finally:
+            GPIO.cleanup()
