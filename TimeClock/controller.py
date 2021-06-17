@@ -15,4 +15,4 @@ def index():
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
     thread.stop()
-    return redirect('index')
+    return redirect('/')
