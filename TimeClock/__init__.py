@@ -7,8 +7,10 @@ from TimeClock.rfid import RFID as RFID
 try:
     # thread = RFID()
     print("calling process with thread target")
-    p = Process(target=RFID.start())
-    p.start() 
+    thread = RFID()
+    thread.start()
+    # p = Process(target=RFID.start())
+    # p.start() 
     print("new process with thread started")
     ##Creates the Flask Application with the configurations 
     def create_app():
