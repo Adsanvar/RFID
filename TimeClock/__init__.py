@@ -6,7 +6,6 @@ from TimeClock.rfid import RFID as RFID
 
 try:
     thread = RFID()
-    thread.daemon = True
     ##Creates the Flask Application with the configurations 
     def create_app():
 
