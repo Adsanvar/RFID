@@ -17,7 +17,7 @@ try:
 
             # thread = RFID()
         print("calling process with thread target")
-        RFID().start()
+        RFID()
         # thread.start()
         # p = Process(target=RFID.start())
         # p.start() 
