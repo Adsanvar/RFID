@@ -56,12 +56,13 @@ class RFID(threading.Thread):
     def __init__(self):
         super().__init__()
         self.reader = SimpleMFRC522()
+        self._stop_event = threading.Event()
         print("New Class created")
     
     def run(self):
         try:
             print("in run")
-            while True:
+            while not self.stopped:
                 print("Ready For Next")
                 id, text = self.reader.read()
                 print(id)
@@ -72,6 +73,13 @@ class RFID(threading.Thread):
             raise
         finally:
                 GPIO.cleanup()
+
+    def stop(self):
+        print('thread stropped')
+        self._stop_event.set()
+
+    def stopped(self):
+        return self._stop_event.is_set()
 
     def write(self, val):
         try:
