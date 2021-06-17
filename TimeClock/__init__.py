@@ -17,12 +17,12 @@ try:
 
         # thread = RFID()
         print("calling process with thread target")
-        RFID().start()
+        RFID().read()
         # thread.start()
         # p = Process(target=RFID.start())
         # p.start() 
         print("new process with thread started")
-        
+
         return app
 
     # read()
