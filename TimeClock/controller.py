@@ -10,9 +10,10 @@ home = Blueprint('home', __name__)
 def index():
     if request.method == 'GET':
         # read()
-        p = Process(target=RFID.read())
-        p.daemon = True
-        p.start() 
+        # p = Process(target=RFID.read())
+        # p.daemon = True
+        # p.start() 
+        target=RFID.read()
         return render_template('index.html')
     else:
         render_template('index.html')
