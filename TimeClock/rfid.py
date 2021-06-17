@@ -61,7 +61,8 @@ class RFID(threading.Thread):
     
     def run(self):
         try:
-            print("in run. Stopped? ", stopped())
+            print("in run.")
+            print("stopped? {}".format(self.stopped))
             while not self.stopped:
                 print("Ready For Next")
                 id, text = self.reader.read()
