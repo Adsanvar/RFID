@@ -7,7 +7,8 @@ home = Blueprint('home', __name__)
 #This Route is the index page (landing page) -Adrian
 @home.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'GET': 
+    if request.method == 'GET':
+        read() 
         return render_template('index.html')
     else:
         render_template('index.html')
