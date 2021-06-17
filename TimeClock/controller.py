@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for
 # import threading
-
+from . import thread
 
 home = Blueprint('home', __name__)
 
@@ -11,3 +11,8 @@ def index():
         return render_template('index.html', isActive=True)
     else:
         render_template('index.html')
+
+@home.route('/stopReadThread', method=['POST'])
+def stopReadThread():
+    thread.join()
+    return redirect('home.index')
