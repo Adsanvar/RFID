@@ -1,7 +1,8 @@
 from flask import Flask
 import threading
-import TimeClock.rfid as RFID
+# import TimeClock.rfid as RFID
 from multiprocessing import Process
+import TimeClock.rfid as RFID
 
 try:
     ##Creates the Flask Application with the configurations 
@@ -15,7 +16,7 @@ try:
 
         return app
 
-    p = Process(target=RFID.read())
+    p = Process(target=RFID.start())
     # p.daemon = True
     p.start() 
     # read()
