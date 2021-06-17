@@ -2,7 +2,7 @@ from flask import Flask
 # import threading
 # import TimeClock.rfid as RFID
 from multiprocessing import Process
-import TimeClock.rfid as RFID
+from TimeClock.rfid import RFID as RFID
 
 try:
     ##Creates the Flask Application with the configurations 

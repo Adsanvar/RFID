@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for
-import TimeClock.rfid as RFID
 # import threading
 
 
