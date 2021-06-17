@@ -13,12 +13,6 @@ try:
         app.register_blueprint(h_bp)
 
         return app
-    
-    def read():
-        x = threading.Thread(target=RFID.read())
-        x.start()
-    
-    read()
 
 except:
     raise
