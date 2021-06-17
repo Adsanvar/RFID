@@ -62,6 +62,7 @@ class RFID(threading.Thread):
 
     def stop(self):
         print('thread stropped')
+        GPIO.cleanup()
         self._stop_event.set()
 
     def stopped(self):
