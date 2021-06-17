@@ -12,8 +12,9 @@ try:
 
         from TimeClock.controller import home as h_bp
         app.register_blueprint(h_bp)
+        print("starting read")
         read()
-        
+        print("end read")
         return app
     
     def read():
