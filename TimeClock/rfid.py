@@ -12,10 +12,17 @@ def write(val):
     finally:
         GPIO.cleanup()
 
-def read():
-    try:
-        id, text = reader.read()
-        print(id)
-        print(text)
-    finally:
-            GPIO.cleanup()
+# def read():
+#     try:
+#         id, text = reader.read()
+#         print(id)
+#         print(text)
+#     finally:
+#             GPIO.cleanup()
+
+try:
+    id, text = reader.read()
+    print(id)
+    print(text)
+finally:
+        GPIO.cleanup()
