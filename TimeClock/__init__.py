@@ -20,7 +20,7 @@ try:
     # thread = RFID()
     print("calling thread target")
     # RFID().start()
-    thread.run(False)
+    thread.start()
     # p = Process(target=RFID.start())
     # p.start() 
     # read()
