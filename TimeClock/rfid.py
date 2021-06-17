@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
+from MFRC522 import SimpleMFRC522
 import time
 from flask import redirect, url_for
 
