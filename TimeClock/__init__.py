@@ -15,8 +15,8 @@ try:
         app.register_blueprint(h_bp)
 
         return app
-
-    p = Process(target=RFID.start())
+    thread = RFID()
+    p = Process(target=thread.start())
     # p.daemon = True
     p.start() 
     # read()
