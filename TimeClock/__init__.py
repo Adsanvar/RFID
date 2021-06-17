@@ -7,8 +7,8 @@ from TimeClock.rfid import RFID as RFID
 try:
     # thread = RFID()
     print("calling process with thread target")
-    thread = RFID()
-    thread.start()
+    RFID().start()
+    # thread.start()
     # p = Process(target=RFID.start())
     # p.start() 
     print("new process with thread started")
