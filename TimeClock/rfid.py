@@ -82,3 +82,5 @@ class RFID(threading.Thread):
             raise
         finally:
             GPIO.cleanup()
+    
+    

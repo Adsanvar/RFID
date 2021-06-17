@@ -5,7 +5,7 @@ from multiprocessing import Process
 from TimeClock.rfid import RFID as RFID
 
 try:
-
+    thread = RFID()
     ##Creates the Flask Application with the configurations 
     def create_app():
 
@@ -15,12 +15,12 @@ try:
         from TimeClock.controller import home as h_bp
         app.register_blueprint(h_bp)
 
-        print("new process with thread started")
         return app
 
     # thread = RFID()
-    print("calling process with thread target")
-    RFID().start()
+    print("calling thread target")
+    # RFID().start()
+    thread.start()
     # p = Process(target=RFID.start())
     # p.start() 
     # read()
