@@ -35,8 +35,8 @@ class RFID(threading.Thread):
                 # print(text)
                 print(repr(text))
                 val = ""
-                if text == None:
-                    text = "Error"
+                if text == None or text  == "":
+                    val = "Error"
                 else:
                     val = text.rstrip('\x00')
                     val = text.rstrip(' ')
