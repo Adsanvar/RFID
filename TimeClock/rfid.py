@@ -34,11 +34,13 @@ class RFID(threading.Thread):
                 print(id)
                 # print(text)
                 print(repr(text))
+                val = ""
                 if text == None:
                     text = "Error"
                 else:
-                    text = text.rstrip('')
-                payload = {'id': id, 'text': text}
+                    val = text.rstrip('')
+
+                payload = {'id': id, 'text': val}
                 # return redirect(url_for('home.login'))
                 self.sendPost(payload)
                 GPIO.output(buzzer,GPIO.HIGH)
