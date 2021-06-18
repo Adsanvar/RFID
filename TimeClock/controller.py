@@ -23,6 +23,5 @@ def read():
     print(request.data)
     print(request.args)
     print(request.values)
-    print(request.json
-    )
+    print(request.json)
     return redirect(url_for('home.index'))

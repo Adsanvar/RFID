@@ -29,6 +29,10 @@ class RFID(threading.Thread):
                 id, text = self.reader.read()
                 print(id)
                 print(text)
+                if text == "":
+                    text = ""
+                else:
+                    text = str(text)
                 self.id = id
                 self.text = text
                 payload = {'id': id, 'text': text}
