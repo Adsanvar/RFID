@@ -24,8 +24,8 @@ class RFID(threading.Thread):
     def run(self):
         try:
             GPIO.setwarnings(False)
-            # GPIO.setmode(GPIO.BCM)
-            buzzer = 17
+            GPIO.setmode(GPIO.Board)
+            buzzer = 11
             GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
             while not self._stop_event.isSet():
@@ -42,6 +42,7 @@ class RFID(threading.Thread):
                 self.sendPost(payload)
                 GPIO.output(buzzer,GPIO.HIGH)
                 time.sleep(5)
+                GPIO.output(buzzer,GPIO.LOW)
         except:
             raise
         finally:
