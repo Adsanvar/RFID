@@ -53,7 +53,7 @@ class RFID(threading.Thread):
     def sendPost(self, payload):
         try:
             url = "http://localhost:5005/read"
-            headers= {"'content-type': 'application/json'"}
+            headers= {'content-type': 'application/json'}
             requests.post(url, data=json.dumps(payload), headers=headers)
         except Exception as e:
             raise
