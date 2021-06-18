@@ -28,9 +28,10 @@ class RFID(threading.Thread):
                 id, text = self.reader.read()
                 print(id)
                 print(text)
-                flash(text, 'success')
+                self.text = text
                 # return redirect(url_for('home.login'))
                 time.sleep(5)
+                
         except:
             raise
         finally:
