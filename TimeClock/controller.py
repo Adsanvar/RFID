@@ -8,9 +8,9 @@ home = Blueprint('home', __name__)
 @home.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('index.html', read = False)
     else:
-        return render_template('index.html')
+        return render_template('index.html', read = False)
 
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
@@ -26,5 +26,5 @@ def read():
         print(request.json['text'])
         flash(request.json['text'], 'success')
 
-    return redirect(url_for('home.index'), code=307)
-    # return render_template('index.html')
+    # return redirect(url_for('home.index'))
+    return render_template('index.html', read = request.json['text'] )

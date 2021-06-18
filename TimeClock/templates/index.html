@@ -41,8 +41,7 @@
           </p>
         </div>
       </div>
-
-      <div class="box">
+      {{read}}
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
@@ -50,6 +49,7 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+      <div class="box">
         <form action="{{ url_for('home.stopReadThread') }}" method="post">
           <input type="submit" name="login" value="Login">
         </form>
