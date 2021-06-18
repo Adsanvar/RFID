@@ -49,7 +49,8 @@ class RFID(threading.Thread):
                     time.sleep(.5)
                     GPIO.output(buzzer,GPIO.LOW)
                 else:
-                    val = text.replace('\x00','')
+                    # val = text.replace("'\x00'",'')
+                    print('\x00' in text)
                     val = text.rstrip(' ')
                     payload = {'id': id, 'text': val}
                     self.sendPost(payload)
