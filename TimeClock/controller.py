@@ -19,6 +19,10 @@ def stopReadThread():
 
 @home.route('/read', methods=['POST'])
 def read():
-    info = request.args.get("data")
-    print(info)
+    # info = request.args.get("data")
+    print(request.data)
+    print(request.args)
+    print(request.values)
+    print(request.json
+    )
     return redirect(url_for('home.index'))

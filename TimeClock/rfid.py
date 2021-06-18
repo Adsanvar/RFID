@@ -31,8 +31,9 @@ class RFID(threading.Thread):
                 print(text)
                 self.id = id
                 self.text = text
+                payload = {'id': id, 'text': text}
                 # return redirect(url_for('home.login'))
-                self.sendPost(text)
+                self.sendPost(payload)
                 time.sleep(5)
         except:
             raise
@@ -49,10 +50,11 @@ class RFID(threading.Thread):
         finally:
             GPIO.cleanup()
 
-    def sendPost(self, info):
+    def sendPost(self, payload):
         try:
             url = "http://localhost:5005/read"
-            requests.post(url, data=json.dumps(info))
+            headers= {"'content-type': 'application/json'"}
+            requests.post(url, data=json.dumps(payload), headers=headers)
         except Exception as e:
             raise
     
