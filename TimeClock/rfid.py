@@ -32,7 +32,8 @@ class RFID(threading.Thread):
                 print("Ready For Next")
                 id, text = self.reader.read()
                 print(id)
-                print(text)
+                # print(text)
+                print(repr(text))
                 if text == None:
                     text = "Error"
                 else:
