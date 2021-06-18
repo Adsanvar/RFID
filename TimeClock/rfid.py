@@ -28,13 +28,11 @@ class RFID(threading.Thread):
                 print("Ready For Next")
                 id, text = self.reader.read()
                 print(id)
-                print(type(text))
+                print(text)
                 if text == "":
                     text = ""
                 else:
                     text = str(text)
-                self.id = id
-                self.text = text
                 payload = {'id': id, 'text': text}
                 # return redirect(url_for('home.login'))
                 self.sendPost(payload)
