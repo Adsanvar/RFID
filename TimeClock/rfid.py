@@ -38,10 +38,14 @@ class RFID(threading.Thread):
                 if text == None or text  == "":
                     print('Error')
                     val = "Error"
-                    for i in range(4):
-                        GPIO.output(buzzer,GPIO.HIGH)              
-                        time.sleep(1)
-                        GPIO.output(buzzer,GPIO.LOW)
+
+                    GPIO.output(buzzer,GPIO.HIGH)              
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)            
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
                 else:
                     val = text.rstrip('\x00')
                     val = text.rstrip(' ')
