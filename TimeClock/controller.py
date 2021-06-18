@@ -10,7 +10,7 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
     else:
-        render_template('index.html')
+        return render_template('index.html')
 
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
