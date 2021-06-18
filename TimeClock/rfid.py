@@ -24,7 +24,7 @@ class RFID(threading.Thread):
     def run(self):
         try:
             GPIO.setwarnings(False)
-            GPIO.setmode(GPIO.BCM)
+            # GPIO.setmode(GPIO.BCM)
             buzzer = 17
             GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
