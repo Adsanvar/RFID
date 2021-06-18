@@ -23,6 +23,10 @@ class RFID(threading.Thread):
 
     def run(self):
         try:
+            GPIO.setwarnings(False)
+            GPIO.setmode(GPIO.BCM)
+            buzzer = 17
+            GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
             while not self._stop_event.isSet():
                 print("Ready For Next")
@@ -36,6 +40,7 @@ class RFID(threading.Thread):
                 payload = {'id': id, 'text': text}
                 # return redirect(url_for('home.login'))
                 self.sendPost(payload)
+                GPIO.output(buzzer,GPIO.HIGH)
                 time.sleep(5)
         except:
             raise

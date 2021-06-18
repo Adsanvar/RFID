@@ -3,7 +3,7 @@ from flask import Flask
 # import TimeClock.rfid as RFID
 from multiprocessing import Process
 from TimeClock.rfid import RFID as RFID
-import webview
+# import webview
 
 try:
     thread = RFID()
@@ -23,9 +23,9 @@ try:
     # RFID().start()
     thread.start()
 
-    window = webview.create_window("TimeClock", "http://localhost:5005", fullscreen=True)
-    window.on_top
-    webview.start()
+    # window = webview.create_window("TimeClock", "http://localhost:5005", fullscreen=True)
+    # window.on_top
+    # webview.start()
     # p = Process(target=RFID.start())
     # p.start() 
     # read()
