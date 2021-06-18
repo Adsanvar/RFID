@@ -36,9 +36,7 @@ class RFID(threading.Thread):
                 print(repr(text))
                 val = ""
                 if text == None or text  == "":
-                    print('Error')
                     val = "Error"
-
                     GPIO.output(buzzer,GPIO.HIGH)              
                     time.sleep(.5)
                     GPIO.output(buzzer,GPIO.LOW)            
@@ -51,7 +49,7 @@ class RFID(threading.Thread):
                     time.sleep(.5)
                     GPIO.output(buzzer,GPIO.LOW)
                 else:
-                    val = text.rstrip('\x00')
+                    val = text.replace('\x00','')
                     val = text.rstrip(' ')
                     payload = {'id': id, 'text': val}
                     self.sendPost(payload)
