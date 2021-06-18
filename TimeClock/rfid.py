@@ -36,6 +36,7 @@ class RFID(threading.Thread):
                 print(repr(text))
                 val = ""
                 if text == None or text  == "":
+                    print('Error')
                     val = "Error"
                     for i in range(4):
                         GPIO.output(buzzer,GPIO.HIGH)              
