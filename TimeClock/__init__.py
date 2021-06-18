@@ -25,7 +25,7 @@ try:
 
     window = webview.create_window("TimeClock", "http://localhost:5005", fullscreen=True)
     window.on_top
-    window.start()
+    webview.start()
     # p = Process(target=RFID.start())
     # p.start() 
     # read()
