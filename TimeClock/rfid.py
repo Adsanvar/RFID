@@ -33,6 +33,7 @@ class RFID(threading.Thread):
                 id, text = self.reader.read()
                 print(id)
                 print(text)
+                print(type(text))
                 if text == "":
                     text = ""
                 else:
@@ -41,8 +42,9 @@ class RFID(threading.Thread):
                 # return redirect(url_for('home.login'))
                 self.sendPost(payload)
                 GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(5)
+                time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)
+                time.sleep(5)
         except:
             raise
         finally:
