@@ -38,6 +38,8 @@ class RFID(threading.Thread):
                     text = "Error"
                 else:
                     text = text.rstrip('\x00')
+                    text = text.rstrip('\n')
+                print("\n" in "hello\ngoodbye")
                 payload = {'id': id, 'text': text}
                 # return redirect(url_for('home.login'))
                 self.sendPost(payload)
