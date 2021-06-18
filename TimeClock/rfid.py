@@ -34,7 +34,7 @@ class RFID(threading.Thread):
                 print(id)
                 print(text)
                 print(type(text))
-                if text == "":
+                if text == None:
                     text = ""
                 else:
                     text = str(text)
