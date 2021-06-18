@@ -38,7 +38,7 @@ class RFID(threading.Thread):
                 if text == None:
                     text = "Error"
                 else:
-                    val = text.rstrip('')
+                    val = text.rstrip('\x00')
 
                 payload = {'id': id, 'text': val}
                 # return redirect(url_for('home.login'))
