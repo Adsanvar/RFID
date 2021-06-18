@@ -28,7 +28,7 @@ class RFID(threading.Thread):
                 print("Ready For Next")
                 id, text = self.reader.read()
                 print(id)
-                print(text)
+                print(type(text))
                 if text == "":
                     text = ""
                 else:
