@@ -26,5 +26,5 @@ def read():
         print(request.json['text'])
         flash(request.json['text'], 'success')
 
-    return redirect(url_for('home.index'))
+    return redirect(url_for('home.index'), code=307)
     # return render_template('index.html')
