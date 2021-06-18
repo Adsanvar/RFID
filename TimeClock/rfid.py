@@ -37,16 +37,18 @@ class RFID(threading.Thread):
                 val = ""
                 if text == None or text  == "":
                     val = "Error"
+                    for i in range(4):
+                        GPIO.output(buzzer,GPIO.HIGH)              
+                        time.sleep(.5)
+                        GPIO.output(buzzer,GPIO.LOW)
                 else:
                     val = text.rstrip('\x00')
                     val = text.rstrip(' ')
-                payload = {'id': id, 'text': val}
-                # return redirect(url_for('home.login'))
-                self.sendPost(payload)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(5)
+                    payload = {'id': id, 'text': val}
+                    self.sendPost(payload)
+                    GPIO.output(buzzer,GPIO.HIGH)              
+                    time.sleep(5)
+                    GPIO.output(buzzer,GPIO.LOW)
         except:
             raise
         finally:
