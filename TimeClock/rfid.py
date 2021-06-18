@@ -33,6 +33,7 @@ class RFID(threading.Thread):
                 id, text = self.reader.read()
                 print(id)
                 print(text)
+                print("\n" in "hello\ngoodbye")
                 if text == None:
                     text = "Error"
                 else:
