@@ -41,22 +41,19 @@
           </p>
         </div>
       </div>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+              <p class="alert-{{category}}">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       <div class="box">
         <form action="{{ url_for('home.stopReadThread') }}" method="post">
           <input type="submit" name="login" value="Login">
         </form>
       </div>
     </div>
-    
-
-    
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-            <p class="alert-{{category}}">{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js')}}"></script>
