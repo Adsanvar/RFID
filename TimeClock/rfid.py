@@ -31,6 +31,7 @@ class RFID(threading.Thread):
                 self.text = text
                 # return redirect(url_for('home.login'))
                 time.sleep(5)
+                print(self.text)
                 
         except:
             raise
