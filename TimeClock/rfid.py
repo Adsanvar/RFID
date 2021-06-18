@@ -39,7 +39,7 @@ class RFID(threading.Thread):
                     val = "Error"
                     for i in range(4):
                         GPIO.output(buzzer,GPIO.HIGH)              
-                        time.sleep(.5)
+                        time.sleep(1)
                         GPIO.output(buzzer,GPIO.LOW)
                 else:
                     val = text.rstrip('\x00')
