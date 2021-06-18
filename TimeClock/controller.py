@@ -8,7 +8,7 @@ home = Blueprint('home', __name__)
 @home.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html', isActive=True)
+        return render_template('index.html')
     else:
         render_template('index.html')
 
@@ -24,5 +24,5 @@ def read():
     else:
         flash(request.json['text'], 'success')
 
-    # return redirect(url_for('home.index'))
-    return render_template('index.html')
+    return redirect(url_for('home.index'))
+    # return render_template('index.html')
