@@ -20,9 +20,9 @@ def stopReadThread():
 @home.route('/read', methods=['POST'])
 def read():
     # info = request.args.get("data")
-    print(request.data)
-    print(request.args)
-    print(request.values)
-    print(request.json)
-    
+    if request.json.text == '' or request.json == None:
+        flash("Error En Deteccion", 'error')
+    else:
+        flash(request.json.text, 'success')
+
     return redirect(url_for('home.index'))
