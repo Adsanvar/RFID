@@ -16,3 +16,9 @@ def index():
 def stopReadThread():
     thread.stop()
     return redirect(url_for('home.index'))
+
+@home.route('/read', methods=['POST'])
+def read():
+    info = request.args.get("data")
+    print(info)
+    return redirect(url_for('home.index'))

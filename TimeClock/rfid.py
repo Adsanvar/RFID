@@ -2,7 +2,8 @@ import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
 import threading
-from flask import redirect, url_for, flash
+import requests
+import json
 
 class RFID(threading.Thread):
     def __init__(self):
@@ -28,11 +29,10 @@ class RFID(threading.Thread):
                 id, text = self.reader.read()
                 print(id)
                 print(text)
+                self.id = id
                 self.text = text
                 # return redirect(url_for('home.login'))
                 time.sleep(5)
-                print(self.text)
-                
         except:
             raise
         finally:
@@ -47,5 +47,9 @@ class RFID(threading.Thread):
             raise
         finally:
             GPIO.cleanup()
+
+    def sendPost(self, info):
+        url = "http://localhost:5005/read"
+        requests.post(url, data=json.dumps(info))
     
 

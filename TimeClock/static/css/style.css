@@ -54,7 +54,7 @@ body {
 }
 .clock-timer:before {
   color: #fff;
-  font-size: 4.2rem;
+  font-size: 3.5rem;
   text-transform: uppercase;
 }
 .clock-label {
@@ -88,7 +88,7 @@ body {
   /* transform: translate(-50%,-50%); */
   /* text-align: center; */
   background-color: #080808;
-  width: 50%;
+  /* width: 50%; */
 }
 
 .box input[type = "submit"]{
