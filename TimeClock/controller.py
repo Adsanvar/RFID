@@ -6,27 +6,6 @@ from mfrc522 import SimpleMFRC522
 import time
 
 home = Blueprint('home', __name__)
-thread = threading.Thread(target=read)
-thread.start()
-
-#This Route is the index page (landing page) -Adrian
-@home.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'GET':
-        return render_template('index.html', read = False)
-    else:
-        return render_template('index.html', read = False)
-
-@home.route('/stopReadThread', methods=['POST'])
-def stopReadThread():
-    # thread.stop()
-    return redirect(url_for('home.index'))
-
-@home.route('/userClock/<string:val>', methods=['GET', 'POST'])
-def userClock(val):
-    print(val)
-    return render_template('index.html', read = val )
-
 
 def read():
     try:
@@ -79,6 +58,28 @@ def read():
         raise
     finally:
             GPIO.cleanup()
+
+thread = threading.Thread(target=read)
+thread.start()
+
+#This Route is the index page (landing page) -Adrian
+@home.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'GET':
+        return render_template('index.html', read = False)
+    else:
+        return render_template('index.html', read = False)
+
+@home.route('/stopReadThread', methods=['POST'])
+def stopReadThread():
+    # thread.stop()
+    return redirect(url_for('home.index'))
+
+@home.route('/userClock/<string:val>', methods=['GET', 'POST'])
+def userClock(val):
+    print(val)
+    return render_template('index.html', read = val )
+
 
 # @home.route('/read', methods=['GET','POST'])
 # def read():
