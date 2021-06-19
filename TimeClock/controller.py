@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for
 import threading
-from . import thread
+# from . import thread
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
