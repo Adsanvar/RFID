@@ -87,24 +87,27 @@ class RFID(threading.Thread):
 
     def sendPost(self, payload):
         try:
-            url = "http://127.0.0.1:5005/read"
-            # url ="http://192.168.1.65:5005/read"
-            headers= {'content-type': 'application/json'}
+            # url = "http://127.0.0.1:5005/read"
+            # # url ="http://192.168.1.65:5005/read"
+            # headers= {'content-type': 'application/json'}
             # requests.post(url, data=json.dumps(payload), headers=headers)
-            requests.put(url, data=json.dumps(payload), headers=headers)
+            # requests.put(url, data=json.dumps(payload), headers=headers)
+            read(payload)
         except Exception as e:
             raise
     
-@rf.route('/read', methods=['PUT'])
-def read():
-    print(request.method)
-    print(request.json['text'])
-    if request.json['text'] == '' or request.json == None:
-        print('error')
-        flash("Error En Deteccion", 'error')
-    else:
-        print(request.json['text'])
-        flash(request.json['text'], 'success')
+@rf.route('/read<string:payload>')
+def read(payload):
+    # print(request.method)
+    # print(request.json['text'])
+    # if request.json['text'] == '' or request.json == None:
+    #     print('error')
+    #     flash("Error En Deteccion", 'error')
+    # else:
+    #     print(request.json['text'])
+    #     flash(request.json['text'], 'success')
 
-    print("RENDER?")
-    return redirect(url_for('home.userClock', val = request.json['text']))
+    # print("RENDER?")
+    # return redirect(url_for('home.userClock', val = request.json['text']))
+    print(payload)
+    return "success"
