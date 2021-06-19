@@ -16,8 +16,10 @@ def index():
 def stopReadThread():
     thread.stop()
     return redirect(url_for('home.index'))
+
 @home.route('/userClock/<string:val>', methods=['GET', 'POST'])
 def userClock(val):
+    print(val)
     return render_template('index.html', read = val )
 
 @home.route('/read', methods=['POST'])

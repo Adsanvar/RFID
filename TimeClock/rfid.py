@@ -4,6 +4,10 @@ import time
 import threading
 import requests
 import json
+from flask import Blueprint, redirect, redirect, url_for, flash, request, render_template
+
+rfid = Blueprint('rfid', __name__)
+
 
 class RFID(threading.Thread):
     def __init__(self):
@@ -84,10 +88,25 @@ class RFID(threading.Thread):
 
     def sendPost(self, payload):
         try:
-            url = "http://127.0.0.1:5005/read"
-            headers= {'content-type': 'application/json'}
-            requests.post(url, data=json.dumps(payload), headers=headers)
+            # url = "http://127.0.0.1:5005/read"
+            # headers= {'content-type': 'application/json'}
+            # requests.post(url, data=json.dumps(payload), headers=headers)
+            return redirect(url_for('read', data=json.dumps(payload)))
         except Exception as e:
             raise
     
+@rfid.route('/read', methods=['GET', 'POST'])
+def read():
+    print(request.json)
+    print(request.method)
+    if request.json['text'] == '' or request.json == None:
+        print('error')
+        flash("Error En Deteccion", 'error')
+    else:
+        print(request.json['text'])
+        flash(request.json['text'], 'success')
+
+    print("RENDER?")
+    # return redirect(url_for('home.userClock', val = request.json['text']))
+    return render_template('index.html', read = request.json['text'] )
 
