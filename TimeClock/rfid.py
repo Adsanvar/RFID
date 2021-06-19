@@ -91,7 +91,7 @@ class RFID(threading.Thread):
             # url = "http://127.0.0.1:5005/read"
             # headers= {'content-type': 'application/json'}
             # requests.post(url, data=json.dumps(payload), headers=headers)
-            return redirect(url_for('read', data=json.dumps(payload)))
+            return redirect(url_for('rfid.read', data=json.dumps(payload)))
         except Exception as e:
             raise
     
