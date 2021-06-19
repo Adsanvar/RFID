@@ -95,7 +95,7 @@ class RFID(threading.Thread):
         except Exception as e:
             raise
     
-@home.route('/read', methods=['PUT'])
+@rfid.route('/read', methods=['PUT'])
 def read():
     print(request.method)
     print(request.json['text'])
