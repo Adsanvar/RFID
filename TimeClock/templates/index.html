@@ -48,6 +48,7 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+      {{read}}
       <div class="box" hidden="True">
         <form action="{{ url_for('home.stopReadThread') }}" method="post">
           <input type="submit" name="login" value={{read}}>
