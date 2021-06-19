@@ -6,7 +6,7 @@ import requests
 import json
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for
 
-rfid = Blueprint('rfid', __name__)
+rf = Blueprint('rfid', __name__)
 
 class RFID(threading.Thread):
     def __init__(self):
@@ -95,7 +95,7 @@ class RFID(threading.Thread):
         except Exception as e:
             raise
     
-@rfid.route('/read', methods=['PUT'])
+@rf.route('/read', methods=['PUT'])
 def read():
     print(request.method)
     print(request.json['text'])
