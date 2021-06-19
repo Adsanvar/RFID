@@ -14,7 +14,7 @@ try:
         app.config['SECRET_KEY'] = 'test_secret_key'
 
         from TimeClock.controller import home as h_bp
-        from TimeClock.controller import rf as rfid
+        from TimeClock.rfid import rf as rfid
         
         app.register_blueprint(h_bp)
         app.register_blueprint(rfid)
