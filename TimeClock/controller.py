@@ -14,7 +14,7 @@ def index():
 
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
-    thread.stop()
+    # thread.stop()
     return redirect(url_for('home.index'))
 
 @home.route('/userClock/<string:val>', methods=['GET', 'POST'])
@@ -22,17 +22,20 @@ def userClock(val):
     print(val)
     return render_template('index.html', read = val )
 
-@home.route('/read', methods=['GET','POST'])
-def read():
-    print(request.method)
-    print(request.json['text'])
-    if request.json['text'] == '' or request.json == None:
-        print('error')
-        flash("Error En Deteccion", 'error')
-    else:
-        print(request.json['text'])
-        flash(request.json['text'], 'success')
+# @home.route('/read', methods=['GET','POST'])
+# def read():
+#     print(request.method)
+#     print(request.json['text'])
+#     if request.json['text'] == '' or request.json == None:
+#         print('error')
+#         flash("Error En Deteccion", 'error')
+#     else:
+#         print(request.json['text'])
+#         flash(request.json['text'], 'success')
 
-    print("RENDER?")
-    # return redirect(url_for('home.userClock', val = request.json['text']))
-    return render_template('timeUserInput.html', read = request.json['text'] )
+#     print("RENDER?")
+#     return redirect(url_for('home.userClock', val = request.json['text']))
+#     # render_template('timeUserInput.html', read = request.json['text'])
+#     # return "success", 200
+
+
