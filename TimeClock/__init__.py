@@ -19,6 +19,9 @@ try:
         app.register_blueprint(h_bp)
         app.register_blueprint(rfid)
 
+        with app.app_context():
+            thread
+
         return app
 
     # print("calling thread target")
