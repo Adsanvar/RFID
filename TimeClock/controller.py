@@ -22,16 +22,16 @@ def userClock(val):
     print(val)
     return render_template('index.html', read = val )
 
-@home.route('/read', methods=['POST'])
-def read():
-    print(request.method)
-    if request.json['text'] == '' or request.json == None:
-        print('error')
-        flash("Error En Deteccion", 'error')
-    else:
-        print(request.json['text'])
-        flash(request.json['text'], 'success')
+# @home.route('/read', methods=['POST'])
+# def read():
+#     print(request.method)
+#     if request.json['text'] == '' or request.json == None:
+#         print('error')
+#         flash("Error En Deteccion", 'error')
+#     else:
+#         print(request.json['text'])
+#         flash(request.json['text'], 'success')
 
-    print("RENDER?")
-    return redirect(url_for('home.userClock', val = request.json['text']))
-    # return render_template('index.html', read = request.json['text'] )
+#     print("RENDER?")
+#     return redirect(url_for('home.userClock', val = request.json['text']))
+#     # return render_template('index.html', read = request.json['text'] )
