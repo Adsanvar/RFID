@@ -48,7 +48,7 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
-      
+      {{read}}
       {% if read != False %}
       <div class="box" >
         <form action="{{ url_for('home.stopReadThread') }}" method="post">

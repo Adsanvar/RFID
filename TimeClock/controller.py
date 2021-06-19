@@ -16,8 +16,11 @@ def index():
 def stopReadThread():
     thread.stop()
     return redirect(url_for('home.index'))
+@home.route('/<string:val>', methods=['GET', 'POST'])
+def userClock(val):
+    return render_template('index.html', read = val )
 
-@home.route('/read', methods=['GET', 'POST'])
+@home.route('/read', methods=['POST'])
 def read():
     print(request.method)
     if request.json['text'] == '' or request.json == None:
@@ -28,5 +31,5 @@ def read():
         flash(request.json['text'], 'success')
 
     print("RENDER?")
-    # return redirect(url_for('home.index'))
-    return render_template('index.html', read = request.json['text'] )
+    return redirect(url_for('home.userClock', val = request.json['text']))
+    # return render_template('index.html', read = request.json['text'] )
