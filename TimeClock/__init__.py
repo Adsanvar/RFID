@@ -18,19 +18,9 @@ try:
 
         return app
 
-    # thread = RFID()
     print("calling thread target")
-    # RFID().start()
+
     thread.start()
 
-    # window = webview.create_window("TimeClock", "http://localhost:5005", fullscreen=True)
-    # window.on_top
-    # webview.start()
-    # p = Process(target=RFID.start())
-    # p.start() 
-    # read()
-    # def read():
-    #     x = threading.Thread(target=RFID.read())
-    #     x.start()
 except:
     raise

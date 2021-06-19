@@ -5,4 +5,4 @@ export DEBUG=1
 export FLASK_RUN_PORT=5005
 # flask run
 flask run --no-reload
-# flask run -h 192.168.1.109
+# flask run -h 192.168.1.65
