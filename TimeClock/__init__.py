@@ -18,8 +18,7 @@ try:
 
         return app
 
-    print("calling thread target")
-
+    # print("calling thread target")
     thread.start()
 
 except:
