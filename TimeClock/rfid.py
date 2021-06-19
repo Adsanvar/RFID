@@ -110,4 +110,4 @@ def read(payload):
     # print("RENDER?")
     # return redirect(url_for('home.userClock', val = request.json['text']))
     print(payload)
-    return render_template('index.html', read = request.json['text'])
+    return render_template('index.html', read = "HELLO")
