@@ -97,18 +97,18 @@ class RFID(threading.Thread):
         except Exception as e:
             raise
     
-@rf.route('/read<string:payload>')
-def read(payload):
-    # print(request.method)
-    # print(request.json['text'])
-    # if request.json['text'] == '' or request.json == None:
-    #     print('error')
-    #     flash("Error En Deteccion", 'error')
-    # else:
-    #     print(request.json['text'])
-    #     flash(request.json['text'], 'success')
+# @rf.route('/read<string:payload>')
+# def read(payload):
+#     # print(request.method)
+#     # print(request.json['text'])
+#     # if request.json['text'] == '' or request.json == None:
+#     #     print('error')
+#     #     flash("Error En Deteccion", 'error')
+#     # else:
+#     #     print(request.json['text'])
+#     #     flash(request.json['text'], 'success')
 
-    # print("RENDER?")
-    # return redirect(url_for('home.userClock', val = request.json['text']))
-    print(payload)
-    return render_template('index.html', read = "HELLO")
+#     # print("RENDER?")
+#     # return redirect(url_for('home.userClock', val = request.json['text']))
+#     print(payload)
+#     return render_template('index.html', read = "HELLO")

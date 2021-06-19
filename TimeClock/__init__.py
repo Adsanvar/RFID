@@ -1,8 +1,7 @@
 from flask import Flask
 # import threading
 # import TimeClock.rfid as RFID
-from multiprocessing import Process
-from TimeClock.rfid import RFID as RFID
+# from TimeClock.rfid import RFID as RFID
 # import webview
 
 try:
