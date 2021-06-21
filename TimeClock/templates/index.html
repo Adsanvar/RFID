@@ -55,6 +55,12 @@
           <input type="submit" name="login" value={{read}}>
         </form>
       </div>
+      {% else %}
+      <div class="box" hidden="True">
+        <form action="{{ url_for('index') }}" method="post">
+          <input type="submit" name="login" value={{read}}>
+        </form>
+      </div>
       {% endif %}
     </div>
 
