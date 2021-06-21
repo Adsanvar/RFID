@@ -54,17 +54,11 @@ def read():
                     val = text.replace('\x00', '')
                 else:
                     val = text.rstrip(' ')
-                payload = {'id': id, 'text': val}
-                print(payload)
-                # with current_app.app_context():
-                #     render_template('index.html', read = val)
-                # template = jinja2.Template('{{ name }} is {{ age }} years old.')
-                # rendered = template.render(name='Ginger', age=10)
-                # sendPost(payload)
-                loadOptions(window, payload)
-                GPIO.output(buzzer,GPIO.HIGH)          
-                time.sleep(5)
-                GPIO.output(buzzer,GPIO.LOW)
+            payload = {'id': id, 'text': val}
+            loadOptions(window, payload)
+            GPIO.output(buzzer,GPIO.HIGH)          
+            time.sleep(5)
+            GPIO.output(buzzer,GPIO.LOW)
     except:
         raise
     finally:
@@ -84,7 +78,11 @@ def index(data=None):
     if data != None:
         data = json.loads(data)
         print(data)
-        return render_template('index.html', read = data['text'])
+        if data['text'] == 'Error':
+            flash("Error Leyendo Etiqueta", 'error')
+            return render_template('index.html', read = False)
+        else:
+            return render_template('index.html', read = data['text'])
     else:
         return render_template('index.html', read = False)
 
