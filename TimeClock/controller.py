@@ -94,7 +94,7 @@ def stopReadThread():
     # thread.stop()
     return redirect(url_for('home.index'))
 
-@home.route('/userClock/<string:val>', methods=['GET', 'POST'])
+@home.route('/', methods=['GET', 'POST'])
 def userClock(val):
     print(val)
     return render_template('index.html', read = val )
@@ -112,8 +112,8 @@ def read():
         flash(request.json['text'], 'success')
 
     print("RENDER?")
-    # return redirect(url_for('home.userClock', val = request.json['text']))
-    render_template('timeUserInput.html', read = request.json['text'])
+    return redirect(url_for('home.userClock', read = request.json['text']))
+    # render_template('timeUserInput.html', read = request.json['text'])
     return "success"
 
 
