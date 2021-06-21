@@ -26,10 +26,10 @@ def read():
             print("Ready For Next")
             id, text = reader.read()
             print(id)
-            # print(text)
-            print(repr(text))
+            print(text)
+            # print(repr(text))
             val = ""
-            if text == None or text  == "":
+            if text == None or text  == '':
                 val = "Error"
             else:
                 # print('\x00' in text)
@@ -38,7 +38,7 @@ def read():
                 else:
                     val = text.rstrip(' ')
 
-            if val == "":
+            if val == '':
                 val = "Error"
                 payload = {'id': id, 'text': val}
                 loadOptions(window, payload)
