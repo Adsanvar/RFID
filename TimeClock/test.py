@@ -103,7 +103,7 @@ def index(data=None):
 
 def setBaseUrl():
     base_url = window.get_current_url()
-    print(base_url)
+    print("base url: ", base_url)
 
 if __name__ == '__main__':
 
