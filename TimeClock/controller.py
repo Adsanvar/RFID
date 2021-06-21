@@ -44,14 +44,15 @@ def read():
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)
             else:
-                print('\x00' in text)
+                # print('\x00' in text)
                 if '\x00' in text:
                     val = text.replace('\x00', '')
                 else:
                     val = text.rstrip(' ')
                 payload = {'id': id, 'text': val}
                 print(payload)
-                GPIO.output(buzzer,GPIO.HIGH)              
+                GPIO.output(buzzer,GPIO.HIGH)   
+                userClock(val)           
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
     except:
@@ -72,7 +73,7 @@ def index():
 
 @home.route('/stopReadThread', methods=['POST'])
 def stopReadThread():
-    # thread.stop()
+    thread.stop()
     return redirect(url_for('home.index'))
 
 @home.route('/userClock/<string:val>', methods=['GET', 'POST'])
