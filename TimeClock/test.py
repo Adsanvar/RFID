@@ -101,6 +101,7 @@ def loadOptions(window, payload):
 def start_server():
     app.run(host='0.0.0.0', port=5000)
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET', 'POST'])
 def index(data=None):
