@@ -102,9 +102,9 @@ if __name__ == '__main__':
 
     print(os.getcwd())
 
-    t = threading.Thread(target=start_server)
-    t.daemon = True
-    t.start()
+    # t = threading.Thread(target=start_server)
+    # t.daemon = True
+    # t.start()
 
     r = threading.Thread(target=read)
     r.daemon = True
