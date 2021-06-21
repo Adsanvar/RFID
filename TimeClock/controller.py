@@ -82,8 +82,12 @@ def sendPost(payload):
 thread = threading.Thread(target=read)
 thread.start()
 
-webview.create_window("PyWebView & Flask", "http://127.0.0.1:5005/")
-webview.start()
+try:
+    webview.create_window("PyWebView & Flask", "http://127.0.0.1:5005")
+    webview.start()
+except Exception as e:
+    print(e)
+    raise
 
 
 #This Route is the index page (landing page) -Adrian
