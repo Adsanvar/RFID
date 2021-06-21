@@ -110,6 +110,6 @@ if __name__ == '__main__':
     r.daemon = True
     r.start()
 
-    webview.start()
+    webview.start(debug=True)
     # webview.load_css()
     sys.exit()
