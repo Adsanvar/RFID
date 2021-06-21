@@ -109,11 +109,11 @@ def index(data=None):
         print(data)
         if data['text'] == 'Error':
             flash("Error Leyendo Etiqueta", 'error')
-            return render_template('index.html')
+            return render_template('index.html', read = False)
         else:
             return render_template('index.html', read = data['text'])
     else:
-        return render_template('index.html')
+        return render_template('index.html', read = False)
 
 
 if __name__ == '__main__':
