@@ -57,6 +57,28 @@ def read():
                 else:
                     val = text.rstrip(' ')
 
+            if val == "":
+                val = "Error"
+                GPIO.output(buzzer,GPIO.HIGH)              
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.LOW)            
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.HIGH)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.LOW)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.HIGH)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.LOW)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.HIGH)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.LOW)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.HIGH)
+                time.sleep(.5)
+                GPIO.output(buzzer,GPIO.LOW)
+            
             payload = {'id': id, 'text': val}
             loadOptions(window, payload)
             GPIO.output(buzzer,GPIO.HIGH)          
