@@ -79,7 +79,7 @@ def read():
 
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
-    print(url)
+    print("URL: ", url)
     window.load_url(url)
 
 # def start_server():
