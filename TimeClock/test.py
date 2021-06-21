@@ -14,7 +14,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-base_url = "http://localhost:5000/"
+# base_url = "http://localhost:5000/"
+base_url = ""
+
 def read():
     try:
         reader = SimpleMFRC522()
@@ -42,8 +44,8 @@ def read():
             if val == '':
                 val = "Error"
                 payload = {'id': id, 'text': val}
-                # loadOptions(window, payload)
-                print(window.get_current_url())
+                loadOptions(window, payload)
+                # print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)              
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)            
@@ -65,8 +67,8 @@ def read():
                 GPIO.output(buzzer,GPIO.LOW)
             else:
                 payload = {'id': id, 'text': val}
-                # loadOptions(window, payload)
-                print(window.get_current_url())
+                loadOptions(window, payload)
+                # print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
@@ -99,6 +101,9 @@ def index(data=None):
     else:
         return render_template('index.html', read = False)
 
+def setBaseUrl():
+    base_url = window.get_current_url()
+    print(base_url)
 
 if __name__ == '__main__':
 
@@ -112,6 +117,6 @@ if __name__ == '__main__':
     r.daemon = True
     r.start()
 
-    webview.start(debug=True)
+    webview.start(setBaseUrl, debug=True)
     # webview.load_css()
     sys.exit()
