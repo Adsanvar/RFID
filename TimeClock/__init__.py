@@ -20,7 +20,7 @@ try:
 
         return app
 
-    webview.create_window("PyWebView & Flask", "http://localhost:5005")
+    webview.create_window("PyWebView & Flask", "http://localhost:5005/")
     webview.start()
     # print("calling thread target")
     # thread.start()
