@@ -4,6 +4,7 @@ import threading
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
+import jinja2
 
 home = Blueprint('home', __name__)
 
@@ -51,8 +52,8 @@ def read():
                     val = text.rstrip(' ')
                 payload = {'id': id, 'text': val}
                 print(payload)
-                with current_app.app_context():
-                    render_template('index.html', read = val)
+                # with current_app.app_context():
+                #     render_template('index.html', read = val)
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
