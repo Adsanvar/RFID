@@ -82,7 +82,7 @@ def sendPost(payload):
 thread = threading.Thread(target=read)
 thread.start()
 
-webview.create_window("PyWebView & Flask", "http://localhost:5005/")
+webview.create_window("PyWebView & Flask", "http://127.0.0.1:5005/")
 webview.start()
 
 
