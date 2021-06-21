@@ -51,13 +51,13 @@
       {{read}}
       {% if read != False %}
       <div class="box" >
-        <form action="{{ url_for('app.index') }}" method="post">
+        <form action="{{ url_for('index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form>
       </div>
       {% else %}
       <div class="box" hidden="True">
-        <form action="{{ url_for('app.index') }}" method="post">
+        <form action="{{ url_for('index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form>
       </div>
