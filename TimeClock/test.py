@@ -15,7 +15,6 @@ app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
-base_url = ""
 
 def read():
     try:
@@ -78,7 +77,8 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
-    url = base_url + json.dumps(payload)
+    # url = base_url + json.dumps(payload)
+    url = session["url"] + json.dumps(payload)
     print("URL: ", url)
     window.load_url(url)
 
@@ -103,6 +103,7 @@ def index(data=None):
 
 def setBaseUrl():
     base_url = window.get_current_url()
+    session['url'] = base_url
     print("base url: ", base_url)
 
 if __name__ == '__main__':
