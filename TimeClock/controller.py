@@ -6,6 +6,7 @@ from mfrc522 import SimpleMFRC522
 import time
 import jinja2
 import requests, json
+import webview
 
 home = Blueprint('home', __name__)
 
@@ -80,6 +81,10 @@ def sendPost(payload):
 
 thread = threading.Thread(target=read)
 thread.start()
+
+webview.create_window("PyWebView & Flask", "http://localhost:5005/")
+webview.start()
+
 
 #This Route is the index page (landing page) -Adrian
 @home.route('/', methods=['GET', 'POST'])
