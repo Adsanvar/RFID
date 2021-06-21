@@ -52,8 +52,8 @@
       {% if read != False %}
       <div class="box" >
         <form action="{{ url_for('index') }}" method="post">
-          <input type="submit" name="clockIn" value="Entrada">
-          <input type="submit" name="clockOut" value="Salida">
+          <input class = "clock-in" type="submit" name="clockIn" value="Entrada">
+          <input class = "clock-out" type="submit" name="clockOut" value="Salida">
         </form>
       </div>
       {% else %}
