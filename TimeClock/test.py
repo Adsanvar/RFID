@@ -86,6 +86,7 @@ def loadOptions(window, payload):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET', 'POST'])
 def index(data=None):
+    print(window.get_current_url())
     if data != None:
         data = json.loads(data)
         print(data)
