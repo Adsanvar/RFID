@@ -9,7 +9,7 @@ import sys
 import threading
 
 app = Flask(__name__)
-
+window = webview.create_window("PyWebView & Flask", "http://localhost:5000/", fullscreen=True)
 
 def read():
     try:
@@ -77,16 +77,17 @@ def index():
         return render_template('index.html', read = False)
     else:
         return render_template('index.html', read = False)
+
+
 if __name__ == '__main__':
 
     t = threading.Thread(target=start_server)
     t.daemon = True
     t.start()
-    
+
     r = threading.Thread(target=read)
     r.daemon = True
     r.start()
 
-    webview.create_window("PyWebView & Flask", "http://localhost:5000/", fullscreen=True)
     webview.start()
     sys.exit()
