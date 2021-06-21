@@ -49,7 +49,7 @@
           {% endif %}
         {% endwith %}
       {{read}}
-      {% if read != None %}
+      {% if read != none %}
       <div class="box" >
         <form action="{{ url_for('index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
