@@ -9,7 +9,7 @@ import sys
 import threading
 
 app = Flask(__name__)
-window = webview.create_window("PyWebView & Flask", "http://localhost:5000/", fullscreen=True)
+window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 
 def read():
     try:
@@ -68,11 +68,18 @@ def read():
     finally:
             GPIO.cleanup()
 
+def loadOptions(window, payload):
+    url = window.get_current_url()+ '/' + payload['text']
+    print(url)
+    window.load_url(url)
+
 def start_server():
     app.run(host='0.0.0.0', port=5000)
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/<string:name>', methods=['GET', 'POST'])
+def index(name=None):
+    print(name)
     if request.method == 'GET':
         return render_template('index.html', read = False)
     else:
