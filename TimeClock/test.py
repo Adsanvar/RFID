@@ -10,7 +10,7 @@ def hello_world():
     return 'Hello World!'
 
 def start_server():
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
 
@@ -18,6 +18,6 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
 
-    webview.create_window("PyWebView & Flask", "http://localhost/")
+    webview.create_window("PyWebView & Flask", "http://localhost:5000/")
     webview.start()
     sys.exit()
