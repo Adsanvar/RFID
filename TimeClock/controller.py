@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for
+from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, current_app
 import threading
 # from . import thread
 import RPi.GPIO as GPIO
@@ -51,8 +51,9 @@ def read():
                     val = text.rstrip(' ')
                 payload = {'id': id, 'text': val}
                 print(payload)
-                GPIO.output(buzzer,GPIO.HIGH)   
-                userClock(val)           
+                with current_app.app_context():
+                    render_template('index.html', read = val)
+                GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
     except:
