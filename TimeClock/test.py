@@ -15,6 +15,13 @@ app.config['SECRET_KEY'] = 'test_secret_key'
 
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 base_url = "http://localhost:5000/"
+
+r = threading.Thread(target=read)
+r.daemon = True
+r.start()
+
+webview.start()
+
 def read():
     try:
         reader = SimpleMFRC522()
