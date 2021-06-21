@@ -49,19 +49,19 @@
           {% endif %}
         {% endwith %}
       {{read}}
-      <!-- {% if read != False %}
+      {% if read != False %}
       <div class="box" >
-        <form action="{{ url_for('home.stopReadThread') }}" method="post">
+        <form action="{{ url_for('app.index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form>
       </div>
       {% else %}
       <div class="box" hidden="True">
-        <form action="{{ url_for('home.stopReadThread') }}" method="post">
+        <form action="{{ url_for('app.index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form>
       </div>
-      {% endif %} -->
+      {% endif %}
     </div>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
