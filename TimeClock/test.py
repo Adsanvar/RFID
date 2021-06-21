@@ -79,7 +79,7 @@ def loadOptions(window, payload):
     window.load_url(url)
 
 def start_server():
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, use_reloader=True)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -100,7 +100,7 @@ def index(data=None):
 if __name__ == '__main__':
 
     print(os.getcwd())
-    
+
     t = threading.Thread(target=start_server)
     t.daemon = True
     t.start()
