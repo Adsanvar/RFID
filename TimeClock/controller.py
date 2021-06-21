@@ -61,15 +61,13 @@ def read():
     finally:
             GPIO.cleanup()
 
-# thread = threading.Thread(target=read)
-# thread.start()
+thread = threading.Thread(target=read)
+thread.start()
 
 #This Route is the index page (landing page) -Adrian
 @home.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        thread = threading.Thread(target=read)
-        thread.start()
         return render_template('index.html', read = False)
     else:
         return render_template('index.html', read = False)
