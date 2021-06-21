@@ -26,6 +26,6 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
 
-    webview.create_window("PyWebView & Flask", "http://localhost:5000/")
+    webview.create_window("PyWebView & Flask", "http://localhost:5000/", fullscreen=True)
     webview.start()
     sys.exit()
