@@ -84,7 +84,7 @@ def index(data=None):
     if data != None:
         data = json.loads(data)
         print(data)
-        return render_template('index.html', read = False)
+        return render_template('index.html', read = data['text'])
     else:
         return render_template('index.html', read = False)
 
