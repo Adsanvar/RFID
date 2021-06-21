@@ -8,6 +8,7 @@ import webview
 import sys
 import threading
 import json
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'test_secret_key'
@@ -107,4 +108,6 @@ if __name__ == '__main__':
     r.start()
 
     webview.start()
+    print(os.getcwd())
+    # webview.load_css()
     sys.exit()
