@@ -2,7 +2,7 @@ from flask import Flask
 # import threading
 # import TimeClock.rfid as RFID
 # from TimeClock.rfid import RFID as RFID
-# import webview
+import webview
 
 try:
     # thread = RFID()
@@ -20,6 +20,8 @@ try:
 
         return app
 
+    webview.create_window("PyWebView & Flask", "http://localhost:5005")
+    webview.start()
     # print("calling thread target")
     # thread.start()
 
