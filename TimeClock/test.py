@@ -31,27 +31,6 @@ def read():
             val = ""
             if text == None or text  == "":
                 val = "Error"
-                payload = {'id': id, 'text': val}
-                loadOptions(window, payload)
-                GPIO.output(buzzer,GPIO.HIGH)              
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)            
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
             else:
                 # print('\x00' in text)
                 if '\x00' in text:
