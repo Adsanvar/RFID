@@ -60,6 +60,7 @@ def read():
                 # template = jinja2.Template('{{ name }} is {{ age }} years old.')
                 # rendered = template.render(name='Ginger', age=10)
                 # sendPost(payload)
+                loadOptions(window, payload)
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
