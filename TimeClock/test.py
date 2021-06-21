@@ -85,8 +85,8 @@ def loadOptions(window, payload):
 #     app.run(host='0.0.0.0', port=5000)
 
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/<string:data>', methods=['GET', 'POST'])
+@server.route('/', methods=['GET', 'POST'])
+@server.route('/<string:data>', methods=['GET', 'POST'])
 def index(data=None):
     if data != None:
         data = json.loads(data)
