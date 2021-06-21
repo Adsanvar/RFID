@@ -10,6 +10,8 @@ import threading
 import json
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'test_secret_key'
+
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 
 def read():
