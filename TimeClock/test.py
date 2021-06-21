@@ -42,7 +42,8 @@ def read():
             if val == '':
                 val = "Error"
                 payload = {'id': id, 'text': val}
-                loadOptions(window, payload)
+                # loadOptions(window, payload)
+                print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)              
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)            
@@ -64,7 +65,8 @@ def read():
                 GPIO.output(buzzer,GPIO.LOW)
             else:
                 payload = {'id': id, 'text': val}
-                loadOptions(window, payload)
+                # loadOptions(window, payload)
+                print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
@@ -86,7 +88,6 @@ def loadOptions(window, payload):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET', 'POST'])
 def index(data=None):
-    print(window.get_current_url())
     if data != None:
         data = json.loads(data)
         print(data)
