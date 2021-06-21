@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'test_secret_key'
 
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-
+base_url = "http://localhost:5000/"
 def read():
     try:
         reader = SimpleMFRC522()
@@ -56,6 +56,7 @@ def read():
                     val = text.replace('\x00', '')
                 else:
                     val = text.rstrip(' ')
+
             payload = {'id': id, 'text': val}
             loadOptions(window, payload)
             GPIO.output(buzzer,GPIO.HIGH)          
@@ -67,7 +68,7 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
-    url = window.get_current_url() + json.dumps(payload)
+    url = base_url + json.dumps(payload)
     print(url)
     window.load_url(url)
 
