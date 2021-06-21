@@ -31,6 +31,8 @@ def read():
             val = ""
             if text == None or text  == "":
                 val = "Error"
+                payload = {'id': id, 'text': val}
+                loadOptions(window, payload)
                 GPIO.output(buzzer,GPIO.HIGH)              
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)            
@@ -59,6 +61,8 @@ def read():
 
             if val == "":
                 val = "Error"
+                payload = {'id': id, 'text': val}
+                loadOptions(window, payload)
                 GPIO.output(buzzer,GPIO.HIGH)              
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)            
@@ -78,12 +82,12 @@ def read():
                 GPIO.output(buzzer,GPIO.HIGH)
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)
-            
-            payload = {'id': id, 'text': val}
-            loadOptions(window, payload)
-            GPIO.output(buzzer,GPIO.HIGH)          
-            time.sleep(5)
-            GPIO.output(buzzer,GPIO.LOW)
+            else:
+                payload = {'id': id, 'text': val}
+                loadOptions(window, payload)
+                GPIO.output(buzzer,GPIO.HIGH)          
+                time.sleep(5)
+                GPIO.output(buzzer,GPIO.LOW)
     except:
         raise
     finally:
