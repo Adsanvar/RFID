@@ -10,10 +10,12 @@ import threading
 import json
 import os
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'test_secret_key'
-
-window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+# app = Flask(__name__)
+# app.config['SECRET_KEY'] = 'test_secret_key'
+server = Flask(__name__, static_folder='./assets', template_folder='./templates')
+server.config['SECRET_KEY'] = '123456789'
+window = webview.create_window("TimeClock", server)
+# window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 base_url = "http://localhost:5000/"
 def read():
     try:
@@ -78,9 +80,9 @@ def loadOptions(window, payload):
     print(url)
     window.load_url(url)
 
-def start_server():
-    # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
-    app.run(host='0.0.0.0', port=5000)
+# def start_server():
+#     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+#     app.run(host='0.0.0.0', port=5000)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -102,9 +104,9 @@ if __name__ == '__main__':
 
     print(os.getcwd())
 
-    t = threading.Thread(target=start_server)
-    t.daemon = True
-    t.start()
+    # t = threading.Thread(target=start_server)
+    # t.daemon = True
+    # t.start()
 
     r = threading.Thread(target=read)
     r.daemon = True
