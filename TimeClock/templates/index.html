@@ -48,19 +48,20 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
-      {{read}}
+
       {% if read != False %}
       <div class="box" >
         <form action="{{ url_for('index') }}" method="post">
-          <input type="submit" name="login" value={{read}}>
+          <input type="submit" name="clockIn" value="Entrada">
+          <input type="submit" name="clockOut" value="Salida">
         </form>
       </div>
       {% else %}
-      <div class="box" hidden="True">
+      <!-- <div class="box" hidden="True">
         <form action="{{ url_for('index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form> 
-      </div>
+      </div> -->
       {% endif %}
     </div>
 
