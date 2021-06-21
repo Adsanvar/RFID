@@ -99,6 +99,8 @@ def index(data=None):
 
 if __name__ == '__main__':
 
+    print(os.getcwd())
+    
     t = threading.Thread(target=start_server)
     t.daemon = True
     t.start()
@@ -108,6 +110,5 @@ if __name__ == '__main__':
     r.start()
 
     webview.start()
-    print(os.getcwd())
     # webview.load_css()
     sys.exit()
