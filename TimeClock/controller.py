@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
 import jinja2
+import requests, json
 
 home = Blueprint('home', __name__)
 
@@ -54,8 +55,9 @@ def read():
                 print(payload)
                 # with current_app.app_context():
                 #     render_template('index.html', read = val)
-                template = jinja2.Template('{{ name }} is {{ age }} years old.')
-                rendered = template.render(name='Ginger', age=10)
+                # template = jinja2.Template('{{ name }} is {{ age }} years old.')
+                # rendered = template.render(name='Ginger', age=10)
+                sendPost(payload)
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
@@ -63,6 +65,18 @@ def read():
         raise
     finally:
             GPIO.cleanup()
+
+def sendPost(payload):
+    try:
+        url = "http://127.0.0.1:5005/read"
+        # # url ="http://192.168.1.65:5005/read"
+        headers= {'content-type': 'application/json'}
+        requests.post(url, data=json.dumps(payload), headers=headers)
+        # requests.put(url, data=json.dumps(payload), headers=headers)
+        # read(payload)
+        # print(payload)
+    except Exception as e:
+        raise
 
 thread = threading.Thread(target=read)
 thread.start()
@@ -86,20 +100,20 @@ def userClock(val):
     return render_template('index.html', read = val )
 
 
-# @home.route('/read', methods=['GET','POST'])
-# def read():
-#     print(request.method)
-#     print(request.json['text'])
-#     if request.json['text'] == '' or request.json == None:
-#         print('error')
-#         flash("Error En Deteccion", 'error')
-#     else:
-#         print(request.json['text'])
-#         flash(request.json['text'], 'success')
+@home.route('/read', methods=['GET','POST'])
+def read():
+    print(request.method)
+    print(request.json['text'])
+    if request.json['text'] == '' or request.json == None:
+        print('error')
+        flash("Error En Deteccion", 'error')
+    else:
+        print(request.json['text'])
+        flash(request.json['text'], 'success')
 
-#     print("RENDER?")
-#     return redirect(url_for('home.userClock', val = request.json['text']))
-#     # render_template('timeUserInput.html', read = request.json['text'])
-#     # return "success", 200
+    print("RENDER?")
+    # return redirect(url_for('home.userClock', val = request.json['text']))
+    render_template('timeUserInput.html', read = request.json['text'])
+    return "success"
 
 
