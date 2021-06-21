@@ -15,13 +15,6 @@ app.config['SECRET_KEY'] = 'test_secret_key'
 
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 base_url = "http://localhost:5000/"
-
-r = threading.Thread(target=read)
-r.daemon = True
-r.start()
-
-webview.start()
-
 def read():
     try:
         reader = SimpleMFRC522()
@@ -86,8 +79,7 @@ def loadOptions(window, payload):
     window.load_url(url)
 
 def start_server():
-    # app.run(host='0.0.0.0', port=5000, use_reloader=True)
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -112,11 +104,16 @@ if __name__ == '__main__':
     # t = threading.Thread(target=start_server)
     # t.daemon = True
     # t.start()
-
+    t = threading.Thread(target=webview.start())
+    t.daemon = True
+    t.start()
+    
     r = threading.Thread(target=read)
     r.daemon = True
     r.start()
 
-    webview.start()
+    start_server()
+
+    # webview.start()
     # webview.load_css()
     sys.exit()
