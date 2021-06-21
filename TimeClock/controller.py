@@ -54,6 +54,8 @@ def read():
                 print(payload)
                 # with current_app.app_context():
                 #     render_template('index.html', read = val)
+                template = jinja2.Template('{{ name }} is {{ age }} years old.')
+                rendered = template.render(name='Ginger', age=10)
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
