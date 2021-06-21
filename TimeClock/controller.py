@@ -83,7 +83,7 @@ thread = threading.Thread(target=read)
 thread.start()
 
 try:
-    webview.create_window("PyWebView & Flask", "http://127.0.0.1:5005")
+    webview.create_window("PyWebView & Flask", "https://www.kleene.dev/")
     webview.start()
 except Exception as e:
     print(e)
