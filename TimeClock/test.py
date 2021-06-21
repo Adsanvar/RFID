@@ -7,6 +7,7 @@ import time
 import webview
 import sys
 import threading
+import json
 
 app = Flask(__name__)
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
@@ -70,7 +71,7 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
-    url = window.get_current_url()+ '/' + payload['text']
+    url = window.get_current_url() + json.dumps(payload)
     print(url)
     window.load_url(url)
 
