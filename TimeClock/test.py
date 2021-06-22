@@ -103,7 +103,12 @@ def loadOptions(window, payload):
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire('Saved!', '', 'success')
+            Swal.fire({
+            icon: 'success',
+            title: 'Todo Listo!',
+            confirmButtonColor: '#3085d6',
+            timer: 1500,
+            })
         } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info')
         }
