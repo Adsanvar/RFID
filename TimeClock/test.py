@@ -85,30 +85,7 @@ def read():
 def loadOptions(window, payload):
     # url = base_url + json.dumps(payload)
     # print("URL: ", url)
-    tmp = """<template id="my-template">
-    <swal-title>
-        Save changes to "Untitled 1" before closing?
-    </swal-title>
-    <swal-icon type="warning" color="red"></swal-icon>
-    <swal-button type="confirm">
-        Save As
-    </swal-button>
-    <swal-button type="cancel">
-        Cancel
-    </swal-button>
-    <swal-button type="deny">
-        Close without Saving
-    </swal-button>
-    <swal-param name="allowEscapeKey" value="false" />
-    <swal-param
-        name="customClass"
-        value='{ "popup": "my-popup" }' />
-    </template>
-    
-    Swal.fire({
-    template: '#my-template'
-    })
-    """
+
     tmp2 = """ const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn-clock-in',
@@ -127,7 +104,7 @@ def loadOptions(window, payload):
     swalWithBootstrapButtons.fire({
     title: '%s',
     text: "Seleccionar Opción",
-    confirmButtonText: 'Entrada',
+    confirmButtonText: 'Entrada \n <i class="fas fa-sign-in-alt"></i>',
     showCancelButton: true,
     cancelButtonText: 'Salida',
     width: 600,
@@ -149,42 +126,13 @@ def loadOptions(window, payload):
     })""" % (payload['text'])
 
     if payload['text'] == 'Error':
-        string = """Swal.fire({
+        string = """swalBtnOkBootstrap.fire({
         icon: 'error',
         title: 'Error Leyendo Etiqueta!',
-        confirmButtonColor: '#3085d6',
         timer: 4000,
         })"""
         window.evaluate_js(string)
     else:
-        string = """Swal.fire({
-        title: '%s',
-        showDenyButton: true,
-        /*showCancelButton: true,*/
-        confirmButtonText: `Entrada`,
-        denyButtonText: `Salida`,
-        confirmButtonColor: '#24c74f',
-        heighAuto: false,
-        width: 600,
-        height: 500,
-        }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            Swal.fire({
-            icon: 'success',
-            title: 'Todo Listo!',
-            confirmButtonColor: '#3085d6',
-            timer: 4000,
-            })
-        }  else if ( result.dismiss === Swal.DismissReason.cancel) 
-            {
-                swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-                )
-            }
-        }) """ % (payload['text'])
         
         window.evaluate_js(tmp2)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
