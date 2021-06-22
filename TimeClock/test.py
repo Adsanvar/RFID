@@ -105,6 +105,8 @@ def loadOptions(window, payload):
     confirmButtonText: 'Entrada',
     showCancelButton: true,
     cancelButtonText: 'Salida',
+    allowKeyEnter: false,
+    returnFocus: false,
     html:
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
