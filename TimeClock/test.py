@@ -85,9 +85,27 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
-    string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Save\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
+    # if payload['text'] == 'Error':
+        
+    # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
     # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
     # window.evaluate_js("Swal.fire({ title: 'Do you want to save the changes?', showDenyButton: true, showCancelButton: true, confirmButtonText: `Save`, denyButtonText: `Don't save`, }).then((result) => { if (result.isConfirmed) { Swal.fire('Saved!', '', 'success') } else if (result.isDenied) { Swal.fire('Changes are not saved', '', 'info') })")
+    string = """const { value: formValues } = await Swal.fire({
+    title: 'Multiple inputs',
+    html:
+        '<input id="swal-input1" class="swal2-input">' +
+        '<input id="swal-input2" class="swal2-input">',
+    focusConfirm: false,
+    preConfirm: () => {
+        return [
+        document.getElementById('swal-input1').value,
+        document.getElementById('swal-input2').value
+        ]
+    }
+    })
+    if (formValues) {
+    Swal.fire(JSON.stringify(formValues))
+    }"""
     window.evaluate_js(string)
     # window.load_url(url)
 
