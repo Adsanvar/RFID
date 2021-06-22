@@ -121,10 +121,22 @@ def loadOptions(window, payload):
             id = document.getElementById('id').value
             name = document.getElementById('name').value
             swalBtnOkBootstrap.fire(
-            id,
-            name,
-            'error'
-            )
+            {
+                title: name,
+                html: `
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
+                        <label class="form-check-label" for="checkbox1">
+                            checkbox1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox2">
+                        <label class="form-check-label" for="checkbox2">
+                            checkbox2
+                        </label>
+                    </div>`,
+            })
         }
     })""" % (payload['text'], payload['id'], payload['text'])
 
