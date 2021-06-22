@@ -83,7 +83,6 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
-    window.evaluate_js('$("#myModal").modal()')
     window.load_url(url)
 
 # def start_server():
@@ -101,7 +100,7 @@ def index(data=None):
             flash("Error Leyendo Etiqueta", 'error')
             return render_template('index.html', read = False)
         else:
-            return render_template('index.html', read = data['text'])
+            return render_template('index.html', read = True, data = data['text'] )
     else:
         return render_template('index.html', read = False)
 
