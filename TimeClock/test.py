@@ -112,18 +112,17 @@ def loadOptions(window, payload):
     tmp2 = """ const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn',
-        /* cancelButton: 'btn btn-danger'*/
-        denyButton: 'btn-clock-out'
+        cancelButton: 'btn-clock-out'
     },
     buttonsStyling: false
     })
 
     swalWithBootstrapButtons.fire({
     title: '%s',
-    text: "You won't be able to revert this!",
+    text: "Seleccionar Opción",
     confirmButtonText: 'Entrada',
-    showDenyButton: true,
-    denyButtonText: `Salida`,
+    showCancelButton: true,
+    cancelButtonText: 'Salida',
     width: 600,
     }).then((result) => {
     if (result.isConfirmed) {
@@ -166,9 +165,14 @@ def loadOptions(window, payload):
             confirmButtonColor: '#3085d6',
             timer: 4000,
             })
-        } else if (result.isDenied) {
-            Swal.fire('Changes are not saved', '', 'info')
-        }
+        }  else if ( result.dismiss === Swal.DismissReason.cancel) 
+            {
+                swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+                )
+            }
         }) """ % (payload['text'])
         
         window.evaluate_js(tmp2)
