@@ -85,12 +85,20 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
-    # if payload['text'] == 'Error':
-        
+
+    if payload['text'] == 'Error':
+        string = """Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+        })"""
+        window.evaluate_js(string)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
     # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
     # window.evaluate_js("Swal.fire({ title: 'Do you want to save the changes?', showDenyButton: true, showCancelButton: true, confirmButtonText: `Save`, denyButtonText: `Don't save`, }).then((result) => { if (result.isConfirmed) { Swal.fire('Saved!', '', 'success') } else if (result.isDenied) { Swal.fire('Changes are not saved', '', 'info') })")
-    string = """const { value: formValues } = await Swal.fire({
+    string = """
+    const { value: formValues } = await Swal.fire({
     title: 'Multiple inputs',
     html:
         '<input id="swal-input1" class="swal2-input">' +
@@ -106,7 +114,7 @@ def loadOptions(window, payload):
     if (formValues) {
     Swal.fire(JSON.stringify(formValues))
     }"""
-    window.evaluate_js(string)
+    # window.evaluate_js(string)
     # window.load_url(url)
 
 # def start_server():
