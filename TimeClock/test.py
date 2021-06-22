@@ -89,8 +89,7 @@ def loadOptions(window, payload):
     if payload['text'] == 'Error':
         string = """Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Error Leyendo Etiqueta!',
+        title: 'Error Leyendo Etiqueta!',
         })"""
         window.evaluate_js(string)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
