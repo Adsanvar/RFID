@@ -105,7 +105,6 @@ def loadOptions(window, payload):
     confirmButtonText: 'Entrada',
     showCancelButton: true,
     cancelButtonText: 'Salida',
-    focusConfirm: false,
     html:
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
@@ -156,7 +155,6 @@ def loadOptions(window, payload):
     html:
         '<input id="swal-input1" class="swal2-input">' +
         '<input id="swal-input2" class="swal2-input">',
-    focusConfirm: false,
     preConfirm: () => {
         return [
         document.getElementById('swal-input1').value,
