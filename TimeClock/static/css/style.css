@@ -80,26 +80,38 @@ body {
 }
 .btn-clock-in
 {
-  background-color:  #28a745;
+  display: block;
+  background-color:  #30c352;
   color: #fff;
   width: 150px;
   height: 150px;
   font-size: 24px;
+  font-family: 'Montserrat';
+  text-align: center;
+  border-radius: 24px;
 }
 .btn-clock-out
 {
-  background-color:  #a72828;
+  display: block;
+  background-color:  #cc2f2f;
   color: #fff;
   width: 150px;
   height: 150px;
   font-size: 24px;
+  font-family: 'Montserrat';
+  text-align: center;
+  border-radius: 24px;
 }
 .btn-ok{
+  display: block;
   background-color:  #3085d6;
   color: #fff;
   width: 100px;
   height: 100px;
   font-size: 24px;
+  font-family: 'Montserrat';
+  text-align: center;
+  border-radius: 24px;
 }
 
 /* 

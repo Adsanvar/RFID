@@ -19,8 +19,6 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 
 base_url = ""
 
-
-
 def read():
     try:
         reader = SimpleMFRC522()
@@ -198,8 +196,6 @@ def setBaseUrl():
 
 if __name__ == '__main__':
 
-    print(os.getcwd())
-
     # t = threading.Thread(target=start_server)
     # t.daemon = True
     # t.start()
@@ -208,6 +204,6 @@ if __name__ == '__main__':
     r.daemon = True
     r.start()
 
-    webview.start(setBaseUrl, debug=True)
-    # webview.load_css()
+    # webview.start(setBaseUrl, debug=True)
+    webview.start(setBaseUrl)
     sys.exit()
