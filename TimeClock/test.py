@@ -35,6 +35,7 @@ def read():
             print(id)
             print(text)
             # print(repr(text))
+            pyautogui.moveTo(512, 300, duration = 1) #moves mouse to center to invoke a wake up rpi if it is sleeping
             val = ""
             if text == None or text  == '':
                 val = "Error"
@@ -82,7 +83,6 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
-    print(pyautogui.size())
     url = base_url + json.dumps(payload)
     print("URL: ", url)
     string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Save\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
