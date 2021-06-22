@@ -91,6 +91,7 @@ def loadOptions(window, payload):
         icon: 'error',
         title: 'Error Leyendo Etiqueta!',
         confirmButtonColor: '#3085d6',
+        timer: 4000,
         })"""
         window.evaluate_js(string)
     else:
@@ -100,7 +101,10 @@ def loadOptions(window, payload):
         /*showCancelButton: true,*/
         confirmButtonText: `Entrada`,
         denyButtonText: `Salida`,
-        confirmButtonColor: '#24c74f'
+        confirmButtonColor: '#24c74f',
+        heighAuto: false,
+        width: 50%,
+        height: 50%,
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
