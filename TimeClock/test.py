@@ -103,8 +103,8 @@ def loadOptions(window, payload):
         denyButtonText: `Salida`,
         confirmButtonColor: '#24c74f',
         heighAuto: false,
-        width: 50%,
-        height: 50%,
+        width: 300px,
+        height: 300px,
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
