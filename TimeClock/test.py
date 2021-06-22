@@ -111,8 +111,15 @@ def loadOptions(window, payload):
     """
     tmp2 = """ const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
-        confirmButton: 'btn',
+        confirmButton: 'btn-clock-in',
         cancelButton: 'btn-clock-out'
+    },
+    buttonsStyling: false
+    })
+
+    const swalBtnOkBootstrap = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn-ok',
     },
     buttonsStyling: false
     })
@@ -126,14 +133,18 @@ def loadOptions(window, payload):
     width: 600,
     }).then((result) => {
     if (result.isConfirmed) {
-        Swal.fire({
+        swalBtnOkBootstrap.fire({
         icon: 'success',
         title: 'Todo Listo!',
-        confirmButtonColor: '#3085d6',
         timer: 4000,
         })
-    } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+    } else if ( result.dismiss === Swal.DismissReason.cancel) 
+        {
+            swalBtnOkBootstrap.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+            )
         }
     })""" % (payload['text'])
 

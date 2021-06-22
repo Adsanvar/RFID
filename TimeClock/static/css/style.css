@@ -78,7 +78,7 @@ body {
     display: none !important;
   }
 }
-.btn
+.btn-clock-in
 {
   background-color:  #28a745;
   color: #fff;
@@ -92,6 +92,13 @@ body {
   color: #fff;
   width: 150px;
   height: 150px;
+  font-size: 24px;
+}
+.btn-ok{
+  background-color:  #3085d6;
+  color: #fff;
+  width: 100px;
+  height: 100px;
   font-size: 24px;
 }
 
