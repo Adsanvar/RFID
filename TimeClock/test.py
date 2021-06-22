@@ -81,6 +81,7 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
+    window.evaluate_js('$(\"#exampleModalCenter\").modal(\"show\")')
     window.load_url(url)
 
 # def start_server():
