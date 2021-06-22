@@ -34,7 +34,7 @@ def read():
             id, text = reader.read()
             print(id)
             print(text)
-            # print(repr(text))
+            print(repr(text))
             pyautogui.moveTo(512, 300, duration = 1) #moves mouse to center to invoke a wake up rpi if it is sleeping
             val = ""
             if text == None or text  == '':
@@ -46,7 +46,7 @@ def read():
                 else:
                     val = text.rstrip(' ')
 
-            if val == '':
+            if val == '' or val == None:
                 val = "Error"
                 payload = {'id': id, 'text': val}
                 loadOptions(window, payload)
