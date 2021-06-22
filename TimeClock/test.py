@@ -107,7 +107,7 @@ def loadOptions(window, payload):
             icon: 'success',
             title: 'Todo Listo!',
             confirmButtonColor: '#3085d6',
-            timer: 1500,
+            timer: 4000,
             })
         } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info')
