@@ -113,6 +113,7 @@ def loadOptions(window, payload):
     customClass: {
         confirmButton: 'btn',
         /* cancelButton: 'btn btn-danger'*/
+        denyButton: 'btn-clock-out'
     },
     buttonsStyling: false
     })
@@ -123,7 +124,7 @@ def loadOptions(window, payload):
     confirmButtonText: 'Entrada',
     showDenyButton: true,
     denyButtonText: `Salida`,
-
+    width: 600,
     }).then((result) => {
     if (result.isConfirmed) {
         Swal.fire({

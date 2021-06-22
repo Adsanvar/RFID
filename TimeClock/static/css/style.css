@@ -84,6 +84,15 @@ body {
   color: #fff;
   width: 150px;
   height: 150px;
+  font-size: 24px;
+}
+.btn-clock-out
+{
+  background-color:  #a72828;
+  color: #fff;
+  width: 150px;
+  height: 150px;
+  font-size: 24px;
 }
 
 /* 
