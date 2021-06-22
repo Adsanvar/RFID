@@ -90,6 +90,7 @@ def loadOptions(window, payload):
         string = """Swal.fire({
         icon: 'error',
         title: 'Error Leyendo Etiqueta!',
+        confirmButtonColor: '#3085d6',
         })"""
         window.evaluate_js(string)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
