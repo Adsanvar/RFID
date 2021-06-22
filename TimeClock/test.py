@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
-window = webview.create_window("TimeClock", app)
+window = webview.create_window("TimeClock", app, fullscreen=True)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
