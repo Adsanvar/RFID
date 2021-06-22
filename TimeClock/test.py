@@ -104,10 +104,14 @@ def loadOptions(window, payload):
     swalWithBootstrapButtons.fire({
     title: '%s',
     text: "Seleccionar Opción",
-    confirmButtonText: 'Entrada <i class="fas fa-sign-in-alt"></i>',
+    confirmButtonText: 'Entrada',
     showCancelButton: true,
     cancelButtonText: 'Salida',
-    width: 600,
+    focusConfirm: false,
+    html:
+        '<input id="swal-input1" class="swal2-input" value="hello">' +
+        '<input id="swal-input2" class="swal2-input" value="hi">',
+    /*width: 600,*/
     }).then((result) => {
     if (result.isConfirmed) {
         swalBtnOkBootstrap.fire({
