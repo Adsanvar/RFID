@@ -104,7 +104,7 @@ def loadOptions(window, payload):
     swalWithBootstrapButtons.fire({
     title: '%s',
     text: "Seleccionar Opción",
-    confirmButtonText: 'Entrada \n <i class="fas fa-sign-in-alt"></i>',
+    confirmButtonText: 'Entrada <i class="fas fa-sign-in-alt"></i>',
     showCancelButton: true,
     cancelButtonText: 'Salida',
     width: 600,
