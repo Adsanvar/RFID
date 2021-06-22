@@ -85,6 +85,64 @@ def read():
 def loadOptions(window, payload):
     # url = base_url + json.dumps(payload)
     # print("URL: ", url)
+    tmp = """<template id="my-template">
+    <swal-title>
+        Save changes to "Untitled 1" before closing?
+    </swal-title>
+    <swal-icon type="warning" color="red"></swal-icon>
+    <swal-button type="confirm">
+        Save As
+    </swal-button>
+    <swal-button type="cancel">
+        Cancel
+    </swal-button>
+    <swal-button type="deny">
+        Close without Saving
+    </swal-button>
+    <swal-param name="allowEscapeKey" value="false" />
+    <swal-param
+        name="customClass"
+        value='{ "popup": "my-popup" }' />
+    </template>
+    
+    Swal.fire({
+    template: '#my-template'
+    })
+    """
+    tmp2 = """ const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn',
+        /* cancelButton: 'btn btn-danger'*/
+    },
+    buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+        )
+    } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+        )
+    }
+    })"""
 
     if payload['text'] == 'Error':
         string = """Swal.fire({
@@ -119,7 +177,7 @@ def loadOptions(window, payload):
         }
         }) """ % (payload['text'])
         
-        window.evaluate_js(string)
+        window.evaluate_js(tmp2)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
     # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
     # window.evaluate_js("Swal.fire({ title: 'Do you want to save the changes?', showDenyButton: true, showCancelButton: true, confirmButtonText: `Save`, denyButtonText: `Don't save`, }).then((result) => { if (result.isConfirmed) { Swal.fire('Saved!', '', 'success') } else if (result.isDenied) { Swal.fire('Changes are not saved', '', 'info') })")

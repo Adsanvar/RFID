@@ -78,6 +78,14 @@ body {
     display: none !important;
   }
 }
+.btn
+{
+  background-color:  #28a745;
+  color: #fff;
+  width: 150px;
+  height: 150px;
+}
+
 /* 
 .box{
   width: 300px;
