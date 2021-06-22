@@ -118,31 +118,24 @@ def loadOptions(window, payload):
     })
 
     swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
+    title: '%s',
     text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
+    confirmButtonText: 'Entrada',
+    showDenyButton: true,
+    denyButtonText: `Salida`,
+
     }).then((result) => {
     if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-        )
-    } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-    ) {
-        swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your imaginary file is safe :)',
-        'error'
-        )
-    }
-    })"""
+        Swal.fire({
+        icon: 'success',
+        title: 'Todo Listo!',
+        confirmButtonColor: '#3085d6',
+        timer: 4000,
+        })
+    } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+        }
+    })""" % (payload['text'])
 
     if payload['text'] == 'Error':
         string = """Swal.fire({
