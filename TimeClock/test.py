@@ -124,47 +124,32 @@ def loadOptions(window, payload):
             {
                 title: name,
                 html: `
-                <div class="card">
-                <div class="content-wrapper">
-                    <h2 class="heading">Accessible Toggle Switch</h2>
-                    <p>The following demo shows how to build and style a custom toggle switch using a semantic checkbox.</p>
-                </div>
-
-                <div class="demo">
-                    <!-- begin toggle markup	 -->
-
-                    <label class="toggle" for="uniqueID">
-                        <input type="checkbox" class="toggle__input" id="uniqueID" />
-                        <span class="toggle-track">
-                            <span class="toggle-indicator">
-                                <!-- 	This check mark is optional	 -->
-                                <span class="checkMark">
-                                    <svg viewBox="0 0 24 24" id="ghq-svg-check" role="presentation" aria-hidden="true">
-                                        <path d="M9.86 18a1 1 0 01-.73-.32l-4.86-5.17a1.001 1.001 0 011.46-1.37l4.12 4.39 8.41-9.2a1 1 0 111.48 1.34l-9.14 10a1 1 0 01-.73.33h-.01z"></path>
-                                    </svg>
-                                </span>
-                            </span>
-                        </span>
-                        Enabled toggle label
-                    </label>
-
-                    <!-- end toggle markup	 -->
-
-                    <label class="toggle" for="disabledDemo">
-                        <input type="checkbox" class="toggle__input" id="disabledDemo" disabled />
-                        <span class="toggle-track">
-                            <span class="toggle-indicator">
-                                <span class="checkMark">
-                                    <svg viewBox="0 0 24 24" id="ghq-svg-check" role="presentation" aria-hidden="true">
-                                        <path d="M9.86 18a1 1 0 01-.73-.32l-4.86-5.17a1.001 1.001 0 011.46-1.37l4.12 4.39 8.41-9.2a1 1 0 111.48 1.34l-9.14 10a1 1 0 01-.73.33h-.01z"></path>
-                                    </svg>
-                                </span>
-                            </span>
-                        </span>
-                        Disabled toggle label
-                    </label>
-                </div>
-            </div>`,
+                <input class="inp-cbx" id="morning" type="checkbox"/>
+                <label class="cbx" for="morning"><span>
+                    <svg width="12px" height="10px">
+                    <use xlink:href="#check"></use>
+                    </svg></span><span>Morning</span></label>
+                <input class="inp-cbx" id="noon" type="checkbox"/>
+                <label class="cbx" for="noon"><span>
+                    <svg width="12px" height="10px">
+                    <use xlink:href="#check"></use>
+                    </svg></span><span>Noon</span></label>
+                <input class="inp-cbx" id="afternoon" type="checkbox"/>
+                <label class="cbx" for="afternoon"><span>
+                    <svg width="12px" height="10px">
+                    <use xlink:href="#check"></use>
+                    </svg></span><span>Afternoon</span></label>
+                <input class="inp-cbx" id="evening" type="checkbox" style="display: none"/>
+                <label class="cbx" for="evening"><span>
+                    <svg width="12px" height="10px">
+                    <use xlink:href="#check"></use>
+                    </svg></span><span>Evening</span></label>
+                <!--SVG Sprites-->
+                <svg class="inline-svg">
+                <symbol id="check" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+                </svg>`,
             })
         }
     })""" % (payload['text'], payload['id'], payload['text'])
