@@ -97,9 +97,10 @@ def loadOptions(window, payload):
         string = """Swal.fire({
         title: '%s',
         showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: `Save`,
-        denyButtonText: `Don't save`,
+        /*showCancelButton: true,*/
+        confirmButtonText: `Entrada`,
+        denyButtonText: `Salida`,
+        confirmButtonColor: '#24c74f'
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
