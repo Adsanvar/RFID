@@ -9,6 +9,7 @@ import sys
 import threading
 import json
 import os
+import pyautogui
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
@@ -81,11 +82,13 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
+    print(pyautogui.size())
     url = base_url + json.dumps(payload)
     print("URL: ", url)
+    string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Save\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
     # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
     # window.evaluate_js("Swal.fire({ title: 'Do you want to save the changes?', showDenyButton: true, showCancelButton: true, confirmButtonText: `Save`, denyButtonText: `Don't save`, }).then((result) => { if (result.isConfirmed) { Swal.fire('Saved!', '', 'success') } else if (result.isDenied) { Swal.fire('Changes are not saved', '', 'info') })")
-    window.evaluate_js('Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Save\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})')
+    window.evaluate_js(string)
     # window.load_url(url)
 
 # def start_server():
