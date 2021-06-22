@@ -83,15 +83,14 @@ def read():
             GPIO.cleanup()
 
 def loadOptions(window, payload):
-    url = base_url + json.dumps(payload)
-    print("URL: ", url)
+    # url = base_url + json.dumps(payload)
+    # print("URL: ", url)
 
     if payload['text'] == 'Error':
         string = """Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href="">Why do I have this issue?</a>'
+        text: 'Error Leyendo Etiqueta!',
         })"""
         window.evaluate_js(string)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
