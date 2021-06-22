@@ -18,6 +18,8 @@ window = webview.create_window("TimeClock", app)
 
 base_url = ""
 
+
+
 def read():
     try:
         reader = SimpleMFRC522()
@@ -81,7 +83,7 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
-    window.evaluate_js('$(\"#exampleModalCenter\").modal(\"show\")')
+    window.evaluate_js('alert("Nice one brother")')
     window.load_url(url)
 
 # def start_server():
