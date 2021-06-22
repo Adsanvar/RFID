@@ -132,7 +132,15 @@ def loadOptions(window, payload):
     })""" % (payload['text'], payload['id'], payload['text'])
 
     if payload['text'] == 'Error':
-        string = """swalBtnOkBootstrap.fire({
+        string = """
+        const swalBtnOkBootstrap = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn-ok',
+        },
+        buttonsStyling: false
+        })
+        
+        swalBtnOkBootstrap.fire({
         icon: 'error',
         title: 'Error Leyendo Etiqueta!',
         timer: 4000,
