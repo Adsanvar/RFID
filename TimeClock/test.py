@@ -83,7 +83,7 @@ def read():
 def loadOptions(window, payload):
     url = base_url + json.dumps(payload)
     print("URL: ", url)
-    window.evaluate_js('Swal.fire({ position: \'top-end\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
+    window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
     # window.load_url(url)
 
 # def start_server():
