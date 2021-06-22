@@ -109,8 +109,8 @@ def loadOptions(window, payload):
     cancelButtonText: 'Salida',
     focusConfirm: false,
     html:
-        '<input id="swal-input1" class="swal2-input" value="hello">' +
-        '<input id="swal-input2" class="swal2-input" value="hi">',
+        '<input id="id" class="swal2-input" value="%s" type="hidden">' +
+        '<input id="name" class="swal2-input" value="%s" type="hidden">',
     /*width: 600,*/
     }).then((result) => {
     if (result.isConfirmed) {
@@ -120,14 +120,16 @@ def loadOptions(window, payload):
         timer: 4000,
         })
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
-        {
+        {   
+            id = document.getElementById('id').value
+            name = document.getElementById('name').value
             swalBtnOkBootstrap.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
+            id,
+            name,
             'error'
             )
         }
-    })""" % (payload['text'])
+    })""" % (payload['text'], payload['id'], payload['text'])
 
     if payload['text'] == 'Error':
         string = """swalBtnOkBootstrap.fire({
