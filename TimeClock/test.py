@@ -108,6 +108,7 @@ def loadOptions(window, payload):
     width: 600,
     timer: 60000,
     html:
+        '<hr/>'+
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
     }).then((result) => {
@@ -125,6 +126,7 @@ def loadOptions(window, payload):
         {
             title: name,
             icon: 'info',
+            showLoaderOnConfirm: true,
             html: `
             <div class="big margin">
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
@@ -154,26 +156,7 @@ def loadOptions(window, payload):
         window.evaluate_js(string)
     else:
         window.evaluate_js(tmp2)
-    # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
-    # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
-    # window.evaluate_js("Swal.fire({ title: 'Do you want to save the changes?', showDenyButton: true, showCancelButton: true, confirmButtonText: `Save`, denyButtonText: `Don't save`, }).then((result) => { if (result.isConfirmed) { Swal.fire('Saved!', '', 'success') } else if (result.isDenied) { Swal.fire('Changes are not saved', '', 'info') })")
-    string = """
-    const { value: formValues } = await Swal.fire({
-    title: 'Multiple inputs',
-    html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
-    preConfirm: () => {
-        return [
-        document.getElementById('swal-input1').value,
-        document.getElementById('swal-input2').value
-        ]
-    }
-    })
-    if (formValues) {
-    Swal.fire(JSON.stringify(formValues))
-    }"""
-    # window.evaluate_js(string)
+
     # window.load_url(url)
 
 # def start_server():
@@ -194,6 +177,15 @@ def index(data=None):
             return render_template('index.html', read = True, data = data['text'] )
     else:
         return render_template('index.html', read = False)
+
+@app.route('/clockIn')
+@app.route('/clockIn/<string:data>')
+def clockin(data=None):
+    if data != None:
+        print(data)
+        return 'Success'
+    else:
+        return 'Error - No Data'
 
 def setBaseUrl():
     global base_url
