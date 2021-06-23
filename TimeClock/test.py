@@ -147,15 +147,22 @@ def loadOptions(window, payload):
     allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
     if (result.isConfirmed) {
-        /*swalBtnOkBootstrap.fire({
-        icon: 'success',
-        title: 'Todo Listo!',
-        timer: 4000,
-        })*/
-
-        Swal.fire({
-        title: `${result.value.message}`,
-        })
+        if (result.value.message === 'Success')
+        {
+            swalBtnOkBootstrap.fire({
+            icon: 'success',
+            title: 'Todo Listo!',
+            timer: 4000,
+            })
+        }else
+        {
+            swalBtnOkBootstrap.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '${result.value.message}',
+            timer: 10000,
+            })""
+        }
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
     {   
         id = document.getElementById('id').value
@@ -222,7 +229,7 @@ def clockin(data=None):
     if data != None:
         url ="http://192.168.1.65:5005/clockin"
         headers= {'content-type': 'application/json'}
-        res = requests.get(url, headers=headers)
+        res = requests.get(url, data=data, headers=headers)
         # return jsonify(message='Success')
         return res.text
     else:
