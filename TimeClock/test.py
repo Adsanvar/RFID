@@ -124,6 +124,7 @@ def loadOptions(window, payload):
         swalBtnOkBootstrap.fire(
         {
             title: name,
+            icon: info,
             html: `
             <div class="big margin">
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
