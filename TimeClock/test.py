@@ -152,6 +152,7 @@ def loadOptions(window, payload):
         title: 'Todo Listo!',
         timer: 4000,
         })*/
+
         Swal.fire({
         title: `${result.value.message}`,
         })
@@ -222,8 +223,9 @@ def clockin(data=None):
         url ="http://192.168.1.65:5005/clockin"
         headers= {'content-type': 'application/json'}
         res = requests.get(url, data=data, headers=headers)
-        print(res.text)
-        return jsonify(message='Success')
+        # return jsonify(message='Success')
+        print(res)
+        return res
     else:
         return jsonify(message='Error No Data')
 
