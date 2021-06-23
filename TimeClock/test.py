@@ -127,11 +127,6 @@ def loadOptions(window, payload):
             <div class="big">
                 <input type="checkbox" name="checkbox_3" id="gg" checked /> 
                 <label for="gg">Checkbox big</label>
-
-                <br />
-
-                <input type="checkbox" name="checkbox_4" id="hh" /> 
-                <label for="hh">Checkbox big</label>
             </div>
             `,
             width: 600,
