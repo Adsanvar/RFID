@@ -112,9 +112,12 @@ def loadOptions(window, payload):
         '<hr/>'+
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
-    preConfirm: (login) => {
-    return fetch(`%sclockin`)
-        .then(response => {
+    preConfirm: () => {
+        id = document.getElementById('id').value
+        name = document.getElementById('name').value
+        data = {'id': id, 'text': name}
+        let url = '%sclockin/' + JSON.stringify(data)
+        return fetch(val).then(response => {
             if (!response.ok) {
             throw new Error(response.statusText)
             }
