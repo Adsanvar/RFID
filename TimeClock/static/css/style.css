@@ -164,7 +164,7 @@ input[type=checkbox] + label:after{
   transform: scale(0.8);
 }
 /*checked*/
-input[type=checkbox]:checked + label:before{
+/* input[type=checkbox]:checked + label:before{
   position:absolute;
   content:'';
   left: -1.3em;
@@ -181,7 +181,7 @@ input[type=checkbox]:checked + label:after{
   left: -1.3em;
   top: 0;
   width: 1em;
-}
+} */
 
 /* 
 .box{
