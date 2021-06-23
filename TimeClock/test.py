@@ -101,12 +101,13 @@ def loadOptions(window, payload):
 
     swalWithBootstrapButtons.fire({
     title: '%s',
-    text: "Seleccionar Opción",
+    
     confirmButtonText: 'Entrada',
     showCancelButton: true,
     cancelButtonText: 'Salida',
     width: 600,
     timer: 60000,
+    footer: "Seleccionar Opción",
     html:
         '<hr/>'+
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
