@@ -132,8 +132,6 @@ def loadOptions(window, payload):
             <hr/>
             `,
             width: 600,
-        }).then((result) => {
-            Swal.fire(result)
         })
     }
     })""" % (payload['text'], payload['id'], payload['text'])
@@ -154,7 +152,6 @@ def loadOptions(window, payload):
         })"""
         window.evaluate_js(string)
     else:
-        
         window.evaluate_js(tmp2)
     # string = 'Swal.fire({title: \'Do you want to save the changes?\', showDenyButton: true, showCancelButton: true, confirmButtonText: \'Entrada\', denyButtonText: \'Cancel\',}).then((result) => { if (result.isConfirmed) { Swal.fire(\'Saved!\', \'\', \'success\')} else if (result.isDenied) {Swal.fire(\'Changes are not saved\', \'\', \'info\')}})'
     # window.evaluate_js('Swal.fire({ position: \'center\', icon: \'success\', title: \'Your work has been saved\', showConfirmButton: false, timer: 1500 })')
