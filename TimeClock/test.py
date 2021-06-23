@@ -221,8 +221,8 @@ def clockin(data=None):
     if data != None:
         url ="http://192.168.1.65:5005/clockin"
         headers= {'content-type': 'application/json'}
-        req = requests.get(url, data=data, headers=headers)
-        print(req)
+        res = requests.get(url, data=data, headers=headers)
+        print(res.text)
         return jsonify(message='Success')
     else:
         return jsonify(message='Error No Data')
