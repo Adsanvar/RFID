@@ -117,7 +117,7 @@ def loadOptions(window, payload):
         name = document.getElementById('name').value
         data = {'id': id, 'text': name}
         let url = '%sclockin/' + JSON.stringify(data)
-        return fetch(val).then(response => {
+        return fetch(url).then(response => {
             if (!response.ok) {
             throw new Error(response.statusText)
             }
