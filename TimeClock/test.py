@@ -129,9 +129,9 @@ def loadOptions(window, payload):
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
                 <label for="no-lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
             </div>
+            <hr/>
             `,
             width: 600,
-            footer: '<button class="btn-ok">OK</button> '
         }).then((result) => {
             Swal.fire(result)
         })
