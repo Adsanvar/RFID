@@ -106,10 +106,10 @@ def loadOptions(window, payload):
     showCancelButton: true,
     cancelButtonText: 'Salida',
     width: 600,
+    timer: 60000,
     html:
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
-    /*width: 600,*/
     }).then((result) => {
     if (result.isConfirmed) {
         swalBtnOkBootstrap.fire({
