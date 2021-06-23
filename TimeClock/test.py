@@ -13,8 +13,8 @@ import pyautogui
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
-window = webview.create_window("TimeClock", app, fullscreen=True)
-# window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+# window = webview.create_window("TimeClock", app, fullscreen=True)
+window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
 base_url = ""
@@ -195,9 +195,9 @@ def loadOptions(window, payload):
 
     # window.load_url(url)
 
-# def start_server():
-#     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
-#     app.run(host='0.0.0.0', port=5000)
+def start_server():
+    # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+    app.run(host='192.168.1.79', port=5000)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -230,9 +230,9 @@ def setBaseUrl():
 
 if __name__ == '__main__':
 
-    # t = threading.Thread(target=start_server)
-    # t.daemon = True
-    # t.start()
+    t = threading.Thread(target=start_server)
+    t.daemon = True
+    t.start()
 
     r = threading.Thread(target=read)
     r.daemon = True
