@@ -10,12 +10,12 @@ import threading
 import json
 import os
 import pyautogui
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
-# window = webview.create_window("TimeClock", app, fullscreen=True)
+window = webview.create_window("TimeClock", app, fullscreen=True)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-window = webview.create_window("TimeClock", "http://192.168.1.79:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
 base_url = ""
@@ -174,7 +174,7 @@ def loadOptions(window, payload):
             width: 600,
         })
     }
-    })""" % (payload['text'], payload['id'], payload['text'], payload['device'], 'http://192.168.1.65:5005/')
+    })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url)
 
     if payload['text'] == 'Error':
         string = """
@@ -196,9 +196,9 @@ def loadOptions(window, payload):
 
     # window.load_url(url)
 
-def start_server():
-    # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
-    app.run(host='192.168.1.79', port=5000)
+# def start_server():
+#     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+#     app.run(host='192.168.1.79', port=5000)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -219,7 +219,10 @@ def index(data=None):
 @app.route('/clockin/<string:data>')
 def clockin(data=None):
     if data != None:
-        print(data)
+        url ="http://192.168.1.65:5005/clockin"
+        headers= {'content-type': 'application/json'}
+        req = requests.get(url, data=data, headers=headers)
+        print(req)
         return jsonify(message='Success')
     else:
         return jsonify(message='Error No Data')
@@ -231,9 +234,9 @@ def setBaseUrl():
 
 if __name__ == '__main__':
 
-    t = threading.Thread(target=start_server)
-    t.daemon = True
-    t.start()
+    # t = threading.Thread(target=start_server)
+    # t.daemon = True
+    # t.start()
 
     r = threading.Thread(target=read)
     r.daemon = True
