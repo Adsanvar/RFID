@@ -127,10 +127,11 @@ def loadOptions(window, payload):
             html: `
             <div class="big nocursor">
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
-                <label for="no-lunch-cbx">No Tomaster Almuerzo? Selecciona Aqui.</label>
+                <label for="no-lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
             </div>
             `,
             width: 600,
+            footer: '<button class="btn-ok">OK</button> '
         })
     }
     })""" % (payload['text'], payload['id'], payload['text'])
