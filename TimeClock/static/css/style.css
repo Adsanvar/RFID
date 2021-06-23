@@ -178,8 +178,8 @@ body {
 .inp-cbx {
   position: absolute;
   visibility: hidden;
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
 }
 .inp-cbx:checked + .cbx span:first-child {
   background: #07f;
