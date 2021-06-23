@@ -77,10 +77,14 @@ body {
     display: none !important;
   }
 }
+.margin
+{
+  margin: 15px;
+}
 .btn-clock-in
 {
   display: block;
-  background-color:  #30c352;
+  background-color:  #00c52e;
   color: #fff;
   width: 150px;
   height: 150px;
@@ -94,7 +98,7 @@ body {
 .btn-clock-out
 {
   display: block;
-  background-color:  #cc2f2f;
+  background-color:  #b90000;
   color: #fff;
   width: 150px;
   height: 150px;

@@ -86,8 +86,8 @@ def loadOptions(window, payload):
 
     tmp2 = """ const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
-        confirmButton: 'btn-clock-in',
-        cancelButton: 'btn-clock-out'
+        confirmButton: 'btn-clock-in margin',
+        cancelButton: 'btn-clock-out margin'
     },
     buttonsStyling: false
     })
