@@ -107,17 +107,36 @@ def loadOptions(window, payload):
     cancelButtonText: 'Salida',
     width: 600,
     timer: 60000,
-    footer: "i: Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
+    footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
     html:
         '<hr/>'+
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
+    preConfirm: (login) => {
+    return fetch(`//api.github.com/users/${login}`)
+        .then(response => {
+            if (!response.ok) {
+            throw new Error(response.statusText)
+            }
+            return response.json()
+        })
+        .catch(error => {
+            Swal.showValidationMessage(
+            `Request failed: ${error}`
+            )
+        })
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
     if (result.isConfirmed) {
-        swalBtnOkBootstrap.fire({
+        /*swalBtnOkBootstrap.fire({
         icon: 'success',
         title: 'Todo Listo!',
         timer: 4000,
+        })*/
+        Swal.fire({
+        title: `${result.value.login}'s avatar`,
+        imageUrl: result.value.avatar_url
         })
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
     {   
