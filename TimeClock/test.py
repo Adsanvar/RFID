@@ -124,10 +124,11 @@ def loadOptions(window, payload):
         {
             title: name,
             html: `
-            <input  type="checkbox" name="no-lunch" id="no-lunch-cbx"/>
-            <span class="checkboxtext">
-            Sin Almuerzo
-            </span>
+            <input class="inp-cbx" id="no-lunch" type="checkbox"/>
+            <label class="cbx" for="no-lunch"><span>
+                <svg width="12px" height="10px">
+                <use xlink:href="#check"></use>
+                </svg></span><span>Sin Almuerzo</span></label>
             `,
             width: 600,
         })
