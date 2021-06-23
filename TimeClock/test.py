@@ -124,6 +124,7 @@ def loadOptions(window, payload):
         swalBtnOkBootstrap.fire(
         {
             title: name,
+            text: 'Si No Tomaster Almuerzo, Favor De Seleccionar La Opcion Abajo.',
             html: `
             <div class="big nocursor">
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
