@@ -134,7 +134,7 @@ def loadOptions(window, payload):
             footer: '<button class="btn-ok">OK</button> '
         }).then((result) => {
             Swal.fire(result)
-        }
+        })
     }
     })""" % (payload['text'], payload['id'], payload['text'])
 
