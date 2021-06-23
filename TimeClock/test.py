@@ -107,7 +107,7 @@ def loadOptions(window, payload):
     cancelButtonText: 'Salida',
     width: 600,
     timer: 60000,
-    footer: "Seleccionar Opción",
+    footer: "i: Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
     html:
         '<hr/>'+
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
