@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, current_app
+from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify
 import threading
 # from . import thread
 import RPi.GPIO as GPIO
@@ -135,7 +135,7 @@ def loadOptions(window, payload):
         timer: 4000,
         })*/
         Swal.fire({
-        title: `${result.value.login}`,
+        title: `${result.value.message}`,
         })
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
     {   
@@ -202,9 +202,9 @@ def index(data=None):
 def clockin(data=None):
     if data != None:
         print(data)
-        return 'Success'
+        return jsonify(message='Success')
     else:
-        return json.dumps('Error - No Data')
+        return jsonify(message='Error No Data')
 
 def setBaseUrl():
     global base_url
