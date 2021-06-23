@@ -69,7 +69,7 @@ def read():
                 time.sleep(.5)
                 GPIO.output(buzzer,GPIO.LOW)
             else:
-                payload = {'id': id, 'text': val}
+                payload = {'id': id, 'text': val, 'device': getserial()}
                 loadOptions(window, payload)
                 # print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)          
@@ -79,6 +79,20 @@ def read():
         raise
     finally:
             GPIO.cleanup()
+
+def getserial():
+  # Extract serial from cpuinfo file
+  cpuserial = "0000000000000000"
+  try:
+    f = open('/proc/cpuinfo','r')
+    for line in f:
+      if line[0:6]=='Serial':
+        cpuserial = line[10:26]
+    f.close()
+  except:
+    cpuserial = "ERROR000000000"
+ 
+  return cpuserial
 
 def loadOptions(window, payload):
     # url = base_url + json.dumps(payload)
@@ -115,7 +129,7 @@ def loadOptions(window, payload):
     preConfirm: () => {
         id = document.getElementById('id').value
         name = document.getElementById('name').value
-        data = {'id': id, 'text': name}
+        data = {'id': id, 'text': name, 'device': %s}
         let url = '%sclockin/' + JSON.stringify(data)
         return fetch(url).then(response => {
             if (!response.ok) {
@@ -159,7 +173,7 @@ def loadOptions(window, payload):
             width: 600,
         })
     }
-    })""" % (payload['text'], payload['id'], payload['text'], base_url)
+    })""" % (payload['text'], payload['id'], payload['text'], payload['device'], 'http://192.168.1.65:5005/')
 
     if payload['text'] == 'Error':
         string = """
