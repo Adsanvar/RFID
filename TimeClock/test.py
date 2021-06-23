@@ -125,8 +125,8 @@ def loadOptions(window, payload):
             title: name,
             html: `
             <div class="big">
-                <input type="checkbox" name="checkbox_3" id="gg" checked /> 
-                <label for="gg">Checkbox big</label>
+                <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
+                <label for="no-lunch-cbx">Sin Almuerzo</label>
             </div>
             `,
             width: 600,
