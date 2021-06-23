@@ -197,8 +197,8 @@ def index(data=None):
     else:
         return render_template('index.html', read = False)
 
-@app.route('/clockIn')
-@app.route('/clockIn/<string:data>')
+@app.route('/clockin')
+@app.route('/clockin/<string:data>')
 def clockin(data=None):
     if data != None:
         print(data)
