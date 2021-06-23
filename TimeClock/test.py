@@ -204,7 +204,7 @@ def clockin(data=None):
         print(data)
         return 'Success'
     else:
-        return 'Error - No Data'
+        return json.dumps('Error - No Data')
 
 def setBaseUrl():
     global base_url
