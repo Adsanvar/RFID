@@ -126,7 +126,7 @@ def loadOptions(window, payload):
             html: `
             <input class="inp-cbx" id="no-lunch" type="checkbox"/>
             <label class="cbx" for="no-lunch"><span>
-                <svg width="18px" height="16px">
+                <svg width="12px" height="10px">
                 <use xlink:href="#check"></use>
                 </svg></span><span>Sin Almuerzo</span></label>
             <svg class="inline-svg">
