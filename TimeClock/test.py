@@ -124,21 +124,17 @@ def loadOptions(window, payload):
         {
             title: name,
             html: `
-            <input class="inp-cbx" id="morning" type="checkbox"/>
-            <label class="cbx" for="morning"><span>
+            <input class="inp-cbx" id="no-lunch" type="checkbox"/>
+            <label class="cbx" for="no-lunch"><span>
                 <svg width="12px" height="10px">
                 <use xlink:href="#check"></use>
-                </svg></span><span>Morning</span></label>
-            <input class="inp-cbx" id="noon" type="checkbox"/>
-            <label class="cbx" for="noon"><span>
-                <svg width="12px" height="10px">
-                <use xlink:href="#check"></use>
-                </svg></span><span>Noon</span></label>
+                </svg></span><span>Sin Almuerzo</span></label>
             <svg class="inline-svg">
             <symbol id="check" viewbox="0 0 12 10">
                 <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
             </symbol>
             </svg>`,
+            width: 600,
         })
     }
     })""" % (payload['text'], payload['id'], payload['text'])
