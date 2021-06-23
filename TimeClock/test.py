@@ -125,14 +125,16 @@ def loadOptions(window, payload):
         {
             title: name,
             html: `
-            <div class="big nocursor">
+            <div class="big margin">
                 <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
                 <label for="no-lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
             </div>
             `,
             width: 600,
             footer: '<button class="btn-ok">OK</button> '
-        })
+        }).then((result) => {
+            Swal.fire(result)
+        }
     }
     })""" % (payload['text'], payload['id'], payload['text'])
 
