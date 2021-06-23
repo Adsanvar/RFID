@@ -120,7 +120,17 @@ body {
   outline: none;
 }
 
-/*checkbox/*/
+.big{
+  font-size: 50px;
+}
+
+/* CSS below will force radio/checkbox size be same as font size */
+label{
+  position: relative;
+  line-height: 1.4;
+}
+
+/*checkbox*/
 input[type=checkbox]{
   width: 1em;
   font-size: inherit;
