@@ -121,7 +121,8 @@ body {
 }
 
 .big{
-  font-size: 50px;
+  font-size: 30px;
+  background-color: transparent;
 }
 
 /* CSS below will force radio/checkbox size be same as font size */
