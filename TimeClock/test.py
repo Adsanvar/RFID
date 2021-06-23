@@ -161,7 +161,7 @@ def loadOptions(window, payload):
             title: 'Error',
             text: '${result.value.message}',
             timer: 10000,
-            })""
+            })
         }
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
     {   
