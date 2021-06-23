@@ -113,7 +113,7 @@ def loadOptions(window, payload):
         '<input id="id" class="swal2-input" value="%s" type="hidden">' +
         '<input id="name" class="swal2-input" value="%s" type="hidden">',
     preConfirm: (login) => {
-    return fetch(`//api.github.com/users/${login}`)
+    return fetch(`%sclockin`)
         .then(response => {
             if (!response.ok) {
             throw new Error(response.statusText)
@@ -135,8 +135,7 @@ def loadOptions(window, payload):
         timer: 4000,
         })*/
         Swal.fire({
-        title: `${result.value.login}'s avatar`,
-        imageUrl: result.value.avatar_url
+        title: `${result.value.login}`,
         })
     } else if ( result.dismiss === Swal.DismissReason.cancel) 
     {   
@@ -157,7 +156,7 @@ def loadOptions(window, payload):
             width: 600,
         })
     }
-    })""" % (payload['text'], payload['id'], payload['text'])
+    })""" % (payload['text'], payload['id'], payload['text'], base_url)
 
     if payload['text'] == 'Error':
         string = """
