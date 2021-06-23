@@ -123,7 +123,7 @@ def loadOptions(window, payload):
         swalBtnOkBootstrap.fire(
         {
             title: name,
-            /*html: `
+            html: `
             <input class="inp-cbx" id="morning" type="checkbox"/>
             <label class="cbx" for="morning"><span>
                 <svg width="12px" height="10px">
@@ -134,22 +134,11 @@ def loadOptions(window, payload):
                 <svg width="12px" height="10px">
                 <use xlink:href="#check"></use>
                 </svg></span><span>Noon</span></label>
-            <input class="inp-cbx" id="afternoon" type="checkbox"/>
-            <label class="cbx" for="afternoon"><span>
-                <svg width="12px" height="10px">
-                <use xlink:href="#check"></use>
-                </svg></span><span>Afternoon</span></label>
-            <input class="inp-cbx" id="evening" type="checkbox" style="display: none"/>
-            <label class="cbx" for="evening"><span>
-                <svg width="12px" height="10px">
-                <use xlink:href="#check"></use>
-                </svg></span><span>Evening</span></label>
-            <!--SVG Sprites-->
             <svg class="inline-svg">
             <symbol id="check" viewbox="0 0 12 10">
                 <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
             </symbol>
-            </svg>`,*/
+            </svg>`,
         })
     }
     })""" % (payload['text'], payload['id'], payload['text'])
