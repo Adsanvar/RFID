@@ -14,7 +14,8 @@ import pyautogui
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 # window = webview.create_window("TimeClock", app, fullscreen=True)
-window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+# window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+window = webview.create_window("TimeClock", "http://192.168.1.79:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
 base_url = ""
