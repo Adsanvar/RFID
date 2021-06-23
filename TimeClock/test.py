@@ -152,7 +152,7 @@ def loadOptions(window, payload):
             swalBtnOkBootstrap.fire({
             icon: 'success',
             title: 'Todo Listo!',
-            timer: 4000,
+            timer: 5000,
             })
         }else
         {
