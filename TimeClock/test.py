@@ -224,8 +224,7 @@ def clockin(data=None):
         headers= {'content-type': 'application/json'}
         res = requests.get(url, data=data, headers=headers)
         # return jsonify(message='Success')
-        print(res.text)
-        return jsonify(message='Success')
+        return res.text
     else:
         return jsonify(message='Error No Data')
 
