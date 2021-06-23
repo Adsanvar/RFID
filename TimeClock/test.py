@@ -129,7 +129,7 @@ def loadOptions(window, payload):
     preConfirm: () => {
         id = document.getElementById('id').value
         name = document.getElementById('name').value
-        data = {'id': id, 'text': name, 'device': %s}
+        data = {'id': id, 'text': name, 'device': '%s'}
         let url = '%sclockin/' + JSON.stringify(data)
         return fetch(url).then(response => {
             if (!response.ok) {
