@@ -173,7 +173,7 @@ def loadOptions(window, payload):
             html:
                 '<hr/>',
             preConfirm: () => {
-                let url = '%swrite'
+                let url = '%sgetWrite'
                 return fetch(url).then(response => {
                     if (!response.ok) {
                     throw new Error(response.statusText)
@@ -357,15 +357,19 @@ def clockin(data=None):
     else:
         return jsonify(message='Error No Data')
 
-@app.route('/write')
-@app.route('/write/<string:data>')
-def write(data=None):
+@app.route('/getWrite')
+@app.route('/getWrite/<string:data>')
+def getWrite(data=None):
+    print("this route got called")
     if data != None:
+        print("data != none")
         try:
             headers= {'content-type': 'application/json'}
+            print("about to send quest")
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
-            print(res.txt)
-            # return res.text
+            print("got request")
+            # print(res.txt)
+            return res.text
         except Exception as e:
             print(e)
             return jsonify(message='Error')
