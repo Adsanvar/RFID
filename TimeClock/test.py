@@ -192,7 +192,7 @@ def loadOptions(window, payload):
             if (result.isConfirmed) {
                 for(i in result.value)
                 {
-                    alert(i)
+                    alert(result.value[i])
                 }
                 /*if (result.value.message === 'Success')
                 {
