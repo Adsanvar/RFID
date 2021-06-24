@@ -110,6 +110,20 @@ body {
   border: none;
   outline: none;
 }
+.btn-cancel
+{
+  display: block;
+  background-color:  #666666;
+  color: #fff;
+  width: 150px;
+  height: 150px;
+  font-size: 24px;
+  font-family: 'Montserrat';
+  text-align: center;
+  border-radius: 25%;
+  border: none;
+  outline: none;
+}
 .btn-ok{
   display: block;
   background-color:  #3085d6;
@@ -219,7 +233,7 @@ input[type=checkbox]:checked + label:after{
 .box input[type = "submit"]:hover{
   background: #2ecc71;
 } */
-
+/* 
 .clock-in
 {
   border:0;
@@ -250,7 +264,7 @@ input[type=checkbox]:checked + label:after{
   border-radius: 24px;
   transition: 0.25s;
   cursor: pointer;
-}
+} */
 
 .nocursor { cursor:none; }
 
