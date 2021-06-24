@@ -207,24 +207,8 @@ def loadOptions(window, payload):
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
                             Swal.fire('Changes are not saved', '', 'info')
                         }
-                    }
+                    })
                 }
-                /*if (result.value.message === 'Success')
-                {
-                    swalBtnOkBootstrap.fire({
-                    icon: 'success',
-                    title: 'Todo Listo!',
-                    timer: 5000,
-                    })
-                }else
-                {
-                    swalBtnOkBootstrap.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: result.value.message,
-                    timer: 10000,
-                    })
-                }*/
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
                 swalBtnOkBootstrap.fire(
