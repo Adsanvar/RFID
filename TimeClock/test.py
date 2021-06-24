@@ -173,7 +173,8 @@ def loadOptions(window, payload):
             html:
                 '<hr/>',
             preConfirm: () => {
-                let url = '%sgetWrite'
+                data = {'id': '%s', 'text': '%s', 'device': '%s'}
+                let url = '%sgetWrite/'+ JSON.stringify(data)
                 return fetch(url).then(response => {
                     if (!response.ok) {
                     throw new Error(response.statusText)
@@ -215,7 +216,7 @@ def loadOptions(window, payload):
                     width: 600,
                 })
             }
-            })""" % (payload['text'], base_url)
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
             window.evaluate_js(tmp)
         else:
