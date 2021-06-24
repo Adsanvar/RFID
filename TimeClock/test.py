@@ -192,7 +192,6 @@ def loadOptions(window, payload):
             if (result.isConfirmed) {
                 for(i in result.value)
                 {
-                    alert(result.value[i].id)
                     name = result.value[i].firstname + ' ' +result.value[i].lastname
                     txt = 'Scan Key to Write: ' + name
                     swalBtnOkBootstrap.fire({
