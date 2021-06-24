@@ -194,7 +194,19 @@ def loadOptions(window, payload):
                 {
                     name = result.value[i].firstname + ' ' +result.value[i].lastname
                     txt = 'Scan Key to Write: ' + name
-                    const { value: formValues } = await Swal.fire({
+                    const { value: accept } = await Swal.fire({
+                        title: 'Terms and conditions',
+                        input: 'checkbox',
+                        inputValue: 1,
+                        inputPlaceholder:
+                            'I agree with the terms and conditions',
+                        confirmButtonText:
+                            'Continue <i class="fa fa-arrow-right"></i>',
+                        inputValidator: (result) => {
+                            return !result && 'You need to agree with T&C'
+                        }
+                    })
+                    /*swalBtnOkBootstrap.fire({
                         title: 'Write',
                         text: txt,
                         allowOutsideClick: false,
@@ -206,7 +218,7 @@ def loadOptions(window, payload):
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
                             Swal.fire('Changes are not saved', '', 'info')
                         }
-                    })
+                    })*/
                 }
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
