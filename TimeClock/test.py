@@ -190,7 +190,11 @@ def loadOptions(window, payload):
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
             if (result.isConfirmed) {
-
+                    swalBtnOkBootstrap.fire({
+                    icon: 'success',
+                    title: 'Todo Listo!',
+                    text: result.value,
+                    })
                 /*if (result.value.message === 'Success')
                 {
                     swalBtnOkBootstrap.fire({
@@ -366,8 +370,8 @@ def getWrite(data=None):
         try:
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
-            print(json.dumps(res.text))
-            return jsonify(res.text)
+            # print(json.dumps(res.text))
+            return res.text
         except Exception as e:
             print(e)
             return jsonify(message='Error')
