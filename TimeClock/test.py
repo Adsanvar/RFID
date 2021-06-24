@@ -190,11 +190,14 @@ def loadOptions(window, payload):
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
             if (result.isConfirmed) {
+                for(i in result.value)
+                {
                     swalBtnOkBootstrap.fire({
-                    icon: 'success',
-                    title: 'Todo Listo!',
-                    text: result.value,
+                        icon: 'success',
+                        title: 'Todo Listo!',
+                        text: i['id'],
                     })
+                }
                 /*if (result.value.message === 'Success')
                 {
                     swalBtnOkBootstrap.fire({
@@ -207,7 +210,7 @@ def loadOptions(window, payload):
                     swalBtnOkBootstrap.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: '${result.value.message}',
+                    text: result.value.message,
                     timer: 10000,
                     })
                 }*/
