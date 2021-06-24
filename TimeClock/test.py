@@ -118,6 +118,7 @@ def validateFob(payload):
     headers= {'content-type': 'application/json'}
     data = json.dumps(payload)
     res = requests.get(api_url+"validateFob", data=data, headers=headers)
+    print(res.json)
 
 def loadOptions(window, payload):
     # url = base_url + json.dumps(payload)
