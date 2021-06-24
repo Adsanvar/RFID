@@ -83,7 +83,7 @@ def read():
 
 readthread = threading.Thread(target=read)
 
-def write():
+def write(val):
     try:
         reader = SimpleMFRC522()
         GPIO.setwarnings(False)
@@ -92,7 +92,7 @@ def write():
         GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
         print("Now place your tag to write")
-        reader.write("Admin")
+        reader.write(val)
         print("Written")
     except:
         raise
@@ -264,9 +264,9 @@ if __name__ == '__main__':
     # t.daemon = True
     # t.start()
 
-    # readthread.daemon = True
-    # readthread.start()
-    write()
+    readthread.daemon = True
+    readthread.start()
+
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()
