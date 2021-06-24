@@ -120,7 +120,7 @@ def validateFob(payload):
         data = json.dumps(payload)
         res = requests.get(api_url+"validateFob", data=data, headers=headers)
         
-        print(res.json('message'))
+        print(res.text['message'])
     except Exception as e:
         print(e)
         return jsonify(message='Error')
