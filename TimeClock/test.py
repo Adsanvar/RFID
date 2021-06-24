@@ -194,7 +194,7 @@ def loadOptions(window, payload):
                 {
                     name = result.value[i].firstname + ' ' +result.value[i].lastname
                     txt = 'Scan Key to Write: ' + name
-                    swalBtnOkBootstrap.fire({
+                    const { value: formValues } = await swalBtnOkBootstrap.fire({
                         title: 'Write',
                         text: txt,
                         allowOutsideClick: false,
