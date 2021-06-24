@@ -190,7 +190,7 @@ def loadOptions(window, payload):
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
             if (result.isConfirmed) {
-                for(i in result.value)
+                for(i in result)
                 {
                     alert(i)
                 }
