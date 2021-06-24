@@ -15,6 +15,7 @@ import requests
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app, fullscreen=True)
+readthread = threading.Thread(target=read)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
@@ -76,6 +77,22 @@ def read():
                 GPIO.output(buzzer,GPIO.HIGH)          
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
+    except:
+        raise
+    finally:
+            GPIO.cleanup()
+
+def write():
+    try:
+        reader = SimpleMFRC522()
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        buzzer = 11
+        GPIO.setup(buzzer, GPIO.OUT)
+        # text = input('New data:')
+        print("Now place your tag to write")
+        reader.write("Admin")
+        print("Written")
     except:
         raise
     finally:
@@ -246,10 +263,9 @@ if __name__ == '__main__':
     # t.daemon = True
     # t.start()
 
-    r = threading.Thread(target=read)
-    r.daemon = True
-    r.start()
-
+    # readthread.daemon = True
+    # readthread.start()
+    write()
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()
