@@ -148,6 +148,20 @@ def loadOptions(window, payload):
         window.evaluate_js(string)
     elif validateFob(payload):
         if payload['text'] == 'Admin':
+            test = """
+                const { value: accept } = await Swal.fire({
+                        title: 'Terms and conditions',
+                        input: 'checkbox',
+                        inputValue: 1,
+                        inputPlaceholder:
+                            'I agree with the terms and conditions',
+                        confirmButtonText:
+                            'Continue <i class="fa fa-arrow-right"></i>',
+                        inputValidator: (result) => {
+                            return !result && 'You need to agree with T&C'
+                        }
+                    })
+            """
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn-clock-in margin',
@@ -194,18 +208,6 @@ def loadOptions(window, payload):
                 {
                     name = result.value[i].firstname + ' ' +result.value[i].lastname;
                     txt = 'Scan Key to Write: ' + name;
-                    const { value: accept } = await Swal.fire({
-                        title: 'Terms and conditions',
-                        input: 'checkbox',
-                        inputValue: 1,
-                        inputPlaceholder:
-                            'I agree with the terms and conditions',
-                        confirmButtonText:
-                            'Continue <i class="fa fa-arrow-right"></i>',
-                        inputValidator: (result) => {
-                            return !result && 'You need to agree with T&C'
-                        }
-                    })
                     /*swalBtnOkBootstrap.fire({
                         title: 'Write',
                         text: txt,
@@ -232,7 +234,7 @@ def loadOptions(window, payload):
             }
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
-            window.evaluate_js(tmp)
+            window.evaluate_js(test)
         else:
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
