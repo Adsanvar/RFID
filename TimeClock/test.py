@@ -119,8 +119,8 @@ def validateFob(payload):
         headers= {'content-type': 'application/json'}
         data = json.dumps(payload)
         res = requests.get(api_url+"validateFob", data=data, headers=headers)
-        
-        print(res.text['message'])
+        print(res.json('message'))
+        print(res.text)
     except Exception as e:
         print(e)
         return False
