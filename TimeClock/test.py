@@ -148,28 +148,6 @@ def loadOptions(window, payload):
         window.evaluate_js(string)
     elif validateFob(payload):
         if payload['text'] == 'Admin':
-            test = """
-                (async () => {
-
-                const { value: accept } = await Swal.fire({
-                title: 'Terms and conditions',
-                input: 'checkbox',
-                inputValue: 1,
-                inputPlaceholder:
-                    'I agree with the terms and conditions',
-                confirmButtonText:
-                    'Continue <i class="fa fa-arrow-right"></i>',
-                inputValidator: (result) => {
-                    return !result && 'You need to agree with T&C'
-                }
-                })
-
-                if (accept) {
-                Swal.fire('You agreed with T&C :)')
-                }
-
-                })()
-            """
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn-clock-in margin',
@@ -214,21 +192,23 @@ def loadOptions(window, payload):
             if (result.isConfirmed) {
                 for(i in result.value)
                 {
-                    name = result.value[i].firstname + ' ' +result.value[i].lastname;
-                    txt = 'Scan Key to Write: ' + name;
-                    /*swalBtnOkBootstrap.fire({
-                        title: 'Write',
-                        text: txt,
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonText: 'Ok',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire('Saved!', '', 'success')
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            Swal.fire('Changes are not saved', '', 'info')
-                        }
-                    })*/
+                    name = result.value[i].firstname + ' ' +result.value[i].lastname
+                    txt = 'Scan Key to Write: ' + name
+                    (async () => {
+                        const { value: accept } = await swalBtnOkBootstrap.fire({
+                            title: 'Write',
+                            text: txt,
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonText: 'Ok',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                        })
+                    })()
                 }
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
@@ -242,7 +222,7 @@ def loadOptions(window, payload):
             }
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
-            window.evaluate_js(test)
+            window.evaluate_js(tmp)
         else:
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
