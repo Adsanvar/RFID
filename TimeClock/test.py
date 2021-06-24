@@ -15,7 +15,6 @@ import requests
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app, fullscreen=True)
-readthread = threading.Thread(target=read)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
@@ -81,6 +80,8 @@ def read():
         raise
     finally:
             GPIO.cleanup()
+
+readthread = threading.Thread(target=read)
 
 def write():
     try:
