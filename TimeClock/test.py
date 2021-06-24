@@ -193,6 +193,21 @@ def loadOptions(window, payload):
                 for(i in result.value)
                 {
                     alert(result.value[i].id)
+                    name = result.value[i].firstname + ' ' +result.value[i].lastname
+                    txt = 'Scan Key to Write: ' + name
+                    swalBtnOkBootstrap.fire({
+                        title: 'Write',
+                        text: txt,
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire('Saved!', '', 'success')
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        }
+                    }
                 }
                 /*if (result.value.message === 'Success')
                 {
