@@ -170,6 +170,7 @@ def loadOptions(window, payload):
             cancelButtonText: 'Cancel',
             width: 600,
             timer: 60000,
+            closeOnCancel: true,
             html:
                 '<hr/>',
             preConfirm: () => {
@@ -189,37 +190,38 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
-            if (result.isConfirmed) {
-                for(i in result.value)
-                {
-                    name = result.value[i].firstname + ' ' +result.value[i].lastname
-                    txt = 'Scan Key to Write: ' + name
+                if (result.isConfirmed) {
+                    for(i in result.value)
+                    {
+                        name = result.value[i].firstname + ' ' +result.value[i].lastname
+                        txt = 'Scan Key to Write: ' + name
 
-                    swalBtnOkBootstrap.fire({
-                        title: 'Write',
-                        text: txt,
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonText: 'Ok',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire('Saved!', '', 'success')
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            Swal.fire('Changes are not saved', '', 'info')
-                        }
-                    })
- 
+                        swalBtnOkBootstrap.fire({
+                            title: 'Write',
+                            text: txt,
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonText: 'Ok',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                        })
+    
+                    }
                 }
-            } else if ( result.dismiss === Swal.DismissReason.cancel) 
-            {   
-                swalBtnOkBootstrap.fire(
-                {
-                    title: 'Cancelled',
-                    icon: 'info',
-                    showLoaderOnConfirm: true,
-                    width: 600,
-                })
-            }
+                /*else if ( result.dismiss === Swal.DismissReason.cancel) 
+                {   
+                    swalBtnOkBootstrap.fire(
+                    {
+                        title: 'Cancelled',
+                        icon: 'info',
+                        showLoaderOnConfirm: true,
+                        width: 600,
+                    })
+                }*/
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
             window.evaluate_js(tmp)
