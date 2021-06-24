@@ -192,11 +192,7 @@ def loadOptions(window, payload):
             if (result.isConfirmed) {
                 for(i in result.value)
                 {
-                    swalBtnOkBootstrap.fire({
-                        icon: 'success',
-                        title: 'Todo Listo!',
-                        text: i['id'],
-                    })
+                    alert(i)
                 }
                 /*if (result.value.message === 'Success')
                 {
