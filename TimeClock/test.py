@@ -192,8 +192,8 @@ def loadOptions(window, payload):
             if (result.isConfirmed) {
                 for(i in result.value)
                 {
-                    name = result.value[i].firstname + ' ' +result.value[i].lastname
-                    txt = 'Scan Key to Write: ' + name
+                    name = result.value[i].firstname + ' ' +result.value[i].lastname;
+                    txt = 'Scan Key to Write: ' + name;
                     const { value: accept } = await Swal.fire({
                         title: 'Terms and conditions',
                         input: 'checkbox',
