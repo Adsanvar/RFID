@@ -359,7 +359,7 @@ def clockin(data=None):
 
 @app.route('/write')
 @app.route('/write/<string:data>')
-def clockin(data=None):
+def write(data=None):
     if data != None:
         try:
             headers= {'content-type': 'application/json'}
