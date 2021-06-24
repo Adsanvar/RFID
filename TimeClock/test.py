@@ -123,7 +123,7 @@ def validateFob(payload):
         print(res.text['message'])
     except Exception as e:
         print(e)
-        return jsonify(message='Error')
+        return False
 
 def loadOptions(window, payload):
     # url = base_url + json.dumps(payload)
