@@ -194,21 +194,21 @@ def loadOptions(window, payload):
                 {
                     name = result.value[i].firstname + ' ' +result.value[i].lastname
                     txt = 'Scan Key to Write: ' + name
-                    (async () => {
-                        const { value: accept } = await swalBtnOkBootstrap.fire({
-                            title: 'Write',
-                            text: txt,
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonText: 'Ok',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire('Saved!', '', 'success')
-                            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                Swal.fire('Changes are not saved', '', 'info')
-                            }
-                        })
-                    })()
+
+                    swalBtnOkBootstrap.fire({
+                        title: 'Write',
+                        text: txt,
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire('Saved!', '', 'success')
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        }
+                    })
+ 
                 }
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
