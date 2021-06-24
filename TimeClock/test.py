@@ -365,7 +365,8 @@ def getWrite(data=None):
         try:
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
-            return json.dumps(res.text)
+            print(json.dumps(res.text))
+            return jsonify(res.text)
         except Exception as e:
             print(e)
             return jsonify(message='Error')
