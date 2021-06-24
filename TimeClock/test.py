@@ -361,15 +361,11 @@ def clockin(data=None):
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
 def getWrite(data=None):
-    print("this route got called")
     if data != None:
-        print("data != none")
         try:
             headers= {'content-type': 'application/json'}
-            print("about to send quest")
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
-            print("got request")
-            # print(res.txt)
+            print(res.txt)
             return res.text
         except Exception as e:
             print(e)
