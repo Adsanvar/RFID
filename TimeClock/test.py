@@ -189,7 +189,7 @@ def loadOptions(window, payload):
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
             if (result.isConfirmed) {
-                /*if (result.value.message === 'Success')
+                if (result.value.message === 'Success')
                 {
                     swalBtnOkBootstrap.fire({
                     icon: 'success',
@@ -204,7 +204,7 @@ def loadOptions(window, payload):
                     text: '${result.value.message}',
                     timer: 10000,
                     })
-                }*/
+                }
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
                 swalBtnOkBootstrap.fire(
