@@ -422,6 +422,7 @@ def writer(data=None):
             # read_flag = True
             global read_flag
             read_flag = False
+            print("is thread alive?",readthread.is_alive())
             stopReadThread()
             print("is thread alive?",readthread.is_alive())
             write(data)
@@ -444,13 +445,10 @@ def stopReadThread():
     readthread._stop_event.set()
 
 def startReadThread():
-    try:
-        readthread = threading.Thread(target=read)
-        # readthread._stop_event = threading.Event()
-        # readthread.daemon = True
-        readthread.start()
-    except:
-        raise
+    # readthread = threading.Thread(target=read)
+    readthread._stop_event = threading.Event()
+    # readthread.daemon = True
+    readthread.start()
 
 if __name__ == '__main__':
 
