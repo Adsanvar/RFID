@@ -416,7 +416,7 @@ def writer(data=None):
             # print("_stop.set(): ")
             # readthread._stop()
             # print("isAlive(): ", readthread.isAlive())
-            write = threading.thread(target=write(data))
+            write = threading.Thread(target=write(data))
             
             return jsonify(message='Success')
         except Exception as e:
