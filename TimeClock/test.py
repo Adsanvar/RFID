@@ -194,12 +194,53 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
-                swalBtnOkBootstrap.fire({
-                    icon: 'success',
-                    title: 'Todo Listo!',
-                    timer: 5000,
-                })
-            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
+                if (result.isConfirmed) {
+                    (async () => {
+                                            
+                        for(i in result.value)
+                        {
+                            name = result.value[i].firstname + ' ' +result.value[i].lastname
+                            txt = 'Writer'
+                            const { value: accept } = await swalWithBootstrapButtons.fire({
+                                title: txt,
+                                showCancelButton: true,
+                                reverseButtons: true,
+                                text: `Press \"Continue\" & Place Key On Scanner To Write: ` + name,
+                                confirmButtonText: 'Continue',
+                                })
+
+                                if (accept) {
+                                    let url = '%swriter/' + JSON.stringify(name)
+                                    return fetch(url).then(response => {
+                                        if (!response.ok) {
+                                        throw new Error(response.statusText)
+                                        }
+                                        Swal.fire('Saved!', '', 'success')
+                                    })
+                                    .catch(error => {
+                                        Swal.showValidationMessage(
+                                        `Request failed: ${error}`
+                                        )
+                                    })
+                                    const { value: cont } = await swalBtnOkBootstrap.fire({
+                                        title: 'Wrote!',
+                                        icon: 'success',
+                                        text: `Successfully Wrote: ` + name,
+                                        confirmButtonText: 'OK',
+                                    })
+                                }
+                                else
+                                {
+                                    const { value: cont } = await swalBtnOkBootstrap.fire({
+                                        title: 'Cancelled Write',
+                                        icon: 'info',
+                                        text: name + ': Was not written',
+                                        confirmButtonText: 'OK',
+                                    })
+                                }
+                        }
+                    })()
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 
             window.evaluate_js(tmp)
         else:
@@ -339,11 +380,11 @@ def getWrite(data=None):
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
             # print(json.dumps(res.text))
-            global read_flag
-            read_flag = False
-            window.load_url(base_url+"writer/"+res.text)
-            stopReadThread()
-            print(res.text)
+            # global read_flag
+            # read_flag = False
+            # window.load_url(base_url+"writer/"+res.text)
+            # stopReadThread()
+            # print(res.text)
             return res.text
         except Exception as e:
             print(e)
@@ -376,6 +417,9 @@ def writer(data=None):
             # GPIO.cleanup()
             # write(data)
             # read_flag = True
+            global read_flag
+            read_flag = False
+            stopReadThread()
             print("rendering")
             return render_template('writer.html', data=data)
         except Exception as e:
