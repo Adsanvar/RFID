@@ -204,16 +204,16 @@ def loadOptions(window, payload):
                                 reverseButtons: true,
                                 text: `Press \"Continue\" & Place Key On Scanner To Write: ` + name,
                                 confirmButtonText: 'Continue',
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        Swal.fire('Saved!', '', 'success')
-                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                        Swal.fire('Changes are not saved', '', 'info')
-                                    }
                                 })
 
-                                if (!accept) {
+                                if (accept) {
+                                    Swal.fire('Saved!', '', 'success')
+                                })
+                                }
+                                else
+                                {
                                     break
+                                    Swal.fire('Changes are not saved', '', 'info')
                                 }
                         }
                     })()
