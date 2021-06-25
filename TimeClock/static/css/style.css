@@ -285,6 +285,7 @@ input[type=checkbox]:checked + label:after{
   border: 0;
 }
 
+/* Table stuff */
 table {
   border-collapse: collapse;
 }
