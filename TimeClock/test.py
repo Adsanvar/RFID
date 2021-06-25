@@ -198,13 +198,13 @@ def loadOptions(window, payload):
                         {
                             name = result.value[i].firstname + ' ' +result.value[i].lastname
                             txt = 'Writer'
-                            const { value: accept } = await Swal.fire({
+                            const { value: accept } = await swalWithBootstrapButtons.fire({
                                 title: txt,
                                 showCancelButton: true,
-                                inputPlaceholder:
-                                    'Place Key On Scanner To Write: ' + name,
+                                reverseButtons: true,
+                                text: 'Place Key On Scanner To Write: ' + name,
                                 confirmButtonText:
-                                    'Continue <i class="fa fa-arrow-right"></i>',
+                                    'Continue ',
                                 })
 
                                 if (accept) {
