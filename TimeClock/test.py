@@ -93,11 +93,12 @@ def write(val):
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
-        GPIO.output(buzzer,GPIO.HIGH) 
         print("Now place your tag to write")
         reader.write(val)
-        GPIO.output(buzzer,GPIO.LOW)
         print("Written")
+        GPIO.output(buzzer,GPIO.HIGH) 
+        time.sleep(5)
+        GPIO.output(buzzer,GPIO.LOW)
     except:
         raise
     finally:
