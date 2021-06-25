@@ -30,7 +30,7 @@ def read():
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         print("in run.")
-        while True:
+        while read_flag:
             print("Ready For Next")
             id, text = reader.read()
             print(id)
@@ -421,6 +421,7 @@ def writer(data=None):
             global read_flag
             read_flag = False
             stopReadThread()
+            write(data)
             print("rendering")
             return render_template('writer.html', data=data)
         except Exception as e:
