@@ -194,64 +194,12 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
-                /*if (result.isConfirmed) {
-                    (async () => {
-                                            
-                        for(i in result.value)
-                        {
-                            name = result.value[i].firstname + ' ' +result.value[i].lastname
-                            txt = 'Writer'
-                            const { value: accept } = await swalWithBootstrapButtons.fire({
-                                title: txt,
-                                showCancelButton: true,
-                                reverseButtons: true,
-                                text: `Press \"Continue\" & Place Key On Scanner To Write: ` + name,
-                                confirmButtonText: 'Continue',
-                                })
-
-                                if (accept) {
-                                    let url = '%swriter/' + JSON.stringify(name)
-                                    return fetch(url).then(response => {
-                                        if (!response.ok) {
-                                        throw new Error(response.statusText)
-                                        }
-                                        Swal.fire('Saved!', '', 'success')
-                                    })
-                                    .catch(error => {
-                                        Swal.showValidationMessage(
-                                        `Request failed: ${error}`
-                                        )
-                                    })
-                                    const { value: cont } = await swalBtnOkBootstrap.fire({
-                                        title: 'Wrote!',
-                                        icon: 'success',
-                                        text: `Successfully Wrote: ` + name,
-                                        confirmButtonText: 'OK',
-                                    })
-                                }
-                                else
-                                {
-                                    const { value: cont } = await swalBtnOkBootstrap.fire({
-                                        title: 'Cancelled Write',
-                                        icon: 'info',
-                                        text: name + ': Was not written',
-                                        confirmButtonText: 'OK',
-                                    })
-                                }
-                        }
-                    })()
-                }*/
-                /*else if ( result.dismiss === Swal.DismissReason.cancel) 
-                {   
-                    swalBtnOkBootstrap.fire(
-                    {
-                        title: 'Cancelled',
-                        icon: 'info',
-                        showLoaderOnConfirm: true,
-                        width: 600,
-                    })
-                }*/
-            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
+                swalBtnOkBootstrap.fire({
+                    icon: 'success',
+                    title: 'Todo Listo!',
+                    timer: 5000,
+                })
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
             window.evaluate_js(tmp)
         else:
@@ -404,7 +352,9 @@ def getWrite(data=None):
 @app.route('/writer')
 @app.route('/writer/<string:data>')
 def writer(data=None):
+    print(data)
     if data != None:
+        print("in data not empty")
         try:
             data = json.loads(data)
             print(data)
@@ -424,12 +374,14 @@ def writer(data=None):
             # GPIO.cleanup()
             # write(data)
             # read_flag = True
-            
+            print("rendering")
             return render_template('writer.html', data=data)
         except Exception as e:
             print(e)
+            print("in exception")
             return jsonify(message='Error')
     else:
+        print("no data")
         return jsonify(message='Error No Data')
 
 
