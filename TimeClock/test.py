@@ -383,10 +383,11 @@ def getWrite(data=None):
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
             # print(json.dumps(res.text))
-            # global read_flag
-            # read_flag = False
-            # window.load_url(base_url+"writer/"+res.text)
+            global read_flag
+            read_flag = False
+            window.load_url(base_url+"writer/"+res.text)
             # stopReadThread()
+            readthread._stop()
             # print(res.text)
             return res.text
         except Exception as e:
@@ -402,6 +403,7 @@ def writer(data=None):
     if data != None:
         print("in data not empty")
         try:
+
             data = json.loads(data)
             print(data)
             # print("isAlive(): ", readthread.isAlive())
@@ -420,15 +422,15 @@ def writer(data=None):
             # GPIO.cleanup()
             # write(data)
             # read_flag = True
-            global read_flag
-            read_flag = False
+            # global read_flag
+            # read_flag = False
             print("is thread alive?",readthread.is_alive())
-            # stopReadThread()
-            readthread._stop()
-            print("is thread alive?",readthread.is_alive())
-            write(data)
-            read_flag = True
-            startReadThread()
+            # # stopReadThread()
+            # readthread._stop()
+            # print("is thread alive?",readthread.is_alive())
+            # write(data)
+            # read_flag = True
+            # startReadThread()
             return render_template('writer.html', data=data)
         except Exception as e:
             raise
@@ -442,13 +444,13 @@ def setBaseUrl():
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
-# def stopReadThread():
-#     readthread._stop_event.set()
+def stopReadThread():
+    readthread._stop_event.set()
 
 def startReadThread():
     # readthread = threading.Thread(target=read)
     # readthread._stop_event = threading.Event()
-    # readthread.daemon = True
+    readthread.daemon = True
     readthread.start()
 
 if __name__ == '__main__':
