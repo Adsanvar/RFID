@@ -441,6 +441,18 @@ def getWrite(data=None):
         try:
             data = json.loads(data)
             print(data)
+            print("isAlive(): ", readthread.isAlive())
+            print("is_alive(): ", readthread.is_alive)
+            global read_flag
+            read_flag = False
+            print("read_flag = ", read_flag)
+            print("isAlive(): ", readthread.isAlive())
+            print("is_alive(): ", readthread.is_alive)
+            print("_stop.set(): ")
+            readthread._stop.set()
+            print("isAlive(): ", readthread.isAlive())
+            print("is_alive(): ", readthread.is_alive)
+            
             return jsonify(message='Success')
         except Exception as e:
             print(e)
