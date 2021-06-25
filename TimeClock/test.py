@@ -407,20 +407,20 @@ def writer(data=None):
             data = json.loads(data)
             # print("isAlive(): ", readthread.isAlive())
             # print("is_alive(): ", readthread.is_alive())
-            global read_flag
-            read_flag = False
+            # global read_flag
+            # read_flag = False
             # print("read_flag = ", read_flag)
-            # print("isAlive(): ", readthread.isAlive())
-            # print("is_alive(): ", readthread.is_alive())
+            print("isAlive(): ", readthread.isAlive())
+            print("is_alive(): ", readthread.is_alive())
             # print("_stop.set(): ")
-            # readthread._stop()
-            # print("isAlive(): ", readthread.isAlive())
+            readthread._stop()
+            print("isAlive(): ", readthread.isAlive())
             # writethread = threading.Thread(target=write(data))
             # writethread.start()
             # writethread.join()
             # GPIO.cleanup()
-            write(data)
-            read_flag = True
+            # write(data)
+            # read_flag = True
             
             return jsonify(message='Success')
         except Exception as e:
