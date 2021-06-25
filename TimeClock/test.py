@@ -416,9 +416,11 @@ def writer(data=None):
             # print("_stop.set(): ")
             # readthread._stop()
             # print("isAlive(): ", readthread.isAlive())
-            writethread = threading.Thread(target=write(data))
-            writethread.start()
-            writethread.join()
+            # writethread = threading.Thread(target=write(data))
+            # writethread.start()
+            # writethread.join()
+            GPIO.cleanup()
+            write(data)
             
             return jsonify(message='Success')
         except Exception as e:
