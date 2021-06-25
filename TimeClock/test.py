@@ -446,7 +446,7 @@ def stopReadThread():
 def startReadThread():
     try:
         readthread = threading.Thread(target=read)
-        readthread._stop_event = threading.Event()
+        # readthread._stop_event = threading.Event()
         # readthread.daemon = True
         readthread.start()
     except:
