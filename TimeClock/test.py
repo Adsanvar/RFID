@@ -212,7 +212,6 @@ def loadOptions(window, payload):
                                 }
                                 else
                                 {
-                                    break
                                     Swal.fire('Changes are not saved', '', 'info')
                                 }
                         }
