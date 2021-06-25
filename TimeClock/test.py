@@ -208,7 +208,6 @@ def loadOptions(window, payload):
 
                                 if (accept) {
                                     Swal.fire('Saved!', '', 'success')
-                                })
                                 }
                                 else
                                 {
