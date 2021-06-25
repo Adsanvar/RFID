@@ -284,12 +284,12 @@ input[type=checkbox]:checked + label:after{
   font-family: "Roboto", sans-serif;
 }
 
-.container {
+/* .container {
   position: absolute;
   width: 100%;
   height: 100vh;
   background: #2c302d;
-}
+} */
 
 .card {
   width: 60%;
