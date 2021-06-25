@@ -340,7 +340,7 @@ def getWrite(data=None):
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
             # print(json.dumps(res.text))
             window.load_url(base_url+"writer/"+res.text)
-            readthread._stop()
+            stopReadThread()
             print(res.text)
             return res.text
         except Exception as e:
@@ -394,7 +394,7 @@ def stopReadThread():
     readthread._stop_event.set()
 
 def startReadThread():
-    # readthread._stop_event = threading.Event()
+    readthread._stop_event = threading.Event()
     readthread.daemon = True
     readthread.start()
 
