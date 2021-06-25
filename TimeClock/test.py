@@ -424,6 +424,7 @@ def writer(data=None):
             read_flag = False
             stopReadThread()
             readthread.join()
+            print("is thread alive?",readthread.isAlive())
             write(data)
             read_flag = True
             startReadThread()
