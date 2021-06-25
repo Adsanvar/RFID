@@ -79,6 +79,7 @@ def read():
                 time.sleep(5)
                 GPIO.output(buzzer,GPIO.LOW)
     except:
+        print('read exception')
         raise
     finally:
             GPIO.cleanup()
@@ -100,6 +101,7 @@ def write(val):
         time.sleep(5)
         GPIO.output(buzzer,GPIO.LOW)
     except:
+        print('write exception')
         raise
     finally:
             GPIO.cleanup()
