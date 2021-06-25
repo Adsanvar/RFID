@@ -282,7 +282,7 @@ input[type=checkbox]:checked + label:after{
   text-align: center;
   transition: all .2s ease-in-out;
 }
-@media screen and (min-width: 700px) {
+/* @media screen and (min-width: 700px) {
   .grid-1-5 {
     float: left;
     width: 50%;
@@ -309,7 +309,7 @@ input[type=checkbox]:checked + label:after{
   .grid-1-5:nth-child(odd), .grid-1-5:nth-child(3n+1) {
     clear: none;
   }
-}
+} */
 
 .main-container {
   padding: 30px;
