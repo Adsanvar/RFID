@@ -423,16 +423,13 @@ def writer(data=None):
             global read_flag
             read_flag = False
             stopReadThread()
-            readthread.join()
-            print("is thread alive?",readthread.isAlive())
+            print("is thread alive?",readthread.is_alive())
             write(data)
             read_flag = True
             startReadThread()
             return render_template('writer.html', data=data)
         except Exception as e:
-            print(e)
-            print("in exception")
-            return jsonify(message='Error')
+            raise
     else:
         print("no data")
         return jsonify(message='Error No Data')
@@ -447,9 +444,13 @@ def stopReadThread():
     readthread._stop_event.set()
 
 def startReadThread():
-    readthread._stop_event = threading.Event()
-    # readthread.daemon = True
-    readthread.start()
+    try:
+        readthread = threading.Thread(target=read)
+        readthread._stop_event = threading.Event()
+        # readthread.daemon = True
+        readthread.start()
+    except:
+        raise
 
 if __name__ == '__main__':
 
