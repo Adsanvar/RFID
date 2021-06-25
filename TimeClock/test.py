@@ -423,6 +423,7 @@ def writer(data=None):
             global read_flag
             read_flag = False
             stopReadThread()
+            readthread.join()
             write(data)
             read_flag = True
             startReadThread()
