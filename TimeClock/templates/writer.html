@@ -9,56 +9,16 @@
   </head>
   <body class="nocursor">
 
-    <!-- <div class="main-container">
-      <div class="card-container">
-        <div class="card card-3 grid-1-5">
-          <h2 class="card__title">Adrian Sandoval-Vargas</h2>
-          <p class="card__apply"><a href="#">Apply Now <i class="fas fa-arrow-right"></i></a></p>
-        </div>
-        <div class="card card-3 grid-1-5">
-          <h2 class="card__title">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
-          <p class="card__apply"><a href="#">Apply Now <i class="fas fa-arrow-right"></i></a></p>
-        </div>
-        <div class="card card-3 grid-1-5">
-          <h2 class="card__title">Ut enim ad minim veniam.</h2>
-          <p class="card__apply"><a href="#">Apply Now <i class="fas fa-arrow-right"></i></a></p>
-        </div>
-        <div class="card card-3 grid-1-5">
-          <h2 class="card__title">Quis nostrud exercitation ullamco laboris nisi.</h2>
-          <p class="card__apply"><a href="#">Apply Now <i class="fas fa-arrow-right"></i></a></p>
-        </div>
-        <div class="card card-3 grid-1-5">
-          <h2 class="card__title">Ut aliquip ex ea commodo consequat. Duis aute irure dolor.</h2>
-          <p class="card__apply"><a href="#">Apply Now <i class="fas fa-arrow-right"></i></a></p>
-        </div>
-      </div>
-    </div> -->
-
     <div class="container">
       <ul class="cards">
         {% for emp in data%}
           <li class="card cards__item">
             <div class="card__frame">
-              <h2 class="card__title">{{emp['firstname']}}</h2>
+              <h2 class="card__title">{{emp['firstname']}} {{emp['lastname']}}</h2>
+              <button class="btn-ok">Write</button>
             </div>
           </li>
         {%endfor%}
-
-        <!-- <li class="card cards__item">
-          <div class="card__frame">
-            <h2 class="card__title"></h2>
-          </div>
-        </li>
-        <li class="card cards__item">
-          <div class="card__frame">
-            <h2 class="card__title">Launch</h2>
-          </div>
-        </li>
-        <li class="card cards__item">
-          <div class="card__frame">
-            <h2 class="card__title">Launch</h2>
-          </div>
-        </li> -->
       </ul>
     </div>
 

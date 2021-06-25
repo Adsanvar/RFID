@@ -274,91 +274,6 @@ input[type=checkbox]:checked + label:after{
   align-items: center;
 }
 
-/* .grid-1-5 {
-  border: 2px solid #5d4e65;
-  min-height: 400px;
-  padding: 1.25em;
-  position: relative;
-  text-align: center;
-  transition: all .2s ease-in-out;
-} */
-/* @media screen and (min-width: 700px) {
-  .grid-1-5 {
-    float: left;
-    width: 50%;
-  }
-  .grid-1-5:nth-child(odd) {
-    clear: left;
-  }
-}
-@media screen and (min-width: 800px) {
-  .grid-1-5 {
-    width: 33.3333333%;
-  }
-  .grid-1-5:nth-child(3n+1) {
-    clear: left;
-  }
-  .grid-1-5:nth-child(odd) {
-    clear: none;
-  }
-}
-@media screen and (min-width: 1120px) {
-  .grid-1-5 {
-    width: 20%;
-  }
-  .grid-1-5:nth-child(odd), .grid-1-5:nth-child(3n+1) {
-    clear: none;
-  }
-} */
-/* 
-.main-container {
-  padding: 30px;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.card {
-  margin: 20px;
-  padding: 20px;
-  width: 200px;
-  height: 100px;
-  display: grid;
-  grid-template-rows: 20px 50px 1fr 50px;
-  border-radius: 10px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  transition: all 0.5s;
-}
-
-.card:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
-}
-
-.card__title {
-  grid-row: 3/4;
-  font-weight: 400;
-  color: #ffffff;
-}
-
-.card__apply {
-  grid-row: 4/5;
-  align-self: center;
-}
-
-.card-3 {
-  background: radial-gradient(#76b2fe, #b69efe);
-}
-
-@media (max-width: 1600px) {
-  .card-container {
-    justify-content: center;
-  }
-} */
-
 .container {
   flex-grow: 1;
   max-width: 960px;
@@ -390,7 +305,7 @@ input[type=checkbox]:checked + label:after{
   border-radius: 5%;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
-.card::before {
+/* .card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -400,7 +315,7 @@ input[type=checkbox]:checked + label:after{
   height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   pointer-events: none;
-}
+} */
 .card:nth-child(1) {
   background-image: linear-gradient(45deg, #3503ad, #f7308c);
 }
