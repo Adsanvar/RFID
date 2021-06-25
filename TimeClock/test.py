@@ -191,23 +191,25 @@ def loadOptions(window, payload):
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
                 if (result.isConfirmed) {
+
                     (async () => {
                                             
                         for(i in result.value)
                         {
                             name = result.value[i].firstname + ' ' +result.value[i].lastname
                             txt = 'Scan Key to Write: ' + name
-                            const { value: accept } = await Swal.fire({
-                                title: txt,
-                                input: 'checkbox',
-                                inputValue: 1,
-                                inputPlaceholder:
-                                    'I agree with the terms and conditions',
-                                confirmButtonText:
-                                    'Continue <i class="fa fa-arrow-right"></i>',
-                                inputValidator: (result) => {
-                                    return !result && 'You need to agree with T&C'
-                                }
+                            const { value: accept } = await swalBtnOkBootstrap.fire({
+                                title: 'Write',
+                                text: txt,
+                                allowOutsideClick: false,
+                                showCancelButton: true,
+                                confirmButtonText: 'Ok',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        Swal.fire('Saved!', '', 'success')
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        Swal.fire('Changes are not saved', '', 'info')
+                                    }
                                 })
 
                                 if (accept) {
@@ -217,6 +219,28 @@ def loadOptions(window, payload):
                         
 
                     })()
+
+                    for(i in result.value)
+                    {
+                        name = result.value[i].firstname + ' ' +result.value[i].lastname
+                        txt = 'Scan Key to Write: ' + name
+
+                        
+                        /*
+                        let url = '%swriter'
+                        return fetch(url).then(response => {
+                            if (!response.ok) {
+                            throw new Error(response.statusText)
+                            }
+                            Swal.fire('Saved!', '', 'success')
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                            )
+                        })*/
+    
+                    }
                 }
                 /*else if ( result.dismiss === Swal.DismissReason.cancel) 
                 {   
