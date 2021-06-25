@@ -188,7 +188,7 @@ def loadOptions(window, payload):
                     )
                 })
             },
-            allowOutsideClick: () => !Swal.isLoading(),
+            allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
                 if (result.isConfirmed) {
 
@@ -202,8 +202,8 @@ def loadOptions(window, payload):
                                 title: txt,
                                 showCancelButton: true,
                                 reverseButtons: true,
-                                text: 'Press \'Continue\' & Place Key On Scanner To Write: ' + name,
-                                confirmButtonText: 'Continue ',
+                                text: `Press \"Continue\" & Place Key On Scanner To Write: ` + name,
+                                confirmButtonText: 'Continue',
                                 }).then((result) => {
                                     if (result.isConfirmed) {
                                         Swal.fire('Saved!', '', 'success')
