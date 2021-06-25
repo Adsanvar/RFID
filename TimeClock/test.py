@@ -216,7 +216,12 @@ def loadOptions(window, payload):
                                 }
                                 else
                                 {
-                                    Swal.fire('Changes are not saved', '', 'info')
+                                    const { value: cont } = await swalBtnOkBootstrap.fire({
+                                        title: 'Cancelled Write',
+                                        icon: 'info',
+                                        text: name + ': Was not written',
+                                        confirmButtonText: 'OK',
+                                    })
                                 }
                         }
                     })()
