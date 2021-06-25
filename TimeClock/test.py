@@ -88,11 +88,12 @@ readthread = threading.Thread(target=read)
 
 def write(val):
     try:
+        GPIO.cleanup()
         writerx = SimpleMFRC522()
-        # GPIO.setwarnings(False)
-        # GPIO.setmode(GPIO.BOARD)
-        # buzzer = 11
-        # GPIO.setup(buzzer, GPIO.OUT)
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        buzzer = 11
+        GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
         print("Now place your tag to write")
         writerx.write(val)
@@ -193,8 +194,7 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
-                if (result.isConfirmed) {
-
+                /*if (result.isConfirmed) {
                     (async () => {
                                             
                         for(i in result.value)
@@ -240,7 +240,7 @@ def loadOptions(window, payload):
                                 }
                         }
                     })()
-                }
+                }*/
                 /*else if ( result.dismiss === Swal.DismissReason.cancel) 
                 {   
                     swalBtnOkBootstrap.fire(
@@ -391,6 +391,8 @@ def getWrite(data=None):
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
             # print(json.dumps(res.text))
+            window.load_url(base_url+res.text)
+            readthread._stop()
             print(res.text)
             return res.text
         except Exception as e:
@@ -405,16 +407,17 @@ def writer(data=None):
     if data != None:
         try:
             data = json.loads(data)
+            print(data)
             # print("isAlive(): ", readthread.isAlive())
             # print("is_alive(): ", readthread.is_alive())
             # global read_flag
             # read_flag = False
             # print("read_flag = ", read_flag)
-            print("isAlive(): ", readthread.isAlive())
-            print("is_alive(): ", readthread.is_alive())
+            # print("isAlive(): ", readthread.isAlive())
+            # print("is_alive(): ", readthread.is_alive())
             # print("_stop.set(): ")
-            readthread._stop()
-            print("isAlive(): ", readthread.isAlive())
+            # readthread._stop()
+            # print("isAlive(): ", readthread.isAlive())
             # writethread = threading.Thread(target=write(data))
             # writethread.start()
             # writethread.join()
@@ -422,7 +425,7 @@ def writer(data=None):
             # write(data)
             # read_flag = True
             
-            return jsonify(message='Success')
+            return render_template('writer.html', data=data)
         except Exception as e:
             print(e)
             return jsonify(message='Error')
