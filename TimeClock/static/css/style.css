@@ -378,7 +378,7 @@ input[type=checkbox]:checked + label:after{
 }
 
 .cards__item {
-  height: 400px;
+  height: 200px;
 }
 
 .card {
@@ -427,4 +427,5 @@ input[type=checkbox]:checked + label:after{
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: #ffffff;
 }

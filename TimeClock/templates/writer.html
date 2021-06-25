@@ -9,7 +9,6 @@
   </head>
   <body class="nocursor">
 
-
     <!-- <div class="main-container">
       <div class="card-container">
         <div class="card card-3 grid-1-5">
@@ -37,14 +36,17 @@
 
     <div class="container">
       <ul class="cards">
-        <li class="card cards__item">
+        {% for emp in data%}
+          <li class="card cards__item">
+            <div class="card__frame">
+              <h2 class="card__title">{{emp['firstname']}}</h2>
+            </div>
+          </li>
+        {%endfor%}
+
+        <!-- <li class="card cards__item">
           <div class="card__frame">
-            <h2 class="card__title">Adrian Sandoval-Vargas</h2>
-          </div>
-        </li>
-        <li class="card cards__item">
-          <div class="card__frame">
-            <h2 class="card__title">Code</h2>
+            <h2 class="card__title"></h2>
           </div>
         </li>
         <li class="card cards__item">
@@ -52,6 +54,11 @@
             <h2 class="card__title">Launch</h2>
           </div>
         </li>
+        <li class="card cards__item">
+          <div class="card__frame">
+            <h2 class="card__title">Launch</h2>
+          </div>
+        </li> -->
       </ul>
     </div>
 

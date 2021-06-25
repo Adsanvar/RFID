@@ -398,9 +398,6 @@ def setBaseUrl():
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
-def stopReadThread():
-    readthread._stop_event.set()
-
 def startReadThread():
     # readthread = threading.Thread(target=read)
     # readthread._stop_event = threading.Event()
