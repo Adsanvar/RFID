@@ -215,7 +215,7 @@ input[type=checkbox]:checked + label:before{
   height: 1em;
   margin: 0;
   border: none;
-  background-color: #3b88fd;
+  background-color: #0065fd;
 }
 input[type=checkbox]:checked + label:after{
   position: absolute;
@@ -325,9 +325,9 @@ input[type=checkbox]:checked + label:after{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
   border-radius: 5%;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  background-image: linear-gradient(45deg, #5a5a5a, #0c0c0c);
 }
 /* .card::before {
   content: "";
@@ -340,15 +340,6 @@ input[type=checkbox]:checked + label:after{
   background-color: rgba(255, 255, 255, 0.1);
   pointer-events: none;
 } */
-.card:nth-child(1) {
-  background-image: linear-gradient(45deg, #3503ad, #f7308c);
-}
-.card:nth-child(2) {
-  background-image: linear-gradient(45deg, #ccff00, #09afff);
-}
-.card:nth-child(3) {
-  background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
-}
 
 .card__frame {
   position: absolute;
