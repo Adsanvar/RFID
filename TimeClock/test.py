@@ -240,41 +240,6 @@ def loadOptions(window, payload):
                                 }
                         }
                     })()
-
-                        /*
-                        for(i in result.value)
-                        {
-                            name = result.value[i].firstname + ' ' +result.value[i].lastname
-                            txt = 'Scan Key to Write: ' + name
-
-                            swalBtnOkBootstrap.fire({
-                                title: 'Write',
-                                text: txt,
-                                allowOutsideClick: false,
-                                showCancelButton: true,
-                                confirmButtonText: 'Ok',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    Swal.fire('Saved!', '', 'success')
-                                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                    Swal.fire('Changes are not saved', '', 'info')
-                                }
-                            })
-            
-                            let url = '%swriter'
-                            return fetch(url).then(response => {
-                                if (!response.ok) {
-                                throw new Error(response.statusText)
-                                }
-                                Swal.fire('Saved!', '', 'success')
-                            })
-                            .catch(error => {
-                                Swal.showValidationMessage(
-                                `Request failed: ${error}`
-                                )
-                            })
-        
-                        }*/
                 }
                 /*else if ( result.dismiss === Swal.DismissReason.cancel) 
                 {   
