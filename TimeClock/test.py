@@ -207,7 +207,12 @@ def loadOptions(window, payload):
                                 })
 
                                 if (accept) {
-                                    Swal.fire('Saved!', '', 'success')
+                                    const { value: cont } = await swalBtnOkBootstrap.fire({
+                                        title: 'Wrote!',
+                                        icon: 'success',
+                                        text: `Successfully Wrote: ` + name,
+                                        confirmButtonText: 'OK',
+                                    })
                                 }
                                 else
                                 {
