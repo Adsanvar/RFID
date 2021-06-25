@@ -138,6 +138,23 @@ body {
   outline: none;
 }
 
+.btn-write{
+  display: block;
+  background-color:  #0288e2;
+  color: #fff;
+  width: 75px;
+  height: 75px;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+.btn-write:hover{
+  background-color:  #ffffff;
+  color: rgb(0, 0, 0);
+}
+
 .btn-btm-right
 { position: absolute;
   bottom:0;
@@ -354,49 +371,3 @@ input[type=checkbox]:checked + label:after{
   color: #ffffff;
 }
 
-.btn-write {
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-size: 20px;
-  letter-spacing: 4px;
-  position: relative;
-  background-color: #16a085;
-  border: none;
-  color: #fff;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-  transition-duration: 0.4s;
-  overflow: hidden;
-  box-shadow: 0 5px 15px #193047;
-  border-radius: 4px;
-}
-
-.btn-write:hover {
-  background: #fff;
-  box-shadow: 0px 2px 10px 5px #1abc9c;
-  color: #000;
-}
-
-.btn-write:after {
-  content: "";
-  background: #1abc9c;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px !important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s
-}
-
-.btn-write:active:after {
-  padding: 0;
-  margin: 0;
-  opacity: 1;
-  transition: 0s
-}
-
-.btn-write:focus { outline:0; }
