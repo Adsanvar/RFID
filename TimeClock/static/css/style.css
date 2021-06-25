@@ -138,6 +138,21 @@ body {
   outline: none;
 }
 
+.btn-ok{
+  display: block;
+  background-color:  #0ba55d;
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  font-size: 24px;
+  font-family: 'Montserrat';
+  text-align: center;
+  border-radius: 30%;
+  border: none;
+  outline: none;
+  margin-bottom: 2px;
+}
+
 .big{
   font-size: 25px;
   background-color: transparent;
