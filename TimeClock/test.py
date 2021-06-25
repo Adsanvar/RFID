@@ -33,51 +33,54 @@ def read():
         while read_flag:
             print("Ready For Next")
             id, text = reader.read()
-            print(id)
-            print(text)
-            print(repr(text))
-            pyautogui.moveTo(512, 300) #moves mouse to center to invoke a wake up rpi if it is sleeping
-            val = ""
-            if text == None or text  == '':
-                val = "Error"
-            else:
-                # print('\x00' in text)
-                if '\x00' in text:
-                    val = text.replace('\x00', '')
+            if read_flag:
+                print(id)
+                print(text)
+                print(repr(text))
+                pyautogui.moveTo(512, 300) #moves mouse to center to invoke a wake up rpi if it is sleeping
+                val = ""
+                if text == None or text  == '':
+                    val = "Error"
                 else:
-                    val = text.rstrip(' ')
+                    # print('\x00' in text)
+                    if '\x00' in text:
+                        val = text.replace('\x00', '')
+                    else:
+                        val = text.rstrip(' ')
 
-            if val == '' or val == None:
-                val = "Error"
-                payload = {'id': id, 'text': val}
-                loadOptions(window, payload)
-                # print(window.get_current_url())
-                GPIO.output(buzzer,GPIO.HIGH)              
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)            
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.HIGH)
-                time.sleep(.5)
-                GPIO.output(buzzer,GPIO.LOW)
+                if val == '' or val == None:
+                    val = "Error"
+                    payload = {'id': id, 'text': val}
+                    loadOptions(window, payload)
+                    # print(window.get_current_url())
+                    GPIO.output(buzzer,GPIO.HIGH)              
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)            
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                else:
+                    payload = {'id': id, 'text': val, 'device': getserial()}
+                    loadOptions(window, payload)
+                    # print(window.get_current_url())
+                    GPIO.output(buzzer,GPIO.HIGH)          
+                    time.sleep(3)
+                    GPIO.output(buzzer,GPIO.LOW)
             else:
-                payload = {'id': id, 'text': val, 'device': getserial()}
-                loadOptions(window, payload)
-                # print(window.get_current_url())
-                GPIO.output(buzzer,GPIO.HIGH)          
-                time.sleep(3)
-                GPIO.output(buzzer,GPIO.LOW)
+                GPIO.cleanup()
     except:
         print('read exception')
         raise
@@ -88,7 +91,6 @@ readthread = threading.Thread(target=read)
 
 def write(val):
     try:
-        GPIO.cleanup()
         writerx = SimpleMFRC522()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
