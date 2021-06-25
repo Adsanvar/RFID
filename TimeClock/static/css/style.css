@@ -152,7 +152,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 .btn-write:hover{
-  background-image: linear-gradient(45deg, #882838, #3d1118);
+  background-image: linear-gradient(45deg, #32a738, #153d11);
 }
 
 .btn-btm-right
