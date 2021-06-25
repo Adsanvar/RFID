@@ -88,17 +88,15 @@ readthread = threading.Thread(target=read)
 
 def write(val):
     try:
-        reader = SimpleMFRC522()
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        buzzer = 11
-        GPIO.setup(buzzer, GPIO.OUT)
+        writerx = SimpleMFRC522()
+        # GPIO.setwarnings(False)
+        # GPIO.setmode(GPIO.BOARD)
+        # buzzer = 11
+        # GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
-        GPIO.output(buzzer,GPIO.HIGH)
         print("Now place your tag to write")
-        reader.write(val)
+        writerx.write(val)
         print("Written")
-        GPIO.output(buzzer,GPIO.LOW)
     except:
         print('write exception')
         raise
