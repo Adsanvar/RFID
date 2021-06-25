@@ -198,7 +198,7 @@ def loadOptions(window, payload):
                             name = result.value[i].firstname + ' ' +result.value[i].lastname
                             txt = 'Scan Key to Write: ' + name
                             const { value: accept } = await Swal.fire({
-                                title: val,
+                                title: txt,
                                 input: 'checkbox',
                                 inputValue: 1,
                                 inputPlaceholder:
