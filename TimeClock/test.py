@@ -443,7 +443,7 @@ def stopReadThread():
 
 def startReadThread():
     readthread._stop_event = threading.Event()
-    readthread.daemon = True
+    # readthread.daemon = True
     readthread.start()
 
 if __name__ == '__main__':
