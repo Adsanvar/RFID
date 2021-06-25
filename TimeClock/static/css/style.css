@@ -138,6 +138,13 @@ body {
   outline: none;
 }
 
+.btn-btm-right
+{ position: absolute;
+  bottom:0;
+  right:0;
+  margin: 1px;
+}
+
 .big{
   font-size: 25px;
   background-color: transparent;
@@ -347,46 +354,148 @@ input[type=checkbox]:checked + label:after{
   color: #ffffff;
 }
 
-.card__overlay {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+@keyframes button-shadow {
+  from {
+    transform: rotate(0);
+    bottom: -5px;
+    right: -5px;
+    opacity: 1;
+  }
+  to {
+    transform: rotate(40deg);
+    bottom: 50px;
+    right: -60px;
+    opacity: 0;
+  }
+}
+@keyframes button-arrow-rotate {
+  0% {
+    width: 15px;
+    margin: -25px auto 0;
+  }
+  1% {
+    width: 10px;
+    height: 0px;
+    margin-top: 15px;
+    transform: rotate(45deg);
+  }
+  100% {
+    width: 10px;
+    margin-top: 15px;
+    transform: rotate(45deg);
+    height: 35px;
+  }
+}
+@keyframes button-arrow-down {
+  from {
+    bottom: -25px;
+    opacity: 1;
+  }
+  to {
+    bottom: -40px;
+    opacity: 0;
+  }
+}
+@keyframes button-arrow-up {
+  0% {
+    height: 20px;
+    transform: rotateZ(45deg);
+    right: -7px;
+  }
+  1% {
+    right: 0px;
+    height: 10px;
+    width: 0;
+    transform: rotateZ(0);
+  }
+  100% {
+    right: 0px;
+    height: 10px;
+    width: 20px;
+    transform: rotateZ(0);
+  }
+}
+body {
+  width: 90%;
   display: flex;
-  align-items: center;
+  background: #28df99;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: 0.5s;
+  align-items: center;
+  height: 90vh;
+}
+
+button {
+  background-color: #fff;
+  width: 140px;
+  height: 70px;
+  border: none;
+  outline: none;
+  position: relative;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.5s;
 }
-.card__overlay::before {
-  content: "Write";
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+button .arrow {
+  height: 25px;
+  width: 15px;
+  background-color: #99f3bd;
+  border-radius: 2px;
+  margin: -25px auto 0;
+  position: relative;
 }
-.card__overlay:hover, .card__overlay:focus {
+button .arrow:after {
+  content: "";
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  background-color: #99f3bd;
+  border-radius: 2px;
+  transform: rotateZ(45deg) translate(1px, 7px);
   bottom: 0;
-  right: 0;
-  width: 100%;
+  right: -7px;
+  transition: all 0.5s;
+  transition-delay: 0.5s;
+}
+button .arrow:before {
+  content: "";
+  background-color: #99f3bd;
+  width: 25px;
+  height: 10px;
+  position: absolute;
+  left: -5px;
+  bottom: -25px;
+  border-radius: 2px;
+  transition: all 0.5s;
+}
+button:after, button:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: #99f3bd;
   height: 100%;
-  box-shadow: none;
-  border-radius: 0;
-  opacity: 0.9;
+  width: 100%;
+  bottom: -5px;
+  right: -5px;
+  border-radius: 5px;
 }
-.card__overlay:hover::before, .card__overlay:focus::before {
-  content: none;
+button:after {
+  animation-play-state: pause;
 }
-.card:nth-child(1) .card__overlay {
-  background-image: linear-gradient(45deg, #3503ad, #f7308c);
+button:active {
+  width: 180px;
+  height: 90px;
 }
-.card:nth-child(2) .card__overlay {
-  background-image: linear-gradient(45deg, #ccff00, #09afff);
+button:focus:after {
+  animation: button-shadow 1s;
 }
-.card:nth-child(3) .card__overlay {
-  background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
+button:focus .arrow {
+  animation: button-arrow-rotate 0.5s forwards;
+  animation-delay: 0.5s;
+}
+button:focus .arrow:after {
+  animation: button-arrow-up 0.5s forwards;
+  animation-delay: 0.5s;
+}
+button:focus .arrow:before {
+  animation: button-arrow-down 0.5s forwards;
 }
