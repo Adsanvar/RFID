@@ -375,8 +375,6 @@ input[type=checkbox]:checked + label:after{
   margin: 0;
   padding: 0;
   list-style: none;
-  border-radius: 5%;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
 .cards__item {
@@ -389,6 +387,8 @@ input[type=checkbox]:checked + label:after{
   align-items: center;
   justify-content: center;
   background-color: #000000;
+  border-radius: 5%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 .card::before {
   content: "";
