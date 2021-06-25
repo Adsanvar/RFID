@@ -423,7 +423,8 @@ def writer(data=None):
             global read_flag
             read_flag = False
             print("is thread alive?",readthread.is_alive())
-            stopReadThread()
+            # stopReadThread()
+            readthread._stop()
             print("is thread alive?",readthread.is_alive())
             write(data)
             read_flag = True
@@ -441,12 +442,12 @@ def setBaseUrl():
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
-def stopReadThread():
-    readthread._stop_event.set()
+# def stopReadThread():
+#     readthread._stop_event.set()
 
 def startReadThread():
     # readthread = threading.Thread(target=read)
-    readthread._stop_event = threading.Event()
+    # readthread._stop_event = threading.Event()
     # readthread.daemon = True
     readthread.start()
 
