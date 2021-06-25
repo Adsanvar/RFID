@@ -312,7 +312,7 @@ def loadOptions(window, payload):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', read = False)
+    return render_template('index.html')
 
 @app.route('/clockin')
 @app.route('/clockin/<string:data>')
