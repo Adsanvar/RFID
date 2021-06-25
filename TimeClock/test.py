@@ -406,17 +406,17 @@ def writer(data=None):
         try:
             data = json.loads(data)
             print(data)
-            print("isAlive(): ", readthread.isAlive())
-            print("is_alive(): ", readthread.is_alive())
-            global read_flag
-            read_flag = False
-            print("read_flag = ", read_flag)
-            print("isAlive(): ", readthread.isAlive())
-            print("is_alive(): ", readthread.is_alive())
-            print("_stop.set(): ")
-            readthread._stop()
-            print("isAlive(): ", readthread.isAlive())
-            print("is_alive(): ", readthread.is_alive())
+            # print("isAlive(): ", readthread.isAlive())
+            # print("is_alive(): ", readthread.is_alive())
+            # global read_flag
+            # read_flag = False
+            # print("read_flag = ", read_flag)
+            # print("isAlive(): ", readthread.isAlive())
+            # print("is_alive(): ", readthread.is_alive())
+            # print("_stop.set(): ")
+            # readthread._stop()
+            # print("isAlive(): ", readthread.isAlive())
+            write = threading.thread(target=write(data))
             
             return jsonify(message='Success')
         except Exception as e:
