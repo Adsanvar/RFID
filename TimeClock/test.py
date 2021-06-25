@@ -360,6 +360,8 @@ def writer(data=None):
 
             data = json.loads(data)
             print(data)
+            for d in data:
+                print(d['firstname'])
             # print("isAlive(): ", readthread.isAlive())
             # print("is_alive(): ", readthread.is_alive())
             # global read_flag

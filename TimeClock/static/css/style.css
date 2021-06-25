@@ -274,14 +274,14 @@ input[type=checkbox]:checked + label:after{
   align-items: center;
 }
 
-.grid-1-5 {
+/* .grid-1-5 {
   border: 2px solid #5d4e65;
   min-height: 400px;
   padding: 1.25em;
   position: relative;
   text-align: center;
   transition: all .2s ease-in-out;
-}
+} */
 /* @media screen and (min-width: 700px) {
   .grid-1-5 {
     float: left;
@@ -375,6 +375,8 @@ input[type=checkbox]:checked + label:after{
   margin: 0;
   padding: 0;
   list-style: none;
+  border-radius: 5%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
 .cards__item {
