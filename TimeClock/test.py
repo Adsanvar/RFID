@@ -163,6 +163,29 @@ def loadOptions(window, payload):
             buttonsStyling: false
             })
 
+            function showWrite(val)
+            {
+                (async () => {
+
+                    const { value: accept } = await Swal.fire({
+                    title: val,
+                    input: 'checkbox',
+                    inputValue: 1,
+                    inputPlaceholder:
+                        'I agree with the terms and conditions',
+                    confirmButtonText:
+                        'Continue <i class="fa fa-arrow-right"></i>',
+                    inputValidator: (result) => {
+                        return !result && 'You need to agree with T&C'
+                    }
+                    })
+
+                    if (accept) {
+                    Swal.fire('You agreed with T&C :)')
+                    }
+
+                })()
+            }
             swalWithBootstrapButtons.fire({
             title: '%s',
             confirmButtonText: 'Write',
@@ -195,8 +218,8 @@ def loadOptions(window, payload):
                     {
                         name = result.value[i].firstname + ' ' +result.value[i].lastname
                         txt = 'Scan Key to Write: ' + name
-
-                        swalBtnOkBootstrap.fire({
+                        showWrite(txt)
+                        /*swalBtnOkBootstrap.fire({
                             title: 'Write',
                             text: txt,
                             allowOutsideClick: false,
@@ -209,6 +232,19 @@ def loadOptions(window, payload):
                                 Swal.fire('Changes are not saved', '', 'info')
                             }
                         })
+                        let url = '%swriter'
+                        return fetch(url).then(response => {
+                            if (!response.ok) {
+                            throw new Error(response.statusText)
+                            }
+                            Swal.fire('Saved!', '', 'success')
+                            ###TODO:###
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                            )
+                        })*/
     
                     }
                 }
