@@ -194,7 +194,7 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
-                if (result.isConfirmed) {
+               if (result.isConfirmed) {
                     (async () => {
                                             
                         for(i in result.value)
@@ -240,6 +240,7 @@ def loadOptions(window, payload):
                                 }
                         }
                     })()
+                }
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 
             window.evaluate_js(tmp)
