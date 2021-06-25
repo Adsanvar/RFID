@@ -197,18 +197,14 @@ def loadOptions(window, payload):
                         for(i in result.value)
                         {
                             name = result.value[i].firstname + ' ' +result.value[i].lastname
-                            txt = 'Scan Key to Write: ' + name
+                            txt = 'Writer'
                             const { value: accept } = await Swal.fire({
                                 title: txt,
-                                input: 'checkbox',
-                                inputValue: 1,
+                                showCancelButton: true,
                                 inputPlaceholder:
-                                    'I agree with the terms and conditions',
+                                    'Place Key On Scanner To Write: ' + name,
                                 confirmButtonText:
                                     'Continue <i class="fa fa-arrow-right"></i>',
-                                inputValidator: (result) => {
-                                    return !result && 'You need to agree with T&C'
-                                }
                                 })
 
                                 if (accept) {
