@@ -339,6 +339,8 @@ def getWrite(data=None):
             headers= {'content-type': 'application/json'}
             res = requests.get(api_url+"getWrite", data=data, headers=headers)
             # print(json.dumps(res.text))
+            global read_flag
+            read_flag = False
             window.load_url(base_url+"writer/"+res.text)
             stopReadThread()
             print(res.text)
