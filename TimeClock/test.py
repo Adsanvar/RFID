@@ -436,7 +436,7 @@ def getWrite(data=None):
 
 @app.route('/writer')
 @app.route('/writer/<string:data>')
-def getWrite(data=None):
+def writer(data=None):
     if data != None:
         try:
             data = json.loads(data)
