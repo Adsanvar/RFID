@@ -20,6 +20,7 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 
 base_url = ""
 api_url = "http://192.168.1.65:5005/"
+read_flag = True
 
 def read():
     try:
@@ -29,7 +30,7 @@ def read():
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         print("in run.")
-        while True:
+        while read_flag:
             print("Ready For Next")
             id, text = reader.read()
             print(id)
@@ -92,8 +93,10 @@ def write(val):
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
+        GPIO.output(buzzer,GPIO.HIGH) 
         print("Now place your tag to write")
         reader.write(val)
+        GPIO.output(buzzer,GPIO.LOW)
         print("Written")
     except:
         raise
@@ -207,6 +210,18 @@ def loadOptions(window, payload):
                                 })
 
                                 if (accept) {
+                                    let url = '%swriter' + JSON.stringify(name)
+                                    return fetch(url).then(response => {
+                                        if (!response.ok) {
+                                        throw new Error(response.statusText)
+                                        }
+                                        Swal.fire('Saved!', '', 'success')
+                                    })
+                                    .catch(error => {
+                                        Swal.showValidationMessage(
+                                        `Request failed: ${error}`
+                                        )
+                                    })
                                     const { value: cont } = await swalBtnOkBootstrap.fire({
                                         title: 'Wrote!',
                                         icon: 'success',
@@ -246,7 +261,7 @@ def loadOptions(window, payload):
                                 }
                             })
             
-                            let url = 'writer'
+                            let url = '%swriter'
                             return fetch(url).then(response => {
                                 if (!response.ok) {
                                 throw new Error(response.statusText)
@@ -271,7 +286,7 @@ def loadOptions(window, payload):
                         width: 600,
                     })
                 }*/
-            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 
             window.evaluate_js(tmp)
         else:
@@ -385,18 +400,8 @@ def loadOptions(window, payload):
 
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/<string:data>', methods=['GET', 'POST'])
-def index(data=None):
-    if data != None:
-        data = json.loads(data)
-        print(data)
-        if data['text'] == 'Error':
-            flash("Error Leyendo Etiqueta", 'error')
-            return render_template('index.html', read = False)
-        else:
-            return render_template('index.html', read = True, data = data['text'] )
-    else:
-        return render_template('index.html', read = False)
+def index():
+    return render_template('index.html', read = False)
 
 @app.route('/clockin')
 @app.route('/clockin/<string:data>')
@@ -429,20 +434,40 @@ def getWrite(data=None):
     else:
         return jsonify(message='Error No Data')
 
+@app.route('/writer')
+@app.route('/writer/<string:data>')
+def getWrite(data=None):
+    if data != None:
+        try:
+            data = json.loads(data)
+            print(data)
+            return jsonify(message='Success')
+        except Exception as e:
+            print(e)
+            return jsonify(message='Error')
+    else:
+        return jsonify(message='Error No Data')
+
+
 def setBaseUrl():
     global base_url
     base_url = window.get_current_url()
     print("base url: ", base_url)
+
+def stopReadThread():
+    readthread._stop_event.set()
+
+def startReadThread():
+    # readthread._stop_event = threading.Event()
+    readthread.daemon = True
+    readthread.start()
 
 if __name__ == '__main__':
 
     # t = threading.Thread(target=start_server)
     # t.daemon = True
     # t.start()
-
-    readthread.daemon = True
-    readthread.start()
-
+    startReadThread()
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()

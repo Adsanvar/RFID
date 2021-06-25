@@ -85,17 +85,17 @@ class RFID(threading.Thread):
         finally:
             GPIO.cleanup()
 
-    def sendPost(self, payload):
-        try:
-            # url = "http://127.0.0.1:5005/read"
-            # # url ="http://192.168.1.65:5005/read"
-            # headers= {'content-type': 'application/json'}
-            # requests.post(url, data=json.dumps(payload), headers=headers)
-            # requests.put(url, data=json.dumps(payload), headers=headers)
-            # read(payload)
-            print(payload)
-        except Exception as e:
-            raise
+    # def sendPost(self, payload):
+    #     try:
+    #         # url = "http://127.0.0.1:5005/read"
+    #         # # url ="http://192.168.1.65:5005/read"
+    #         # headers= {'content-type': 'application/json'}
+    #         # requests.post(url, data=json.dumps(payload), headers=headers)
+    #         # requests.put(url, data=json.dumps(payload), headers=headers)
+    #         # read(payload)
+    #         print(payload)
+    #     except Exception as e:
+    #         raise
     
 # @rf.route('/read<string:payload>')
 # def read(payload):
