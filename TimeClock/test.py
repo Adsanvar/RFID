@@ -424,7 +424,8 @@ def writer(data=None):
             read_flag = False
             stopReadThread()
             write(data)
-            print("rendering")
+            read_flag = True
+            startReadThread()
             return render_template('writer.html', data=data)
         except Exception as e:
             print(e)
