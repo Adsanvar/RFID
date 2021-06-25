@@ -407,7 +407,7 @@ def writer(data=None):
             data = json.loads(data)
             # print("isAlive(): ", readthread.isAlive())
             # print("is_alive(): ", readthread.is_alive())
-            # global read_flag
+            global read_flag
             read_flag = False
             # print("read_flag = ", read_flag)
             # print("isAlive(): ", readthread.isAlive())
@@ -420,6 +420,7 @@ def writer(data=None):
             # writethread.join()
             GPIO.cleanup()
             write(data)
+            read_flag = True
             
             return jsonify(message='Success')
         except Exception as e:
