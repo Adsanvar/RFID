@@ -149,6 +149,7 @@ body {
   border-radius: 50%;
   border: none;
   outline: none;
+  margin-top: 10px;
 }
 .btn-write:hover{
   background-color:  #ffffff;
