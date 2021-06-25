@@ -196,54 +196,8 @@ def loadOptions(window, payload):
             },
             allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
             }).then((result) => {
-               if (result.isConfirmed) {
-                    (async () => {
-                                            
-                        for(i in result.value)
-                        {
-                            name = result.value[i].firstname + ' ' +result.value[i].lastname
-                            txt = 'Writer'
-                            const { value: accept } = await swalWithBootstrapButtons.fire({
-                                title: txt,
-                                showCancelButton: true,
-                                reverseButtons: true,
-                                text: `Press \"Continue\" & Place Key On Scanner To Write: ` + name,
-                                confirmButtonText: 'Continue',
-                                })
-
-                                if (accept) {
-                                    let url = '%swriter/' + JSON.stringify(name)
-                                    return fetch(url).then(response => {
-                                        if (!response.ok) {
-                                        throw new Error(response.statusText)
-                                        }
-                                        Swal.fire('Saved!', '', 'success')
-                                    })
-                                    .catch(error => {
-                                        Swal.showValidationMessage(
-                                        `Request failed: ${error}`
-                                        )
-                                    })
-                                    const { value: cont } = await swalBtnOkBootstrap.fire({
-                                        title: 'Wrote!',
-                                        icon: 'success',
-                                        text: `Successfully Wrote: ` + name,
-                                        confirmButtonText: 'OK',
-                                    })
-                                }
-                                else
-                                {
-                                    const { value: cont } = await swalBtnOkBootstrap.fire({
-                                        title: 'Cancelled Write',
-                                        icon: 'info',
-                                        text: name + ': Was not written',
-                                        confirmButtonText: 'OK',
-                                    })
-                                }
-                        }
-                    })()
-                }
-            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
+                /*Might Not Need Code Here*/
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
 
             window.evaluate_js(tmp)
         else:
@@ -424,7 +378,7 @@ def writer(data=None):
             # read_flag = True
             # global read_flag
             # read_flag = False
-            print("is thread alive?",readthread.is_alive())
+            # print("is thread alive?",readthread.is_alive())
             # # stopReadThread()
             # readthread._stop()
             # print("is thread alive?",readthread.is_alive())
