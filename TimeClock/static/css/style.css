@@ -415,14 +415,6 @@ input[type=checkbox]:checked + label:after{
     transform: rotateZ(0);
   }
 }
-body {
-  width: 90%;
-  display: flex;
-  background: #28df99;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-}
 
 button {
   background-color: #fff;
