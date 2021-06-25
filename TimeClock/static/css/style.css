@@ -300,6 +300,7 @@ input[type=checkbox]:checked + label:after{
   background: #242625;
   border-radius: 10px;
   box-shadow: 25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f;
+  margin:10px;
 }
 .card__container {
   display: grid;
