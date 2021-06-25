@@ -418,7 +418,7 @@ def writer(data=None):
             # writethread = threading.Thread(target=write(data))
             # writethread.start()
             # writethread.join()
-            GPIO.cleanup()
+            # GPIO.cleanup()
             write(data)
             read_flag = True
             
