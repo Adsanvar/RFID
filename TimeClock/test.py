@@ -210,7 +210,7 @@ def loadOptions(window, payload):
                                 })
 
                                 if (accept) {
-                                    let url = '%swriter' + JSON.stringify(name)
+                                    let url = '%swriter/' + JSON.stringify(name)
                                     return fetch(url).then(response => {
                                         if (!response.ok) {
                                         throw new Error(response.statusText)
@@ -402,7 +402,9 @@ def getWrite(data=None):
 @app.route('/writer')
 @app.route('/writer/<string:data>')
 def writer(data=None):
+    print('writer')
     if data != None:
+        print('data')
         try:
             data = json.loads(data)
             print(data)
@@ -423,6 +425,7 @@ def writer(data=None):
             print(e)
             return jsonify(message='Error')
     else:
+        print('no data')
         return jsonify(message='Error No Data')
 
 
