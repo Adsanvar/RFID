@@ -30,7 +30,7 @@ def read():
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         print("in run.")
-        while read_flag:
+        while True:
             print("Ready For Next")
             id, text = reader.read()
             print(id)
@@ -76,7 +76,7 @@ def read():
                 loadOptions(window, payload)
                 # print(window.get_current_url())
                 GPIO.output(buzzer,GPIO.HIGH)          
-                time.sleep(5)
+                time.sleep(3)
                 GPIO.output(buzzer,GPIO.LOW)
     except:
         print('read exception')
