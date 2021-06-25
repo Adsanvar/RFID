@@ -154,6 +154,23 @@ body {
   background-image: linear-gradient(45deg, #00b109, #34b629);
 }
 
+
+.btn-exit{
+  display: block;
+  background-color: #b90000;
+  color: #fff;
+  width: 150px;
+  height: 75px;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 5%;
+  border: none;
+  outline: none;
+}
+.btn-exit:hover{
+  background-image: linear-gradient(45deg, #00b109, #34b629);
+}
+
 .btn-btm-right
 { position: absolute;
   bottom:0;
@@ -326,7 +343,7 @@ input[type=checkbox]:checked + label:after{
   justify-content: center;
   border-radius: 5%;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
-  /* background-image: linear-gradient(45deg, #5a5a5a, #0c0c0c); */
+  background-image: linear-gradient(45deg, #3503ad, #f7308c);
 }
 /* .card::before {
   content: "";
@@ -339,15 +356,7 @@ input[type=checkbox]:checked + label:after{
   background-color: rgba(255, 255, 255, 0.1);
   pointer-events: none;
 } */
-.card:nth-child(1) {
-  background-image: linear-gradient(45deg, #3503ad, #f7308c);
-}
-.card:nth-child(2) {
-  background-image: linear-gradient(45deg, #ccff00, #09afff);
-}
-.card:nth-child(3) {
-  background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
-}
+
 
 .card__frame {
   position: absolute;
