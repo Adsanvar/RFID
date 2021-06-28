@@ -404,7 +404,7 @@ def writer(data=None):
                 
         # print("is writeer active: ", writeThread.is_alive())
 
-        return render_template('writer.html', data=test)
+        return render_template('writer.html', data=data)
     else:
         print(data)
         if data != None:
