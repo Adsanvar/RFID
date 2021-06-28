@@ -117,6 +117,7 @@ def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
     print(res.text)
+    flash(res.text, 'success')
 
 def getserial():
   # Extract serial from cpuinfo file
