@@ -340,9 +340,9 @@ def getWrite(data=None):
             # print(json.dumps(res.text))
             global read_flag
             read_flag = False
+            stopReadThread()
             window.load_url(base_url+"writer/"+res.text)
-            # stopReadThread()
-            readthread._stop()
+            # readthread._stop()
             # print(res.text)
             return res.text
         except Exception as e:
@@ -401,18 +401,33 @@ def setBaseUrl():
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
-def startReadThread():
+def stopReadThread():
+    global readthread
+    global read_flag
+
+    read_flag = False
+    readthread._stop()
+
+def startReadThread(start):
     # readthread = threading.Thread(target=read)
     # readthread._stop_event = threading.Event()
-    readthread.daemon = True
-    readthread.start()
+    global readthread
+    global read_flag
+    if start:
+    # readthread.daemon = True
+        readthread.start()
+    else:
+        read_flag = True
+        readthread = threading.Thread(target=read)
+        readthread.start()
+        
 
 if __name__ == '__main__':
 
     # t = threading.Thread(target=start_server)
     # t.daemon = True
     # t.start()
-    startReadThread()
+    startReadThread(True)
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()
