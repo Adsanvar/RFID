@@ -98,8 +98,10 @@ def write(val):
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         # text = input('New data:')
+        GPIO.output(buzzer,GPIO.HIGH)
         print("Now place your tag to write")
         writerx.write(val)
+        GPIO.output(buzzer,GPIO.LOW)
         print("Written")
     except:
         print('write exception')
@@ -364,7 +366,8 @@ def getWrite(data=None):
 def writer(data=None):
     if request.method == "POST":
         name = request.form.get('name')
-        print(name)
+        startWriteThread(name)
+        print("is writeer active: ", writeThread.is_active())
         return render_template('writer.html')
     else:
         print(data)
