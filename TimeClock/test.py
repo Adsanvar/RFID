@@ -315,6 +315,7 @@ def index():
     if 'exitWrite' in request.form:
         startReadThread(False)
         print("is thread alive: ", readthread.is_alive())
+        return render_template('index.html')
     else:
         return render_template('index.html')
 
