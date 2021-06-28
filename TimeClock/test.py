@@ -363,7 +363,8 @@ def getWrite(data=None):
 @app.route('/writer/<string:data>')
 def writer(data=None):
     if request.method == "POST":
-
+        print("POST")
+        render_template('writer.html')
     else:
         print(data)
         if data != None:
