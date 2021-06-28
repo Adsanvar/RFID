@@ -390,9 +390,8 @@ def writer(data=None):
         emp_id = int(request.form.get('id'))
         for emp in data:
             if emp['id'] == emp_id:
-                print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
-                # startWriteThread(name, emp_id)
+                startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
         return render_template('writer.html')
     else:
