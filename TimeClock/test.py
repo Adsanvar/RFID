@@ -391,7 +391,7 @@ def writer(data=None):
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
         # return render_template('writer.html')
-        return redirect('getWrite', data = json.dumps(data))
+        return redirect(url_for('getWrite', data = json.dumps(data)))
     else:
         print(data)
         if data != None:
