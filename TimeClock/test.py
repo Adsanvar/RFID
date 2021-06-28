@@ -90,7 +90,7 @@ def read():
 
 readthread = threading.Thread(target=read)
 
-def write(val):
+def write(val, employeeId):
     try:
         GPIO.cleanup()
         readerx = SimpleMFRC522()
@@ -113,14 +113,19 @@ def write(val):
         writerx.write(val)
         GPIO.output(buzzer,GPIO.LOW)
         print("Written")
-        payload = {'id': id, 'text': val, 'device': getserial()}
-        headers= {'content-type': 'application/json'}
-        res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
+        payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
+        sendWriteRequest(payload)
+
     except:
         print('write exception')
         raise
     finally:
             GPIO.cleanup()
+
+def sendWriteRequest(payload):
+    # headers= {'content-type': 'application/json'}
+    # res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
+    print(payload)
 
 def getserial():
   # Extract serial from cpuinfo file
@@ -364,7 +369,9 @@ def getWrite(data=None):
             global read_flag
             read_flag = False
             window.load_url(base_url+"writer/"+res.text)
-            stopReadThread()
+            if readthread.is_alive():
+                stopReadThread()
+                
             # readthread._stop()
             # print(res.text)
             return res.text
@@ -378,9 +385,12 @@ def getWrite(data=None):
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
     if request.method == "POST":
-        print(data)
-        name = request.form.get('name')
-        # startWriteThread(name)
+        data = json.loads(data)
+        id = request.form.get('id')
+        for emp in data:
+            if emp['id'] == id:
+                name = emp['firstname'] + ' ' + emp['lastname']
+                startWriteThread(name, id)
         # print("is writeer active: ", writeThread.is_alive())
         return render_template('writer.html')
     else:
@@ -431,9 +441,9 @@ def setBaseUrl():
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
-def startWriteThread(val):
+def startWriteThread(val, id):
     global writeThread 
-    writeThread = threading.Thread(target=write(val))
+    writeThread = threading.Thread(target=write(val, id))
 
 def stopWriteThread():
     global writeThread
