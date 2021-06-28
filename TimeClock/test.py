@@ -92,6 +92,7 @@ readthread = threading.Thread(target=read)
 
 def write(val):
     try:
+        GPIO.cleanup()
         writerx = SimpleMFRC522()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
