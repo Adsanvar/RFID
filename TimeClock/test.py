@@ -394,7 +394,7 @@ def writer(data=None):
             if emp['id'] == emp_id:
                 print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
-                startWriteThread(name, id)
+                # startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
         return render_template('writer.html')
     else:
