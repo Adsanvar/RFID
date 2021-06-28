@@ -388,11 +388,11 @@ def writer(data=None):
         print('inpost')
         data = json.loads(data)
         emp_id = request.form.get('id')
-        print(emp_id)
+        print("empid: ", emp_id)
         for emp in data:
-            print(emp['id'])
+            print("emp in data ", emp['id'])
             if emp['id'] == emp_id:
-                print('in emp.id == id')
+                print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, id)
         # print("is writeer active: ", writeThread.is_alive())
@@ -481,9 +481,5 @@ if __name__ == '__main__':
     # t.start()
     startReadThread(True)
     # webview.start(setBaseUrl, debug=True)
-    try:
-        webview.start(setBaseUrl)
-        sys.exit()
-    except:
-        webview.start(setBaseUrl)
-        raise
+    webview.start(setBaseUrl)
+    sys.exit()
