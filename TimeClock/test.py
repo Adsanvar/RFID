@@ -359,8 +359,8 @@ def getWrite(data=None):
     else:
         return jsonify(message='Error No Data')
 
-@app.route('/writer')
-@app.route('/writer/<string:data>')
+@app.route('/writer',methods=['GET', 'POST'])
+@app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
     if request.method == "POST":
         print("POST")
