@@ -400,7 +400,8 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        data = data.remove[emp_id]
+        del data[emp_id]
+        print(data)
         return render_template('writer.html', data=data)
     else:
         print(data)
