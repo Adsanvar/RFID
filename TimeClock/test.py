@@ -92,7 +92,7 @@ readthread = threading.Thread(target=read)
 
 def write(val, employeeId):
     try:
-        GPIO.cleanup()
+        # GPIO.cleanup()
         readerx = SimpleMFRC522()
         flash("Scan To Read", 'success')
         print("Scan To Read")
