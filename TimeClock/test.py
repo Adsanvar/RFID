@@ -95,7 +95,7 @@ def write(val, employeeId):
         GPIO.cleanup()
         readerx = SimpleMFRC522()
         flash("Scan To Read", 'success')
-        print("Scan To")
+        print("Scan To Read")
         id, text = readerx.read()
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
@@ -120,9 +120,9 @@ def write(val, employeeId):
             GPIO.cleanup()
 
 def sendWriteRequest(payload):
-    # headers= {'content-type': 'application/json'}
-    # res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
-    print(payload)
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
+    flash(res.text, 'success')
 
 def getserial():
   # Extract serial from cpuinfo file
@@ -390,7 +390,8 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        return render_template('writer.html')
+        # return render_template('writer.html')
+        return redirect('getWrite')
     else:
         print(data)
         if data != None:
