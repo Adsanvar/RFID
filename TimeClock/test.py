@@ -92,16 +92,22 @@ readthread = threading.Thread(target=read)
 
 def write(val, employeeId):
     try:
-        # GPIO.cleanup()
+        GPIO.cleanup()
         readerx = SimpleMFRC522()
         flash("Scan To Read", 'success')
-        print("Scan To Read")
+        print("Scan To")
         id, text = readerx.read()
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        buzzer = 11
+        GPIO.setup(buzzer, GPIO.OUT)
+        GPIO.output(buzzer,GPIO.HIGH)
         flash("Place ID to Write", 'success')
         print("Now place your tag to write")
         writerx.write(val)
+        GPIO.output(buzzer,GPIO.LOW)
         print("Written")
         flash("Written", 'success')
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
@@ -114,10 +120,9 @@ def write(val, employeeId):
             GPIO.cleanup()
 
 def sendWriteRequest(payload):
-    headers= {'content-type': 'application/json'}
-    res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
-    print(res.text)
-    flash(res.text, 'success')
+    # headers= {'content-type': 'application/json'}
+    # res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
+    print(payload)
 
 def getserial():
   # Extract serial from cpuinfo file
@@ -385,7 +390,7 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        return redirect('getWrite')
+        return render_template('writer.html')
     else:
         print(data)
         if data != None:
