@@ -388,7 +388,9 @@ def writer(data=None):
         print('inpost')
         data = json.loads(data)
         id = request.form.get('id')
+        print(id)
         for emp in data:
+            print(emp['id'])
             if emp['id'] == id:
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, id)
