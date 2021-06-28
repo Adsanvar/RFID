@@ -312,6 +312,7 @@ def loadOptions(window, payload):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    print("is thread alive: ", readthread.is_alive())
     return render_template('index.html')
 
 @app.route('/clockin')
