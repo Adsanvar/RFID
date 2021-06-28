@@ -398,8 +398,9 @@ def writer(data=None):
         for emp in data:
             if emp['id'] == emp_id:
                 name = emp['firstname'] + ' ' + emp['lastname']
-                startWriteThread(name, emp_id)
                 print(data.index(emp))
+                # startWriteThread(name, emp_id)
+                
         # print("is writeer active: ", writeThread.is_alive())
 
         return render_template('writer.html', data=data)
