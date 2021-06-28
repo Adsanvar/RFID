@@ -393,14 +393,16 @@ def writer(data=None):
     if request.method == "POST":
         print('inpost')
         data = json.loads(data)
+        print(data)
         emp_id = int(request.form.get('id'))
         for emp in data:
             if emp['id'] == emp_id:
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        loadWriter(json.dumps(data))
-        return "success"
+        headers= {'content-type': 'application/json'}
+        res = requests.get(api_url+"getWrite", data=json.dumps(data), headers=headers)
+        return render_template('writer.html', data=res.text)
     else:
         print(data)
         if data != None:
