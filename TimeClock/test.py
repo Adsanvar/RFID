@@ -392,6 +392,7 @@ def writer(data=None):
         for emp in data:
             print(emp['id'])
             if emp['id'] == id:
+                print('in emp.id == id')
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, id)
         # print("is writeer active: ", writeThread.is_alive())
