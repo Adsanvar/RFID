@@ -94,14 +94,9 @@ def write(val, employeeId):
     try:
         GPIO.cleanup()
         readerx = SimpleMFRC522()
+        flash("Scan To Read", 'success')
         print("Scan To Read")
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        buzzer = 11
-        GPIO.setup(buzzer, GPIO.OUT)
-        GPIO.output(buzzer,GPIO.HIGH)
         id, text = readerx.read()
-        GPIO.output(buzzer,GPIO.LOW)
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
         GPIO.setwarnings(False)
@@ -109,10 +104,12 @@ def write(val, employeeId):
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
         GPIO.output(buzzer,GPIO.HIGH)
+        flash("Place ID to Write", 'success')
         print("Now place your tag to write")
         writerx.write(val)
         GPIO.output(buzzer,GPIO.LOW)
         print("Written")
+        flash("Written", 'success')
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
         sendWriteRequest(payload)
 
