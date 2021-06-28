@@ -13,13 +13,7 @@
         <button class="btn-exit btn-top-left" name="exitWrite" type="submit">CLOSE</button>
       </form>
     </div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-            <p class="alert-{{category}}">{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+
     <div class="container">
       <ul class="cards">
         {% for emp in data%}
