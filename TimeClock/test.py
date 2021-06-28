@@ -400,9 +400,8 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        headers= {'content-type': 'application/json'}
-        res = requests.get(api_url+"getWrite", data=json.dumps(data), headers=headers)
-        return render_template('writer.html', data=res.text)
+        data = data.remove[emp_id]
+        return render_template('writer.html', data=data)
     else:
         print(data)
         if data != None:
