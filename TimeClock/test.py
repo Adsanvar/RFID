@@ -99,15 +99,9 @@ def write(val, employeeId):
         id, text = readerx.read()
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        buzzer = 11
-        GPIO.setup(buzzer, GPIO.OUT)
-        GPIO.output(buzzer,GPIO.HIGH)
         flash("Place ID to Write", 'success')
         print("Now place your tag to write")
         writerx.write(val)
-        GPIO.output(buzzer,GPIO.LOW)
         print("Written")
         flash("Written", 'success')
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
@@ -120,9 +114,9 @@ def write(val, employeeId):
             GPIO.cleanup()
 
 def sendWriteRequest(payload):
-    # headers= {'content-type': 'application/json'}
-    # res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
-    print(payload)
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
+    print(res.text)
 
 def getserial():
   # Extract serial from cpuinfo file
