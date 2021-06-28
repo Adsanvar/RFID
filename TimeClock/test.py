@@ -93,17 +93,29 @@ readthread = threading.Thread(target=read)
 def write(val):
     try:
         GPIO.cleanup()
+        readerx = SimpleMFRC522()
+        print("Scan To Read")
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        buzzer = 11
+        GPIO.setup(buzzer, GPIO.OUT)
+        GPIO.output(buzzer,GPIO.HIGH)
+        id, text = readerx.read()
+        GPIO.output(buzzer,GPIO.LOW)
+        GPIO.cleanup()        
         writerx = SimpleMFRC522()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         buzzer = 11
         GPIO.setup(buzzer, GPIO.OUT)
-        # text = input('New data:')
         GPIO.output(buzzer,GPIO.HIGH)
         print("Now place your tag to write")
         writerx.write(val)
         GPIO.output(buzzer,GPIO.LOW)
         print("Written")
+        payload = {'id': id, 'text': val, 'device': getserial()}
+        headers= {'content-type': 'application/json'}
+        res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
     except:
         print('write exception')
         raise
@@ -366,9 +378,10 @@ def getWrite(data=None):
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
     if request.method == "POST":
+        print(data)
         name = request.form.get('name')
-        startWriteThread(name)
-        print("is writeer active: ", writeThread.is_alive())
+        # startWriteThread(name)
+        # print("is writeer active: ", writeThread.is_alive())
         return render_template('writer.html')
     else:
         print(data)
