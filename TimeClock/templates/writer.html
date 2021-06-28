@@ -20,7 +20,7 @@
             <div class="card__frame">
               <form action="{{writer}}" method="POST">
                 <h2 class="card__title">{{emp['firstname']}} {{emp['lastname']}}</h2>
-                <button class="btn-write" href="#m1-o" name="{{emp['firstname']}} {{emp['lastname']}}" type=submit>Write</button>
+                <button class="btn-write" href="#m1-o" name="{{emp['firstname']}} {{emp['lastname']}}" type=submit><a href="#m1-o" class="link-1" id="m1-c">Write</a></button>
               </form>
             </div>  
           </li>
@@ -29,8 +29,8 @@
     </div>
 
     <div class="box">
-      <a href="#m1-o" class="link-1" id="m1-c">Modal 1</a>
-      <p class="box__info">Without Background</p>
+      <!-- <a href="#m1-o" class="link-1" id="m1-c">Modal 1</a>
+      <p class="box__info">Without Background</p> -->
     
       <div class="modal-container" id="m1-o" style="--m-background: transparent;">
         <div class="modal">
