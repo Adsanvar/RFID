@@ -312,11 +312,12 @@ def loadOptions(window, payload):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if 'exitWrite' in request.form:
-        print('in exit write')
-        startReadThread(False)
-        print("is thread alive: ", readthread.is_alive())
-        return render_template('index.html')
+    if request.method == "POST":
+        if 'exitWrite' in request.form:
+            print('in exit write')
+            startReadThread(False)
+            print("is thread alive: ", readthread.is_alive())
+            return render_template('index.html')
     else:
         print('Not in exit write')
         return render_template('index.html')
