@@ -312,8 +312,11 @@ def loadOptions(window, payload):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    print("is thread alive: ", readthread.is_alive())
-    return render_template('index.html')
+    if 'exitWrite' in request.form:
+        startReadThread(False)
+        print("is thread alive: ", readthread.is_alive())
+    else:
+        return render_template('index.html')
 
 @app.route('/clockin')
 @app.route('/clockin/<string:data>')
@@ -340,8 +343,8 @@ def getWrite(data=None):
             # print(json.dumps(res.text))
             global read_flag
             read_flag = False
-            stopReadThread()
             window.load_url(base_url+"writer/"+res.text)
+            stopReadThread()
             # readthread._stop()
             # print(res.text)
             return res.text
