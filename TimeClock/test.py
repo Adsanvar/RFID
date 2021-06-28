@@ -363,7 +363,8 @@ def getWrite(data=None):
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
     if request.method == "POST":
-        print("POST")
+        name = request.form.get('name')
+        print(name)
         return render_template('writer.html')
     else:
         print(data)

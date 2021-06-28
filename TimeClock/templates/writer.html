@@ -13,33 +13,19 @@
         <button class="btn-exit btn-top-left" name="exitWrite" type="submit">CLOSE</button>
       </form>
     </div>
-    <div id="objContainer" class="container">
+    <div class="container">
       <ul class="cards">
         {% for emp in data%}
           <li class="card cards__item">
             <div class="card__frame">
               <form action="{{writer}}" method="POST">
                 <h2 class="card__title">{{emp['firstname']}} {{emp['lastname']}}</h2>
-                <button class="btn-write" href="#m1-o" name="{{emp['firstname']}} {{emp['lastname']}}" type="submit">Write</button>
+                <button class="btn-write" name="name" type="submit" value="{{emp['firstname']}} {{emp['lastname']}}">Write</button>
               </form>
             </div>  
           </li>
         {%endfor%}
       </ul>
-    </div>
-
-    <div class="box">
-      <!-- <a href="#m1-o" class="link-1" id="m1-c">Modal 1</a>
-      <p class="box__info">Without Background</p> -->
-    
-      <div class="modal-container" id="m1-o" style="--m-background: transparent;">
-        <div class="modal">
-          <h1 class="modal__title">Modal 1 Title</h1>
-          <p class="modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex dicta maiores libero minus obcaecati iste optio, eius labore repellendus.</p>
-          <!-- <button class="modal__btn">Button &rarr;</button> -->
-          <a href="#objContainer" class="link-2"></a>
-        </div>
-      </div>
     </div>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js')}}"></script>
