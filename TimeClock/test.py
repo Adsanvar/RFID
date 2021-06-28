@@ -364,7 +364,7 @@ def getWrite(data=None):
 def writer(data=None):
     if request.method == "POST":
         print("POST")
-        render_template('writer.html')
+        return render_template('writer.html')
     else:
         print(data)
         if data != None:
