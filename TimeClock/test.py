@@ -480,5 +480,9 @@ if __name__ == '__main__':
     # t.start()
     startReadThread(True)
     # webview.start(setBaseUrl, debug=True)
-    webview.start(setBaseUrl)
+    try:
+        webview.start(setBaseUrl)
+    except:
+        webview.start(setBaseUrl)
+        raise
     sys.exit()
