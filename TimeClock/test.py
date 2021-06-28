@@ -385,7 +385,7 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        return render_template('writer.html')
+        return redirect('getWrite')
     else:
         print(data)
         if data != None:
