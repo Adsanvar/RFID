@@ -387,11 +387,11 @@ def writer(data=None):
     if request.method == "POST":
         print('inpost')
         data = json.loads(data)
-        id = request.form.get('id')
-        print(id)
+        emp_id = request.form.get('id')
+        print(emp_id)
         for emp in data:
             print(emp['id'])
-            if emp['id'] == id:
+            if emp['id'] == emp_id:
                 print('in emp.id == id')
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, id)
@@ -483,7 +483,7 @@ if __name__ == '__main__':
     # webview.start(setBaseUrl, debug=True)
     try:
         webview.start(setBaseUrl)
+        sys.exit()
     except:
         webview.start(setBaseUrl)
         raise
-    sys.exit()
