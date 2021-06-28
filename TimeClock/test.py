@@ -371,7 +371,7 @@ def getWrite(data=None):
             window.load_url(base_url+"writer/"+res.text)
             if readthread.is_alive():
                 stopReadThread()
-                
+
             # readthread._stop()
             # print(res.text)
             return res.text
@@ -385,6 +385,7 @@ def getWrite(data=None):
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
     if request.method == "POST":
+        print('inpost')
         data = json.loads(data)
         id = request.form.get('id')
         for emp in data:
