@@ -387,11 +387,8 @@ def writer(data=None):
     if request.method == "POST":
         print('inpost')
         data = json.loads(data)
-        emp_id = request.form.get('id')
-        print("empid: ", type(emp_id))
+        emp_id = int(request.form.get('id'))
         for emp in data:
-            print("emp in data ", type(emp['id']))
-
             if emp['id'] == emp_id:
                 print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
