@@ -360,23 +360,32 @@ def clockin(data=None):
 def getWrite(data=None):
     if data != None:
         try:
-            headers= {'content-type': 'application/json'}
-            res = requests.get(api_url+"getWrite", data=data, headers=headers)
-            # print(json.dumps(res.text))
-            global read_flag
-            read_flag = False
-            window.load_url(base_url+"writer/"+res.text)
+            # headers= {'content-type': 'application/json'}
+            # res = requests.get(api_url+"getWrite", data=data, headers=headers)
+            # # print(json.dumps(res.text))
+            # global read_flag
+            # read_flag = False
+            # window.load_url(base_url+"writer/"+res.text)
+            loadWriter(data)
             if readthread.is_alive():
                 stopReadThread()
 
             # readthread._stop()
             # print(res.text)
-            return res.text
+            return "success"
         except Exception as e:
             print(e)
             return jsonify(message='Error')
     else:
         return jsonify(message='Error No Data')
+
+def loadWriter(data):
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"getWrite", data=data, headers=headers)
+    # print(json.dumps(res.text))
+    global read_flag
+    read_flag = False
+    window.load_url(base_url+"writer/"+res.text)
 
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
@@ -390,8 +399,8 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 startWriteThread(name, emp_id)
         # print("is writeer active: ", writeThread.is_alive())
-        # return render_template('writer.html')
-        return redirect(url_for('getWrite', data = json.dumps(data)))
+        loadWriter(json.dumps(data))
+        return "success"
     else:
         print(data)
         if data != None:
