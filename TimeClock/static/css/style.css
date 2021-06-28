@@ -249,38 +249,6 @@ input[type=checkbox]:checked + label:after{
 }
 
 /* 
-.box{
-  width: 300px;
-  padding: 40px;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  background-color: transparent;
-  width: 50%;
-} */
-
-/* .box input[type = "submit"]{
-  border:0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #2ecc71;
-  padding: 14px 40px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-  cursor: pointer;
-}
-
-.box input[type = "submit"]:hover{
-  background: #2ecc71;
-} */
-/* 
 .clock-in
 {
   border:0;
@@ -384,5 +352,44 @@ input[type=checkbox]:checked + label:after{
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffffff;
+}
+
+/* MODAL */
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 4rem 2rem;
+}
+
+.box:not(:first-child) {
+  height: 45rem;
+}
+
+.box__title {
+  font-size: 10rem;
+  font-weight: normal;
+  letter-spacing: .8rem;
+  margin-bottom: 2.6rem;
+}
+
+.box__title::first-letter {
+  color: var(--primary);
+}
+
+.box__p,
+.box__info,
+.box__note {
+  font-size: 1.6rem;
+}
+
+.box__info {
+  margin-top: 6rem;
+}
+
+.box__note {
+  line-height: 2;
 }
 

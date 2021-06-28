@@ -21,6 +21,7 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 base_url = ""
 api_url = "http://192.168.1.65:5005/"
 read_flag = True
+writeThread = None
 
 def read():
     try:
@@ -361,52 +362,63 @@ def getWrite(data=None):
 @app.route('/writer')
 @app.route('/writer/<string:data>')
 def writer(data=None):
-    print(data)
-    if data != None:
-        print("in data not empty")
-        try:
+    if request.method == "POST":
 
-            data = json.loads(data)
-            print(data)
-            for d in data:
-                print(d['firstname'])
-            # print("isAlive(): ", readthread.isAlive())
-            # print("is_alive(): ", readthread.is_alive())
-            # global read_flag
-            # read_flag = False
-            # print("read_flag = ", read_flag)
-            # print("isAlive(): ", readthread.isAlive())
-            # print("is_alive(): ", readthread.is_alive())
-            # print("_stop.set(): ")
-            # readthread._stop()
-            # print("isAlive(): ", readthread.isAlive())
-            # writethread = threading.Thread(target=write(data))
-            # writethread.start()
-            # writethread.join()
-            # GPIO.cleanup()
-            # write(data)
-            # read_flag = True
-            # global read_flag
-            # read_flag = False
-            # print("is thread alive?",readthread.is_alive())
-            # # stopReadThread()
-            # readthread._stop()
-            # print("is thread alive?",readthread.is_alive())
-            # write(data)
-            # read_flag = True
-            # startReadThread()
-            return render_template('writer.html', data=data)
-        except Exception as e:
-            raise
     else:
-        print("no data")
-        return jsonify(message='Error No Data')
+        print(data)
+        if data != None:
+            print("in data not empty")
+            try:
+
+                data = json.loads(data)
+                print(data)
+                for d in data:
+                    print(d['firstname'])
+                # print("isAlive(): ", readthread.isAlive())
+                # print("is_alive(): ", readthread.is_alive())
+                # global read_flag
+                # read_flag = False
+                # print("read_flag = ", read_flag)
+                # print("isAlive(): ", readthread.isAlive())
+                # print("is_alive(): ", readthread.is_alive())
+                # print("_stop.set(): ")
+                # readthread._stop()
+                # print("isAlive(): ", readthread.isAlive())
+                # writethread = threading.Thread(target=write(data))
+                # writethread.start()
+                # writethread.join()
+                # GPIO.cleanup()
+                # write(data)
+                # read_flag = True
+                # global read_flag
+                # read_flag = False
+                # print("is thread alive?",readthread.is_alive())
+                # # stopReadThread()
+                # readthread._stop()
+                # print("is thread alive?",readthread.is_alive())
+                # write(data)
+                # read_flag = True
+                # startReadThread()
+                return render_template('writer.html', data=data)
+            except Exception as e:
+                raise
+        else:
+            print("no data")
+            return jsonify(message='Error No Data')
 
 
 def setBaseUrl():
     global base_url
     base_url = window.get_current_url()
     print("base url: ", base_url)
+
+def startWriteThread(val):
+    global writeThread 
+    writeThread = threading.Thread(target=write(val))
+
+def stopWriteThread():
+    global writeThread
+    writeThread._stop()
 
 def stopReadThread():
     global readthread
