@@ -115,7 +115,7 @@ def write(val, employeeId):
 
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
-    res = requests.get(api_url+"updateEmployee", data=json.dumps(payload), headers=headers)
+    res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
     print(res.text)
     flash(res.text, 'success')
 
