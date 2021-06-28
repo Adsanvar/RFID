@@ -368,7 +368,7 @@ def writer(data=None):
     if request.method == "POST":
         name = request.form.get('name')
         startWriteThread(name)
-        print("is writeer active: ", writeThread.is_active())
+        print("is writeer active: ", writeThread.is_alive())
         return render_template('writer.html')
     else:
         print(data)
