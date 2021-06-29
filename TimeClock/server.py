@@ -40,13 +40,15 @@ def index():
             print("Cancel: is readthread alive: ", readthread.is_alive())
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
+            render_template('index.html')
+            readthread.setFlag(True)
             readthread.run()
             # print("is readthread alive: ", readthread.is_alive())
             # print("is readthread stopped? ", readthread.stopped())
             # print("from POST, writeropen?: ", writethread.is_alive())
             # startReadThread(False)
             # print("is thread alive: ", thread.is_alive())
-            return render_template('index.html')
+            return 'success'
     else:
         print('Not in exit write')
         return render_template('index.html')

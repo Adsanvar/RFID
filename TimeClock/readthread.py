@@ -35,7 +35,6 @@ class Reader(threading.Thread):
             buzzer = 11
             GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
-            self.read_flag = True
             # while not self._stop_event.isSet():
             while self.read_flag:
                 print(self.read_flag)
