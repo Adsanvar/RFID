@@ -35,6 +35,7 @@ class Reader(threading.Thread):
             buzzer = 11
             GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
+            self.read_flag = True
             # while not self._stop_event.isSet():
             while self.read_flag:
                 print(self.read_flag)
@@ -97,6 +98,9 @@ class Reader(threading.Thread):
     def setBaseUrl(self, base_url):
         self.base_url = base_url
         print("base url set: ", self.base_url)
+    
+    def setFlag(val):
+        self.read_flag = val
 
         # try:
         #     GPIO.setwarnings(False)
