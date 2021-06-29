@@ -11,6 +11,7 @@ import json
 import os
 import requests
 from TimeClock.reader import Reader
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app, fullscreen=True)
