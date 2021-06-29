@@ -5,8 +5,8 @@ import threading
 import requests
 import json
 import pyautogui
-from RFID.TimeClock.utilities import getserial
-from RFID.TimeClock.server import loadOptions
+from rfid.TimeClock.utilities import getserial
+from rfid.TimeClock.server import loadOptions
 # rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
