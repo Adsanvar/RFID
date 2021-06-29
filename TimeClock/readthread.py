@@ -98,7 +98,7 @@ class Reader(threading.Thread):
         self.base_url = base_url
         print("base url set: ", self.base_url)
     
-    def setFlag(val):
+    def setFlag(self, val):
         self.read_flag = val
 
         # try:
