@@ -84,6 +84,7 @@ class Reader(threading.Thread):
                     GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(3)
                     GPIO.output(buzzer,GPIO.LOW)
+                    print(val)
                     if val == "Admin":
                         self.read_flag == False
         except:
