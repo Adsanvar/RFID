@@ -20,7 +20,7 @@ class Reader(threading.Thread):
 
     def stop(self):
         print('Read thread stropped')
-        GPIO.cleanup()
+        # GPIO.cleanup()
         self._stop_event.set()
 
     def stopped(self):
