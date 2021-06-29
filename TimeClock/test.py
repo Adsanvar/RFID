@@ -463,6 +463,7 @@ def setBaseUrl():
 def startWriteThread(val, id):
     global writeThread 
     writeThread = threading.Thread(target=write(val, id))
+    writeThread.start()
 
 def stopWriteThread():
     global writeThread
