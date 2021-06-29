@@ -400,7 +400,8 @@ def writer(data=None):
             if emp['id'] == emp_id:
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
-                startWriteThread(name, emp_id)
+                write(name, emp_id)
+                # startWriteThread(name, emp_id)
                 del data[data.index(emp)]
                 
         # print("is writeer active: ", writeThread.is_alive())
