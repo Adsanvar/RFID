@@ -1,4 +1,4 @@
-def getserial(self):
+def getserial():
     # Extract serial from cpuinfo file
     cpuserial = "0000000000000000"
     try:
