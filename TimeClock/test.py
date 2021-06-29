@@ -335,7 +335,8 @@ def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
             startReadThread(False)
-            print("is thread alive: ", writeThread.is_alive())
+            thread = getWriteThread()
+            # print("is thread alive: ", writeThread.is_alive())
             return render_template('index.html')
     else:
         print('Not in exit write')
@@ -400,8 +401,7 @@ def writer(data=None):
             if emp['id'] == emp_id:
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
-                write(name, emp_id)
-                # startWriteThread(name, emp_id)
+                startWriteThread(name, emp_id)
                 del data[data.index(emp)]
                 
         # print("is writeer active: ", writeThread.is_alive())
@@ -457,6 +457,10 @@ def setBaseUrl():
     global base_url
     base_url = window.get_current_url()
     print("base url: ", base_url)
+
+def getWriteThread():
+    global writeThread
+    return writeThread
 
 def startWriteThread(val, id):
     global writeThread 
