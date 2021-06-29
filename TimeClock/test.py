@@ -154,6 +154,7 @@ def validateFob(payload):
         else:
             return False
     except Exception as e:
+        print('Exception in /validateFob')
         print(e)
         return False
 
@@ -355,6 +356,7 @@ def clockin(data=None):
             # return jsonify(message='Success')
             return res.text
         except Exception as e:
+            print('Exception in /clockin')
             print(e)
             return jsonify(message='Error')
     else:
@@ -380,6 +382,7 @@ def getWrite(data=None):
             # print(res.text)
             return "success"
         except Exception as e:
+            print('Exception in getWrite')
             print(e)
             return jsonify(message='Error')
     else:
@@ -451,6 +454,7 @@ def writer(data=None):
                 # startReadThread()
                 return render_template('writer.html', data=data)
             except Exception as e:
+                print('Exception in GET of /Writer')
                 raise
         else:
             print("no data")
