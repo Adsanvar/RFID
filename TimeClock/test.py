@@ -336,7 +336,7 @@ def loadOptions(window, payload):
 def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
-            print("from POST Cancel, writeropen?: ", writethread.is_alive())
+            print("from POST, writeropen?: ", writethread.is_alive())
             startReadThread(False)
             # print("is thread alive: ", thread.is_alive())
             return render_template('index.html')
@@ -387,7 +387,7 @@ def loadWriter(data):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"getWrite", data=data, headers=headers)
     # print(json.dumps(res.text))
-    # global read_flag
+    global read_flag
     read_flag = False
     window.load_url(base_url+"writer/"+res.text)
 
@@ -456,28 +456,28 @@ def writer(data=None):
 
 
 def setBaseUrl():
-    # global base_url
+    global base_url
     base_url = window.get_current_url()
     print("base url: ", base_url)
 
 def getWriteThread():
-    # global writethread
+    global writethread
     return writethread
 
 def startWriteThread(val, id):
-    # global writethread 
+    global writethread 
     writethread = threading.Thread(target=write(val, id))
     print('with global variables startWriteThread(val, id), writethread start')
     writethread.start()
 
 def stopWriteThread():
-    # global writethread
+    global writethread
     print('with global variables stopWriteThread(), writethread stop')
     writethread._stop()
 
 def stopReadThread():
-    # global readthread
-    # global read_flag
+    global readthread
+    global read_flag
 
     read_flag = False
     print('with global variables stopReadThread(), read_flag== False, readthread stop')
