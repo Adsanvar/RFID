@@ -10,7 +10,7 @@ import threading
 import json
 import os
 import requests
-import TimeClock.reader as reader
+from reader import Reader
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
@@ -21,7 +21,7 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 base_url = ""
 api_url = "http://192.168.1.65:5005/"
 
-readthread = reader.Reader(window = window)
+readthread = Reader(window = window)
 
 
 # read_flag = True
