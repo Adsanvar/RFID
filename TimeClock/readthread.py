@@ -16,6 +16,7 @@ class Reader(threading.Thread):
         self._stop_event = threading.Event()
         self.window = window
         self.api_url = api_url
+        self.read_flag = True
         print("New Class created")    
 
     def stop(self):
@@ -34,7 +35,8 @@ class Reader(threading.Thread):
             buzzer = 11
             GPIO.setup(buzzer, GPIO.OUT)
             print("in run.")
-            while not self._stop_event.isSet():
+            # while not self._stop_event.isSet():
+            while self.read_flag:
                 print("Ready For Next")
                 id, text = reader.read()
                 print(id)
@@ -56,7 +58,7 @@ class Reader(threading.Thread):
                     payload = {'id': id, 'text': val}
                     loadOptions(self.window, payload, self.base_url, self.api_url)
                     # print(window.get_current_url())
-                    GPIO.output(buzzer,GPIO.HIGH)              
+                    GPIO.output(buzzer,GPIO.HIGH)     
                     time.sleep(.5)
                     GPIO.output(buzzer,GPIO.LOW)            
                     time.sleep(.5)
@@ -82,6 +84,8 @@ class Reader(threading.Thread):
                     GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(3)
                     GPIO.output(buzzer,GPIO.LOW)
+                    if text == "Admin":
+                        self.read_flag == False
         except:
             print('read exception')
             raise
