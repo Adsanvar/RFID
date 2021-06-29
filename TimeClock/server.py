@@ -23,7 +23,6 @@ api_url = "http://192.168.1.65:5005/"
 
 readthread = Reader(window = window)
 
-
 # read_flag = True
 
 # def read():
