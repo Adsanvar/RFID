@@ -10,7 +10,7 @@ import threading
 import json
 import os
 import requests
-from reader import ReadThread as Reader
+from TimeClock.Reader import Reader
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
