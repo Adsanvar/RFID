@@ -10,15 +10,14 @@ from utilities import getserial
 # rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
-
     def __init__(self, window, api_url):
         super().__init__()
         self.reader = SimpleMFRC522()
         self._stop_event = threading.Event()
         self.window = window
         self.api_url = api_url
-        print("New Class created")
-    
+        print("New Class created")    
+
     def stop(self):
         print('thread stropped')
         GPIO.cleanup()
@@ -87,7 +86,7 @@ class Reader(threading.Thread):
             print('read exception')
             raise
         finally:
-                GPIO.cleanup()
+            GPIO.cleanup()
     
     def setBaseUrl(self, base_url):
         self.base_url = base_url
