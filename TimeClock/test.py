@@ -21,7 +21,6 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 base_url = ""
 api_url = "http://192.168.1.65:5005/"
 read_flag = True
-writeThread = None
 
 def read():
     try:
@@ -89,6 +88,7 @@ def read():
             GPIO.cleanup()
 
 readthread = threading.Thread(target=read)
+writethread = threading.Thread()
 
 def write(val, employeeId):
     try:
@@ -99,6 +99,7 @@ def write(val, employeeId):
             GPIO.cleanup()
             readerx = SimpleMFRC522()
             print("Scan To Read, readeropen?: ", readthread.is_alive())
+            print("Scan To Read, writeropen?: ", writethread.is_alive())
             id, text = readerx.read()
             GPIO.cleanup()        
             writerx = SimpleMFRC522()
@@ -334,9 +335,9 @@ def loadOptions(window, payload):
 def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
+            print("Scan To Read, writeropen?: ", writethread.is_alive())
             startReadThread(False)
-            thread = getWriteThread()
-            print("is thread alive: ", thread.is_alive())
+            # print("is thread alive: ", thread.is_alive())
             return render_template('index.html')
     else:
         print('Not in exit write')
@@ -459,17 +460,17 @@ def setBaseUrl():
     print("base url: ", base_url)
 
 def getWriteThread():
-    global writeThread
-    return writeThread
+    global writethread
+    return writethread
 
 def startWriteThread(val, id):
-    global writeThread 
-    writeThread = threading.Thread(target=write(val, id))
-    writeThread.start()
+    global writethread 
+    writethread = threading.Thread(target=write(val, id))
+    writethread.start()
 
 def stopWriteThread():
-    global writeThread
-    writeThread._stop()
+    global writethread
+    writethread._stop()
 
 def stopReadThread():
     global readthread
