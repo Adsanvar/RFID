@@ -6,7 +6,7 @@ import requests
 import json
 import pyautogui
 from modules.utilities import getserial
-from TimeClock.server import loadOptions
+from TimeClock.test import loadOptions
 # rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
