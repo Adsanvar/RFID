@@ -10,8 +10,7 @@ import threading
 import json
 import os
 import requests
-print(os.getcwd())
-print(sys.path())
+sys.path.append(".")
 from reader import Reader
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
