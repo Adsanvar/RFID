@@ -467,10 +467,12 @@ def getWriteThread():
 def startWriteThread(val, id):
     global writethread 
     writethread = threading.Thread(target=write(val, id))
+    print('with global variables startWriteThread(val, id), writethread start')
     writethread.start()
 
 def stopWriteThread():
     global writethread
+    print('with global variables stopWriteThread(), writethread stop')
     writethread._stop()
 
 def stopReadThread():
@@ -478,6 +480,7 @@ def stopReadThread():
     global read_flag
 
     read_flag = False
+    print('with global variables stopReadThread(), read_flag== False, readthread stop')
     readthread._stop()
 
 def startReadThread(start):
@@ -487,10 +490,12 @@ def startReadThread(start):
     global read_flag
     if start:
     # readthread.daemon = True
+        print('with global variables from start, readthread start')
         readthread.start()
     else:
         read_flag = True
         readthread = threading.Thread(target=read)
+        print('with global variables from not start, read_flag== True, readthread start')
         readthread.start()
         
 
