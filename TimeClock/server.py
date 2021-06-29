@@ -39,7 +39,7 @@ def index():
         if 'exitWrite' in request.form:
             print("is readthread alive: ", readthread.is_alive())
             print("is readthread stopped? ", readthread.stopped())
-            readthread.resume()
+            readthread.run()
             print("is readthread alive: ", readthread.is_alive())
             print("is readthread stopped? ", readthread.stopped())
             # print("from POST, writeropen?: ", writethread.is_alive())
