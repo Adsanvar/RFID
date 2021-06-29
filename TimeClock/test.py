@@ -334,9 +334,6 @@ def loadOptions(window, payload):
 def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
-            global writeThread
-            if writeThread.is_alive():
-                writeThread._stop()
             startReadThread(False)
             print("is thread alive: ", readthread.is_alive())
             return render_template('index.html')
