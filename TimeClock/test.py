@@ -92,7 +92,8 @@ writethread = threading.Thread()
 
 def write(val, employeeId):
     try:
-        # global readthread
+        global readthread
+        global writethread
         if readthread.is_alive():
             stopReadThread()
         else:
@@ -370,6 +371,7 @@ def getWrite(data=None):
             # global read_flag
             # read_flag = False
             # window.load_url(base_url+"writer/"+res.text)
+            global readthread
             loadWriter(data)
             if readthread.is_alive():
                 stopReadThread()
