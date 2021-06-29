@@ -384,6 +384,7 @@ def getWrite(data=None):
         except Exception as e:
             print('Exception in getWrite')
             print(e)
+            raise
             return jsonify(message='Error')
     else:
         return jsonify(message='Error No Data')
