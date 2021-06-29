@@ -135,6 +135,8 @@ def writer(data=None):
         if data != None:
             print("in data not empty")
             try:
+                print("Cancel: is readthread alive: ", readthread.is_alive())
+                print("Cancel: is readthread stopped? ", readthread.stopped())
                 data = json.loads(data)
                 print(data)
                 # print("isAlive(): ", readthread.isAlive())
