@@ -400,14 +400,13 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
                 del data[data.index(emp)]
-                rem = data
-                # startWriteThread(name, emp_id)
+                startWriteThread(name, emp_id)
                 
         # print("is writeer active: ", writeThread.is_alive())
-        if not rem:
+        if not data:
             return render_template('writer.html')
         else:
-            window.load_url(base_url+"writer/"+json.dumps(rem))
+            window.load_url(base_url+"writer/"+json.dumps(data))
             return "success"
     else:
         print(data)
