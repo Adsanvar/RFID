@@ -37,6 +37,7 @@ class Reader(threading.Thread):
             print("in run.")
             # while not self._stop_event.isSet():
             while self.read_flag:
+                print(self.read_flag)
                 print("Ready For Next")
                 id, text = reader.read()
                 print(id)
@@ -88,6 +89,10 @@ class Reader(threading.Thread):
                     if val == "Admin":
                         print('in val == Admin')
                         self.read_flag == False
+                
+                if self.read_flag == False:
+                    print("in false flag")
+                    break
         except:
             print('read exception')
             raise
