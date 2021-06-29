@@ -126,15 +126,11 @@ def writer(data=None):
             window.load_url(base_url+"writer/"+json.dumps(data))
             return "success"
     else:
-        print(data)
         if data != None:
             print("in data not empty")
             try:
-
                 data = json.loads(data)
                 print(data)
-                for d in data:
-                    print(d['firstname'])
                 # print("isAlive(): ", readthread.isAlive())
                 # print("is_alive(): ", readthread.is_alive())
                 # global read_flag
