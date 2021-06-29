@@ -40,7 +40,7 @@ def index():
             print("Cancel: is readthread alive: ", readthread.is_alive())
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
-            # readthread.run()
+            readthread.start()
             # print("is readthread alive: ", readthread.is_alive())
             # print("is readthread stopped? ", readthread.stopped())
             # print("from POST, writeropen?: ", writethread.is_alive())
