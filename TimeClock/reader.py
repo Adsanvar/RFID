@@ -5,8 +5,8 @@ import threading
 import requests
 import json
 import pyautogui
-from .utilities import getserial
-from .server import loadOptions
+import TimeClock.utilities as utils
+import TimeClock.server as server
 # rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
@@ -54,7 +54,7 @@ class Reader(threading.Thread):
                 if val == '' or val == None:
                     val = "Error"
                     payload = {'id': id, 'text': val}
-                    loadOptions(self.window, payload)
+                    server.loadOptions(self.window, payload)
                     # print(window.get_current_url())
                     GPIO.output(buzzer,GPIO.HIGH)              
                     time.sleep(.5)
@@ -76,8 +76,8 @@ class Reader(threading.Thread):
                     time.sleep(.5)
                     GPIO.output(buzzer,GPIO.LOW)
                 else:
-                    payload = {'id': id, 'text': val, 'device': getserial()}
-                    loadOptions(self.window, payload)
+                    payload = {'id': id, 'text': val, 'device': utils.getserial()}
+                    server.loadOptions(self.window, payload)
                     # print(window.get_current_url())
                     GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(3)
