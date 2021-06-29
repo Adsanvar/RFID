@@ -10,8 +10,7 @@ import threading
 import json
 import os
 import requests
-import reader 
-
+from . import reader
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
 window = webview.create_window("TimeClock", app, fullscreen=True)
