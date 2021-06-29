@@ -97,9 +97,7 @@ class Reader(threading.Thread):
     def setBaseUrl(self, base_url):
         self.base_url = base_url
         print("base url set: ", self.base_url)
-    
-    def setFlag(self, val):
-        self.read_flag = val
+
 
         # try:
         #     GPIO.setwarnings(False)

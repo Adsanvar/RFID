@@ -40,7 +40,7 @@ def index():
             print("Cancel: is readthread alive: ", readthread.is_alive())
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
-            render_template('index.html')
+            window.load_url(base_url)
             readthread.setFlag(True)
             readthread.run()
             # print("is readthread alive: ", readthread.is_alive())
@@ -135,8 +135,8 @@ def writer(data=None):
         if data != None:
             print("in data not empty")
             try:
-                print("Cancel: is readthread alive: ", readthread.is_alive())
-                print("Cancel: is readthread stopped? ", readthread.stopped())
+                print("Writer: is readthread alive: ", readthread.is_alive())
+                print("Writer: is readthread stopped? ", readthread.stopped())
                 data = json.loads(data)
                 print(data)
                 # print("isAlive(): ", readthread.isAlive())
