@@ -78,9 +78,11 @@ def getWrite(data=None):
             # if readthread.is_alive():
             #     stopReadThread()
             print("is readthread alive? ", readthread.is_alive())
+            print("is readthread stopped? ", readthread.stopped())
             if not readthread.stopped():
                 readthread.stop()
             print("is readthread alive? ", readthread.is_alive())
+            print("is readthread stopped? ", readthread.stopped())
             # readthread._stop()
             # print(res.text)
             return "success"
