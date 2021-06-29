@@ -94,8 +94,7 @@ def write(val, employeeId):
     try:
         GPIO.cleanup()
         readerx = SimpleMFRC522()
-        flash("Scan To Read", 'success')
-        print("Scan To Read")
+        print("Scan To Read, readeropen?: ", readthread.is_alive())
         id, text = readerx.read()
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
