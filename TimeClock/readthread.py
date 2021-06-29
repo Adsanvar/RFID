@@ -88,11 +88,11 @@ class Reader(threading.Thread):
                     print(val)
                     if val == "Admin":
                         print('in val == Admin')
-                        self.read_flag == False
+                        self.read_flag = False
                 
-                if self.read_flag == False:
-                    print("in false flag")
-                    break
+                # if self.read_flag == False:
+                #     print("in false flag")
+                #     break
         except:
             print('read exception')
             raise
