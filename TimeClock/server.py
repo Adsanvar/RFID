@@ -21,9 +21,8 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 base_url = ""
 api_url = "http://192.168.1.65:5005/"
 
-GPIO.cleanup()
-
 readthread = Reader(window = window, api_url = api_url)
+readthread.daemon = False
 
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
