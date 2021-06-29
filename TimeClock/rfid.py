@@ -9,7 +9,7 @@ from utilities import getserial
 from server import loadOptions
 # rf = Blueprint('rfid', __name__)
 
-class Reader(threading.Thread):
+class RFID(threading.Thread):
     def __init__(self, window):
         super().__init__()
         self.reader = SimpleMFRC522()
