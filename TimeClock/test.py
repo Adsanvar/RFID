@@ -335,7 +335,7 @@ def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
             startReadThread(False)
-            print("is thread alive: ", readthread.is_alive())
+            print("is thread alive: ", writeThread.is_alive())
             return render_template('index.html')
     else:
         print('Not in exit write')
