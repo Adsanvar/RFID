@@ -92,26 +92,29 @@ readthread = threading.Thread(target=read)
 
 def write(val, employeeId):
     try:
-        GPIO.cleanup()
-        readerx = SimpleMFRC522()
-        print("Scan To Read, readeropen?: ", readthread.is_alive())
-        id, text = readerx.read()
-        GPIO.cleanup()        
-        writerx = SimpleMFRC522()
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        buzzer = 11
-        GPIO.setup(buzzer, GPIO.OUT)
-        GPIO.output(buzzer,GPIO.HIGH)
-        flash("Place ID to Write", 'success')
-        print("Now place your tag to write")
-        writerx.write(val)
-        GPIO.output(buzzer,GPIO.LOW)
-        print("Written")
-        flash("Written", 'success')
-        payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
-        sendWriteRequest(payload)
-
+        global readthread
+        if readthread.is_alive():
+            stopReadThread()
+        else:
+            GPIO.cleanup()
+            readerx = SimpleMFRC522()
+            print("Scan To Read, readeropen?: ", readthread.is_alive())
+            id, text = readerx.read()
+            GPIO.cleanup()        
+            writerx = SimpleMFRC522()
+            GPIO.setwarnings(False)
+            GPIO.setmode(GPIO.BOARD)
+            buzzer = 11
+            GPIO.setup(buzzer, GPIO.OUT)
+            GPIO.output(buzzer,GPIO.HIGH)
+            flash("Place ID to Write", 'success')
+            print("Now place your tag to write")
+            writerx.write(val)
+            GPIO.output(buzzer,GPIO.LOW)
+            print("Written")
+            flash("Written", 'success')
+            payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
+            sendWriteRequest(payload)
     except:
         print('write exception')
         raise
@@ -331,7 +334,9 @@ def loadOptions(window, payload):
 def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
-            print('in exit write')
+            global writeThread
+            if writeThread.is_alive():
+                writeThread._stop()
             startReadThread(False)
             print("is thread alive: ", readthread.is_alive())
             return render_template('index.html')
