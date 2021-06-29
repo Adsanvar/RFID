@@ -23,8 +23,8 @@ class Reader(threading.Thread):
         # GPIO.cleanup()
         self._stop_event.set()
 
-    # def resume(self):
-    #     self._stop_event.clear()
+    def resume(self):
+        self._stop_event.clear()
 
     def stopped(self):
         return self._stop_event.is_set()
