@@ -11,6 +11,7 @@ import json
 import os
 import requests
 print(os.getcwd())
+print(sys.path())
 from reader import Reader
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
