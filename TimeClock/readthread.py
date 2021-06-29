@@ -5,20 +5,20 @@ import threading
 import requests
 import json
 import pyautogui
-# from server import loadOptions
-# from utilities import getserial
+from gui import loadOptions
+from utilities import getserial
 # rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
 
-    def __init__(self, window):
+    def __init__(self, window, api_url):
         super().__init__()
         self.reader = SimpleMFRC522()
         self._stop_event = threading.Event()
         self.window = window
+        self.api_url = api_url
         print("New Class created")
     
-
     def stop(self):
         print('thread stropped')
         GPIO.cleanup()
@@ -55,7 +55,7 @@ class Reader(threading.Thread):
                 if val == '' or val == None:
                     val = "Error"
                     payload = {'id': id, 'text': val}
-                    loadOptions(self.window, payload)
+                    loadOptions(self.window, payload, self.base_url, self.api_url)
                     # print(window.get_current_url())
                     GPIO.output(buzzer,GPIO.HIGH)              
                     time.sleep(.5)
@@ -78,7 +78,7 @@ class Reader(threading.Thread):
                     GPIO.output(buzzer,GPIO.LOW)
                 else:
                     payload = {'id': id, 'text': val, 'device': getserial()}
-                    loadOptions(self.window, payload)
+                    loadOptions(self.window, payload, self.base_url, self.api_url)
                     # print(window.get_current_url())
                     GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(3)
@@ -88,7 +88,10 @@ class Reader(threading.Thread):
             raise
         finally:
                 GPIO.cleanup()
-
+    
+    def setBaseUrl(self, base_url):
+        self.base_url = base_url
+        print("base url set: ", self.base_url)
 
         # try:
         #     GPIO.setwarnings(False)
