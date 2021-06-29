@@ -22,7 +22,7 @@ base_url = ""
 api_url = "http://192.168.1.65:5005/"
 
 readthread = Reader(window = window, api_url = api_url)
-readthread.daemon = False
+readthread.daemon = True
 
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
@@ -37,8 +37,8 @@ def sendWriteRequest(payload):
 def index():
     if request.method == "POST":
         if 'exitWrite' in request.form:
-            print("is readthread alive: ", readthread.is_alive())
-            print("is readthread stopped? ", readthread.stopped())
+            print("Cancel: is readthread alive: ", readthread.is_alive())
+            print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
             # readthread.run()
             # print("is readthread alive: ", readthread.is_alive())
@@ -83,12 +83,12 @@ def getWrite(data=None):
             loadWriter(data)
             # if readthread.is_alive():
             #     stopReadThread()
-            print("is readthread alive? ", readthread.is_alive())
-            print("is readthread stopped? ", readthread.stopped())
-            if not readthread.stopped():
-                readthread.stop()
-            print("is readthread alive? ", readthread.is_alive())
-            print("is readthread stopped? ", readthread.stopped())
+            print("Get Write: is readthread alive? ", readthread.is_alive())
+            print("Get Write: is readthread stopped? ", readthread.stopped())
+            # if not readthread.stopped():
+            #     readthread.stop()
+            # print("is readthread alive? ", readthread.is_alive())
+            # print("is readthread stopped? ", readthread.stopped())
             # readthread._stop()
             # print(res.text)
             return "success"
