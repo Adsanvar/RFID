@@ -404,8 +404,9 @@ def writer(data=None):
                 # startWriteThread(name, emp_id)
                 
         # print("is writeer active: ", writeThread.is_alive())
-
-        return render_template('writer.html', data=rem)
+        window.load_url(base_url+"writer/"+json.dump(rem))
+        # return render_template('writer.html', data=rem)
+        return "success"
     else:
         print(data)
         if data != None:
