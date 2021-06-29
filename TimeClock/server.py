@@ -22,7 +22,7 @@ base_url = ""
 api_url = "http://192.168.1.65:5005/"
 
 readthread = Reader(window = window, api_url = api_url)
-readthread.daemon = True
+readthread.daemon = False
 
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
@@ -39,10 +39,10 @@ def index():
         if 'exitWrite' in request.form:
             print("is readthread alive: ", readthread.is_alive())
             print("is readthread stopped? ", readthread.stopped())
-            readthread.resume()
-            readthread.run()
-            print("is readthread alive: ", readthread.is_alive())
-            print("is readthread stopped? ", readthread.stopped())
+            # readthread.resume()
+            # readthread.run()
+            # print("is readthread alive: ", readthread.is_alive())
+            # print("is readthread stopped? ", readthread.stopped())
             # print("from POST, writeropen?: ", writethread.is_alive())
             # startReadThread(False)
             # print("is thread alive: ", thread.is_alive())
