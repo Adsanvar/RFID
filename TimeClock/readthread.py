@@ -19,7 +19,7 @@ class Reader(threading.Thread):
         print("New Class created")    
 
     def stop(self):
-        print('thread stropped')
+        print('Read thread stropped')
         GPIO.cleanup()
         self._stop_event.set()
 
