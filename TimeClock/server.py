@@ -121,6 +121,7 @@ def sendWriteRequest(payload):
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
     val = json.loads(res.text)
     val = val['message']
+    print(val)
     if val == 'success':
         # flash(val, val) # 'success', 'success'
         # return redirect(url_for('getWrite', data = payload))
