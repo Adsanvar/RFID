@@ -24,6 +24,7 @@ api_url = "http://192.168.1.65:5005/"
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 
+
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
@@ -51,6 +52,7 @@ def index():
             return 'success'
     else:
         print('Not in exit write')
+        print("Cancel: is readthread alive: ", readthread.is_alive())
         return render_template('index.html')
 
 @app.route('/clockin')
