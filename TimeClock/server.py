@@ -42,7 +42,7 @@ def index():
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
             window.load_url(base_url)
-            readthread.setFlag(True)
+            readthread.read_flag = True
             readthread.run()
             # print("is readthread alive: ", readthread.is_alive())
             # print("is readthread stopped? ", readthread.stopped())
