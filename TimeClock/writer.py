@@ -54,7 +54,7 @@ class Writer(threading.Thread):
         finally:
                 GPIO.cleanup()
     
-    def setWrite(self, val, empId):
+    def setWriter(self, val, empId):
         self.val = val
         self.employee_id = empId
         
