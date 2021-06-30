@@ -146,7 +146,8 @@ def writer(data=None):
                 wr.join()
         #         print(threading.current_thread().name)
         #         del data[data.index(emp)]
-        return render_template('writer.html')              
+        # return render_template('writer.html')  
+        return jsonify(message="success")            
         # # print("is writeer active: ", writeThread.is_alive())
         # if not data:
         #     return render_template('writer.html')
@@ -203,7 +204,6 @@ def write(val, employeeId):
         id, text = readerx.read()
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
-        flash("Place ID to Write", 'success')
         print("Now place your tag to write")
         writerx.write(val)
         # GPIO.setwarnings(False)
@@ -214,7 +214,6 @@ def write(val, employeeId):
         # time.sleep(2)
         # GPIO.output(buzzer,GPIO.LOW)
         print("Written")
-        flash("Written", 'success')
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
         sendWriteRequest(payload)
     except:
