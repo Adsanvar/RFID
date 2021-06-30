@@ -118,9 +118,13 @@ def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
     val = json.loads(res.text)
-    if val['message'] == 'success':
-        print('success')
-        flash(res.text, 'success')
+    val = val['message']
+    if val == 'success':
+        flash(val, val) # 'success', 'success'
+        return redirect(url_for('getWrite', data = payload))
+    else:
+        flash(val, val) # 'error', 'error'
+
 
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
@@ -142,7 +146,7 @@ def writer(data=None):
                 wr.join()
         #         print(threading.current_thread().name)
         #         del data[data.index(emp)]
-                
+        return render_template('writer.html')              
         # # print("is writeer active: ", writeThread.is_alive())
         # if not data:
         #     return render_template('writer.html')
