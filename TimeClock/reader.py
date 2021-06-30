@@ -7,7 +7,6 @@ import json
 import pyautogui
 from gui import loadOptions
 from utilities import getserial
-# rf = Blueprint('rfid', __name__)
 
 class Reader(threading.Thread):
     def __init__(self, window, api_url):
@@ -102,92 +101,3 @@ class Reader(threading.Thread):
     def setBaseUrl(self, base_url):
         self.base_url = base_url
         print("base url set: ", self.base_url)
-
-
-        # try:
-        #     GPIO.setwarnings(False)
-        #     GPIO.setmode(GPIO.BOARD)
-        #     buzzer = 11
-        #     GPIO.setup(buzzer, GPIO.OUT)
-        #     print("in run.")
-        #     while not self._stop_event.isSet():
-        #         print("Ready For Next")
-        #         id, text = self.reader.read()
-        #         print(id)
-        #         # print(text)
-        #         print(repr(text))
-        #         val = ""
-        #         if text == None or text  == "":
-        #             val = "Error"
-        #             GPIO.output(buzzer,GPIO.HIGH)              
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.LOW)            
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.HIGH)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.LOW)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.HIGH)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.LOW)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.HIGH)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.LOW)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.HIGH)
-        #             time.sleep(.5)
-        #             GPIO.output(buzzer,GPIO.LOW)
-        #         else:
-        #             print('\x00' in text)
-        #             if '\x00' in text:
-        #                 val = text.replace('\x00', '')
-        #             else:
-        #                 val = text.rstrip(' ')
-        #             payload = {'id': id, 'text': val}
-        #             self.sendPost(payload)
-        #             GPIO.output(buzzer,GPIO.HIGH)              
-        #             time.sleep(5)
-        #             GPIO.output(buzzer,GPIO.LOW)
-        # except:
-        #     raise
-        # finally:
-        #         GPIO.cleanup()
-
-    # def write(self, val):
-    #     try:
-    #         print("Place your tag to write")
-    #         self.reader.write(val)
-    #         print("Written")
-    #     except:
-    #         raise
-    #     finally:
-    #         GPIO.cleanup()
-
-    # def sendPost(self, payload):
-    #     try:
-    #         # url = "http://127.0.0.1:5005/read"
-    #         # # url ="http://192.168.1.65:5005/read"
-    #         # headers= {'content-type': 'application/json'}
-    #         # requests.post(url, data=json.dumps(payload), headers=headers)
-    #         # requests.put(url, data=json.dumps(payload), headers=headers)
-    #         # read(payload)
-    #         print(payload)
-    #     except Exception as e:
-    #         raise
-    
-# @rf.route('/read<string:payload>')
-# def read(payload):
-#     # print(request.method)
-#     # print(request.json['text'])
-#     # if request.json['text'] == '' or request.json == None:
-#     #     print('error')
-#     #     flash("Error En Deteccion", 'error')
-#     # else:
-#     #     print(request.json['text'])
-#     #     flash(request.json['text'], 'success')
-
-#     # print("RENDER?")
-#     # return redirect(url_for('home.userClock', val = request.json['text']))
-#     print(payload)
-#     return render_template('index.html', read = "HELLO")
