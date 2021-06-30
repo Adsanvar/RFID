@@ -90,7 +90,7 @@ class Reader(threading.Thread):
                     GPIO.output(buzzer,GPIO.LOW)
                     if val == "Admin":
                         # self.read_flag = False
-                        stop()
+                        self._stop_event.set()
 
         except:
             print('read exception')
