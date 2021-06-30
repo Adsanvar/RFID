@@ -283,6 +283,8 @@ input[type=checkbox]:checked + label:after{
 
 .nocursor { cursor:none; }
 
+
+
 .flex-col{
   display: flex;
   flex-direction: column;

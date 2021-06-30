@@ -117,8 +117,10 @@ def loadWriter(data):
 def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
+    print(json.dumps(res.text))
+    print(res.json())
+    print(res.text['message'])
     flash(res.text, 'success')
-    print(threading.current_thread().name)
 
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
@@ -138,15 +140,15 @@ def writer(data=None):
                 wr.start()
                 print("is write thread alive? ", wr.is_alive())
                 wr.join()
-                print(threading.current_thread().name)
-                del data[data.index(emp)]
+        #         print(threading.current_thread().name)
+        #         del data[data.index(emp)]
                 
-        # print("is writeer active: ", writeThread.is_alive())
-        if not data:
-            return render_template('writer.html')
-        else:
-            window.load_url(base_url+"writer/"+json.dumps(data))
-            return "success"
+        # # print("is writeer active: ", writeThread.is_alive())
+        # if not data:
+        #     return render_template('writer.html')
+        # else:
+        #     window.load_url(base_url+"writer/"+json.dumps(data))
+        #     return "success"
     else:
         if data != None:
             print("in data not empty")
