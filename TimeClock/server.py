@@ -25,6 +25,8 @@ api_url = "http://192.168.1.65:5005/"
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 
+success_flag = False
+
 # def start_server():
 #     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
 #     app.run(host='192.168.1.79', port=5000)
@@ -120,10 +122,12 @@ def sendWriteRequest(payload):
     val = json.loads(res.text)
     val = val['message']
     if val == 'success':
-        flash(val, val) # 'success', 'success'
-        return redirect(url_for('getWrite', data = payload))
+        # flash(val, val) # 'success', 'success'
+        # return redirect(url_for('getWrite', data = payload))
+        success_flag = True
     else:
-        flash(val, val) # 'error', 'error'
+        # flash(val, val) # 'error', 'error'
+        success_flag = False
 
 
 @app.route('/writer',methods=['GET', 'POST'])
@@ -145,15 +149,18 @@ def writer(data=None):
                 print("is write thread alive? ", wr.is_alive())
                 wr.join()
         #         print(threading.current_thread().name)
-        #         del data[data.index(emp)]
-        # return render_template('writer.html')  
-        return jsonify(message="success")            
-        # # print("is writeer active: ", writeThread.is_alive())
-        # if not data:
-        #     return render_template('writer.html')
-        # else:
-        #     window.load_url(base_url+"writer/"+json.dumps(data))
-        #     return "success"
+                del data[data.index(emp)]
+              
+        # print("is writeer active: ", writeThread.is_alive())
+        if success_flag:
+            if not data:
+                return render_template('writer.html')
+            else:
+                window.load_url(base_url+"writer/"+json.dumps(data))
+                return "success"
+        else:
+            flash('error writing key', 'error')
+            return render_template('writer.html')
     else:
         if data != None:
             print("in data not empty")
