@@ -27,6 +27,7 @@ api_url = "http://192.168.1.65:5005/"
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 writethread = Writer(api_url=api_url)
+writethread.daemon = True
 
 # success_flag = False
 
