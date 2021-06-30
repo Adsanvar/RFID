@@ -148,10 +148,16 @@ def writer(data=None):
                 writethread.setWriter(name, emp_id)
                 print("writer alive? ", writethread.is_alive())
                 if writethread.is_alive():
+                    print('writer: in run')
                     writethread.run()
                 else:
+                    print('writer: in start')
                     writethread.start()
-
+                
+                if writethread.is_alive():
+                    print('writer: in join')
+                    writethread.join()
+                
                 del data[data.index(emp)]
               
         # print("is writeer active: ", writeThread.is_alive())
