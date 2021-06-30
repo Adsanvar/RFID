@@ -118,6 +118,7 @@ def sendWriteRequest(payload):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
     flash(res.text, 'success')
+    print(threading.current_thread)
 
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
