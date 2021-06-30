@@ -145,11 +145,12 @@ def writer(data=None):
                 # wr.join()
                 #print(threading.current_thread().name)
                 writethread.setWriter(name, emp_id)
+                print("writer alive? ", writethread.is_alive())
                 if writethread.is_alive():
                     writethread.run()
                 else:
                     writethread.start()
-                    
+
                 del data[data.index(emp)]
               
         # print("is writeer active: ", writeThread.is_alive())
