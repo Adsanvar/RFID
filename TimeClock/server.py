@@ -189,6 +189,7 @@ def writer(data=None):
 
 def write(val, employeeId):
     try:
+        print(threading.current_thread().name)
         # GPIO.cleanup()
         print('place to read')
         readerx = SimpleMFRC522()
