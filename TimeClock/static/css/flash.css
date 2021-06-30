@@ -9,3 +9,9 @@
   color: red;
   text-align: center;
 }
+
+.alert-warning
+{
+  color:yellow;
+  text-align: center;
+}
