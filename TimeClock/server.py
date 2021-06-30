@@ -41,8 +41,9 @@ def index():
             print("Cancel: is readthread alive: ", readthread.is_alive())
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
-            window.load_url(base_url)
+            # window.load_url(base_url)
             # readthread.read_flag = True
+            readthread.resume()
             readthread.run()
             # print("is readthread alive: ", readthread.is_alive())
             # print("is readthread stopped? ", readthread.stopped())
@@ -75,7 +76,7 @@ def clockin(data=None):
 def resumeRead():
     readthread.resume()
     readthread.run()
-    return 'success'
+    return jsonify(message='success')
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
