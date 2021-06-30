@@ -41,7 +41,7 @@ def index():
             print("Cancel: is readthread alive: ", readthread.is_alive())
             print("Cancel: is readthread stopped? ", readthread.stopped())
             # readthread.resume()
-            # window.load_url(base_url)
+            window.load_url(base_url)
             # readthread.read_flag = True
             readthread.resume()
             readthread.run()
@@ -50,7 +50,7 @@ def index():
             # print("from POST, writeropen?: ", writethread.is_alive())
             # startReadThread(False)
             # print("is thread alive: ", thread.is_alive())
-            return render_template('index.html')
+            return jsonify(message='loads window and not renders')
     else:
         print('Not in exit write')
         print("Cancel: is readthread alive: ", readthread.is_alive())
