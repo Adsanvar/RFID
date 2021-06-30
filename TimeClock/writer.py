@@ -56,5 +56,5 @@ class Writer(threading.Thread):
     
     def setWriter(self, val, empId):
         self.val = val
-        self.employee_id = empId
+        self.employeeId = empId
         
