@@ -74,6 +74,8 @@ def clockin(data=None):
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
     readthread.resume()
+    readthread.run()
+    return 'success'
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
