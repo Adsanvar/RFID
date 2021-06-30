@@ -71,6 +71,10 @@ def clockin(data=None):
     else:
         return jsonify(message='Error No Data')
 
+@app.route('/resumeRead', methods=['GET'])
+def resumeRead():
+    readthread.resume()
+
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
 def getWrite(data=None):

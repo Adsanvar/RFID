@@ -58,8 +58,7 @@ def loadOptions(window, payload, base_url, api_url):
             showCancelButton: true,
             cancelButtonText: 'Cancel',
             width: 600,
-            timer: 60000,
-            closeOnCancel: true,
+            allowOutsideClick: false,
             html:
                 '<hr/>',
             preConfirm: () => {
@@ -77,10 +76,25 @@ def loadOptions(window, payload, base_url, api_url):
                     )
                 })
             },
-            allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),
+            /*allowOutsideClick: () => !swalWithBootstrapButtons.isLoading(),*/
             }).then((result) => {
                 /*Might Not Need Code Here*/
-            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url)
+                if(result.dismiss === Swal.DismissReason.cancel)
+                {
+                    let url = '%sresumeRead'
+                    return fetch(url).then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                            )
+                    })
+                }
+            })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 
             window.evaluate_js(tmp)
         else:
