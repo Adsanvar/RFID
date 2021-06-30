@@ -11,6 +11,7 @@ import json
 import os
 import requests
 from reader import Reader
+from utilities import getserial
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
@@ -23,12 +24,6 @@ api_url = "http://192.168.1.65:5005/"
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
-
-
-def sendWriteRequest(payload):
-    headers= {'content-type': 'application/json'}
-    res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
-    flash(res.text, 'success')
 
 # def start_server():
 #     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
@@ -119,6 +114,11 @@ def loadWriter(data):
     # read_flag = False
     window.load_url(base_url+"writer/"+res.text)
 
+def sendWriteRequest(payload):
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
+    flash(res.text, 'success')
+
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
@@ -132,6 +132,9 @@ def writer(data=None):
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
                 # startWriteThread(name, emp_id)
+                wr = threading.Thread(target = write(name, emp['id']))
+                wr.start()
+                print("is write thread alive? ", wr.is_alive())
                 del data[data.index(emp)]
                 
         # print("is writeer active: ", writeThread.is_alive())
@@ -181,6 +184,32 @@ def writer(data=None):
             print("no data")
             return jsonify(message='Error No Data')
 
+def write(val, employeeId):
+    try:
+        # GPIO.cleanup()
+        readerx = SimpleMFRC522()
+        id, text = readerx.read()
+        GPIO.cleanup()        
+        writerx = SimpleMFRC522()
+        flash("Place ID to Write", 'success')
+        print("Now place your tag to write")
+        writerx.write(val)
+        # GPIO.setwarnings(False)
+        # GPIO.setmode(GPIO.BOARD)
+        # buzzer = 11
+        # GPIO.setup(buzzer, GPIO.OUT)
+        # GPIO.output(buzzer,GPIO.HIGH)
+        # time.sleep(2)
+        # GPIO.output(buzzer,GPIO.LOW)
+        print("Written")
+        flash("Written", 'success')
+        payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
+        sendWriteRequest(payload)
+    except:
+        print('write exception')
+        raise
+    finally:
+            GPIO.cleanup()
 
 def setBaseUrl():
     global base_url
