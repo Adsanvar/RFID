@@ -156,6 +156,7 @@ def writer(data=None):
         # print("is writeer active: ", writeThread.is_alive())
         if success_flag:
             if not data:
+                flash('There are no more employees to write', 'warning')
                 return render_template('writer.html')
             else:
                 window.load_url(base_url+"writer/"+json.dumps(data))
