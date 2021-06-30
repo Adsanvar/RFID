@@ -45,8 +45,8 @@ def index():
             # readthread.read_flag = True
             print("Cancel: is writethread alive: ", writethread.is_alive())
             print("Cancel: is writethread stopped? ", writethread.stopped())
-            if writethread.is_alive():
-                writethread.stop()
+            
+            writethread.stop()
 
             readthread.resume()
             readthread.run()
@@ -145,7 +145,7 @@ def writer(data=None):
                 # wr.join()
                 #print(threading.current_thread().name)
                 writethread.setWriter(name, emp_id)
-                print("writer alive? ", writethread.is_alive())
+                print("writer: alive? ", writethread.is_alive())
                 # if writethread.is_alive():
                 #     print('writer: in run')
                 #     writethread.run()
@@ -155,10 +155,6 @@ def writer(data=None):
 
                 print('writer: running')
                 writethread.run()
-                
-                if writethread.is_alive():
-                    print('writer: in join')
-                    writethread.join()
                 
                 del data[data.index(emp)]
               

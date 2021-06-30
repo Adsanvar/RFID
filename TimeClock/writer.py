@@ -28,31 +28,32 @@ class Writer(threading.Thread):
         return self._stop_event.is_set()
 
     def run(self):
-        try:
-            print(threading.current_thread().name)
-            # GPIO.cleanup()
-            print('place to read')
-            readerx = SimpleMFRC522()
-            id, text = readerx.read()
-            GPIO.cleanup()        
-            writerx = SimpleMFRC522()
-            print("Now place your tag to write")
-            writerx.write(self.val)
-            # GPIO.setwarnings(False)
-            # GPIO.setmode(GPIO.BOARD)
-            # buzzer = 11
-            # GPIO.setup(buzzer, GPIO.OUT)
-            # GPIO.output(buzzer,GPIO.HIGH)
-            # time.sleep(2)
-            # GPIO.output(buzzer,GPIO.LOW)
-            print("Base level Written")
-            payload = {'id': id, 'text': self.val, 'device': getserial(), 'employeeId': self.employeeId}
-            sendWriteRequest(payload, self.api_url)
-        except:
-            print('write exception')
-            raise
-        finally:
-                GPIO.cleanup()
+        if not self._stop_event.is_set():
+            try:
+                print(threading.current_thread().name)
+                # GPIO.cleanup()
+                print('place to read')
+                readerx = SimpleMFRC522()
+                id, text = readerx.read()
+                GPIO.cleanup()        
+                writerx = SimpleMFRC522()
+                print("Now place your tag to write")
+                writerx.write(self.val)
+                # GPIO.setwarnings(False)
+                # GPIO.setmode(GPIO.BOARD)
+                # buzzer = 11
+                # GPIO.setup(buzzer, GPIO.OUT)
+                # GPIO.output(buzzer,GPIO.HIGH)
+                # time.sleep(2)
+                # GPIO.output(buzzer,GPIO.LOW)
+                print("Base level Written")
+                payload = {'id': id, 'text': self.val, 'device': getserial(), 'employeeId': self.employeeId}
+                sendWriteRequest(payload, self.api_url)
+            except:
+                print('write exception')
+                raise
+            finally:
+                    GPIO.cleanup()
     
     def setWriter(self, val, empId):
         self.val = val
