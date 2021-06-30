@@ -37,7 +37,7 @@ class Writer(threading.Thread):
             GPIO.cleanup()        
             writerx = SimpleMFRC522()
             print("Now place your tag to write")
-            writerx.write(val)
+            writerx.write(self.val)
             # GPIO.setwarnings(False)
             # GPIO.setmode(GPIO.BOARD)
             # buzzer = 11
