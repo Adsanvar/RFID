@@ -45,7 +45,7 @@ class Writer(threading.Thread):
             # GPIO.output(buzzer,GPIO.HIGH)
             # time.sleep(2)
             # GPIO.output(buzzer,GPIO.LOW)
-            print("Written")
+            print("Base level Written")
             payload = {'id': id, 'text': self.val, 'device': getserial(), 'employeeId': self.employeeId}
             sendWriteRequest(payload, self.api_url)
         except:

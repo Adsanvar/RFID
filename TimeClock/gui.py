@@ -24,14 +24,15 @@ def sendWriteRequest(payload, api_url):
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
     val = json.loads(res.text)
     val = val['message']
-    print(val)
     global success_flag
     if val == 'success':
+        print("server success, setting success flag to True")
         # flash(val, val) # 'success', 'success'
         # return redirect(url_for('getWrite', data = payload))
         success_flag = True
     else:
         # flash(val, val) # 'error', 'error'
+        print('server failure, setting success flag to False')
         success_flag = False
 
 def loadOptions(window, payload, base_url, api_url):

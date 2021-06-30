@@ -147,12 +147,15 @@ def writer(data=None):
                 #print(threading.current_thread().name)
                 writethread.setWriter(name, emp_id)
                 print("writer alive? ", writethread.is_alive())
-                if writethread.is_alive():
-                    print('writer: in run')
-                    writethread.run()
-                else:
-                    print('writer: in start')
-                    writethread.start()
+                # if writethread.is_alive():
+                #     print('writer: in run')
+                #     writethread.run()
+                # else:
+                #     print('writer: in start')
+                #     writethread.start()
+
+                print('writer: running')
+                writethread.run()
                 
                 if writethread.is_alive():
                     print('writer: in join')
