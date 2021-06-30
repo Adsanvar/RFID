@@ -137,6 +137,7 @@ def writer(data=None):
                 wr = threading.Thread(target = write(name, emp['id']))
                 wr.start()
                 print("is write thread alive? ", wr.is_alive())
+                wr.join()
                 print(threading.current_thread().name)
                 del data[data.index(emp)]
                 
