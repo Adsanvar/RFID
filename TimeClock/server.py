@@ -122,6 +122,7 @@ def sendWriteRequest(payload):
     val = json.loads(res.text)
     val = val['message']
     print(val)
+    global success_flag
     if val == 'success':
         # flash(val, val) # 'success', 'success'
         # return redirect(url_for('getWrite', data = payload))
