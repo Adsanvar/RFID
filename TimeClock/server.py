@@ -129,6 +129,7 @@ def writer(data=None):
         emp_id = int(request.form.get('id'))
         for emp in data:
             if emp['id'] == emp_id:
+                print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
                 # startWriteThread(name, emp_id)
@@ -187,6 +188,7 @@ def writer(data=None):
 def write(val, employeeId):
     try:
         # GPIO.cleanup()
+        print('place to read')
         readerx = SimpleMFRC522()
         id, text = readerx.read()
         GPIO.cleanup()        
