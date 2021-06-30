@@ -11,7 +11,7 @@ from utilities import getserial
 class Reader(threading.Thread):
     def __init__(self, window, api_url):
         super().__init__()
-        self.reader = SimpleMFRC522()
+        # self.reader = SimpleMFRC522()
         self._stop_event = threading.Event()
         self.window = window
         self.api_url = api_url
