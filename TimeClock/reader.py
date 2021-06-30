@@ -32,6 +32,7 @@ class Reader(threading.Thread):
 
     def run(self):
         try:
+            GPIO.cleanup()
             reader = SimpleMFRC522()
             GPIO.setwarnings(False)
             GPIO.setmode(GPIO.BOARD)
