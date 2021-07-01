@@ -22,6 +22,7 @@ try:
     config = json.load(f)
 except:
     print('error occurred reading file')
+    raise
     
 
 app.config['SECRET_KEY'] = config['secret_key']
