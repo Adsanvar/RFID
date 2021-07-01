@@ -46,7 +46,7 @@ def index():
             # readthread.read_flag = True
             print("Cancel: is writethread alive: ", writethread.is_alive())
             print("Cancel: is writethread stopped? ", writethread.stopped())
-            
+
             writethread.stop()
 
             readthread.resume()
@@ -151,18 +151,20 @@ def writer(data=None):
                 # print("is write thread alive? ", wr.is_alive())
                 # wr.join()
                 #print(threading.current_thread().name)
-                writethread.setWriter(name, emp_id)
-                print("writer: alive? ", writethread.is_alive())
+
                 # if writethread.is_alive():
                 #     print('writer: in run')
                 #     writethread.run()
                 # else:
                 #     print('writer: in start')
                 #     writethread.start()
+                print("writer: alive? ", writethread.is_alive())
+                writethread.setWriter(name, emp_id)
 
                 print('writer: running')
                 writethread.run()
-                
+                print('Proceeding after run')
+
                 del data[data.index(emp)]
               
         # print("is writeer active: ", writeThread.is_alive())
@@ -216,6 +218,34 @@ def writer(data=None):
         else:
             print("no data")
             return jsonify(message='Error No Data')
+
+
+@app.route('/stopWrite', methods=["POST"])
+def stopWrite():
+    print("Cancel: is readthread alive: ", readthread.is_alive())
+    print("Cancel: is readthread stopped? ", readthread.stopped())
+    # readthread.resume()
+    # window.load_url(base_url)
+
+    print("Cancel: is writethread alive: ", writethread.is_alive())
+    print("Cancel: is writethread stopped? ", writethread.stopped())
+
+    # writethread.stop()
+
+    # readthread.resume()
+    # readthread.run()
+
+    print("Cancel: is readthread alive: ", readthread.is_alive())
+    print("Cancel: is readthread stopped? ", readthread.stopped())
+    print("Cancel: is writethread alive: ", writethread.is_alive())
+    print("Cancel: is writethread stopped? ", writethread.stopped())
+
+    return render_template('index.html')
+
+
+
+
+
 
 # def write(val, employeeId):
 #     try:
