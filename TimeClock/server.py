@@ -21,7 +21,7 @@ import logging
 
 now = datetime.datetime.now()
 Path("logs").mkdir(parents=True, exist_ok=True)
-logging.basicConfig(filename = '{}/{}.log'.format('logs', now.date()), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 app = Flask(__name__)
 config = None
