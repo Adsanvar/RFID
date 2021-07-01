@@ -37,8 +37,11 @@ readthread.daemon = True
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET'])
-def index(data):
-    print(data)
+def index(data=None):
+    print(request.data)
+    print(request.values)
+    print(request.form.get('data'))
+    print(request.form['data'])
     if data != None:
         print('in data !none')
         print(data)
@@ -256,7 +259,7 @@ def stopWrite():
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
 
-    return redirect(url_for('index', ))
+    return redirect(url_for('index', data="fromStopWrite"))
 
 
 
