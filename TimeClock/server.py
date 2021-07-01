@@ -253,7 +253,7 @@ def stopWrite():
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
 
-    return redirect(url_for('index'), data="fromStopWrite")
+    return redirect(url_for('index', data="fromStopWrite"))
 
 
 
