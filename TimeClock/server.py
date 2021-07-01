@@ -16,13 +16,22 @@ from utilities import getserial
 import gui 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '123456789'
+config = None
+try:
+    f = open('config.txt')
+    config = json.loads(f)
+except:
+    print('error occurred reading file')
+    
+
+app.config['SECRET_KEY'] = config['secret_key']
 window = webview.create_window("TimeClock", app, fullscreen=True)
 # window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 # base_url = "http://localhost:5000/"
 
 base_url = ""
-api_url = "http://192.168.1.65:5005/"
+# api_url = "http://192.168.1.65:5005/"
+api_url = config['api_url']
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
