@@ -38,7 +38,10 @@ readthread.daemon = True
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET'])
 def index(data=None):
+    print(data)
     if data != None:
+        print('in data !none')
+        print(data)
         if data == 'fromStopWrite':
             readthread.resume()
             readthread.run()
