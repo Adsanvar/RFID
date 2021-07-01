@@ -36,12 +36,9 @@ readthread.daemon = True
 #     app.run(host='192.168.1.79', port=5000)
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/<string:data>', methods=['GET'])
-def index(data=None):
-    print(request.args.get('data'))
+def index():
+    data = request.args.get('data')
     if data != None:
-        print('in data !none')
-        print(data)
         if data == 'fromStopWrite':
             readthread.resume()
             readthread.run()
