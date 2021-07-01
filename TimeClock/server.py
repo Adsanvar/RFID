@@ -148,6 +148,7 @@ def writer(data=None):
                 # writethread.run()
                 # print('Proceeding after run')
                 val = write(name, emp_id)
+
                 if not val:
                     break
                 
@@ -332,15 +333,18 @@ def setBaseUrl():
         
 
 if __name__ == '__main__':
-
-    # t = threading.Thread(target=start_server)
-    # t.daemon = True
-    # t.start()
-    # startReadThread(True)
-    readthread.start()
-    # writethread.setWriteFlag(False)
-    # writethread.start()
-    
-    # webview.start(setBaseUrl, debug=True)
-    webview.start(setBaseUrl)
-    sys.exit()
+    try:
+        # t = threading.Thread(target=start_server)
+        # t.daemon = True
+        # t.start()
+        # startReadThread(True)
+        readthread.start()
+        # writethread.setWriteFlag(False)
+        # writethread.start()
+        
+        # webview.start(setBaseUrl, debug=True)
+        webview.start(setBaseUrl)
+        sys.exit()
+    except:
+        raise
+        
