@@ -38,7 +38,6 @@ readthread.daemon = True
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET'])
 def index(data=None):
-    data = json.loads(data)
     print(data)
     if data != None:
         print('in data !none')
@@ -257,7 +256,7 @@ def stopWrite():
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
 
-    return redirect(url_for('index', data="fromStopWrite"))
+    return redirect(url_for('index', "fromStopWrite"))
 
 
 
