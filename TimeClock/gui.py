@@ -199,7 +199,14 @@ def loadOptions(window, payload, base_url, api_url):
                     <hr/>
                     `,
                     width: 600,
+                }).then((result) => {
+                    if (result.isConfirmed)
+                    {
+                        alert("confirmed")
+                    }
                 })
+
+
             }
             })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url)
 
