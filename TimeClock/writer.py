@@ -31,7 +31,7 @@ class Writer(threading.Thread):
         if not self._stop_event.is_set():
             try:
                 print(threading.current_thread().name)
-                # GPIO.cleanup()
+                GPIO.cleanup()
                 print('place to read')
                 readerx = SimpleMFRC522()
                 id, text = readerx.read()

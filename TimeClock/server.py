@@ -46,11 +46,17 @@ def index():
             # readthread.read_flag = True
             print("Cancel: is writethread alive: ", writethread.is_alive())
             print("Cancel: is writethread stopped? ", writethread.stopped())
-            GPIO.cleanup()
+            
             writethread.stop()
 
             readthread.resume()
             readthread.run()
+
+            print("Cancel: is readthread alive: ", readthread.is_alive())
+            print("Cancel: is readthread stopped? ", readthread.stopped())
+            print("Cancel: is writethread alive: ", writethread.is_alive())
+            print("Cancel: is writethread stopped? ", writethread.stopped())
+
             # print("is readthread alive: ", readthread.is_alive())
             # print("is readthread stopped? ", readthread.stopped())
             # print("from POST, writeropen?: ", writethread.is_alive())
