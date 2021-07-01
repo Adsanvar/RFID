@@ -18,11 +18,13 @@ import gui
 app = Flask(__name__)
 config = None
 try:
+    path = os.cwd()
+    print(path)
     f = open('config.txt')
     config = json.loads(f)
 except:
     print('error occurred reading file')
-
+    
 
 app.config['SECRET_KEY'] = config['secret_key']
 window = webview.create_window("TimeClock", app, fullscreen=True)
@@ -342,18 +344,18 @@ def setBaseUrl():
         
 
 if __name__ == '__main__':
-    # try:
-    # t = threading.Thread(target=start_server)
-    # t.daemon = True
-    # t.start()
-    # startReadThread(True)
-    readthread.start()
-    # writethread.setWriteFlag(False)
-    # writethread.start()
-    
-    # webview.start(setBaseUrl, debug=True)
-    webview.start(setBaseUrl)
-    sys.exit()
-    # except:
-    #     raise
+    try:
+        # t = threading.Thread(target=start_server)
+        # t.daemon = True
+        # t.start()
+        # startReadThread(True)
+        readthread.start()
+        # writethread.setWriteFlag(False)
+        # writethread.start()
+        
+        # webview.start(setBaseUrl, debug=True)
+        webview.start(setBaseUrl)
+        sys.exit()
+    except:
+        raise
         
