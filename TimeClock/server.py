@@ -85,7 +85,7 @@ def getWrite(data=None):
             # print("is readthread stopped? ", readthread.stopped())
             # readthread._stop()
             # print(res.text)
-            return "success"
+            return jsonify(message='success')
         except Exception as e:
             print('Exception in getWrite')
             print(e)
@@ -131,8 +131,9 @@ def writer(data=None):
                 #     writethread.start()
                 print("writer: alive? ", writethread.is_alive())
                 writethread.setWriter(name, emp_id)
+                writethread.setWriteFlag(True)
                 writethread.write()
-
+                print("After write thread")
                 # print('writer: running')
                 # writethread.run()
                 # print('Proceeding after run')
@@ -198,7 +199,8 @@ def stopWrite():
 
     # readthread.resume()
     # readthread.run()
-
+    print("at stopWrite")
+    
     print("Cancel: is readthread alive: ", readthread.is_alive())
     print("Cancel: is readthread stopped? ", readthread.stopped())
     print("Cancel: is writethread alive: ", writethread.is_alive())
@@ -290,8 +292,9 @@ if __name__ == '__main__':
     # t.start()
     # startReadThread(True)
     readthread.start()
-    writethread.start()
     writethread.setWriteFlag(False)
+    writethread.start()
+    
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()
