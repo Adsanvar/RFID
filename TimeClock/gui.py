@@ -7,6 +7,7 @@ success_flag = False
 def validateFob(payload, api_url):
     try:
         headers= {'content-type': 'application/json'}
+        print(type(payload))
         data = json.dumps(payload)
         res = requests.get(api_url+"validateFob", data=data, headers=headers)
         res = json.loads(res.text)
