@@ -201,33 +201,35 @@ def write(val, empId):
         readerx = SimpleMFRC522()
         id, text = readerx.read()
 
-        print(type(text))
         if "Admin" in text:
             payload = {"id":id, "text": "Admin", "device": getserial()}
             res = gui.validateFob(payload, api_url)
             if res:
-                sys.exit()
-        # GPIO.cleanup()        
-        # writerx = SimpleMFRC522()
-        # print("Now place your tag to write")
-        # writerx.write(val)
-        # # GPIO.setwarnings(False)
-        # # GPIO.setmode(GPIO.BOARD)
-        # # buzzer = 11
-        # # GPIO.setup(buzzer, GPIO.OUT)
-        # # GPIO.output(buzzer,GPIO.HIGH)
-        # # time.sleep(2)
-        # # GPIO.output(buzzer,GPIO.LOW)
-        # print("Base level Written")
-        # payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': empId}
-        # gui.sendWriteRequest(payload, api_url)
-    except Exception as e:
-        print(e.args)
-        print(e.mro)
-        print(e.with_traceback)        
+                return False
+        
+
+        GPIO.cleanup()        
+        writerx = SimpleMFRC522()
+        print("Now place your tag to write")
+        writerx.write(val)
+        # GPIO.setwarnings(False)
+        # GPIO.setmode(GPIO.BOARD)
+        # buzzer = 11
+        # GPIO.setup(buzzer, GPIO.OUT)
+        # GPIO.output(buzzer,GPIO.HIGH)
+        # time.sleep(2)
+        # GPIO.output(buzzer,GPIO.LOW)
+        print("Base level Written")
+        payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': empId}
+        gui.sendWriteRequest(payload, api_url)
+
+    except Exception as e:     
         print('write exception')
+        print(e)
     finally:
-            GPIO.cleanup()
+        print('In finally')
+        GPIO.cleanup()
+        return True
 
 
 @app.route('/stopWrite', methods=["POST"])
