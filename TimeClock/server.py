@@ -13,7 +13,7 @@ import requests
 from reader import Reader
 from writer import Writer
 from utilities import getserial
-import gui
+import gui 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456789'
@@ -129,14 +129,15 @@ def writer(data=None):
                 # else:
                 #     print('writer: in start')
                 #     writethread.start()
-                print("writer: alive? ", writethread.is_alive())
-                writethread.setWriter(name, emp_id)
-                writethread.setWriteFlag(True)
-                writethread.write()
-                print("After write thread")
+                # print("writer: alive? ", writethread.is_alive())
+                # writethread.setWriter(name, emp_id)
+                # writethread.setWriteFlag(True)
+                # writethread.write()
+                # print("After write thread")
                 # print('writer: running')
                 # writethread.run()
                 # print('Proceeding after run')
+                write(name, emp_id)
 
                 del data[data.index(emp)]
               
@@ -192,6 +193,33 @@ def writer(data=None):
             print("no data")
             return jsonify(message='Error No Data')
 
+def write(val, empId):
+    try:
+        # print(threading.current_thread().name)
+        GPIO.cleanup()
+        print('place to read')
+        readerx = SimpleMFRC522()
+        id, text = readerx.read()
+        GPIO.cleanup()        
+        writerx = SimpleMFRC522()
+        print("Now place your tag to write")
+        writerx.write(val)
+        # GPIO.setwarnings(False)
+        # GPIO.setmode(GPIO.BOARD)
+        # buzzer = 11
+        # GPIO.setup(buzzer, GPIO.OUT)
+        # GPIO.output(buzzer,GPIO.HIGH)
+        # time.sleep(2)
+        # GPIO.output(buzzer,GPIO.LOW)
+        print("Base level Written")
+        payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': empId}
+        gui.sendWriteRequest(payload, api_url)
+    except:
+        print('write exception')
+        raise
+    finally:
+            GPIO.cleanup()
+
 
 @app.route('/stopWrite', methods=["POST"])
 def stopWrite():
@@ -200,7 +228,7 @@ def stopWrite():
     # readthread.resume()
     # readthread.run()
     print("at stopWrite")
-    
+
     print("Cancel: is readthread alive: ", readthread.is_alive())
     print("Cancel: is readthread stopped? ", readthread.stopped())
     print("Cancel: is writethread alive: ", writethread.is_alive())
