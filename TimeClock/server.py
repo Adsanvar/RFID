@@ -38,9 +38,7 @@ readthread.daemon = True
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<string:data>', methods=['GET'])
 def index(data=None):
-    print(request.data)
-    print(request.values)
-    print(request.form.get('data'))
+    print(request.args)
     if data != None:
         print('in data !none')
         print(data)
