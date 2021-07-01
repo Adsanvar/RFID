@@ -291,6 +291,7 @@ if __name__ == '__main__':
     # startReadThread(True)
     readthread.start()
     writethread.start()
+    writethread.setWriteFlag(False)
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()

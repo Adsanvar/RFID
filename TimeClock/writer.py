@@ -58,6 +58,9 @@ class Writer(threading.Thread):
             finally:
                     GPIO.cleanup()
     
+    def setWriteFlag(self, val):
+        self.write_flag = val
+    
     def setWriter(self, val, empId):
         self.val = val
         self.employeeId = empId
