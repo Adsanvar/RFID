@@ -17,11 +17,12 @@ import gui
 
 app = Flask(__name__)
 config = None
+path = os.cwd()
+print(path)
+
 try:
-    path = os.cwd()
-    print(path)
     f = open('config.txt')
-    config = json.loads(f)
+    config = json.load(f)
 except:
     print('error occurred reading file')
     
