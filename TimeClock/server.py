@@ -41,7 +41,6 @@ def index(data=None):
     print(request.data)
     print(request.values)
     print(request.form.get('data'))
-    print(request.form['data'])
     if data != None:
         print('in data !none')
         print(data)
