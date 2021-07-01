@@ -331,7 +331,7 @@ if __name__ == '__main__':
     # t.daemon = True
     # t.start()
     # startReadThread(True)
-    readthread.run()
+    readthread.start()
     # writethread.setWriteFlag(False)
     # writethread.start()
     
