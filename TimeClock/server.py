@@ -148,8 +148,7 @@ def writer(data=None):
                 # writethread.run()
                 # print('Proceeding after run')
                 val = write(name, emp_id)
-                print(val)
-                if val:
+                if not val:
                     break
                 
                 del data[data.index(emp)]
