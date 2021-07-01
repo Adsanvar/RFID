@@ -18,10 +18,10 @@ import gui
 app = Flask(__name__)
 config = None
 path = os.getcwd()
-print(path)
 
 try:
-    f = open('config.txt')
+    path += "config.txt"
+    f = open(path)
     config = json.load(f)
 except:
     print('error occurred reading file')
