@@ -36,8 +36,15 @@ readthread.daemon = True
 #     app.run(host='192.168.1.79', port=5000)
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html')
+@app.route('/<string:data>', methods=['GET'])
+def index(data=None):
+    if data != None:
+        if data == 'fromStopWrite':
+            readthread.resume()
+            readthread.run()
+        return 'success'
+    else:
+        return render_template('index.html')
 
 @app.route('/clockin')
 @app.route('/clockin/<string:data>')
@@ -239,9 +246,6 @@ def write(val, empId):
 @app.route('/stopWrite', methods=["POST"])
 def stopWrite():
     # writethread.stop()
-
-    readthread.resume()
-    readthread.run()
     print("at stopWrite")
 
     print("Cancel: is readthread alive: ", readthread.is_alive())
@@ -249,7 +253,7 @@ def stopWrite():
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
 
-    return render_template('index.html')
+    return redirect(url_for('index'), data="fromStopWrite")
 
 
 
