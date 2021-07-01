@@ -40,6 +40,7 @@ def index():
     data = request.args.get('data')
     if data != None:
         if data == 'fromStopWrite':
+            window.load_url(base_url)
             readthread.resume()
             readthread.run()
         return 'success'
