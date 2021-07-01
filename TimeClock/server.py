@@ -37,36 +37,7 @@ writethread.daemon = True
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == "POST":
-        if 'exitWrite' in request.form:
-            print("Cancel: is readthread alive: ", readthread.is_alive())
-            print("Cancel: is readthread stopped? ", readthread.stopped())
-            # readthread.resume()
-            window.load_url(base_url)
-            # readthread.read_flag = True
-            print("Cancel: is writethread alive: ", writethread.is_alive())
-            print("Cancel: is writethread stopped? ", writethread.stopped())
-
-            writethread.stop()
-
-            readthread.resume()
-            readthread.run()
-
-            print("Cancel: is readthread alive: ", readthread.is_alive())
-            print("Cancel: is readthread stopped? ", readthread.stopped())
-            print("Cancel: is writethread alive: ", writethread.is_alive())
-            print("Cancel: is writethread stopped? ", writethread.stopped())
-
-            # print("is readthread alive: ", readthread.is_alive())
-            # print("is readthread stopped? ", readthread.stopped())
-            # print("from POST, writeropen?: ", writethread.is_alive())
-            # startReadThread(False)
-            # print("is thread alive: ", thread.is_alive())
-            return jsonify(message='loads window and not renders')
-    else:
-        print('Not in exit write')
-        print("Cancel: is readthread alive: ", readthread.is_alive())
-        return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/clockin')
 @app.route('/clockin/<string:data>')
@@ -160,10 +131,11 @@ def writer(data=None):
                 #     writethread.start()
                 print("writer: alive? ", writethread.is_alive())
                 writethread.setWriter(name, emp_id)
+                writethread.write()
 
-                print('writer: running')
-                writethread.run()
-                print('Proceeding after run')
+                # print('writer: running')
+                # writethread.run()
+                # print('Proceeding after run')
 
                 del data[data.index(emp)]
               
@@ -222,14 +194,6 @@ def writer(data=None):
 
 @app.route('/stopWrite', methods=["POST"])
 def stopWrite():
-    print("Cancel: is readthread alive: ", readthread.is_alive())
-    print("Cancel: is readthread stopped? ", readthread.stopped())
-    # readthread.resume()
-    # window.load_url(base_url)
-
-    print("Cancel: is writethread alive: ", writethread.is_alive())
-    print("Cancel: is writethread stopped? ", writethread.stopped())
-
     # writethread.stop()
 
     # readthread.resume()
@@ -326,6 +290,7 @@ if __name__ == '__main__':
     # t.start()
     # startReadThread(True)
     readthread.start()
+    writethread.start()
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
     sys.exit()

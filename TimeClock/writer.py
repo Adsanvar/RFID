@@ -12,7 +12,7 @@ class Writer(threading.Thread):
         self.api_url = api_url
         # self.val = val
         # self.employeeId = employeeId
-        # self.read_flag = True
+        self.write_flag = True
         print("New Writer Class created")    
 
     def stop(self):
@@ -28,6 +28,9 @@ class Writer(threading.Thread):
         return self._stop_event.is_set()
 
     def run(self):
+        print("Writer RUNNING, WriteFlag: ", self.write_flag)
+
+    def write(self):
         if not self._stop_event.is_set():
             try:
                 print(threading.current_thread().name)
