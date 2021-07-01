@@ -74,7 +74,8 @@ def getWrite(data=None):
             # window.load_url(base_url+"writer/"+res.text)
 
             # global readthread
-            readthread.stop()
+            # readthread.stop() # prevents erroneous stoppage of readthread from http request to validate fob
+
             loadWriter(data)
             # if readthread.is_alive():
             #     stopReadThread()
