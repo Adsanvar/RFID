@@ -5,6 +5,7 @@ from gui import sendWriteRequest
 from utilities import getserial
 
 class Writer(threading.Thread):
+    GPIO.setwarnings(False)
     def __init__(self, api_url):
         super().__init__()
         # self.reader = SimpleMFRC522()
