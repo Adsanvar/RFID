@@ -140,12 +140,14 @@ def writer(data=None):
                 # writethread.run()
                 # print('Proceeding after run')
                 val = write(name, emp_id)
-                print(val)
-
+                
+                if val:
+                    break
+                
                 del data[data.index(emp)]
               
         # print("is writeer active: ", writeThread.is_alive())
-        if gui.success_flag:
+        if val:
             if not data:
                 flash('There are no more employees to write', 'warning')
                 return render_template('writer.html')
@@ -238,8 +240,8 @@ def write(val, empId):
 def stopWrite():
     # writethread.stop()
 
-    # readthread.resume()
-    # readthread.run()
+    readthread.resume()
+    readthread.run()
     print("at stopWrite")
 
     print("Cancel: is readthread alive: ", readthread.is_alive())
