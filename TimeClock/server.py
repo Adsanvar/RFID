@@ -203,7 +203,7 @@ def write(val, empId):
 
         print(type(text))
         if "Admin" in text:
-            payload = {"id":id, "text": "Admin", "device": utilities.getserial}
+            payload = {"id":id, "text": "Admin", "device": getserial}
             res = gui.validateFob(payload, api_url)
             if res:
                 sys.exit()
