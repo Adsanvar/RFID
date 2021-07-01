@@ -17,11 +17,8 @@ import gui
 
 app = Flask(__name__)
 config = None
-path = os.getcwd()
-
 try:
-    path += "config.txt"
-    f = open(path)
+    f = open('/home/pi/timeClockConfig.txt')
     config = json.load(f)
 except:
     print('error occurred reading file')
