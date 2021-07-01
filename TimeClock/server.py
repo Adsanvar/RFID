@@ -17,7 +17,7 @@ import gui
 
 app = Flask(__name__)
 config = None
-path = os.cwd()
+path = os.getcwd()
 print(path)
 
 try:
