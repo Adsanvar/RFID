@@ -7,7 +7,6 @@ success_flag = False
 def validateFob(payload, api_url):
     try:
         headers= {'content-type': 'application/json'}
-        print(type(payload))
         data = json.dumps(payload)
         res = requests.get(api_url+"validateFob", data=data, headers=headers)
         res = json.loads(res.text)
@@ -54,6 +53,7 @@ def loadOptions(window, payload, base_url, api_url):
         timer: 4000,
         })"""
         window.evaluate_js(string)
+        return False
     elif validateFob(payload, api_url):
         if payload['text'] == 'Admin':
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
@@ -116,6 +116,7 @@ def loadOptions(window, payload, base_url, api_url):
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 
             window.evaluate_js(tmp)
+            return True
         else:
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -203,6 +204,7 @@ def loadOptions(window, payload, base_url, api_url):
             })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url)
 
             window.evaluate_js(tmp)
+            return True
     else:
         string = """
         const swalBtnOkBootstrap = Swal.mixin({
@@ -218,3 +220,4 @@ def loadOptions(window, payload, base_url, api_url):
         timer: 10000,
         })"""
         window.evaluate_js(string)
+        return False
