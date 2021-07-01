@@ -74,6 +74,7 @@ def getWrite(data=None):
             # window.load_url(base_url+"writer/"+res.text)
 
             # global readthread
+            readthread.stop()
             loadWriter(data)
             # if readthread.is_alive():
             #     stopReadThread()
