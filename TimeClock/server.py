@@ -222,14 +222,13 @@ def write(val, empId):
         print("Base level Written")
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': empId}
         gui.sendWriteRequest(payload, api_url)
-
+        return True
     except Exception as e:     
         print('write exception')
         print(e)
     finally:
         print('In finally')
         GPIO.cleanup()
-        return True
 
 
 @app.route('/stopWrite', methods=["POST"])
