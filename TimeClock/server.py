@@ -28,8 +28,11 @@ config = None
 try:
     f = open('/home/pi/Documents/timeClockConfig.json')
     config = json.load(f)
-except:
+    app.logger.info('Config File Loaded')
+except Exception as e:
     print('error occurred reading file')
+    app.logger.error('Config File Error')
+    app.logger.error(e)
     raise
     
 
@@ -58,8 +61,10 @@ def index():
     data = request.args.get('data')
     if data != None:
         if data == 'fromStopWrite':
+            app.logger.info('Stopping From a Write Operation')
             window.load_url(base_url)
             readthread.resume()
+            app.logger.info('Resuming ReadThread and Running it again')
             readthread.run()
         return 'success'
     else:
@@ -105,8 +110,10 @@ def getWrite(data=None):
             loadWriter(data)
             # if readthread.is_alive():
             #     stopReadThread()
-            print("Get Write: is readthread alive? ", readthread.is_alive())
-            print("Get Write: is readthread stopped? ", readthread.stopped())
+            # print("Get Write: is readthread alive? ", readthread.is_alive())
+            # print("Get Write: is readthread stopped? ", readthread.stopped())
+            app.logger.info('Get Write: is readthread alive? ', readthread.is_alive())
+            app.logger.info('Get Write: is readthread alive? ', readthread.stopped())
             # if not readthread.stopped():
             #     readthread.stop()
             # print("is readthread alive? ", readthread.is_alive())
@@ -117,9 +124,11 @@ def getWrite(data=None):
         except Exception as e:
             print('Exception in getWrite')
             print(e)
+            app.logger.warning("Exception in getWrite")
             raise
             return jsonify(message='Error')
     else:
+        app.logger.info("No Data coming into getWrite")
         return jsonify(message='Error No Data')
 
 def loadWriter(data):
@@ -219,9 +228,12 @@ def writer(data=None):
                 return render_template('writer.html', data=data)
             except Exception as e:
                 print('Exception in GET of /Writer')
+                app.logger.error("Exception in GET Writer")
+                app.logger.error(e)
                 raise
         else:
             print("no data")
+            app.logger.warning("No Data Comming into Writer")
             return jsonify(message='Error No Data')
 
 def write(val, empId):
@@ -257,6 +269,8 @@ def write(val, empId):
     except Exception as e:     
         print('write exception')
         print(e)
+        app.logger.error("Write Function from RFID")
+        app.logger.error(e)
     finally:
         GPIO.cleanup()
 
@@ -359,10 +373,13 @@ if __name__ == '__main__':
         readthread.start()
         # writethread.setWriteFlag(False)
         # writethread.start()
-        
+        app.logger.info("Read Thread Started")
         # webview.start(setBaseUrl, debug=True)
+        app.logger.info("starting the webview window with a base url")
         webview.start(setBaseUrl)
         sys.exit()
-    except:
+    except Exception as e:
+        app.logger.error("Error Running the __main__ thread")
+        app.logger.error(e)
         raise
         
