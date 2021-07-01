@@ -148,7 +148,7 @@ def writer(data=None):
                 # writethread.run()
                 # print('Proceeding after run')
                 val = write(name, emp_id)
-                
+                print(val)
                 if val:
                     break
                 
@@ -240,7 +240,6 @@ def write(val, empId):
         print('write exception')
         print(e)
     finally:
-        print('In finally')
         GPIO.cleanup()
 
 
