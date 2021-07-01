@@ -112,8 +112,8 @@ def getWrite(data=None):
             #     stopReadThread()
             # print("Get Write: is readthread alive? ", readthread.is_alive())
             # print("Get Write: is readthread stopped? ", readthread.stopped())
-            app.logger.info('Get Write: is readthread alive? ', readthread.is_alive())
-            app.logger.info('Get Write: is readthread alive? ', readthread.stopped())
+            app.logger.info('Get Write: is readthread alive? {}'.format(readthread.is_alive()))
+            app.logger.info('Get Write: is readthread alive? {}'.format(readthread.stopped()))
             # if not readthread.stopped():
             #     readthread.stop()
             # print("is readthread alive? ", readthread.is_alive())
