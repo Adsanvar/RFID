@@ -26,8 +26,8 @@ api_url = "http://192.168.1.65:5005/"
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
-writethread = Writer(api_url=api_url)
-writethread.daemon = True
+# writethread = Writer(api_url=api_url)
+# writethread.daemon = True
 
 # success_flag = False
 
@@ -231,8 +231,8 @@ def stopWrite():
 
     print("Cancel: is readthread alive: ", readthread.is_alive())
     print("Cancel: is readthread stopped? ", readthread.stopped())
-    print("Cancel: is writethread alive: ", writethread.is_alive())
-    print("Cancel: is writethread stopped? ", writethread.stopped())
+    # print("Cancel: is writethread alive: ", writethread.is_alive())
+    # print("Cancel: is writethread stopped? ", writethread.stopped())
 
     return render_template('index.html')
 
@@ -320,8 +320,8 @@ if __name__ == '__main__':
     # t.start()
     # startReadThread(True)
     readthread.start()
-    writethread.setWriteFlag(False)
-    writethread.start()
+    # writethread.setWriteFlag(False)
+    # writethread.start()
     
     # webview.start(setBaseUrl, debug=True)
     webview.start(setBaseUrl)
