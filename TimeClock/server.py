@@ -18,7 +18,7 @@ import gui
 app = Flask(__name__)
 config = None
 try:
-    f = open('/home/pi/timeClockConfig.txt')
+    f = open('/home/pi/Documents/timeClockConfig.json')
     config = json.load(f)
 except:
     print('error occurred reading file')
