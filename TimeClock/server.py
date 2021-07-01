@@ -26,7 +26,8 @@ logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DE
 app = Flask(__name__)
 config = None
 try:
-    f = open('/home/pi/Documents/timeClockConfig.json')
+    # f = open('/home/pi/Documents/timeClockConfig.json')
+    f = open('/home/pi/Documents/devTimeClockConfig.json')
     config = json.load(f)
     app.logger.info('Config File Loaded')
 except Exception as e:
@@ -82,9 +83,29 @@ def clockin(data=None):
         except Exception as e:
             print('Exception in /clockin')
             print(e)
+            app.logger.error('Exception in /clockin, {}'.format(e))
             return jsonify(message='Error')
     else:
+        app.logger.warning('No Data in clockin')
         return jsonify(message='Error No Data')
+
+@app.route('/clockout')
+@app.route('/clockout/<string:data>')
+def clockout(data=None):
+    if data != None:
+        try:
+            headers= {'content-type': 'application/json'}
+            res = requests.get(api_url+"clockout", data=data, headers=headers)
+            # return jsonify(message='Success')
+            return res.text
+        except Exception as e:
+            print('Exception in /clockout')
+            print(e)
+            app.logger.error('Exception in /clockout, {}'.format(e))
+            return jsonify(message='Error')
+    else:
+        app.logger.warning('No Data in clockout')
+        return jsonify(message='Error No Data')    
 
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
