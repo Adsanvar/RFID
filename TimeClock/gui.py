@@ -20,9 +20,11 @@ fobs = None
 #         print(e)
 #         return False
 
-def setFobs(fobs):
-    fobs = fobs
-
+def setFobs(val):
+    print("setFobsCalled")
+    fobs = val
+    print(fobs)
+    
 def validateFob(payload):
     for o in fobs:
         if o['fobid'] == payload['id']:
