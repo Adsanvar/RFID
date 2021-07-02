@@ -72,6 +72,7 @@ try:
             f.write(o)
         fobs = json.load(f)
         print(fobs)
+        f.close()
 except:
     raise
 
