@@ -123,7 +123,9 @@ def clockin(data=None):
             dt = datetime.datetime.now()
             with open(f'/home/pi/Documents/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                row = [data['id'], dt.date(), dt, '', True]
+                header = ['fobid', 'date', 'in/out','time', 'lunch']
+                clkin.writerow(header)
+                row = [data['id'], dt.date(),'in', dt, True]
                 clkin.writerow(row)
             
             return jsonify(message='Success')
