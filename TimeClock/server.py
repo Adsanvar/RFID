@@ -67,12 +67,17 @@ def getFobs(api_url):
 try:
     objs = getFobs(api_url)
     if objs != False:
-        f = open('/home/pi/Documents/fobs.json', 'w+')
-        for o in objs:
-            f.write(o)
-        fobs = json.load(f)
-        print(fobs)
+        print(objs)
+        with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
+            json.dump(objs, f, ensure_ascii=False, indent=4)
         f.close()
+        
+        # f = open('/home/pi/Documents/fobs.json', 'r')
+        # for o in objs:
+        #     f.write(o)
+        # fobs = json.load(f)
+        # print(fobs)
+        # f.close()
 except:
     raise
 
