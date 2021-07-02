@@ -24,8 +24,9 @@ def setFobs(val):
     print("setFobsCalled")
     fobs = val
     print(fobs)
-    
+
 def validateFob(payload):
+    print(fobs)
     for o in fobs:
         if o['fobid'] == payload['id']:
             if o['test'] == payload['text']:
