@@ -67,7 +67,7 @@ def getFobs(api_url):
 try:
     objs = getFobs(api_url)
     if objs != False:
-        print(objs)
+        print("RECIEVED, ", objs)
         with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
             json.dump(objs, f, ensure_ascii=False, indent=4)
 
@@ -75,11 +75,13 @@ try:
             fobs = json.load(f)
         
         # fobs = json.load(f)
-        print(fobs)
+        print("LOADED, ", fobs)
         # f.close()
 except:
     raise
 
+
+print("OUTSIDE: ", fobs)
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 # writethread = Writer(api_url=api_url)
