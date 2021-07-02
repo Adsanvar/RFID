@@ -29,13 +29,14 @@ def validateFob(payload):
     print(fobs)
     print(payload)
     for o in fobs:
-        print(o['fobid'])
-        print(payload['id'])
-        # if o['fobid'] == payload['id']:
-        #     if o['test'] == payload['text']:
-        #         return True
-        #     else:
-        #         return False
+        print(type(o['fobid']))
+        print(type(payload['id']))
+        if o['fobid'] == payload['id']:
+            print("fobid matched payload id")
+            if o['test'] == payload['text']:
+                return True
+            else:
+                return False
 
 
 def sendWriteRequest(payload, api_url):
