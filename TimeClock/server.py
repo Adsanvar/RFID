@@ -17,6 +17,7 @@ import gui
 import datetime
 from pathlib import Path
 import logging
+import csv
 
 
 now = datetime.datetime.now()
@@ -108,10 +109,20 @@ def index():
 def clockin(data=None):
     if data != None:
         try:
-            headers= {'content-type': 'application/json'}
-            res = requests.get(api_url+"clockin", data=data, headers=headers)
-            # return jsonify(message='Success')
-            return res.text
+            # Code to send to server
+            # headers= {'content-type': 'application/json'}
+            # res = requests.get(api_url+"clockin", data=data, headers=headers)
+            # # return jsonify(message='Success')
+            # return res.text
+            # fobid = db.Column(db.String(45))
+            # date = db.Column(db.Date)
+            # clockin = db.Column(db.DateTime)
+            # clockout = db.Column(db.DateTime)
+            # lunch = db.Column(db.Boolean(1))
+            print(data)
+            # with open('/home/pi/Documents/TimeClock.csv', 'a+') as f:
+            #     clkin = csv.writer(f, delimiter=',')
+
         except Exception as e:
             print('Exception in /clockin')
             print(e)
