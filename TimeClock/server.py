@@ -152,6 +152,8 @@ def clockout(data=None):
                 row = [data['text'], data['id'], dt.date(),'out', dt, True]
                 clkin.writerow(row)
 
+            return jsonify(message="Succes")
+
         except Exception as e:
             print('Exception in /clockout')
             print(e)
