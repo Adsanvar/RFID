@@ -25,11 +25,14 @@ logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DE
 
 app = Flask(__name__)
 config = None
+fobs = None
+
 try:
-    # f = open('/home/pi/Documents/timeClockConfig.json')
-    f = open('/home/pi/Documents/devTimeClockConfig.json')
+    # f = open('/home/pi/Documents/timeClockConfig.json', 'r')
+    f = open('/home/pi/Documents/devTimeClockConfig.json', 'r')
     config = json.load(f)
     app.logger.info('Config File Loaded')
+    f.close()
 except Exception as e:
     print('error occurred reading file')
     app.logger.error('Config File Error')
@@ -46,6 +49,15 @@ base_url = ""
 # api_url = "http://192.168.1.65:5005/"
 api_url = config['api_url']
 
+try:
+    objs = getFobs(api_url)
+    f = open('/home/pi/Documents/fobs.json', 'w+')
+    f.write(objs)
+    fobs = json.load(f)
+    print(fobs)
+except:
+    raise
+
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 # writethread = Writer(api_url=api_url)
@@ -56,6 +68,19 @@ readthread.daemon = True
 # def start_server():
 #     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
 #     app.run(host='192.168.1.79', port=5000)
+
+def getFobs(api_url):
+    try:
+        payload = {"device": getserial()}
+        headers= {'content-type': 'application/json'}
+        data = json.dumps(payload)
+        res = requests.get(api_url+"getFobs", data=data, headers=headers)
+        res = json.loads(res.text)
+        return res
+    except Exception as e:
+        print('Exception in getFobs')
+        print(e)
+        return False
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -308,37 +333,6 @@ def stopWrite():
 
     return redirect(url_for('index', data="fromStopWrite"))
 
-
-
-
-
-
-# def write(val, employeeId):
-#     try:
-#         print(threading.current_thread().name)
-#         # GPIO.cleanup()
-#         print('place to read')
-#         readerx = SimpleMFRC522()
-#         id, text = readerx.read()
-#         GPIO.cleanup()        
-#         writerx = SimpleMFRC522()
-#         print("Now place your tag to write")
-#         writerx.write(val)
-#         # GPIO.setwarnings(False)
-#         # GPIO.setmode(GPIO.BOARD)
-#         # buzzer = 11
-#         # GPIO.setup(buzzer, GPIO.OUT)
-#         # GPIO.output(buzzer,GPIO.HIGH)
-#         # time.sleep(2)
-#         # GPIO.output(buzzer,GPIO.LOW)
-#         print("Written")
-#         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': employeeId}
-#         sendWriteRequest(payload)
-#     except:
-#         print('write exception')
-#         raise
-#     finally:
-#             GPIO.cleanup()
 
 def setBaseUrl():
     global base_url

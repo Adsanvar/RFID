@@ -199,6 +199,24 @@ def loadOptions(window, payload, base_url, api_url):
                     <hr/>
                     `,
                     width: 600,
+                    preConfirm: () => {
+                        id = document.getElementById('id').value
+                        name = document.getElementById('name').value
+                        data = {'id': id, 'text': name, 'device': '%s'}
+                        let url = '%sclockout/' + JSON.stringify(data)
+                        return fetch(url).then(response => {
+                            if (!response.ok) {
+                            throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                            )
+                        })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading(),                    
                 }).then((result) => {
                     if (result.isConfirmed)
                     {
