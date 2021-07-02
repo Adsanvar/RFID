@@ -27,13 +27,15 @@ def validateFob(payload):
         fobs = json.load(f)
     
     print(fobs)
+    print(payload)
     for o in fobs:
-        print(o)
-        if o['fobid'] == payload['id']:
-            if o['test'] == payload['text']:
-                return True
-            else:
-                return False
+        print(o['fobid'])
+        print(payload['id'])
+        # if o['fobid'] == payload['id']:
+        #     if o['test'] == payload['text']:
+        #         return True
+        #     else:
+        #         return False
 
 
 def sendWriteRequest(payload, api_url):
