@@ -69,15 +69,11 @@ try:
     if objs != False:
         with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
             json.dump(objs, f, ensure_ascii=False, indent=4)
-
-        with open('/home/pi/Documents/fobs.json', 'r', encoding='utf-8') as f:
-            fobs = json.load(f)
+            
 except Exception as e:
     app.logger.error("Exception Trying to load fobs")
     print(e)
 
-
-gui.setFobs(fobs)
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True

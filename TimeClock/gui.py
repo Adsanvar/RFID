@@ -20,13 +20,12 @@ fobs = None
 #         print(e)
 #         return False
 
-def setFobs(val):
-    print("setFobsCalled")
-    fobs = val
-    print(fobs)
 
 def validateFob(payload):
-    print(fobs)
+
+    with open('/home/pi/Documents/fobs.json', 'r', encoding='utf-8') as f:
+        fobs = json.load(f)
+    
     for o in fobs:
         if o['fobid'] == payload['id']:
             if o['test'] == payload['text']:
