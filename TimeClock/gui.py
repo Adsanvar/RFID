@@ -163,14 +163,8 @@ def loadOptions(window, payload, base_url, api_url):
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
-            html:
-                '<hr/>'+
-                '<input id="id" class="swal2-input" value="%s" type="hidden">' +
-                '<input id="name" class="swal2-input" value="%s" type="hidden">',
             preConfirm: () => {
-                id = document.getElementById('id').value
-                name = document.getElementById('name').value
-                data = {'id': id, 'text': name, 'device': '%s'}
+                data = {'id': %s, 'text': %s}
                 let url = '%sclockin/' + JSON.stringify(data)
                 return fetch(url).then(response => {
                     if (!response.ok) {
@@ -214,16 +208,15 @@ def loadOptions(window, payload, base_url, api_url):
                     showLoaderOnConfirm: true,
                     html: `
                     <div class="big margin">
-                        <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
-                        <label for="no-lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
+                        <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
+                        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
                     </div>
                     <hr/>
                     `,
                     width: 600,
                     preConfirm: () => {
-                        id = document.getElementById('id').value
-                        name = document.getElementById('name').value
-                        data = {'id': id, 'text': name, 'device': '%s'}
+                        checked = document.getElementById('lunch-cbx').checked
+                        data = {'id': %s, 'text': %s, 'lunch': checked}
                         let url = '%sclockout/' + JSON.stringify(data)
                         return fetch(url).then(response => {
                             if (!response.ok) {
@@ -247,7 +240,7 @@ def loadOptions(window, payload, base_url, api_url):
 
 
             }
-            })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url, payload['device'], base_url)
+            })""" % (payload['text'], payload['id'], payload['text'], base_url, base_url)
 
             window.evaluate_js(tmp)
             return True
