@@ -247,7 +247,7 @@ def loadOptions(window, payload, base_url, api_url):
 
 
             }
-            })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url)
+            })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url, payload['device'], base_url)
 
             window.evaluate_js(tmp)
             return True
