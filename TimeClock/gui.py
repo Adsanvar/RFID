@@ -255,7 +255,7 @@ def loadOptions(window, payload, base_url, api_url):
 
 
             }
-            })""" % (payload['text'], payload['id'], base_url)
+            })""" % (str(payload['text']), str(payload['id']), str(base_url))
 
             window.evaluate_js(tmp)
             return True
