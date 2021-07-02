@@ -68,8 +68,8 @@ try:
     objs = getFobs(api_url)
     if objs != False:
         print(objs)
-        with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
-            json.dump(objs, f, ensure_ascii=False, indent=4)
+        with open('/home/pi/Documents/fobs.json', 'w+') as f:
+            json.dump(objs, f)
             fobs = json.load(f)
         print(fobs)
         f.close()
