@@ -125,6 +125,8 @@ def clockin(data=None):
                 dt = datetime.datetime.now()
                 row = [data['id'], dt.date(), dt, '', True]
                 clkin.writerow(row)
+            
+            return jsonify(message='Success')
 
         except Exception as e:
             print('Exception in /clockin')
