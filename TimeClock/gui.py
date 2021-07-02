@@ -140,7 +140,7 @@ def loadOptions(window, payload, base_url, api_url):
             return True
         else:
             tmp = """ 
-            name = '%s'
+            name = %s
             fobid = %s
             base_url = %s
 
