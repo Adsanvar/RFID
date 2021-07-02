@@ -29,11 +29,12 @@ def validateFob(payload):
     print(fobs)
     print(payload)
     for o in fobs:
-        print(type(o['fobid']))
-        print(type(payload['id']))
-        if o['fobid'] == payload['id']:
+        # print(type(o['fobid']))
+        # print(type(payload['id']))
+        if int(o['fobid']) == payload['id']:
             print("fobid matched payload id")
-            if o['test'] == payload['text']:
+            if o['text'] == payload['text']:
+                print("text matched payload text")
                 return True
             else:
                 return False
