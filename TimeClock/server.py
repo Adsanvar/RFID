@@ -57,11 +57,7 @@ def getFobs(api_url):
         data = json.dumps(payload)
         res = requests.get(api_url+"getFobs", data=data, headers=headers)
         res = json.loads(res.text)
-        print("Response: ", res)
-        if res['message'] == False:
-            return False
-        else:
-            return res
+        return res
 
     except Exception as e:
         print('Exception in getFobs')
