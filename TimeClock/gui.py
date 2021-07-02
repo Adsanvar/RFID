@@ -201,7 +201,7 @@ def loadOptions(window, payload, base_url, api_url):
             {   
                 swalBtnOkBootstrap.fire(
                 {   
-                    title: %s,
+                    title: '%s',
                     icon: 'info',
                     showLoaderOnConfirm: true,
                     html: `
