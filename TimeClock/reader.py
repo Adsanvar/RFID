@@ -91,7 +91,7 @@ class Reader(threading.Thread):
                             print("Reader Read Admin, stopping read thread")
                             # self.read_flag = False
                             self._stop_event.set()
-                                        
+                                                
                     GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(3)
                     GPIO.output(buzzer,GPIO.LOW)

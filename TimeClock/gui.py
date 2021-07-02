@@ -23,7 +23,7 @@ fobs = None
 
 def validateFob(payload):
 
-    with open('/home/pi/Documents/fobs.json', 'r', encoding='utf-8') as f:
+    with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
         fobs = json.load(f)
     
     print(fobs)

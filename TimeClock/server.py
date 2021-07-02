@@ -29,8 +29,8 @@ config = None
 fobs = None
 
 try:
-    # f = open('/home/pi/Documents/timeClockConfig.json', 'r')
-    f = open('/home/pi/Documents/devTimeClockConfig.json', 'r')
+    # f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
+    f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
     config = json.load(f)
     app.logger.info('Config File Loaded')
     f.close()
@@ -70,7 +70,7 @@ def loadFobs():
     try:
         objs = getFobs(api_url)
         if objs != False:
-            with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
+            with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
 
     except Exception as e:
@@ -114,18 +114,14 @@ def clockin(data=None):
             # res = requests.get(api_url+"clockin", data=data, headers=headers)
             # # return jsonify(message='Success')
             # return res.text
-            # fobid = db.Column(db.String(45))
-            # date = db.Column(db.Date)
-            # clockin = db.Column(db.DateTime)
-            # clockout = db.Column(db.DateTime)
-            # lunch = db.Column(db.Boolean(1))
+
             data = json.loads(data)
             dt = datetime.datetime.now()
-            with open(f'/home/pi/Documents/{dt.year}_TimeClock.csv', 'a+') as f:
+            with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                header = ['fobid', 'date', 'in/out','time', 'lunch']
+                header = ['name','fobid', 'date', 'in/out','time', 'lunch']
                 clkin.writerow(header)
-                row = [data['id'], dt.date(),'in', dt, True]
+                row = [data['text'], data['id'], dt.date(),'in', dt, True]
                 clkin.writerow(row)
             
             return jsonify(message='Success')
@@ -144,10 +140,18 @@ def clockin(data=None):
 def clockout(data=None):
     if data != None:
         try:
-            headers= {'content-type': 'application/json'}
-            res = requests.get(api_url+"clockout", data=data, headers=headers)
-            # return jsonify(message='Success')
-            return res.text
+            # headers= {'content-type': 'application/json'}
+            # res = requests.get(api_url+"clockout", data=data, headers=headers)
+            # # return jsonify(message='Success')
+            # return res.text
+
+            data = json.loads(data)
+            dt = datetime.datetime.now()
+            with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
+                clkin = csv.writer(f, delimiter=',')
+                row = [data['text'], data['id'], dt.date(),'out', dt, True]
+                clkin.writerow(row)
+
         except Exception as e:
             print('Exception in /clockout')
             print(e)
