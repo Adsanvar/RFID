@@ -49,12 +49,32 @@ base_url = ""
 # api_url = "http://192.168.1.65:5005/"
 api_url = config['api_url']
 
+
+def getFobs(api_url):
+    try:
+        payload = {"device": getserial()}
+        headers= {'content-type': 'application/json'}
+        data = json.dumps(payload)
+        res = requests.get(api_url+"getFobs", data=data, headers=headers)
+        res = json.loads(res.text)
+        print("Response: ", res)
+        if res['message'] == False:
+            return False
+        else:
+            return res
+
+    except Exception as e:
+        print('Exception in getFobs')
+        print(e)
+        return False
+
 try:
     objs = getFobs(api_url)
-    f = open('/home/pi/Documents/fobs.json', 'w+')
-    f.write(objs)
-    fobs = json.load(f)
-    print(fobs)
+    if objs != False:
+        f = open('/home/pi/Documents/fobs.json', 'w+')
+        f.write(objs)
+        fobs = json.load(f)
+        print(fobs)
 except:
     raise
 
@@ -68,19 +88,6 @@ readthread.daemon = True
 # def start_server():
 #     # app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
 #     app.run(host='192.168.1.79', port=5000)
-
-def getFobs(api_url):
-    try:
-        payload = {"device": getserial()}
-        headers= {'content-type': 'application/json'}
-        data = json.dumps(payload)
-        res = requests.get(api_url+"getFobs", data=data, headers=headers)
-        res = json.loads(res.text)
-        return res
-    except Exception as e:
-        print('Exception in getFobs')
-        print(e)
-        return False
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
