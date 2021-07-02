@@ -3,21 +3,34 @@ import os
 import requests
 
 success_flag = False
+fobs = None
 
-def validateFob(payload, api_url):
-    try:
-        headers= {'content-type': 'application/json'}
-        data = json.dumps(payload)
-        res = requests.get(api_url+"validateFob", data=data, headers=headers)
-        res = json.loads(res.text)
-        if res['message']:
-            return True
-        else:
-            return False
-    except Exception as e:
-        print('Exception in /validateFob')
-        print(e)
-        return False
+# def validateFob(payload, api_url):
+#     try:
+#         headers= {'content-type': 'application/json'}
+#         data = json.dumps(payload)
+#         res = requests.get(api_url+"validateFob", data=data, headers=headers)
+#         res = json.loads(res.text)
+#         if res['message']:
+#             return True
+#         else:
+#             return False
+#     except Exception as e:
+#         print('Exception in /validateFob')
+#         print(e)
+#         return False
+
+def setFobs(fobs):
+    fobs = fobs
+
+def validateFob(payload):
+    for o in fobs:
+        if o['fobid'] == payload['id']:
+            if o['test'] == payload['text']:
+                return True
+            else:
+                return False
+
 
 def sendWriteRequest(payload, api_url):
     headers= {'content-type': 'application/json'}
@@ -54,7 +67,7 @@ def loadOptions(window, payload, base_url, api_url):
         })"""
         window.evaluate_js(string)
         return False
-    elif validateFob(payload, api_url):
+    elif validateFob(payload):
         if payload['text'] == 'Admin':
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {

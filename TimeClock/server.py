@@ -67,21 +67,18 @@ def getFobs(api_url):
 try:
     objs = getFobs(api_url)
     if objs != False:
-        print("RECIEVED, ", objs)
         with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
             json.dump(objs, f, ensure_ascii=False, indent=4)
 
         with open('/home/pi/Documents/fobs.json', 'r', encoding='utf-8') as f:
             fobs = json.load(f)
-        
-        # fobs = json.load(f)
-        print("LOADED, ", fobs)
-        # f.close()
-except:
-    raise
+except Exception as e:
+    app.logger.error("Exception Trying to load fobs")
+    print(e)
 
 
-print("OUTSIDE: ", fobs)
+gui.setFobs(fobs)
+
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 # writethread = Writer(api_url=api_url)
@@ -182,7 +179,6 @@ def getWrite(data=None):
             print('Exception in getWrite')
             print(e)
             app.logger.warning("Exception in getWrite")
-            raise
             return jsonify(message='Error')
     else:
         app.logger.info("No Data coming into getWrite")
@@ -287,7 +283,6 @@ def writer(data=None):
                 print('Exception in GET of /Writer')
                 app.logger.error("Exception in GET Writer")
                 app.logger.error(e)
-                raise
         else:
             print("no data")
             app.logger.warning("No Data Comming into Writer")
