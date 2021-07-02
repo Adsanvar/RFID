@@ -120,8 +120,11 @@ def clockin(data=None):
             # clockout = db.Column(db.DateTime)
             # lunch = db.Column(db.Boolean(1))
             print(data)
-            # with open('/home/pi/Documents/TimeClock.csv', 'a+') as f:
-            #     clkin = csv.writer(f, delimiter=',')
+            with open('/home/pi/Documents/TimeClock.csv', 'a+') as f:
+                clkin = csv.writer(f, delimiter=',')
+                dt = datetime.datetime.now()
+                row = [data['id'], dt.date(), dt, '', True]
+                clkin.writerow(row)
 
         except Exception as e:
             print('Exception in /clockin')
