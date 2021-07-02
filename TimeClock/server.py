@@ -71,7 +71,7 @@ try:
         with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
             json.dump(objs, f, ensure_ascii=False, indent=4)
         
-        fobs = json.loads(f)
+        fobs = json.load(f)
         print(fobs)
         f.close()
 except:
