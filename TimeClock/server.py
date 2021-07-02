@@ -62,18 +62,21 @@ def getFobs(api_url):
     except Exception as e:
         print('Exception in getFobs')
         print(e)
+        app.logger.error("Exception Trying to Get fobs")
         return False
 
-try:
-    objs = getFobs(api_url)
-    if objs != False:
-        with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
-            json.dump(objs, f, ensure_ascii=False, indent=4)
-            
-except Exception as e:
-    app.logger.error("Exception Trying to load fobs")
-    print(e)
+def loadFobs():
+    try:
+        objs = getFobs(api_url)
+        if objs != False:
+            with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
+                json.dump(objs, f, ensure_ascii=False, indent=4)
 
+    except Exception as e:
+        app.logger.error("Exception Trying to load fobs")
+        print(e)
+
+loadFobs()
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
@@ -332,7 +335,7 @@ def stopWrite():
     print("Cancel: is readthread stopped? ", readthread.stopped())
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
-
+    loadFobs()
     return redirect(url_for('index', data="fromStopWrite"))
 
 
