@@ -139,7 +139,12 @@ def loadOptions(window, payload, base_url, api_url):
             window.evaluate_js(tmp)
             return True
         else:
-            tmp = """ const swalWithBootstrapButtons = Swal.mixin({
+            tmp = """ 
+            name = '%s'
+            fobid = %s
+            base_url = %s
+
+            const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn-clock-in margin',
                 cancelButton: 'btn-clock-out margin'
@@ -155,7 +160,7 @@ def loadOptions(window, payload, base_url, api_url):
             })
 
             swalWithBootstrapButtons.fire({
-            title: '%s',
+            title: name,
             
             confirmButtonText: 'Entrada',
             showCancelButton: true,
@@ -164,8 +169,8 @@ def loadOptions(window, payload, base_url, api_url):
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
             preConfirm: () => {
-                data = {'id': %s, 'text': %s}
-                let url = '%sclockin/' + JSON.stringify(data)
+                data = {'id': fobid, 'text': name}
+                let url = base_url+'clockin/' + JSON.stringify(data)
                 return fetch(url).then(response => {
                     if (!response.ok) {
                     throw new Error(response.statusText)
@@ -199,10 +204,8 @@ def loadOptions(window, payload, base_url, api_url):
                 }
             } else if ( result.dismiss === Swal.DismissReason.cancel) 
             {   
-                id = document.getElementById('id').value
-                name = document.getElementById('name').value
                 swalBtnOkBootstrap.fire(
-                {
+                {   
                     title: name,
                     icon: 'info',
                     showLoaderOnConfirm: true,
@@ -216,8 +219,8 @@ def loadOptions(window, payload, base_url, api_url):
                     width: 600,
                     preConfirm: () => {
                         checked = document.getElementById('lunch-cbx').checked
-                        data = {'id': %s, 'text': %s, 'lunch': checked}
-                        let url = '%sclockout/' + JSON.stringify(data)
+                        data = {'id': fobid, 'text': name, 'lunch': checked}
+                        let url = base_url+'clockout/' + JSON.stringify(data)
                         return fetch(url).then(response => {
                             if (!response.ok) {
                             throw new Error(response.statusText)
@@ -232,15 +235,27 @@ def loadOptions(window, payload, base_url, api_url):
                     },
                     allowOutsideClick: () => !Swal.isLoading(),                    
                 }).then((result) => {
-                    if (result.isConfirmed)
+                    if (result.value.message === 'Success')
                     {
-                        alert("confirmed")
+                        swalBtnOkBootstrap.fire({
+                        icon: 'success',
+                        title: 'Todo Listo!',
+                        timer: 5000,
+                        })
+                    }else
+                    {
+                        swalBtnOkBootstrap.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '${result.value.message}',
+                        timer: 10000,
+                        })
                     }
                 })
 
 
             }
-            })""" % (payload['text'], payload['id'], payload['text'], base_url, base_url)
+            })""" % (payload['text'], payload['id'], base_url)
 
             window.evaluate_js(tmp)
             return True
