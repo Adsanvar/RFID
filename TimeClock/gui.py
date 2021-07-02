@@ -26,7 +26,9 @@ def validateFob(payload):
     with open('/home/pi/Documents/fobs.json', 'r', encoding='utf-8') as f:
         fobs = json.load(f)
     
+    print(fobs)
     for o in fobs:
+        print(o)
         if o['fobid'] == payload['id']:
             if o['test'] == payload['text']:
                 return True
