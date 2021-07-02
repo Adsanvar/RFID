@@ -120,9 +120,9 @@ def clockin(data=None):
             # clockout = db.Column(db.DateTime)
             # lunch = db.Column(db.Boolean(1))
             data = json.loads(data)
-            with open('/home/pi/Documents/TimeClock.csv', 'a+') as f:
+            dt = datetime.datetime.now()
+            with open(f'/home/pi/Documents/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                dt = datetime.datetime.now()
                 row = [data['id'], dt.date(), dt, '', True]
                 clkin.writerow(row)
             
