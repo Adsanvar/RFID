@@ -68,7 +68,8 @@ try:
     objs = getFobs(api_url)
     if objs != False:
         f = open('/home/pi/Documents/fobs.json', 'w+')
-        f.write(objs)
+        for o in objs:
+            f.write(o)
         fobs = json.load(f)
         print(fobs)
 except:
