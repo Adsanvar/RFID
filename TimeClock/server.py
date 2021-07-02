@@ -119,7 +119,7 @@ def clockin(data=None):
             # clockin = db.Column(db.DateTime)
             # clockout = db.Column(db.DateTime)
             # lunch = db.Column(db.Boolean(1))
-            print(data)
+            data = json.loads(data)
             with open('/home/pi/Documents/TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 dt = datetime.datetime.now()
