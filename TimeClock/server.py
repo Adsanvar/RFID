@@ -70,12 +70,13 @@ try:
         print(objs)
         with open('/home/pi/Documents/fobs.json', 'w+', encoding='utf-8') as f:
             json.dump(objs, f, ensure_ascii=False, indent=4)
-        
-        fobs = json.load(f)
+            fobs = json.load(f)
         print(fobs)
         f.close()
 except:
     raise
+
+print(fobs)
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
