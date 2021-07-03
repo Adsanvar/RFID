@@ -151,7 +151,7 @@ def clockout(data=None):
             dt = datetime.datetime.now()
             with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                row = [dt.date(), data['text'], data['id'],'out', dt, data['lunch']]
+                # row = [dt.date(), data['text'], data['id'],'out', dt, data['lunch']]
                 clkin.writerow(row)
                 f.close()
 
