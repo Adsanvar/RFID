@@ -170,7 +170,7 @@ def loadOptions(window, payload, base_url, api_url):
             preConfirm: () => {
                 id = document.getElementById('id').value
                 name = document.getElementById('name').value
-                data = {'id': id, 'text': name, 'device': '%s'}
+                data = {'id': id, 'text': name}
                 let url = '%sclockin/' + JSON.stringify(data)
                 return fetch(url).then(response => {
                     if (!response.ok) {
@@ -214,8 +214,8 @@ def loadOptions(window, payload, base_url, api_url):
                     showLoaderOnConfirm: true,
                     html: `
                     <div class="big margin">
-                        <input type="checkbox" name="no-lunch-cbx" id="no-lunch-cbx" /> 
-                        <label for="no-lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
+                        <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
+                        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
                     </div>
                     <hr/>
                     `,
@@ -223,7 +223,8 @@ def loadOptions(window, payload, base_url, api_url):
                     preConfirm: () => {
                         id = document.getElementById('id').value
                         name = document.getElementById('name').value
-                        data = {'id': id, 'text': name, 'device': '%s'}
+                        lunch = document.getElementById('lunch-cbx').checked
+                        data = {'id': id, 'text': name, 'lunch': lunch}
                         let url = '%sclockout/' + JSON.stringify(data)
                         return fetch(url).then(response => {
                             if (!response.ok) {
@@ -241,13 +242,28 @@ def loadOptions(window, payload, base_url, api_url):
                 }).then((result) => {
                     if (result.isConfirmed)
                     {
-                        alert("confirmed")
+                        if (result.value.message === 'Success')
+                        {
+                            swalBtnOkBootstrap.fire({
+                            icon: 'success',
+                            title: 'Todo Listo!',
+                            timer: 5000,
+                            })
+                        }else
+                        {
+                            swalBtnOkBootstrap.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: '${result.value.message}',
+                            timer: 10000,
+                            })
+                        }
                     }
                 })
 
 
             }
-            })""" % (payload['text'], payload['id'], payload['text'], payload['device'], base_url, payload['device'], base_url)
+            })""" % (payload['text'], payload['id'], payload['text'], base_url, base_url)
 
             window.evaluate_js(tmp)
             return True

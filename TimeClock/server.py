@@ -18,6 +18,7 @@ import datetime
 from pathlib import Path
 import logging
 import csv
+from flask_apscheduler import APScheduler
 
 
 now = datetime.datetime.now()
@@ -121,8 +122,9 @@ def clockin(data=None):
                 clkin = csv.writer(f, delimiter=',')
                 header = ['date', 'name','fobid', 'in/out','time', 'lunch']
                 clkin.writerow(header)
-                row = [dt.date(), data['text'], data['id'], 'in', dt, True]
+                row = [dt.date(), data['text'], data['id'], 'in', dt, False]
                 clkin.writerow(row)
+                f.close()
             
             return jsonify(message='Success')
 
@@ -149,10 +151,11 @@ def clockout(data=None):
             dt = datetime.datetime.now()
             with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                row = [dt.date(), data['text'], data['id'],'out', dt, True]
+                row = [dt.date(), data['text'], data['id'],'out', dt, data['lunch']]
                 clkin.writerow(row)
+                f.close()
 
-            return jsonify(message="Succes")
+            return jsonify(message="Success")
 
         except Exception as e:
             print('Exception in /clockout')
