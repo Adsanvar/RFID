@@ -213,14 +213,14 @@ def loadOptions(window, payload, base_url, api_url):
                                 timer: 60000,
                                 footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
                                 html:
-                                    '<hr/>
+                                    `<hr/>
                                     <input id="id" class="swal2-input" value="%s" type="hidden">
                                     <input id="name" class="swal2-input" value="%s" type="hidden">
                                     <div class="big margin">
                                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
                                         <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
                                     </div>
-                                    <hr/>',
+                                    <hr/>`,
                                 preConfirm: () => {
                                     id = document.getElementById('id').value
                                     name = document.getElementById('name').value
