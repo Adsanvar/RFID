@@ -156,7 +156,6 @@ def loadOptions(window, payload, base_url, api_url):
 
             swalWithBootstrapButtons.fire({
             title: '%s',
-            
             confirmButtonText: 'Entrada',
             showCancelButton: true,
             cancelButtonText: 'Salida',
@@ -211,7 +210,6 @@ def loadOptions(window, payload, base_url, api_url):
                 {
                     title: name,
                     icon: 'info',
-                    showLoaderOnConfirm: true,
                     html: `
                     <div class="big margin">
                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
@@ -225,6 +223,7 @@ def loadOptions(window, payload, base_url, api_url):
                         name = document.getElementById('name').value
                         lunch = document.getElementById('lunch-cbx').checked
                         data = {'id': id, 'text': name, 'lunch': lunch}
+                        alert('sending request')
                         let url = '%sclockout/' + JSON.stringify(data)
                         return fetch(url).then(response => {
                             if (!response.ok) {
@@ -238,27 +237,9 @@ def loadOptions(window, payload, base_url, api_url):
                             )
                         })
                     },
-                    allowOutsideClick: () => !Swal.isLoading(),                    
+                    allowOutsideClick: false                 
                 }).then((result) => {
-                    if (result.isConfirmed)
-                    {
-                        if (result.value.message === 'Success')
-                        {
-                            swalBtnOkBootstrap.fire({
-                            icon: 'success',
-                            title: 'Todo Listo!',
-                            timer: 5000,
-                            })
-                        }else
-                        {
-                            swalBtnOkBootstrap.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: '${result.value.message}',
-                            timer: 10000,
-                            })
-                        }
-                    }
+                    alert(result.value.message)
                 })
 
 
