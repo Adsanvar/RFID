@@ -210,6 +210,7 @@ def loadOptions(window, payload, base_url, api_url):
                 {
                     title: name,
                     icon: 'info',
+                    confirmButtonText: 'Write',
                     html: `
                     <div class="big margin">
                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
@@ -223,7 +224,6 @@ def loadOptions(window, payload, base_url, api_url):
                         name = document.getElementById('name').value
                         lunch = document.getElementById('lunch-cbx').checked
                         data = {'id': id, 'text': name, 'lunch': lunch}
-                        alert('sending request')
                         let url = '%sclockout/' + JSON.stringify(data)
                         return fetch(url).then(response => {
                             if (!response.ok) {
