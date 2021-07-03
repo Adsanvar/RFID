@@ -157,7 +157,7 @@ def loadOptions(window, payload, base_url, api_url):
             swalWithBootstrapButtons.fire({
             title: '%s',
             confirmButtonText: 'Entrada',
-            showDenyButton: true
+            showDenyButton: true,
             denyButtonText: 'Salida',
             width: 600,
             timer: 60000,
@@ -218,6 +218,7 @@ def loadOptions(window, payload, base_url, api_url):
                     <hr/>
                     `,
                     width: 600,
+                    allowOutsideClick: false,
                     preConfirm: () => {
                         id = document.getElementById('id').value
                         name = document.getElementById('name').value
@@ -235,8 +236,7 @@ def loadOptions(window, payload, base_url, api_url):
                             `Request failed: ${error}`
                             )
                         })
-                    },
-                    allowOutsideClick: false                 
+                    }          
                 }).then((result) => {
                     alert(result.value.message)
                 })
