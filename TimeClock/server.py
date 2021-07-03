@@ -122,8 +122,8 @@ def clockin(data=None):
                 clkin = csv.writer(f, delimiter=',')
                 header = ['date', 'name','fobid', 'in/out','time', 'lunch']
                 clkin.writerow(header)
-                row = [dt.date(), data['text'], data['id'], 'in', dt, False]
-                clkin.writerow(row)
+                # row = [dt.date(), data['text'], data['id'], 'in', dt, False]
+                # clkin.writerow(row)
                 f.close()
             
             return jsonify(message='Success')
