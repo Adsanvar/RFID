@@ -157,8 +157,8 @@ def loadOptions(window, payload, base_url, api_url):
             swalWithBootstrapButtons.fire({
             title: '%s',
             confirmButtonText: 'Entrada',
-            showCancelButton: true,
-            cancelButtonText: 'Salida',
+            showDenyButton: true
+            denyButtonText: 'Salida',
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
@@ -202,7 +202,7 @@ def loadOptions(window, payload, base_url, api_url):
                     timer: 10000,
                     })
                 }
-            } else if ( result.dismiss === Swal.DismissReason.cancel) 
+            } else if ( result.isDenied) 
             {   
                 id = document.getElementById('id').value
                 name = document.getElementById('name').value
@@ -210,7 +210,6 @@ def loadOptions(window, payload, base_url, api_url):
                 {
                     title: name,
                     icon: 'info',
-                    confirmButtonText: 'Write',
                     html: `
                     <div class="big margin">
                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
@@ -219,6 +218,7 @@ def loadOptions(window, payload, base_url, api_url):
                     <hr/>
                     `,
                     width: 600,
+                    allowOutsideClick: false,
                     preConfirm: () => {
                         id = document.getElementById('id').value
                         name = document.getElementById('name').value
@@ -236,8 +236,7 @@ def loadOptions(window, payload, base_url, api_url):
                             `Request failed: ${error}`
                             )
                         })
-                    },
-                    allowOutsideClick: false                 
+                    }               
                 }).then((result) => {
                     alert(result.value.message)
                 })
