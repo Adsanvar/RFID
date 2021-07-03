@@ -218,7 +218,6 @@ def loadOptions(window, payload, base_url, api_url):
                     <hr/>
                     `,
                     width: 600,
-                    allowOutsideClick: false,
                     preConfirm: () => {
                         id = document.getElementById('id').value
                         name = document.getElementById('name').value
@@ -236,7 +235,8 @@ def loadOptions(window, payload, base_url, api_url):
                             `Request failed: ${error}`
                             )
                         })
-                    }               
+                    },
+                    allowOutsideClick: false                 
                 }).then((result) => {
                     alert(result.value.message)
                 })
