@@ -204,16 +204,14 @@ def loadOptions(window, payload, base_url, api_url):
                     }
                 } else if (result.isDenied) 
                 {   
-                    swalWithBootstrapButtons.fire({
+                    swalBtnOkBootstrap.fire({
                                 title: '%s',
-                                confirmButtonText: 'Entrada',
-                                showDenyButton: true,
-                                denyButtonText: 'Salida',
+                                confirmButtonText: 'OK',
+                                icon: 'info',
                                 width: 600,
-                                timer: 60000,
-                                footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
+                                allowOutsideClick: false,
                                 html:
-                                    `<hr/>
+                                    `
                                     <input id="id" class="swal2-input" value="%s" type="hidden">
                                     <input id="name" class="swal2-input" value="%s" type="hidden">
                                     <div class="big margin">
@@ -239,11 +237,16 @@ def loadOptions(window, payload, base_url, api_url):
                                         )
                                     })
                                 },
-                                allowOutsideClick: () => !Swal.isLoading(),
                                 }).then((resultx) => {
                                     if (resultx.isConfirmed) {
-                                        alert('confirmed')
-                                    }
+                                        if (resultx.value.message === 'Success')
+                                        {
+                                            swalBtnOkBootstrap.fire({
+                                            icon: 'success',
+                                            title: 'Todo Listo!',
+                                            timer: 5000,
+                                            })
+                                        }
                                 })
                 }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url)
