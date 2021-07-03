@@ -247,6 +247,7 @@ def loadOptions(window, payload, base_url, api_url):
                                             timer: 5000,
                                             })
                                         }
+                                    }
                                 })
                 }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url)
