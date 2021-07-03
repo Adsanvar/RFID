@@ -120,8 +120,8 @@ def clockin(data=None):
             dt = datetime.datetime.now()
             with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                # header = ['date', 'name','fobid', 'in/out','time', 'lunch']
-                # clkin.writerow(header)
+                header = ['date', 'name','fobid', 'in/out','time', 'lunch']
+                clkin.writerow(header)
                 row = [dt.date(), data['text'], data['id'], 'in', dt, False]
                 clkin.writerow(row)
                 f.close()
