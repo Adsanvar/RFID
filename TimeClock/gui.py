@@ -202,14 +202,15 @@ def loadOptions(window, payload, base_url, api_url):
                     timer: 10000,
                     })
                 }
-            } else if ( result.isDenied) 
-            {   
+            } else if (result.isDenied) 
+            {   alert('in denied')
                 id = document.getElementById('id').value
                 name = document.getElementById('name').value
                 swalBtnOkBootstrap.fire(
                 {
                     title: name,
                     icon: 'info',
+                    confirmButtonText: 'OK',
                     html: `
                     <div class="big margin">
                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
@@ -237,11 +238,8 @@ def loadOptions(window, payload, base_url, api_url):
                             )
                         })
                     }          
-                }).then((result) => {
-                    alert(result.value.message)
-                })
-
-
+                }).then((result) => {alert(result.value.message) })
+                alert('after fired')
             }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, base_url)
 
