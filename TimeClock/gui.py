@@ -185,62 +185,67 @@ def loadOptions(window, payload, base_url, api_url):
             },
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
-            if (result.isConfirmed) {
-                if (result.value.message === 'Success')
-                {
-                    swalBtnOkBootstrap.fire({
-                    icon: 'success',
-                    title: 'Todo Listo!',
-                    timer: 5000,
-                    })
-                }else
-                {
-                    swalBtnOkBootstrap.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '${result.value.message}',
-                    timer: 10000,
-                    })
+                if (result.isConfirmed) {
+                    if (result.value.message === 'Success')
+                    {
+                        swalBtnOkBootstrap.fire({
+                        icon: 'success',
+                        title: 'Todo Listo!',
+                        timer: 5000,
+                        })
+                    }else
+                    {
+                        swalBtnOkBootstrap.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '${result.value.message}',
+                        timer: 10000,
+                        })
+                    }
+                } else if (result.isDenied) 
+                {   
+                    swalWithBootstrapButtons.fire({
+                                title: '%s',
+                                confirmButtonText: 'Entrada',
+                                showDenyButton: true,
+                                denyButtonText: 'Salida',
+                                width: 600,
+                                timer: 60000,
+                                footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
+                                html:
+                                    '<hr/>
+                                    <input id="id" class="swal2-input" value="%s" type="hidden">
+                                    <input id="name" class="swal2-input" value="%s" type="hidden">
+                                    <div class="big margin">
+                                        <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
+                                        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
+                                    </div>
+                                    <hr/>',
+                                preConfirm: () => {
+                                    id = document.getElementById('id').value
+                                    name = document.getElementById('name').value
+                                    lunch = document.getElementById('lunch-cbx').checked
+                                    data = {'id': id, 'text': name, 'lunch':lunch}
+                                    let url = '%sclockout/' + JSON.stringify(data)
+                                    return fetch(url).then(response => {
+                                        if (!response.ok) {
+                                        throw new Error(response.statusText)
+                                        }
+                                        return response.json()
+                                    })
+                                    .catch(error => {
+                                        Swal.showValidationMessage(
+                                        `Request failed: ${error}`
+                                        )
+                                    })
+                                },
+                                allowOutsideClick: () => !Swal.isLoading(),
+                                }).then((resultx) => {
+                                    if (resultx.isConfirmed) {
+                                        alert('confirmed')
+                                    }
+                                })
                 }
-            } else if (result.isDenied) 
-            {   alert('in denied')
-                id = document.getElementById('id').value
-                name = document.getElementById('name').value
-                swalBtnOkBootstrap.fire(
-                {
-                    title: name,
-                    icon: 'info',
-                    confirmButtonText: 'OK',
-                    html: `
-                    <div class="big margin">
-                        <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
-                        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
-                    </div>
-                    <hr/>
-                    `,
-                    width: 600,
-                    allowOutsideClick: false,
-                    preConfirm: () => {
-                        id = document.getElementById('id').value
-                        name = document.getElementById('name').value
-                        lunch = document.getElementById('lunch-cbx').checked
-                        data = {'id': id, 'text': name, 'lunch': lunch}
-                        let url = '%sclockout/' + JSON.stringify(data)
-                        return fetch(url).then(response => {
-                            if (!response.ok) {
-                            throw new Error(response.statusText)
-                            }
-                            return response.json()
-                        })
-                        .catch(error => {
-                            Swal.showValidationMessage(
-                            `Request failed: ${error}`
-                            )
-                        })
-                    }          
-                }).then((result) => {alert(result.value.message) })
-                alert('after fired')
-            }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, base_url)
 
             window.evaluate_js(tmp)

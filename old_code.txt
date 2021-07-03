@@ -56,3 +56,43 @@ This code if for SweetAlert2 to send async requests
         width: 600,
     })
 }*/
+
+
+
+
+
+/*id = document.getElementById('id').value
+name = document.getElementById('name').value
+swalBtnOkBootstrap.fire(
+{
+    title: name,
+    icon: 'info',
+    confirmButtonText: 'OK',
+    html: `
+    <div class="big margin">
+        <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
+        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
+    </div>
+    <hr/>
+    `,
+    width: 600,
+    allowOutsideClick: false,
+    preConfirm: () => {
+        id = document.getElementById('id').value
+        name = document.getElementById('name').value
+        lunch = document.getElementById('lunch-cbx').checked
+        data = {'id': id, 'text': name, 'lunch': lunch}
+        let url = '%sclockout/' + JSON.stringify(data)
+        return fetch(url).then(response => {
+            if (!response.ok) {
+            throw new Error(response.statusText)
+            }
+            return response.json()
+        })
+        .catch(error => {
+            Swal.showValidationMessage(
+            `Request failed: ${error}`
+            )
+        })
+    }          
+}).then((result) => {alert(result.value.message) })*/
