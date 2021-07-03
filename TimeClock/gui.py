@@ -142,7 +142,7 @@ def loadOptions(window, payload, base_url, api_url):
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn-clock-in margin',
-                cancelButton: 'btn-clock-out margin'
+                denyButton: 'btn-clock-out margin'
             },
             buttonsStyling: false
             })
