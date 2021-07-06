@@ -414,6 +414,7 @@ def setBaseUrl():
 #         readthread.start()
         
 # @scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+@app.route('/csvProcessor', methods=['POST'])
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -436,7 +437,9 @@ def csvProcessor():
     data = json.dumps(data)
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"processCsv", data=data, headers=headers)
-    
+    res = json.loads(res.text)
+    print(res['message'])
+        
     app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
 
 
