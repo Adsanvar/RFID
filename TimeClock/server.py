@@ -422,7 +422,8 @@ def csvProcessor():
     app.logger.info("Processing CSV FILE - START: {} ".format(now))
     dt = datetime.datetime.now()
     data = {}
-    with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f:
+
+    with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'w+') as f:
         clkin = csv.writer(f, delimiter=',')
         header = ['date', 'name','fobid', 'in/out','time', 'lunch']
         clkin.writerow(header)        
