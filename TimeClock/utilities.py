@@ -7,7 +7,9 @@ def getserial():
         for line in f:
             if line[0:6]=='Serial':
                 cpuserial = line[10:26]
-        codecs.encode(cpuserial, 'rot_13')
+        print(cpuserial)
+        cpuserial = codecs.encode(cpuserial, 'rot_13')
+        print(cpuserial)
         f.close()
     except:
         cpuserial = "ERROR000000000"
