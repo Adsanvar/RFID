@@ -26,6 +26,9 @@ Path("logs").mkdir(parents=True, exist_ok=True)
 logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 app = Flask(__name__)
+scheduler = APScheduler()
+scheduler.start()
+
 config = None
 fobs = None
 
@@ -410,6 +413,32 @@ def setBaseUrl():
 #         print('with global variables from not start, read_flag== True, readthread start')
 #         readthread.start()
         
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+def csvProcessor():
+    now = datetime.datetime.now()
+    # delta = now + datetime.timedelta(minutes = 1)
+    # sleep(15)
+    app.logger.info("Processing CSV FILE - START: {} ".format(now))
+    dt = datetime.datetime.now()
+    data = {}
+    with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f:
+        csv_reader = csv.DictReader(f)
+        line_count = 0
+        for row in csv_reader:
+            if row['date'] == f'{dt.date()}':
+                data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['lunch']
+                # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
+                # line_count += 1
+                line_count += 1
+
+        f.close()
+    data['device'] = getserial()
+    data = json.dumps(data)
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"processCsv", data=data, headers=headers)
+    
+    app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
+
 
 if __name__ == '__main__':
     try:
