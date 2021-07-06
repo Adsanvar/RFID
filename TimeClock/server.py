@@ -441,7 +441,7 @@ def csvProcessor():
     print(res['message'])
         
     app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
-    
+    return render_template('index.html')
 
 if __name__ == '__main__':
     try:
