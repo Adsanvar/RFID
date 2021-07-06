@@ -426,7 +426,7 @@ def csvProcessor():
         csv_reader = csv.DictReader(f)
         line_count = 0
         for row in csv_reader:
-            # print(row)
+            print(row)
             print(dt.date())
             if row['date'] == f'{dt.date()}':
                 data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['lunch']
