@@ -413,8 +413,9 @@ def setBaseUrl():
 #         print('with global variables from not start, read_flag== True, readthread start')
 #         readthread.start()
         
-# @scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
-@app.route('/csvProcessor', methods=['POST'])
+
+# @app.route('/csvProcessor', methods=['POST'])
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -427,9 +428,9 @@ def csvProcessor():
             csv_reader = csv.DictReader(f)
             line_count = 0
             for row in csv_reader:
-                print(row)
-                print(dt.date())
-                print(row['date'])
+                # print(row)
+                # print(dt.date())
+                # print(row['date'])
                 if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
@@ -439,11 +440,11 @@ def csvProcessor():
             f.close()
         data['device'] = getserial()
         data = json.dumps(data)
-        print(data)
+        # print(data)
         headers= {'content-type': 'application/json'}
         res = requests.get(api_url+"processCsv", data=data, headers=headers)
         res = json.loads(res.text)
-        print(res['message'])
+        # print(res['message'])
             
         app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
         return render_template('index.html')
