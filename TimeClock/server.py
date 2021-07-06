@@ -435,7 +435,7 @@ def csvProcessor():
                 print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                 # line_count += 1
                 line_count += 1
-
+        print(line_count)
         f.close()
     data['device'] = getserial()
     data = json.dumps(data)
