@@ -423,25 +423,28 @@ def csvProcessor():
     dt = datetime.datetime.now()
     data = {}
     with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f:
-        csv_reader = csv.DictReader(f)
-        line_count = 0
-        for row in csv_reader:
-            print(row)
-            print(dt.date())
-            if row['date'] == f'{dt.date()}':
-                data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['lunch']
-                print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
-                # line_count += 1
-                line_count += 1
+        clkin = csv.writer(f, delimiter=',')
+        header = ['date', 'name','fobid', 'in/out','time', 'lunch']
+        clkin.writerow(header)        
+        # csv_reader = csv.DictReader(f)
+        # line_count = 0
+        # for row in csv_reader:
+        #     print(row)
+        #     print(dt.date())
+        #     if row['date'] == f'{dt.date()}':
+        #         data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['lunch']
+        #         print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
+        #         # line_count += 1
+        #         line_count += 1
 
         f.close()
-    data['device'] = getserial()
-    data = json.dumps(data)
-    print(data)
-    headers= {'content-type': 'application/json'}
-    res = requests.get(api_url+"processCsv", data=data, headers=headers)
-    res = json.loads(res.text)
-    print(res['message'])
+    # data['device'] = getserial()
+    # data = json.dumps(data)
+    # print(data)
+    # headers= {'content-type': 'application/json'}
+    # res = requests.get(api_url+"processCsv", data=data, headers=headers)
+    # res = json.loads(res.text)
+    # print(res['message'])
         
     app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
     return render_template('index.html')
