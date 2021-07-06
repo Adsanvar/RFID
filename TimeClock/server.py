@@ -413,7 +413,7 @@ def setBaseUrl():
 #         print('with global variables from not start, read_flag== True, readthread start')
 #         readthread.start()
         
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+# @scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
