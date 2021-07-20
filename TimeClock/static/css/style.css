@@ -383,4 +383,5 @@ thead th {
 .hours
 {
   display: inline-block;
+  position: absolute;
 }
