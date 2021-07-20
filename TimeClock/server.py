@@ -198,7 +198,6 @@ def hours(data=None):
         try:
             res = json.loads(data)
             print('in hours')
-            print(res)
             data_table = {}
             for i in res:
                 if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
@@ -214,6 +213,7 @@ def hours(data=None):
                     lunch = "NO"
                 else:
                     lunch = "SI"
+
                 data_table[i] = {}
                 data_table[i]['date'] = date
                 data_table[i]['clk_in'] = clk_in
@@ -221,6 +221,7 @@ def hours(data=None):
                 data_table[i]['hours'] = hours
                 data_table[i]['no_lunch'] = lunch
             
+            print(data_table)
             return render_template("hours.html", data=data_table)
         except Exception as e:
             print('Exception in load hours')
