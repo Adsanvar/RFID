@@ -103,6 +103,9 @@ def index():
             readthread.resume()
             app.logger.info('Resuming ReadThread and Running it again')
             readthread.run()
+        elif data == 'closeHours':
+            app.logger.info('Loading base url from close hours')
+            window.load_url(base_url)
         return 'success'
     else:
         return render_template('index.html')
@@ -175,36 +178,61 @@ def resumeRead():
     return jsonify(message='success')
 
 @app.route('/getHours')
-@app.route('/getHours/<string:data>')
-def getHours(data=None):
+def getHours():
+    try:
+        app.logger.info('Loading Hours')
+        loadHours()
+        return jsonify(message='success')
+    except Exception as e:
+        print('Exception in getHours')
+        print(e)
+        app.logger.warning("Exception in getHours")
+        return jsonify(message='Error')
+
+@app.route('/hours')
+@app.route('/hours/<string:data>')
+def hours(data=None):
     if data != None:
         try:
-            app.logger.info('Loading Hours')
-            loadHours(data)
-            return jsonify(message='success')
+            res = json.loads(data)
+            data_table = {}
+            for i in res:
+                if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
+                    clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+                    clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+                else:
+                    clk_in = res[i]['clock_in']
+                    clk_out = res[i]['clock_out']
+                    
+                date = res[i]['date']
+                hours = res[i]['hours']
+                if res[i]['no_lunch']:
+                    lunch = "NO"
+                else:
+                    lunch = "SI"
+                data_table[i] = {}
+                data_table[i]['date'] = date
+                data_table[i]['clk_in'] = clk_in
+                data_table[i]['clk_out'] = clk_out
+                data_table[i]['hours'] = hours
+                data_table[i]['no_lunch'] = lunch
+            
+            return render_template("hours.html", data=data)
         except Exception as e:
-            print('Exception in getHours')
+            print('Exception in load hours')
             print(e)
-            app.logger.warning("Exception in getHours")
+            app.logger.warning("Exception in loadhours")
             return jsonify(message='Error')
     else:
-        app.logger.info("No Data coming into getHours")
-        return jsonify(message='Error No Data')       
+        app.logger.info("No Data coming into loadhours")
+        return jsonify(message='Error No Data') 
 
-def loadHours(data):
+def loadHours():
+    payload = {"device": getserial()}
     headers= {'content-type': 'application/json'}
+    data = json.dumps(payload)
     res = requests.get(api_url+"getHours", data=data, headers=headers)
-    # print(json.dumps(res.text))
-    # global read_flag
-    # read_flag = False
-    window.load_url(base_url+"hours/"+res.text)    
-
-# @app.route('/closeHours', methods=['GET'])
-# def closeHours():
-#     window.load_url(base_url)    
-
-# def loadIndex():
-#     window.load_url(base_url)
+    window.load_url(base_url+"hours/"+res) 
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')

@@ -96,3 +96,58 @@ swalBtnOkBootstrap.fire(
         })
     }          
 }).then((result) => {alert(result.value.message) })*/
+
+from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify
+import requests
+import json
+import datetime
+
+app = Flask(__name__)
+
+def start_server():
+    app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+    # app.run(host='192.168.1.79', port=5005)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('hours.html')
+
+@app.route('/get_hours', methods=['POST'])
+def get_hours():
+    api_url = "http://192.168.1.65:5005/"
+    # payload = {"device": getserial()}
+    payload = {"device": "12345"}
+    headers= {'content-type': 'application/json'}
+    data = json.dumps(payload)
+    res = requests.get(api_url+"getHours", data=data, headers=headers)
+    res = json.loads(res.text)
+    print(res)
+    # clkin = datetime.datetime.strptime(dt_in, "%m/%d/%Y %I:%M %p").strftime("%Y-%m-%d %H:%M:%S")
+    data = {}
+    for i in res:
+        if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
+            clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+            clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+        else:
+            clk_in = res[i]['clock_in']
+            clk_out = res[i]['clock_out']
+            
+        date = res[i]['date']
+        hours = res[i]['hours']
+        if res[i]['no_lunch']:
+            lunch = "NO"
+        else:
+            lunch = "SI"
+        data[i] = {}
+        data[i]['date'] = date
+        data[i]['clk_in'] = clk_in
+        data[i]['clk_out'] = clk_out
+        data[i]['hours'] = hours
+        data[i]['no_lunch'] = lunch
+
+        
+    return render_template("hours.html", data=data)
+
+if __name__ == '__main__':
+    start_server()

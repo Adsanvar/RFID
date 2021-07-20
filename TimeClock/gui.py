@@ -159,6 +159,8 @@ def loadOptions(window, payload, base_url, api_url):
             confirmButtonText: 'Entrada',
             showDenyButton: true,
             denyButtonText: 'Salida',
+            showCancelButton: true,
+            cancelButtonText: 'Horas',
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
@@ -250,7 +252,14 @@ def loadOptions(window, payload, base_url, api_url):
                                     }
                                 })
                 }
-            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url)
+                else if(result.dismiss === Swal.DismissReason.cancel)
+                {
+                    $.get("/getHours", function(responseText)
+                    {
+
+                    });
+                }
+            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
 
             window.evaluate_js(tmp)
             return True
