@@ -237,8 +237,7 @@ def loadHours(data):
     headers= {'content-type': 'application/json'}
     data = json.dumps(payload)
     res = requests.get(api_url+"getHours", data=data, headers=headers)
-    data = json.dumps(res.text)
-    window.load_url(base_url+"hours/"+data) 
+    window.load_url(base_url+"hours/"+res.text) 
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
