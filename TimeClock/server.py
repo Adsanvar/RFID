@@ -50,7 +50,6 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 # base_url = "http://localhost:5000/"
 
 base_url = ""
-# api_url = "http://192.168.1.65:5005/"
 api_url = config['api_url']
 
 
@@ -106,6 +105,9 @@ def index():
         elif data == 'closeHours':
             app.logger.info('Loading base url from close hours')
             window.load_url(base_url)
+            readthread.resume()
+            app.logger.info('Resuming ReadThread and Running it again')
+            readthread.run()
         return 'success'
     else:
         return render_template('index.html')
@@ -222,6 +224,8 @@ def hours(data=None):
                 data_table[i]['no_lunch'] = lunch
             
             print(data_table)
+            app.logger.info('Stopping ReadThread')
+            readthread.stop()
             return render_template("hours.html", data=data_table)
         except Exception as e:
             print('Exception in load hours')
