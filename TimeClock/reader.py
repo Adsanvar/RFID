@@ -15,6 +15,7 @@ class Reader(threading.Thread):
         self._stop_event = threading.Event()
         self.window = window
         self.api_url = api_url
+        self.in_hours_flag = False
         # self.read_flag = True
         print("New Class created")    
 
