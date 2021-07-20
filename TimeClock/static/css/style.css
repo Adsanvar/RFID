@@ -378,5 +378,6 @@ thead th {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+  position: fixed;
 }
 
