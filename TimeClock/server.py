@@ -231,7 +231,7 @@ def hours(data=None):
 def loadHours(data):
     data = json.loads(data)
     print("in loadHours: ", data)
-    payload = {"device": getserial() "id": data}
+    payload = {"device": getserial(), "id": data}
     headers= {'content-type': 'application/json'}
     data = json.dumps(payload)
     res = requests.get(api_url+"getHours", data=data, headers=headers)
