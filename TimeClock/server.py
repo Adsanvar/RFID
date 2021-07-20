@@ -199,27 +199,29 @@ def hours(data=None):
             res = json.loads(data)
             print('in hours')
             print(res)
-            # data_table = {}
-            # for i in res:
-            #     if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
-            #         clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
-            #         clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
-            #     else:
-            #         clk_in = res[i]['clock_in']
-            #         clk_out = res[i]['clock_out']
+            data_table = {}
+            for i in res:
+                if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
+                    clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+                    clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+                else:
+                    clk_in = res[i]['clock_in']
+                    clk_out = res[i]['clock_out']
                     
-            #     date = res[i]['date']
-            #     hours = res[i]['hours']
-            #     if res[i]['no_lunch']:
-            #         lunch = "NO"
-            #     else:
-            #         lunch = "SI"
-            #     data_table[i] = {}
-            #     data_table[i]['date'] = date
-            #     data_table[i]['clk_in'] = clk_in
-            #     data_table[i]['clk_out'] = clk_out
-            #     data_table[i]['hours'] = hours
-            #     data_table[i]['no_lunch'] = lunch
+                date = res[i]['date']
+                hours = res[i]['hours']
+                if res[i]['no_lunch']:
+                    lunch = "NO"
+                else:
+                    lunch = "SI"
+                data_table[i] = {}
+                data_table[i]['date'] = date
+                data_table[i]['clk_in'] = clk_in
+                data_table[i]['clk_out'] = clk_out
+                data_table[i]['hours'] = hours
+                data_table[i]['no_lunch'] = lunch
+
+            print(data_table)
             
             return render_template("hours.html")
         except Exception as e:
