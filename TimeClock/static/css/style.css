@@ -375,7 +375,7 @@ thead th {
 
 .table-center
 {
-  display: block;
+  display: inline-block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
 }
