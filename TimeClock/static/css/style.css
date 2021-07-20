@@ -308,7 +308,7 @@ input[type=checkbox]:checked + label:after{
 
 .container {
   flex-grow: 1;
-  max-width: 200px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
