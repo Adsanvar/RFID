@@ -142,7 +142,8 @@ def loadOptions(window, payload, base_url, api_url):
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn-clock-in margin',
-                denyButton: 'btn-clock-out margin'
+                denyButton: 'btn-clock-out margin',
+                cancelButton: 'btn-cancel margin'
             },
             buttonsStyling: false
             })
@@ -187,6 +188,7 @@ def loadOptions(window, payload, base_url, api_url):
             },
             allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
+                alert(result)
                 if (result.isConfirmed) {
                     if (result.value.message === 'Success')
                     {
@@ -254,10 +256,12 @@ def loadOptions(window, payload, base_url, api_url):
                 }
                 else if(result.dismiss === Swal.DismissReason.cancel)
                 {
+                    
                     $.get("/getHours", function(responseText)
                     {
-
+                        
                     });
+                    alert("sent request")
                 }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
 
