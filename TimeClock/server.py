@@ -197,27 +197,28 @@ def hours(data=None):
     if data != None:
         try:
             res = json.loads(data)
-            data_table = {}
-            for i in res:
-                if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
-                    clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
-                    clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
-                else:
-                    clk_in = res[i]['clock_in']
-                    clk_out = res[i]['clock_out']
+            print(res)
+            # data_table = {}
+            # for i in res:
+            #     if res[i]['clock_in'] is not None or res[i]['clock_in'] != '':
+            #         clk_in = datetime.datetime.strptime(res[i]['clock_in'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+            #         clk_out = datetime.datetime.strptime(res[i]['clock_out'], '%a, %d %b %Y %H:%M:%S GMT').strftime("%I:%M:%S %p")
+            #     else:
+            #         clk_in = res[i]['clock_in']
+            #         clk_out = res[i]['clock_out']
                     
-                date = res[i]['date']
-                hours = res[i]['hours']
-                if res[i]['no_lunch']:
-                    lunch = "NO"
-                else:
-                    lunch = "SI"
-                data_table[i] = {}
-                data_table[i]['date'] = date
-                data_table[i]['clk_in'] = clk_in
-                data_table[i]['clk_out'] = clk_out
-                data_table[i]['hours'] = hours
-                data_table[i]['no_lunch'] = lunch
+            #     date = res[i]['date']
+            #     hours = res[i]['hours']
+            #     if res[i]['no_lunch']:
+            #         lunch = "NO"
+            #     else:
+            #         lunch = "SI"
+            #     data_table[i] = {}
+            #     data_table[i]['date'] = date
+            #     data_table[i]['clk_in'] = clk_in
+            #     data_table[i]['clk_out'] = clk_out
+            #     data_table[i]['hours'] = hours
+            #     data_table[i]['no_lunch'] = lunch
             
             return render_template("hours.html", data=data)
         except Exception as e:
@@ -231,13 +232,10 @@ def hours(data=None):
 
 def loadHours(data):
     data = json.loads(data)
-    print("in loadHours: ", data)
     payload = {"device": getserial(), "fobid": data}
     headers= {'content-type': 'application/json'}
     data = json.dumps(payload)
-    print("loadHours data, ", data)
     res = requests.get(api_url+"getHours", data=data, headers=headers)
-    print(res.text)
     window.load_url(base_url+"hours/"+res.text) 
 
 @app.route('/getWrite')
