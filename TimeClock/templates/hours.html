@@ -20,13 +20,12 @@
       {% endwith %}
     </div>
 
-    <div>
-      <form action="{{ url_for('index', data='closeHours') }}" method="POST">
-        <button class="btn-exit btn-top-left" type="submit">X</button>
-      </form>
-    </div>
-
       <div class="table-center">
+        <div>
+          <form action="{{ url_for('index', data='closeHours') }}" method="POST">
+            <button class="btn-exit btn-top-left" type="submit">X</button>
+          </form>
+        </div>
         <table>
           <thead>
             <tr>
