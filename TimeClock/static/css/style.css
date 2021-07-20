@@ -379,3 +379,8 @@ thead th {
   margin-left: auto;
   margin-right: auto;
 }
+
+.hours
+{
+  display: inline-block;
+}
