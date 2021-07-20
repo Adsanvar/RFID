@@ -221,7 +221,7 @@ def hours(data=None):
             #     data_table[i]['hours'] = hours
             #     data_table[i]['no_lunch'] = lunch
             
-            return render_template("hours.html", data=data)
+            return render_template("hours.html")
         except Exception as e:
             print('Exception in load hours')
             print(e)
