@@ -143,6 +143,7 @@ def loadOptions(window, payload, base_url, api_url):
             customClass: {
                 confirmButton: 'btn-clock-in margin',
                 denyButton: 'btn-clock-out margin',
+                cancelButton: 'btn-cancel margin'
             },
             buttonsStyling: false
             })
@@ -159,6 +160,8 @@ def loadOptions(window, payload, base_url, api_url):
             confirmButtonText: 'Entrada',
             showDenyButton: true,
             denyButtonText: 'Salida',
+            showCancelButton: true,
+            cancelButtonText: 'Horas',
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
@@ -251,7 +254,23 @@ def loadOptions(window, payload, base_url, api_url):
                                     }
                                 })
                 }
-            })""" % (payload['text'], payload['id'] ,payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
+                else if(result.dismiss === Swal.DismissReason.cancel)
+                {
+                    let url = '%sgetHours/%s'
+                    return fetch(url).then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                            )
+                    })
+                }
+                
+            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
 
             window.evaluate_js(tmp)
             return True
