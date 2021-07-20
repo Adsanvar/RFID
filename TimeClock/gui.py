@@ -267,10 +267,10 @@ def loadOptions(window, payload, base_url, api_url):
                             Swal.showValidationMessage(
                             `Request failed: ${error}`
                             )
-                    })
+                        })
                 }
                 
-            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
+            })""" % (payload['text'],payload['id'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
 
             window.evaluate_js(tmp)
             return True
