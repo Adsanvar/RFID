@@ -164,7 +164,7 @@ def loadOptions(window, payload, base_url, api_url):
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
             html:
                 '<hr/>'+
-                '<a class="btn-cancel margin" href="/getHours/%s">Horas</a>'+
+                '<a href="/getHours/%s">Horas</a>'+
                 '<input id="id" class="swal2-input" value="%s" type="hidden">' +
                 '<input id="name" class="swal2-input" value="%s" type="hidden">',
             preConfirm: () => {
