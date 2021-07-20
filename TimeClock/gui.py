@@ -167,6 +167,7 @@ def loadOptions(window, payload, base_url, api_url):
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
             html:
                 '<hr/>'+
+                '<a href="/getHours">Horas</a>'+
                 '<input id="id" class="swal2-input" value="%s" type="hidden">' +
                 '<input id="name" class="swal2-input" value="%s" type="hidden">',
             preConfirm: () => {
@@ -252,10 +253,6 @@ def loadOptions(window, payload, base_url, api_url):
                                         }
                                     }
                                 })
-                }
-                else if(result.dismiss === Swal.DismissReason.cancel)
-                {
-                    alert("sent request")
                 }
             })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
 
