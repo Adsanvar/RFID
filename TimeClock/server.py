@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify
 import threading
-# from . import thread
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
@@ -175,6 +174,38 @@ def resumeRead():
     readthread.run()
     return jsonify(message='success')
 
+@app.route('/getHours')
+@app.route('/getHours/<string:data>')
+def getHours(data=None):
+    if data != None:
+        try:
+            app.logger.info('Loading Hours')
+            loadHours(data)
+            return jsonify(message='success')
+        except Exception as e:
+            print('Exception in getHours')
+            print(e)
+            app.logger.warning("Exception in getHours")
+            return jsonify(message='Error')
+    else:
+        app.logger.info("No Data coming into getHours")
+        return jsonify(message='Error No Data')       
+
+def loadHours(data):
+    headers= {'content-type': 'application/json'}
+    res = requests.get(api_url+"getHours", data=data, headers=headers)
+    # print(json.dumps(res.text))
+    # global read_flag
+    # read_flag = False
+    window.load_url(base_url+"hours/"+res.text)    
+
+# @app.route('/closeHours', methods=['GET'])
+# def closeHours():
+#     window.load_url(base_url)    
+
+# def loadIndex():
+#     window.load_url(base_url)
+
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
 def getWrite(data=None):
@@ -220,7 +251,6 @@ def loadWriter(data):
     # global read_flag
     # read_flag = False
     window.load_url(base_url+"writer/"+res.text)
-
 
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])

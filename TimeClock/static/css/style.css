@@ -283,8 +283,6 @@ input[type=checkbox]:checked + label:after{
 
 .nocursor { cursor:none; }
 
-
-
 .flex-col{
   display: flex;
   flex-direction: column;
@@ -354,4 +352,23 @@ input[type=checkbox]:checked + label:after{
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffffff;
+}
+
+table {
+  width: 800px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+th,
+td {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+th {
+  text-align: left;
+}
+thead th {
+  background-color: #55608f;
 }
