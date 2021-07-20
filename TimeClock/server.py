@@ -105,9 +105,8 @@ def index():
         elif data == 'closeHours':
             app.logger.info('Loading base url from close hours')
             window.load_url(base_url)
-            readthread.resume()
-            app.logger.info('Resuming ReadThread and Running it again')
-            readthread.run()
+            app.logger.info('Setting not_in_hours flag for reading')
+            readthread.not_in_hours()
         return 'success'
     else:
         return render_template('index.html')
@@ -225,7 +224,7 @@ def hours(data=None):
             
             print(data_table)
             app.logger.info('Stopping ReadThread')
-            readthread.stop()
+            readthread.in_hours()
             return render_template("hours.html", data=data_table)
         except Exception as e:
             print('Exception in load hours')
