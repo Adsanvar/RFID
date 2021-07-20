@@ -178,10 +178,11 @@ def resumeRead():
     return jsonify(message='success')
 
 @app.route('/getHours')
-def getHours():
+@app.route('/getHours/<string:data>')
+def getHours(data=None):
     try:
         app.logger.info('Loading Hours')
-        loadHours()
+        loadHours(data)
         return jsonify(message='success')
     except Exception as e:
         print('Exception in getHours')
@@ -227,8 +228,10 @@ def hours(data=None):
         app.logger.info("No Data coming into loadhours")
         return jsonify(message='Error No Data') 
 
-def loadHours():
-    payload = {"device": getserial()}
+def loadHours(data):
+    data = json.loads(data)
+    print("in loadHours: ", data)
+    payload = {"device": getserial() "id": data}
     headers= {'content-type': 'application/json'}
     data = json.dumps(payload)
     res = requests.get(api_url+"getHours", data=data, headers=headers)

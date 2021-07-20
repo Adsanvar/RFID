@@ -143,7 +143,6 @@ def loadOptions(window, payload, base_url, api_url):
             customClass: {
                 confirmButton: 'btn-clock-in margin',
                 denyButton: 'btn-clock-out margin',
-                cancelButton: 'btn-cancel margin'
             },
             buttonsStyling: false
             })
@@ -160,14 +159,12 @@ def loadOptions(window, payload, base_url, api_url):
             confirmButtonText: 'Entrada',
             showDenyButton: true,
             denyButtonText: 'Salida',
-            showCancelButton: true,
-            cancelButtonText: 'Horas',
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
             html:
                 '<hr/>'+
-                '<a href="/getHours">Horas</a>'+
+                '<a class="btn-cancel margin" href="/getHours/%s">Horas</a>'+
                 '<input id="id" class="swal2-input" value="%s" type="hidden">' +
                 '<input id="name" class="swal2-input" value="%s" type="hidden">',
             preConfirm: () => {
@@ -254,7 +251,7 @@ def loadOptions(window, payload, base_url, api_url):
                                     }
                                 })
                 }
-            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
+            })""" % (payload['text'], payload['id'] ,payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url )
 
             window.evaluate_js(tmp)
             return True
