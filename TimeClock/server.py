@@ -32,8 +32,8 @@ config = None
 fobs = None
 
 try:
-    f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
-    # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
+    # f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
+    f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
     config = json.load(f)
     app.logger.info('Config File Loaded')
     f.close()
