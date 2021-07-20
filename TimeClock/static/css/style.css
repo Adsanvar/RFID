@@ -371,7 +371,7 @@ input[type=checkbox]:checked + label:after{
   color: #ffffff;
 }
 
-table {
+/* table {
   width: 800px;
   border-collapse: collapse;
   overflow: hidden;
@@ -388,7 +388,7 @@ th {
 }
 thead th {
   background-color: #55608f;
-}
+} */
 
 .table-center
 {
