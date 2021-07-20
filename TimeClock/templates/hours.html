@@ -27,28 +27,30 @@
     </div>
 
     <div class="container">
-      <table>
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Entrada</th>
-            <th>Salida</th>
-            <th>Horas</th>
-            <th>Almuerzo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for r in data%}
-          <tr>
-            <td>{{data[r]['date']}}</td>
-            <td>{{data[r]['clk_in']}}</td>
-            <td>{{data[r]['clk_out']}}</td>
-            <td>{{data[r]['hours']}}</td>
-            <td>{{data[r]['no_lunch']}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="table-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Entrada</th>
+              <th>Salida</th>
+              <th>Horas</th>
+              <th>Almuerzo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in data%}
+            <tr>
+              <td>{{data[r]['date']}}</td>
+              <td>{{data[r]['clk_in']}}</td>
+              <td>{{data[r]['clk_out']}}</td>
+              <td>{{data[r]['hours']}}</td>
+              <td>{{data[r]['no_lunch']}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js')}}"></script>

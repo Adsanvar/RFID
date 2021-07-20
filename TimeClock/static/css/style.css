@@ -372,3 +372,10 @@ th {
 thead th {
   background-color: #55608f;
 }
+
+.table-center
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
