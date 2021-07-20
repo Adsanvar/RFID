@@ -197,6 +197,7 @@ def hours(data=None):
     if data != None:
         try:
             res = json.loads(data)
+            print('in hours')
             print(res)
             # data_table = {}
             # for i in res:
