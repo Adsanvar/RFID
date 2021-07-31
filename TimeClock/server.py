@@ -236,12 +236,16 @@ def hours(data=None):
         return jsonify(message='Error No Data') 
 
 def loadHours(data):
-    data = json.loads(data)
-    payload = {"device": getserial(), "fobid": data}
-    headers= {'content-type': 'application/json'}
-    data = json.dumps(payload)
-    res = requests.get(api_url+"getHours", data=data, headers=headers)
-    window.load_url(base_url+"hours/"+res.text) 
+    try:
+        data = json.loads(data)
+        payload = {"device": getserial(), "fobid": data}
+        headers= {'content-type': 'application/json'}
+        data = json.dumps(payload)
+        res = requests.get(api_url+"getHours", data=data, headers=headers)
+        window.load_url(base_url+"hours/"+res.text) 
+    except Exception as e:
+        app.logger.warning(f"Exception in loadHours {e}")
+        window.load_url(base_url) 
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
