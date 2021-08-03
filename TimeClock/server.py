@@ -488,7 +488,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='56')
+@scheduler.task('cron', id='csvProcessor', hour="00", minute='06')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -505,7 +505,8 @@ def csvProcessor():
                 print(row)
                 # print(dt.date())
                 print(row['date'])
-                if row['date'] == str(dt.date()):
+                d = datetime.datetime.today() - datetime.timedelta(days=1)
+                if row['date'] == f'{d.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
@@ -513,8 +514,9 @@ def csvProcessor():
             print(line_count)
             f.close()
         data['device'] = getserial()
+        print(data)
         data = json.dumps(data)
-        # print(data)
+        print(data)
         headers= {'content-type': 'application/json'}
         res = requests.get(api_url+"processCsv", data=data, headers=headers)
         res = json.loads(res.text)
@@ -525,8 +527,7 @@ def csvProcessor():
     except Exception as e:
         app.logger.info("Processing CSV FILE - FAILED: {}".format(now))
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
-        raise
-        #return render_template('index.html')
+        return render_template('index.html')
 
 if __name__ == '__main__':
     try:
