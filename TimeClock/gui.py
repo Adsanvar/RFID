@@ -38,7 +38,8 @@ def validateFob(payload):
                     return True
                 else:
                     return False
-    except:
+    except Exception as e:
+        print(e)
         return False
 
 
