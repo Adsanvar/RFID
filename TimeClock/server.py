@@ -247,6 +247,8 @@ def loadHours(data):
         window.load_url(base_url+"hours/"+res.text) 
     except Exception as e:
         app.logger.warning(f"Exception in loadHours {e}")
+        app.logger.warning(f"Ex info payload: {payload}")
+        app.logger.warning(f"Ex info payload: {res.text}")
         window.load_url(base_url) 
 
 @app.route('/getWrite')

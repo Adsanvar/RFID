@@ -22,22 +22,24 @@ fobs = None
 
 
 def validateFob(payload):
-
-    with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
-        fobs = json.load(f)
-    
-    print(fobs)
-    print(payload)
-    for o in fobs:
-        # print(type(o['fobid']))
-        # print(type(payload['id']))
-        if int(o['fobid']) == payload['id']:
-            print("fobid matched payload id")
-            if o['text'] == payload['text']:
-                print("text matched payload text")
-                return True
-            else:
-                return False
+    try:
+        with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
+            fobs = json.load(f)
+        
+        print(fobs)
+        print(payload)
+        for o in fobs:
+            # print(type(o['fobid']))
+            # print(type(payload['id']))
+            if int(o['fobid']) == payload['id']:
+                print("fobid matched payload id")
+                if o['text'] == payload['text']:
+                    print("text matched payload text")
+                    return True
+                else:
+                    return False
+    except:
+        return False
 
 
 def sendWriteRequest(payload, api_url):
