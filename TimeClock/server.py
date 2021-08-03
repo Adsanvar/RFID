@@ -246,7 +246,7 @@ def loadHours(data):
         res = requests.get(api_url+"getHours", data=data, headers=headers)
         window.load_url(base_url+"hours/"+res.text) 
     except Exception as e:
-        app.logger.warning(f"Exception in loadHours {e}")
+        app.logger.warning(f'Exception in loadHours {e}')
         window.load_url(base_url) 
 
 @app.route('/getWrite')
@@ -488,7 +488,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='30')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -522,7 +522,8 @@ def csvProcessor():
         app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
         return render_template('index.html')
     except:
-        raise
+        app.logger.info("Processing CSV FILE - FAILED: {}".format(now))
+        return render_template('index.html')
 
 if __name__ == '__main__':
     try:
