@@ -244,7 +244,6 @@ def loadHours(data):
         headers= {'content-type': 'application/json'}
         data = json.dumps(payload)
         res = requests.get(api_url+"getHours", data=data, headers=headers)
-        res = json.loads(res.text)
         print(res)
         # if res != 'error'
         window.load_url(base_url+"hours/"+res.text) 
