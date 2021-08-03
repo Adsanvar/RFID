@@ -488,7 +488,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='54')
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='56')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -525,7 +525,8 @@ def csvProcessor():
     except Exception as e:
         app.logger.info("Processing CSV FILE - FAILED: {}".format(now))
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
-        return render_template('index.html')
+        raise
+        #return render_template('index.html')
 
 if __name__ == '__main__':
     try:
