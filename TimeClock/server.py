@@ -244,9 +244,12 @@ def loadHours(data):
         headers= {'content-type': 'application/json'}
         data = json.dumps(payload)
         res = requests.get(api_url+"getHours", data=data, headers=headers)
-        print(res.text)
-        # if res != 'error'
-        window.load_url(base_url+"hours/"+res.text) 
+        val = json.loads(res.text)
+        
+        if 'message' not in val:
+            window.load_url(base_url+"hours/"+res.text) 
+        else:
+            window.load_url(base_url)
     except Exception as e:
         print(f'Exception in loadHours {e}')
         window.load_url(base_url) 
