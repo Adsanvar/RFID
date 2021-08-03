@@ -488,7 +488,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="00", minute='06')
+@scheduler.task('cron', id='csvProcessor', hour="00", minute='08')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -502,9 +502,9 @@ def csvProcessor():
             csv_reader = csv.DictReader(f)
             line_count = 0
             for row in csv_reader:
-                print(row)
+                #print(row)
                 # print(dt.date())
-                print(row['date'])
+                #print(row['date'])
                 d = datetime.datetime.today() - datetime.timedelta(days=1)
                 if row['date'] == f'{d.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
