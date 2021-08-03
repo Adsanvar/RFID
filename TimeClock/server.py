@@ -190,6 +190,7 @@ def getHours(data=None):
         print('Exception in getHours')
         print(e)
         app.logger.warning("Exception in getHours")
+        window.load_url(base_url) 
         return jsonify(message='getHour Error')
 
 @app.route('/hours')
@@ -233,6 +234,7 @@ def hours(data=None):
             return jsonify(message='Error')
     else:
         app.logger.info("No Data coming into loadhours")
+        window.load_url(base_url) 
         return jsonify(message='Error No Data') 
 
 def loadHours(data):
