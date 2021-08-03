@@ -230,7 +230,8 @@ def hours(data=None):
         except Exception as e:
             print('Exception in load hours')
             print(e)
-            app.logger.warning("Exception in loadhours")
+            app.logger.warning("Exception in loadhours: {}".format(e))
+            window.load_url(base_url) 
             return jsonify(message='Error')
     else:
         app.logger.info("No Data coming into loadhours")
