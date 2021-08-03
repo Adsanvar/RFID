@@ -525,7 +525,6 @@ def csvProcessor():
         app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
         return render_template('index.html')
     except Exception as e:
-        app.logger.info("Processing CSV FILE - FAILED: {}".format(now))
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
         return render_template('index.html')
 
