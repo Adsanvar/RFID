@@ -488,12 +488,13 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='30')
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='45')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
     # sleep(15)
     app.logger.info("Processing CSV FILE - START: {} ".format(now))
+    print("Processing CSV FILE - START: {} ".format(now))
     dt = datetime.datetime.now()
     data = {}
     try:
@@ -518,11 +519,12 @@ def csvProcessor():
         res = requests.get(api_url+"processCsv", data=data, headers=headers)
         res = json.loads(res.text)
         # print(res['message'])
-            
+        print("Processing CSV FILE - ENDED: {}".format(now))
         app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
         return render_template('index.html')
-    except:
+    except Exception as e:
         app.logger.info("Processing CSV FILE - FAILED: {}".format(now))
+        print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
         return render_template('index.html')
 
 if __name__ == '__main__':
