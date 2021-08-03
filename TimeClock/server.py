@@ -244,9 +244,12 @@ def loadHours(data):
         headers= {'content-type': 'application/json'}
         data = json.dumps(payload)
         res = requests.get(api_url+"getHours", data=data, headers=headers)
+        res = json.loads(res.text)
+        print(res)
+        # if res != 'error'
         window.load_url(base_url+"hours/"+res.text) 
     except Exception as e:
-        app.logger.warning(f'Exception in loadHours {e}')
+        print(f'Exception in loadHours {e}')
         window.load_url(base_url) 
 
 @app.route('/getWrite')
@@ -488,7 +491,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="00", minute='26')
+@scheduler.task('cron', id='csvProcessor', hour="11", minute='30')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -505,8 +508,8 @@ def csvProcessor():
                 #print(row)
                 # print(dt.date())
                 #print(row['date'])
-                d = datetime.datetime.today() - datetime.timedelta(days=1)
-                if row['date'] == f'{d.date()}':
+                # d = datetime.datetime.today() - datetime.timedelta(days=1)
+                if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
