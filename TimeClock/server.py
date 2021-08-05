@@ -74,12 +74,18 @@ def loadFobs():
         if objs != False:
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
+        else:
+            objs = getFobs(api_url)
+            if objs != False:
+                with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+                    json.dump(objs, f, ensure_ascii=False, indent=4)
+
 
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
         print(e)
 
-loadFobs()
+# loadFobs()
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
@@ -541,6 +547,9 @@ if __name__ == '__main__':
         # t.start()
         # startReadThread(True)
         readthread.start()
+        print("loading fobs")
+        loadFobs()
+        print("fobs loaded")
         # writethread.setWriteFlag(False)
         # writethread.start()
         app.logger.info("Read Thread Started")
