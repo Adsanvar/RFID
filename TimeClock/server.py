@@ -18,6 +18,7 @@ from pathlib import Path
 import logging
 import csv
 from flask_apscheduler import APScheduler
+from time import sleep
 
 
 now = datetime.datetime.now()
@@ -505,7 +506,7 @@ def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
     # sleep(15)
-    app.logger.info("Processing CSV FILE - START: {} ".format(now))
+    # app.logger.info("Processing CSV FILE - START: {} ".format(now))
     print("Processing CSV FILE - START: {} ".format(now))
     dt = datetime.datetime.now()
     data = {}
@@ -517,8 +518,9 @@ def csvProcessor():
                 #print(row)
                 # print(dt.date())
                 #print(row['date'])
-                # d = datetime.datetime.today() - datetime.timedelta(days=1)
-                if row['date'] == f'{dt.date()}':
+                d = datetime.datetime.today() - datetime.timedelta(days=1)
+                if row['date'] == f'{d}':
+                # if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
@@ -531,10 +533,23 @@ def csvProcessor():
         # print(data)
         headers= {'content-type': 'application/json'}
         res = requests.get(api_url+"processCsv", data=data, headers=headers)
+        print("Status Code: ", res.status_code)
         res = json.loads(res.text)
-        print(res['message'])
+        print("Message: ", res['message'])
+        if res['message'] == 'error':
+            for i in range(10):
+                resx = requests.get(api_url+"processCsv", data=data, headers=headers)
+                restxt = json.loads(resx.text)
+                if restxt['message'] == 'error':
+                    print(resx.status_code)
+                    sleep(360)
+                    continue
+                elif restxt['message'] == "success":
+                    break
+                else:
+                    break
         print("Processing CSV FILE - ENDED: {}".format(now))
-        app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
+        # app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
         return render_template('index.html')
     except Exception as e:
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
