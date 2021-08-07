@@ -519,6 +519,7 @@ def csvProcessor():
                 # print(dt.date())
                 #print(row['date'])
                 d = datetime.datetime.today() - datetime.timedelta(days=1)
+                print(d)
                 if row['date'] == f'{d}':
                 # if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
@@ -528,9 +529,9 @@ def csvProcessor():
             print(line_count)
             f.close()
         data['device'] = getserial()
-        #print(data)
-        data = json.dumps(data)
         # print(data)
+        data = json.dumps(data)
+        print(data)
         headers= {'content-type': 'application/json'}
         res = requests.get(api_url+"processCsv", data=data, headers=headers)
         print("Status Code: ", res.status_code)
