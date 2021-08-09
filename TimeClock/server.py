@@ -72,6 +72,7 @@ def getFobs(api_url):
 def loadFobs():
     try:
         objs = getFobs(api_url)
+        print("Response: ", objs)
         if objs != False:
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
@@ -80,8 +81,7 @@ def loadFobs():
             if objs != False:
                 with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                     json.dump(objs, f, ensure_ascii=False, indent=4)
-
-
+                    
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
         print(e)
