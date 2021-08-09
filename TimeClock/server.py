@@ -518,10 +518,10 @@ def csvProcessor():
                 #print(row)
                 # print(dt.date())
                 #print(row['date'])
-                d = datetime.datetime.today() - datetime.timedelta(days=1)
-                print(d)
-                if row['date'] == f'{d.date()}':
-                # if row['date'] == f'{dt.date()}':
+                # d = datetime.datetime.today() - datetime.timedelta(days=1)
+                # print(d)
+                # if row['date'] == f'{d.date()}':
+                if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
