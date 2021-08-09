@@ -57,6 +57,7 @@ api_url = config['api_url']
 def getFobs(api_url):
     try:
         payload = {"device": getserial()}
+        sleep(5)
         headers= {'content-type': 'application/json'}
         data = json.dumps(payload)
         res = requests.get(api_url+"getFobs", data=data, headers=headers)
@@ -72,16 +73,24 @@ def getFobs(api_url):
 def loadFobs():
     try:
         objs = getFobs(api_url)
-        print("Response: ", objs)
         if objs != False:
+            print("Response: ", objs)
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
         else:
-            objs = getFobs(api_url)
-            if objs != False:
-                with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
-                    json.dump(objs, f, ensure_ascii=False, indent=4)
-                    
+            for i in range(10):
+                objs = getFobs(api_url)
+                print("Retry Response: ", objs)
+                if objs != False:
+                    with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+                        json.dump(objs, f, ensure_ascii=False, indent=4)
+                    break
+                else:
+                    sleep(10)
+                    continue
+
+                
+
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
         print(e)
