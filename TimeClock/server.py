@@ -139,7 +139,7 @@ def clockin(data=None):
             # return res.text
 
             data = json.loads(data)
-            dt = datetime.datetime.now()
+            dt = datetime.datetime.now().replace(microsecond=0)
             with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 # header = ['date', 'name','fobid', 'in/out','time', 'lunch']
@@ -170,7 +170,7 @@ def clockout(data=None):
             # return res.text
 
             data = json.loads(data)
-            dt = datetime.datetime.now()
+            dt = datetime.datetime.now().replace(microsecond=0)
             with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 row = [dt.date(), data['text'], data['id'],'out', dt, data['lunch']]
@@ -510,7 +510,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+@scheduler.task('cron', id='csvProcessor', hour="12", minute='05')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -527,10 +527,10 @@ def csvProcessor():
                 #print(row)
                 # print(dt.date())
                 #print(row['date'])
-                # d = datetime.datetime.today() - datetime.timedelta(days=1)
+                yesterday = datetime.datetime.today() - datetime.timedelta(days=1)
                 # print(d)
-                # if row['date'] == f'{d.date()}':
-                if row['date'] == f'{dt.date()}':
+                if row['date'] == f'{yesterday.date()}':
+                # if row['date'] == f'{dt.date()}':
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
