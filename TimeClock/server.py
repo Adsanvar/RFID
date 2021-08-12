@@ -255,21 +255,22 @@ def hours(data=None):
         return jsonify(message='Error No Data') 
 
 def loadHours(data):
-    try:
-        data = json.loads(data)
-        payload = {"device": getserial(), "fobid": data}
-        headers= {'content-type': 'application/json'}
-        data = json.dumps(payload)
-        res = requests.get(api_url+"getHours", data=data, headers=headers)
-        val = json.loads(res.text)
+    window.load_url(base_url)
+    # try:
+    #     data = json.loads(data)
+    #     payload = {"device": getserial(), "fobid": data}
+    #     headers= {'content-type': 'application/json'}
+    #     data = json.dumps(payload)
+    #     res = requests.get(api_url+"getHours", data=data, headers=headers)
+    #     val = json.loads(res.text)
         
-        if 'message' not in val:
-            window.load_url(base_url+"hours/"+res.text) 
-        else:
-            window.load_url(base_url)
-    except Exception as e:
-        print(f'Exception in loadHours {e}')
-        window.load_url(base_url) 
+    #     if 'message' not in val:
+    #         window.load_url(base_url+"hours/"+res.text) 
+    #     else:
+    #         window.load_url(base_url)
+    # except Exception as e:
+    #     print(f'Exception in loadHours {e}')
+    #     window.load_url(base_url) 
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
@@ -510,7 +511,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="15", minute='21')
+@scheduler.task('cron', id='csvProcessor', hour="15", minute='26')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
