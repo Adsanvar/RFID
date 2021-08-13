@@ -254,8 +254,23 @@ def hours(data=None):
         window.load_url(base_url) 
         return jsonify(message='Error No Data') 
 
+# TODO: LOAD hours from csv file.
 def loadHours(data):
     window.load_url(base_url)
+    # dt = datetime.datetime.now()
+
+    # with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f: 
+    #     csv_reader = csv.DictReader(f)
+    #     for row in csv_reader:
+    #         #print(row)
+    #         # print(dt.date())
+    #         #print(row['date'])
+    #         # yesterday = datetime.datetime.today() - datetime.timedelta(days=1)
+    #         # print(d)
+    #         # if row['date'] == f'{yesterday.date()}':
+    #         if row['date'] == f'{dt.date()}':
+    #             data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
+
     # try:
     #     data = json.loads(data)
     #     payload = {"device": getserial(), "fobid": data}
