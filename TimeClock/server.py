@@ -19,7 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-import pandas as pd
+#import pandas as pd
 
 
 now = datetime.datetime.now()
@@ -527,7 +527,7 @@ def setBaseUrl():
         
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="11", minute='27')
+@scheduler.task('cron', id='csvProcessor', hour="11", minute='28')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
