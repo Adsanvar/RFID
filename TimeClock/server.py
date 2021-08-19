@@ -19,6 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
+import pandas as pd
 
 
 now = datetime.datetime.now()
@@ -239,9 +240,9 @@ def hours(data=None):
                 data_table[i]['hours'] = hours
                 data_table[i]['no_lunch'] = lunch
             
-            print(data_table)
-            app.logger.info('Stopping ReadThread')
-            readthread.in_hours()
+            # print(data_table)
+            # app.logger.info('Stopping ReadThread')
+            # readthread.in_hours()
             return render_template("hours.html", data=data_table)
         except Exception as e:
             print('Exception in load hours')
@@ -256,36 +257,36 @@ def hours(data=None):
 
 # TODO: LOAD hours from csv file.
 def loadHours(data):
-    window.load_url(base_url)
-    # dt = datetime.datetime.now()
-
-    # with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f: 
-    #     csv_reader = csv.DictReader(f)
-    #     for row in csv_reader:
-    #         #print(row)
-    #         # print(dt.date())
-    #         #print(row['date'])
-    #         # yesterday = datetime.datetime.today() - datetime.timedelta(days=1)
-    #         # print(d)
-    #         # if row['date'] == f'{yesterday.date()}':
-    #         if row['date'] == f'{dt.date()}':
-    #             data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
-
     # try:
-    #     data = json.loads(data)
-    #     payload = {"device": getserial(), "fobid": data}
-    #     headers= {'content-type': 'application/json'}
-    #     data = json.dumps(payload)
-    #     res = requests.get(api_url+"getHours", data=data, headers=headers)
-    #     val = json.loads(res.text)
-        
-    #     if 'message' not in val:
-    #         window.load_url(base_url+"hours/"+res.text) 
-    #     else:
-    #         window.load_url(base_url)
+    #     dt = datetime.datetime.now()
+    #     before = dt - datetime.timedelta(weeks=3)
+    #     df = pd.read_csv(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv',header=0)
+    #     df[(df['date']> str(before.date())) & (df['date']< str(dt.date())) & (df['fobid'] == data)]
+    #     df = df.drop(['fobid'], axis=1)
+    #     df['in/out'] = df['in/out'].map({'in':'Entrada' ,'out':'Salida'})
+    #     df['lunch'] = df['lunch'].map({False:'Si' ,True:'No'})
+    #     df.columns = ['Fecha', 'Nombre', 'Entrada/Salida', 'Tiempo', "Almuerzo"]
+    #     dct = df.to_dict()
+    #     data = json.dumps(dct)
+    #     window.load_url(base_url+"hours/"+data)
     # except Exception as e:
-    #     print(f'Exception in loadHours {e}')
-    #     window.load_url(base_url) 
+    #     print(e)
+    #     window.load_url(base_url)
+    try:
+        data = json.loads(data)
+        payload = {"device": getserial(), "fobid": data}
+        headers= {'content-type': 'application/json'}
+        data = json.dumps(payload)
+        res = requests.get(api_url+"getHours", data=data, headers=headers)
+        val = json.loads(res.text)
+        
+        if 'message' not in val:
+            window.load_url(base_url+"hours/"+res.text) 
+        else:
+            window.load_url(base_url)
+    except Exception as e:
+        print(f'Exception in loadHours {e}')
+        window.load_url(base_url) 
 
 @app.route('/getWrite')
 @app.route('/getWrite/<string:data>')
