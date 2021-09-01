@@ -268,7 +268,7 @@ def loadOptions(window, payload, base_url, api_url):
                         {
                             throw new Error(response.statusText)
                         }
-                        Swal.close()
+                            Swal.close()
                             return response.json()
                         }).catch(error => {
                             Swal.showValidationMessage(
