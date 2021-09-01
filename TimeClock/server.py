@@ -595,8 +595,9 @@ if __name__ == '__main__':
         try:
             output = subprocess.check_output(('grep', 'ESSID'), stdin=ps.stdout)
             print(list(output))
-            # print(output)
-            # loadFobs()
+            if len(output) != 0:
+                print(output)
+                loadFobs()
         except subprocess.CalledProcessError:
             # grep did not match any lines
             print("No wireless networks connected")
