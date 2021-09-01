@@ -258,14 +258,19 @@ def loadOptions(window, payload, base_url, api_url):
                 }
                 else if(result.dismiss === Swal.DismissReason.cancel)
                 {
+                    Swal.fire({
+                        title: 'Obteniendo Horas'
+                    });
+                    Swal.showLoading();
                     let url = '%sgetHours/%s'
                     return fetch(url).then(response => {
-                        if (!response.ok) {
+                        if (!response.ok) 
+                        {
                             throw new Error(response.statusText)
-                            }
+                        }
+                        Swal.close()
                             return response.json()
-                        })
-                        .catch(error => {
+                        }).catch(error => {
                             Swal.showValidationMessage(
                             `Request failed: ${error}`
                             )
