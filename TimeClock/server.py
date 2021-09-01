@@ -74,7 +74,7 @@ def getFobs(api_url):
 def loadFobs():
     try:
         objs = getFobs(api_url)
-        print("Response: ", objs, "TYPE: ", type(objs), objs[0])
+        print("Response: ", objs, "TYPE: ", type(objs[0]), objs[0])
         if objs != False:
             # print("Response: ", objs)
             print("in not False")
