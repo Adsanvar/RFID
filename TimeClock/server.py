@@ -74,8 +74,9 @@ def getFobs(api_url):
 def loadFobs():
     try:
         objs = getFobs(api_url)
-        print("Response: ", objs, "TYPE: ", type(objs[0]), objs[0])
-        if objs != False:
+        print("Response: ", objs, "TYPE: ", type(objs[0]), len(objs[0]))
+
+        if len(objs) != 1 and len(objs[0]) != 1:
             # print("Response: ", objs)
             print("in not False")
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
