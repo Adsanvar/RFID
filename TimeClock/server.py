@@ -81,17 +81,17 @@ def loadFobs():
             print("in not False")
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
-        else:
-            for i in range(10):
-                objs = getFobs(api_url)
-                print("Retry Response: ", objs)
-                if objs != False:
-                    with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
-                        json.dump(objs, f, ensure_ascii=False, indent=4)
-                    break
-                else:
-                    sleep(10)
-                    continue
+        # else:
+        #     for i in range(10):
+        #         objs = getFobs(api_url)
+        #         print("Retry Response: ", objs)
+        #         if len(objs) != 1 and len(objs[0]) != 1:
+        #             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+        #                 json.dump(objs, f, ensure_ascii=False, indent=4)
+        #             break
+        #         else:
+        #             sleep(10)
+        #             continue
 
                 
 
