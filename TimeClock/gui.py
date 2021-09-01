@@ -220,9 +220,9 @@ def loadOptions(window, payload, base_url, api_url):
                                     `
                                     <input id="id" class="swal2-input" value="%s" type="hidden">
                                     <input id="name" class="swal2-input" value="%s" type="hidden">
-                                    <div class="big margin">
+                                    <div class="big margin" style="margin-left:5px;>
                                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
-                                        <label for="lunch-cbx">Selecciona Aqui Si No Tomaste Almuerzo</label>
+                                        <label for="lunch-cbx">No Tome Almuerzo</label>
                                     </div>
                                     <hr/>`,
                                 preConfirm: () => {
@@ -259,7 +259,8 @@ def loadOptions(window, payload, base_url, api_url):
                 else if(result.dismiss === Swal.DismissReason.cancel)
                 {
                     Swal.fire({
-                        title: 'Obteniendo Horas'
+                        title: 'Obteniendo Horas',
+                        allowOutsideClick: false
                     });
                     Swal.showLoading();
                     let url = '%sgetHours/%s'
