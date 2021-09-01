@@ -74,7 +74,7 @@ def getFobs(api_url):
 def loadFobs():
     try:
         objs = getFobs(api_url)
-        print("Response: ", objs, "TYPE: ", type(objs), objs['message'])
+        print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
         if type(objs) != dict:
             # print("Response: ", objs)
             print("in not False")
