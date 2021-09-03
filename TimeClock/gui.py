@@ -220,7 +220,7 @@ def loadOptions(window, payload, base_url, api_url):
                                     `
                                     <input id="id" class="swal2-input" value="%s" type="hidden">
                                     <input id="name" class="swal2-input" value="%s" type="hidden">
-                                    <div class="big margin" style="margin-left:5px;>
+                                    <div class="big margin" style="margin-left:5px;">
                                         <input type="checkbox" name="lunch-cbx" id="lunch-cbx" /> 
                                         <label for="lunch-cbx">No Tome Almuerzo</label>
                                     </div>
