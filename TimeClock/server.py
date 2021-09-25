@@ -526,10 +526,10 @@ def setBaseUrl():
 #         readthread = threading.Thread(target=read)
 #         print('with global variables from not start, read_flag== True, readthread start')
 #         readthread.start()
-        
+
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
+@scheduler.task('cron', id='csvProcessor', hour="17", minute='40')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -539,9 +539,20 @@ def csvProcessor():
     dt = datetime.datetime.now()
     data = {}
     try:
+        upload_dates = []
+        with open(f'/home/pi/Documents/rfid/failed_uploads.csv', 'r') as failed_uploads: 
+            failed = csv.reader(failed_uploads)
+            
+            for failed_date in failed:
+                upload_dates.append(failed_date)
+
+            failed_uploads.close()
+
         with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f: 
             csv_reader = csv.DictReader(f)
             line_count = 0
+            upload_dates.append(dt.date())
+            # No failed dates
             for row in csv_reader:
                 #print(row)
                 # print(dt.date())
@@ -549,13 +560,15 @@ def csvProcessor():
                 # yesterday = datetime.datetime.today() - datetime.timedelta(days=2)
                 # print(d)
                 # if row['date'] == f'{yesterday.date()}':
-                if row['date'] == f'{dt.date()}':
+                # if row['date'] == f'{dt.date()}':
+                if row['date'] in upload_dates:
                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
                     # line_count += 1
                     line_count += 1
-            print(line_count)
+            # print(line_count)
             f.close()
+
         data['device'] = getserial()
         # print(data)
         data = json.dumps(data)
@@ -565,7 +578,9 @@ def csvProcessor():
         print("Status Code: ", res.status_code)
         res = json.loads(res.text)
         print("Message: ", res['message'])
+        sent_flag = True
         if res['message'] == 'error':
+            sent_flag = False
             for i in range(10):
                 resx = requests.get(api_url+"processCsv", data=data, headers=headers)
                 restxt = json.loads(resx.text)
@@ -574,12 +589,27 @@ def csvProcessor():
                     sleep(300)
                     continue
                 elif restxt['message'] == "success":
+                    sent_flag = True
                     break
                 else:
+                    sent_flag = True
                     break
+        
+        if sent_flag:
+            f = open(f'/home/pi/Documents/rfid/failed_uploads.csv', "w+")
+            f.close()
+
+        if not sent_flag:
+            with open(f'/home/pi/Documents/rfid/failed_uploads.csv', 'a+') as f:
+                failed_uploads = csv.writer(f, delimiter=',')
+                row = dt.date()
+                failed_uploads.writerow(row)
+                f.close()
+                
+
         print("Processing CSV FILE - ENDED: {}".format(now))
         # app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
-        return render_template('index.html')
+        # return render_template('index.html')
     except Exception as e:
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
         return render_template('index.html')
