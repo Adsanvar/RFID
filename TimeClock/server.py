@@ -77,7 +77,7 @@ def loadFobs():
         # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
         print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
-            # print("Response: ", objs)
+            print("Response: ", objs)
             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
         # else:
@@ -529,7 +529,7 @@ def setBaseUrl():
 
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="18", minute='00')
+@scheduler.task('cron', id='csvProcessor', hour="18", minute='23')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
