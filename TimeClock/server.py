@@ -529,7 +529,7 @@ def setBaseUrl():
 
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="18", minute='35')
+@scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -551,7 +551,7 @@ def csvProcessor():
         with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f: 
             csv_reader = csv.DictReader(f)
             line_count = 0
-            upload_dates.append(dt.date())
+            upload_dates.append(f'{dt.date()}')
             # No failed dates
             for row in csv_reader:
                 #print(row)
