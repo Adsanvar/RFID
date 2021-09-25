@@ -529,7 +529,7 @@ def setBaseUrl():
 
 
 # @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="18", minute='23')
+@scheduler.task('cron', id='csvProcessor', hour="18", minute='30')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -569,6 +569,8 @@ def csvProcessor():
             # print(line_count)
             f.close()
 
+        print("uploading dates: ")
+        print(upload_dates)
         data['device'] = getserial()
         # print(data)
         data = json.dumps(data)
