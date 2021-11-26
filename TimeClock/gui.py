@@ -145,7 +145,7 @@ def loadOptions(window, payload, base_url, api_url):
             customClass: {
                 confirmButton: 'btn-clock-in margin',
                 denyButton: 'btn-clock-out margin',
-                cancelButton: 'btn-cancel margin'
+                /*cancelButton: 'btn-cancel margin'*/
             },
             buttonsStyling: false
             })
@@ -162,8 +162,8 @@ def loadOptions(window, payload, base_url, api_url):
             confirmButtonText: 'Entrada',
             showDenyButton: true,
             denyButtonText: 'Salida',
-            showCancelButton: true,
-            cancelButtonText: 'Horas',
+            /*showCancelButton: true,*/
+            /*cancelButtonText: 'Horas',*/
             width: 600,
             timer: 60000,
             footer: "Seleccionar Opción o Oprime Afuera De Este Modulo Para Cerrar.",
