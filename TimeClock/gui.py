@@ -262,7 +262,7 @@ def loadOptions(window, payload, base_url, api_url):
                         allowOutsideClick: false
                     });
                     Swal.showLoading();
-                    let url = '%sgetHours/%s'
+                    let url = '%_sgetHours/%_s'
                     return fetch(url).then(response => {
                         if (!response.ok) 
                         {
