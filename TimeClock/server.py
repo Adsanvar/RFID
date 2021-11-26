@@ -197,20 +197,21 @@ def resumeRead():
     readthread.run()
     return jsonify(message='success')
 
-@app.route('/getHours')
-@app.route('/getHours/<string:data>')
-def getHours(data=None):
-    try:
-        app.logger.info('Loading Hours')
-        print("loading hours")
-        loadHours(data)
-        return jsonify(message='success')
-    except Exception as e:
-        print('Exception in getHours')
-        print(e)
-        app.logger.warning("Exception in getHours")
-        window.load_url(base_url) 
-        return jsonify(message='getHour Error')
+# hours feature has be disabled
+# @app.route('/getHours')
+# @app.route('/getHours/<string:data>')
+# def getHours(data=None):
+#     try:
+#         app.logger.info('Loading Hours')
+#         print("loading hours")
+#         loadHours(data)
+#         return jsonify(message='success')
+#     except Exception as e:
+#         print('Exception in getHours')
+#         print(e)
+#         app.logger.warning("Exception in getHours")
+#         window.load_url(base_url) 
+#         return jsonify(message='getHour Error')
 
 @app.route('/hours')
 @app.route('/hours/<string:data>')
