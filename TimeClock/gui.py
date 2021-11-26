@@ -262,7 +262,7 @@ def loadOptions(window, payload, base_url, api_url):
                         allowOutsideClick: false
                     });
                     Swal.showLoading();
-                    let url = '%_sgetHours/%_s'
+                    let url = 'getHours/'
                     return fetch(url).then(response => {
                         if (!response.ok) 
                         {
@@ -280,6 +280,7 @@ def loadOptions(window, payload, base_url, api_url):
             })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url)
             
             #code below is to view hours
+            # let url = '%sgetHours/%s'
             # % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
             
             window.evaluate_js(tmp)
