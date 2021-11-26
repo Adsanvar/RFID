@@ -42,7 +42,6 @@ def validateFob(payload):
         print(e)
         return False
 
-
 def sendWriteRequest(payload, api_url):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"writeFob", data=json.dumps(payload), headers=headers)
@@ -256,7 +255,7 @@ def loadOptions(window, payload, base_url, api_url):
                                     }
                                 })
                 }
-                else if(result.dismiss === Swal.DismissReason.cancel)
+                /*else if(result.dismiss === Swal.DismissReason.cancel)
                 {
                     Swal.fire({
                         title: 'Obteniendo Horas',
@@ -276,10 +275,13 @@ def loadOptions(window, payload, base_url, api_url):
                             `Request failed: ${error}`
                             )
                         })
-                }
+                }*/
                 
-            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
-
+            })""" % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url)
+            
+            #code below is to view hours
+            # % (payload['text'], payload['id'], payload['text'], base_url, payload['text'], payload['id'], payload['text'], base_url, base_url, payload['id'] )
+            
             window.evaluate_js(tmp)
             return True
     else:
