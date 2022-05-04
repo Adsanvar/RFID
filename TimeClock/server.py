@@ -33,6 +33,7 @@ scheduler.start()
 config = None
 fobs = None
 
+# prod - pending
 # try:
 #     f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
 #     # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
@@ -46,14 +47,23 @@ fobs = None
 #     raise
     
 
+# prod
 # app.config['SECRET_KEY'] = config['secret_key']
+# devel
 app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
+# prod
 # window = webview.create_window("TimeClock", app, fullscreen=True)
+
+# devel
 window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
 base_url = "http://localhost:5000/"
 
+# prod
 # base_url = ""
 # api_url = config['api_url']
+
+# devel
+api_url = ""
 
 def getFobs(api_url):
     try:
