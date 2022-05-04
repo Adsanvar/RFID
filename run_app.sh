@@ -7,12 +7,12 @@ flask run
 # flask run --no-reload
 # flask run -h 192.168.1.65
 
-timer=5
+# timer=5
 
-echo "Application will start in: "
-while (($timer !=0))
-do
-    echo $timer
-    sleep 1s
-    timer=$((timer-1))
-done
+# echo "Application will start in: "
+# while (($timer !=0))
+# do
+#     echo $timer
+#     sleep 1s
+#     timer=$((timer-1))
+# done
