@@ -20,7 +20,7 @@ import csv
 from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
-import database as database
+import database
 #import pandas as pd
 
 
@@ -31,7 +31,7 @@ db = SQLAlchemy()
 app = Flask(__name__)
 scheduler = APScheduler()
 scheduler.start()
-database = Database(db=db)
+database.Database(db=db)
 
 config = None
 fobs = None
