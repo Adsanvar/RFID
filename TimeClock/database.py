@@ -1,7 +1,10 @@
-from server import db
 from flask_login import UserMixin
 from flask import flash
 from sqlalchemy import and_
+
+class Database(self, db):
+    self.db = db
+
 
 #this is the model for the user table in the db
 class User(UserMixin, db.Model):
@@ -67,7 +70,6 @@ class Fob(db.Model):
     fobid = db.Column(db.String(45))
     text = db.Column(db.String(45))
     employeeId = db.Column(db.Integer)
-
 
 #user_query returns the first instance of username that is found by query 
 def user_query(usr):
