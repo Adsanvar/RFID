@@ -1,4 +1,4 @@
-from . import db
+from server import db
 from flask_login import UserMixin
 from flask import flash
 from sqlalchemy import and_

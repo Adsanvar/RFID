@@ -20,7 +20,7 @@ import csv
 from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
-import TimeClock.database as database
+import database as database
 #import pandas as pd
 
 
