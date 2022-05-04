@@ -20,6 +20,7 @@ import csv
 from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
+import TimeClock.database as database
 #import pandas as pd
 
 
@@ -141,6 +142,7 @@ def index():
             readthread.not_in_hours()
         return 'success'
     else:
+        print(database.getFobs())
         return render_template('index.html')
 
 @app.route('/clockin')
