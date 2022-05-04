@@ -142,6 +142,7 @@ def index():
             readthread.not_in_hours()
         return 'success'
     else:
+        print("INDEX:")
         print(database.getFobs())
         return render_template('index.html')
 
