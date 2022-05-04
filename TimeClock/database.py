@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from flask import flash
 from sqlalchemy import and_
-from . import db
+# from . import db
 
 # class Database:
 #     def __init__(self, db):
