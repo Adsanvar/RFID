@@ -5,7 +5,6 @@ from sqlalchemy import and_
 class Database(self, db):
     self.db = db
 
-
 #this is the model for the user table in the db
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
