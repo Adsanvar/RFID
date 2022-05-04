@@ -7,7 +7,7 @@ class Database:
         self.db = db
 
 #this is the model for the user table in the db
-class User(UserMixin, self.self.db.Model):
+class User(UserMixin, self.db.Model):
     id = self.db.Column(self.db.Integer, primary_key=True)
     username = self.db.Column(self.db.String(45))
     password = self.db.Column(self.db.String(100))
