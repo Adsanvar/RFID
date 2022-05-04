@@ -1,11 +1,11 @@
 from flask_login import UserMixin
 from flask import flash
 from sqlalchemy import and_
-# from . import db
 
-# class Database:
-#     def __init__(self, db):
-#         db = db
+
+class Database:
+    def __init__(self, db):
+        self.db = db
 
 #this is the model for the user table in the db
 class User(UserMixin, db.Model):
