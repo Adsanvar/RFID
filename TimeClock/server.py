@@ -31,7 +31,6 @@ db = SQLAlchemy()
 app = Flask(__name__)
 scheduler = APScheduler()
 scheduler.start()
-database.Database(db=db)
 
 config = None
 fobs = None
