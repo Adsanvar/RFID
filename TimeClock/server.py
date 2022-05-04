@@ -46,13 +46,14 @@ except Exception as e:
     raise
     
 
-app.config['SECRET_KEY'] = config['secret_key']
-window = webview.create_window("TimeClock", app, fullscreen=True)
-# window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-# base_url = "http://localhost:5000/"
+# app.config['SECRET_KEY'] = config['secret_key']
+app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
+# window = webview.create_window("TimeClock", app, fullscreen=True)
+window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+base_url = "http://localhost:5000/"
 
-base_url = ""
-api_url = config['api_url']
+# base_url = ""
+# api_url = config['api_url']
 
 
 def getFobs(api_url):
@@ -91,9 +92,6 @@ def loadFobs():
         #         else:
         #             sleep(10)
         #             continue
-
-                
-
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
         print(e)
