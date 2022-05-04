@@ -51,7 +51,7 @@ fobs = None
 # app.config['SECRET_KEY'] = config['secret_key']
 # devel
 app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Database13.@localhost/mvdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 database.db.init_app(app)
