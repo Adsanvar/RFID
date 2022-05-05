@@ -9,7 +9,7 @@ from gui import loadOptions
 from utilities import getserial
 
 class Reader(threading.Thread):
-    def __init__(self, window, api_url):
+    def __init__(self, window, api_url=None):
         super().__init__()
         # self.reader = SimpleMFRC522()
         self._stop_event = threading.Event()

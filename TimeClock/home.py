@@ -12,17 +12,3 @@ home = Blueprint('home', __name__, template_folder='templates')
 def index(): 
     return render_template('index.html')
 
-def setBaseUrl():
-    global base_url
-    base_url = window.get_current_url()
-    print("base url: ", base_url)
-    readthread.setBaseUrl(base_url)
-
-def create():
-    print("CREATE CALLED")
-    base_url = "http://localhost:5000/"
-    window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-    readthread = Reader(window = window, api_url = api_url)
-    readthread.daemon = True
-    readthread.start()
-    webview.start(setBaseUrl)

@@ -42,10 +42,22 @@ try:
 
         from TimeClock.home import home as h_bp
         app.register_blueprint(h_bp)
-        
-        h_bp.create()
+
+        base_url = "http://localhost:5000/"
+        window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+        readthread = Reader(window = window, api_url = api_url)
+        readthread.daemon = True
+        readthread.start()
+        webview.start(setBaseUrl)
 
         return app
+    
+    def setBaseUrl():
+        global base_url
+        base_url = window.get_current_url()
+        print("base url: ", base_url)
+        readthread.setBaseUrl(base_url)
+
 except:
     raise
 
