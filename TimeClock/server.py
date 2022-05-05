@@ -23,8 +23,10 @@ from flask_sqlalchemy import SQLAlchemy
 import database as dbc
 #import pandas as pd
 
+db = dbc.db
+
 #this is the model for the user table in the db
-class User(dbc.db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(45))
     password = db.Column(db.String(100))
@@ -36,7 +38,7 @@ class User(dbc.db.Model):
         return self.username
 
 #events model
-class Event(dbc.db.Model):
+class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     start = db.Column(db.String(45))
@@ -46,7 +48,7 @@ class Event(dbc.db.Model):
     def __repr__(self):
         return self.title
 
-class Timeclock(dbc.db.Model):
+class Timeclock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fobid = db.Column(db.String(45))
     date = db.Column(db.Date)
@@ -54,11 +56,11 @@ class Timeclock(dbc.db.Model):
     clockout = db.Column(db.DateTime)
     nolunch = db.Column(db.Boolean(1))
 
-class Device(dbc.db.Model):
+class Device(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     serial = db.Column(db.String(100))
 
-class Employee(dbc.db.Model):
+class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(45))
     lastname = db.Column(db.String(45))
@@ -70,7 +72,7 @@ class Employee(dbc.db.Model):
     def __repr__(self):
         return self.firstname + " " + self.lastname
     
-class Payroll(dbc.db.Model):
+class Payroll(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     employee_id = db.Column(db.Integer)
     start = db.Column(db.DateTime)
@@ -82,7 +84,7 @@ class Payroll(dbc.db.Model):
     cash_amount = db.Column(db.Numeric(7,2))
     total_hours_after_lunch = db.Column(db.Numeric(5,2))
 
-class Fob(dbc.db.Model):
+class Fob(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fobid = db.Column(db.String(45))
     text = db.Column(db.String(45))
@@ -119,7 +121,7 @@ app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-dbc.db.init_app(app)
+db.init_app(app)
 
 # prod
 window = webview.create_window("TimeClock", app, fullscreen=True)
