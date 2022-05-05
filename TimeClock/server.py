@@ -141,7 +141,7 @@ def index():
         return 'success'
     else:
         print("INDEX:")
-        print(database.getFobs())
+        print(dbc.getFobs())
         tc = dbc.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
         print(tc)
         # database.createTimeclock(tc)
