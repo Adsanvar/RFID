@@ -209,7 +209,7 @@ def index():
     else:
         print("INDEX:")
         print(dbc.getFobs())
-        tc = dbc.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
+        tc = TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
         print(tc)
         # database.createTimeclock(tc)
         # print(database.getTimeclockRowById(123))
