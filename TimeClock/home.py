@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify, send_file, Response
 import webview
-from reader import Reader
-from writer import Writer
-from utilities import getserial
+from TimeClock.reader import Reader
+from TimeClock.writer import Writer
+from TimeClock.utilities import getserial
 import gui 
 import datetime
 
