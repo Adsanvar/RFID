@@ -37,8 +37,9 @@ try:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
         app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-        
-        from TimeClock.home import home_bp as h_bp
+        db.init_app(app)
+
+        from TimeClock.home import home as h_bp
 
         app.register_blueprint(h_bp)
         return app
