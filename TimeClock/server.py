@@ -19,7 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-import database
+import database as database
 #import pandas as pd
 
 
@@ -142,10 +142,11 @@ def index():
     else:
         print("INDEX:")
         print(database.getFobs())
-        print(type(database))
+        database.TimeClock()
         tc = database.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
-        database.createTimeclock(tc)
-        print(database.getTimeclockRowById(123))
+        print(tc)
+        # database.createTimeclock(tc)
+        # print(database.getTimeclockRowById(123))
         return render_template('index.html')
 
 @app.route('/clockin')
