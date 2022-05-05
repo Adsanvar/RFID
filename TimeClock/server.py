@@ -19,7 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-import database as dbc
+# import database as dbc
 #import pandas as pd
 
 
@@ -34,38 +34,38 @@ config = None
 fobs = None
 
 # prod - pending
-# try:
-#     f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
-#     # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
-#     config = json.load(f)
-#     app.logger.info('Config File Loaded')
-#     f.close()
-# except Exception as e:
-#     print('error occurred reading file')
-#     app.logger.error('Config File Error')
-#     app.logger.error(e)
-#     raise
+try:
+    f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
+    # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
+    config = json.load(f)
+    app.logger.info('Config File Loaded')
+    f.close()
+except Exception as e:
+    print('error occurred reading file')
+    app.logger.error('Config File Error')
+    app.logger.error(e)
+    raise
     
 
 # prod
-# app.config['SECRET_KEY'] = config['secret_key']
+app.config['SECRET_KEY'] = config['secret_key']
 # devel
-app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+# app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 # dbc.db.init_app(app)
 
 # prod
-# window = webview.create_window("TimeClock", app, fullscreen=True)
+window = webview.create_window("TimeClock", app, fullscreen=True)
 
 # devel
-window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
-base_url = "http://localhost:5000/"
+# window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
+# base_url = "http://localhost:5000/"
 
 # prod
-# base_url = ""
-# api_url = config['api_url']
+base_url = ""
+api_url = config['api_url']
 
 # devel
 api_url = ""
