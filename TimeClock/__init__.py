@@ -39,7 +39,7 @@ try:
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         db.init_app(app)
 
-        from TimeClock.home import home as h_bp
+        from TimeClock.home import home_page as h_bp
 
         app.register_blueprint(h_bp)
         return app
