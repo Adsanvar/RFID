@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify
 import threading
 import RPi.GPIO as GPIO

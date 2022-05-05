@@ -1,3 +1,4 @@
+#!/bin/bash
 # export FLASK_APP=~/Documents/RFID/TimeClock
 export FLASK_APP=TimeClock/server.py
 export FLASK_ENV=development
