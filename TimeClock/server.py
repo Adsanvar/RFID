@@ -20,11 +20,10 @@ import csv
 from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
-import database as dbc
+from database import db
 from database import TimeClock
 #import pandas as pd
 
-db = dbc.db
 # #this is the model for the user table in the db
 # class User(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
