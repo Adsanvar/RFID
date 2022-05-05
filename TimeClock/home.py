@@ -19,6 +19,7 @@ def setBaseUrl():
     readthread.setBaseUrl(base_url)
 
 def create():
+    print("CREATE CALLED")
     base_url = "http://localhost:5000/"
     window = webview.create_window("TimeClock", "http://localhost:5000/", fullscreen=True)
     readthread = Reader(window = window, api_url = api_url)
