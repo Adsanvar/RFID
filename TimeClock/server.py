@@ -63,7 +63,7 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 
 # prod
 base_url = ""
-api_url = config['api_url']
+# api_url = config['api_url']
 
 # devel
 api_url = ""
