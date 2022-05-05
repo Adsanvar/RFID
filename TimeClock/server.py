@@ -19,7 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-from database import db
+import database as database
 #import pandas as pd
 
 
@@ -54,7 +54,7 @@ app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-db.init_app(app)
+database.db.init_app(app)
 
 # prod
 # window = webview.create_window("TimeClock", app, fullscreen=True)
