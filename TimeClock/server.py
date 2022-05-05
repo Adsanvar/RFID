@@ -19,8 +19,75 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-import database as dbc
+from flask_sqlalchemy import SQLAlchemy
+from database import db as dbc
 #import pandas as pd
+
+#this is the model for the user table in the db
+class User(UserMixin, dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(45))
+    password = db.Column(db.String(100))
+    firstname = db.Column(db.String(45))
+    lastname = db.Column(db.String(45))
+    role = db.Column(db.String(45))
+    
+    def __repr__(self):
+        return self.username
+
+#events model
+class Event(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    start = db.Column(db.String(45))
+    end = db.Column(db.String(45))
+    className = db.Column(db.String(45))
+    
+    def __repr__(self):
+        return self.title
+
+class Timeclock(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fobid = db.Column(db.String(45))
+    date = db.Column(db.Date)
+    clockin = db.Column(db.DateTime)
+    clockout = db.Column(db.DateTime)
+    nolunch = db.Column(db.Boolean(1))
+
+class Device(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    serial = db.Column(db.String(100))
+
+class Employee(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(45))
+    lastname = db.Column(db.String(45))
+    fobid = db.Column(db.String(45))
+    payrate = db.Column(db.Numeric(6,2))
+    cash = db.Column(db.Boolean(1))
+    employment_type = db.Column(db.String(45))
+
+    def __repr__(self):
+        return self.firstname + " " + self.lastname
+    
+class Payroll(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    employee_id = db.Column(db.Integer)
+    start = db.Column(db.DateTime)
+    end = db.Column(db.DateTime)
+    total_hours = db.Column(db.Numeric(5,2))
+    date = db.Column(db.DateTime)
+    cash_hours = db.Column(db.Numeric(5,2))
+    payroll_hours = db.Column(db.Numeric(5,2))
+    cash_amount = db.Column(db.Numeric(7,2))
+    total_hours_after_lunch = db.Column(db.Numeric(5,2))
+
+class Fob(dbc.db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fobid = db.Column(db.String(45))
+    text = db.Column(db.String(45))
+    employeeId = db.Column(db.Integer)
+
 
 now = datetime.datetime.now()
 Path("logs").mkdir(parents=True, exist_ok=True)
@@ -140,8 +207,8 @@ def index():
     else:
         print("INDEX:")
         print(dbc.getFobs())
-        tc = dbc.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
-        print(tc)
+        # tc = dbc.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
+        # print(tc)
         # database.createTimeclock(tc)
         # print(database.getTimeclockRowById(123))
         return render_template('index.html')
