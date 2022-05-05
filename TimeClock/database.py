@@ -3,6 +3,8 @@ from flask import flash
 from sqlalchemy import and_
 from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
+
 #this is the model for the user table in the db
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
