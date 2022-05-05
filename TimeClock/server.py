@@ -24,7 +24,7 @@ from database import db as dbc
 #import pandas as pd
 
 #this is the model for the user table in the db
-class User(UserMixin, dbc.db.Model):
+class User(dbc.db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(45))
     password = db.Column(db.String(100))
