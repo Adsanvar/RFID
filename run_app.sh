@@ -1,5 +1,6 @@
-export FLASK_APP=~/Documents/rfid/TimeClock
+# export FLASK_APP=~/Documents/RFID/TimeClock
 # export FLASK_APP=TimeClock/server.py
+export FLASK_APP=TimeClock
 export FLASK_ENV=development
 export DEBUG=1
 export FLASK_RUN_PORT=5000
