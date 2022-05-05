@@ -28,6 +28,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+
 db = SQLAlchemy()
 
 try:
@@ -40,8 +41,10 @@ try:
         db.init_app(app)
 
         from TimeClock.home import home as h_bp
-
         app.register_blueprint(h_bp)
+        
+        TimeClock.home.create()
+
         return app
 except:
     raise
