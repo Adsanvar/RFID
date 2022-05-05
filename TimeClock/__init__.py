@@ -38,7 +38,7 @@ try:
         app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         
-        from TimeClock.home import home as h_bp
+        from home import home as h_bp
 
         app.register_blueprint(h_bp)
         return app
