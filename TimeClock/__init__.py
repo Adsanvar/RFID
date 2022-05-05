@@ -43,7 +43,7 @@ try:
         from TimeClock.home import home as h_bp
         app.register_blueprint(h_bp)
         
-        TimeClock.home.create()
+        h_bp.create()
 
         return app
 except:
