@@ -19,8 +19,7 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-import database
-from database import TimeClock, Fob
+from database import db
 #import pandas as pd
 
 
@@ -55,7 +54,7 @@ app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Database13.@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-database.db.init_app(app)
+db.init_app(app)
 
 # prod
 # window = webview.create_window("TimeClock", app, fullscreen=True)
@@ -143,7 +142,7 @@ def index():
     else:
         print("INDEX:")
         print(database.getFobs())
-        tc = TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
+        tc = database.TimeClock(fobid=123, date=datetime.datetime.now(), clock_in=datetime.datetime.now(), nolunch=False)
         print(tc)
         # database.createTimeclock(tc)
         # print(database.getTimeclockRowById(123))
