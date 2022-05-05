@@ -3,7 +3,7 @@ import webview
 from TimeClock.reader import Reader
 from TimeClock.writer import Writer
 from TimeClock.utilities import getserial
-import TimeClock.gui
+import TimeClock.gui as gui
 import datetime
 
 home = Blueprint('home', __name__, template_folder='templates')
