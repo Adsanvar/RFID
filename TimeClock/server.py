@@ -144,9 +144,8 @@ def index():
         print("INDEX:")
         print(dbc.getFobs())
         tc = dbc.Timeclock(fobid=123, date=datetime.datetime.now(), clockin=datetime.datetime.now(), nolunch=False)
-        print(tc)
-        # database.createTimeclock(tc)
-        # print(database.getTimeclockRowById(123))
+        database.createTimeclock(tc)
+        print(database.getTimeclockRowById(123))
         return render_template('index.html')
 
 @app.route('/clockin')
