@@ -2,8 +2,9 @@ from flask_login import UserMixin
 from flask import flash
 from sqlalchemy import and_
 from flask_sqlalchemy import SQLAlchemy
+from __main__ import app
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
 #this is the model for the user table in the db
 class User(UserMixin, db.Model):
