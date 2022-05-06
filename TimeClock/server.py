@@ -22,7 +22,6 @@ from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
 # import database as dbc
-from flask_sqlalchemy import SQLAlchemy
 #import pandas as pd
 
 now = datetime.datetime.now()
