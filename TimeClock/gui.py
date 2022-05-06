@@ -1,7 +1,7 @@
 import json
 import os
 import requests
-from database import db
+import database
 
 success_flag = False
 fobs = None
@@ -42,7 +42,7 @@ def validateFob(payload):
     # except Exception as e:
     #     print(e)
     #     return False
-    print(db.searchFob(payload['id']))
+    print(database.searchFob(payload['id']))
     return True
 
 def sendWriteRequest(payload, api_url):
