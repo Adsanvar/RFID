@@ -24,8 +24,6 @@ from flask_sqlalchemy import SQLAlchemy
 import database as dbc
 #import pandas as pd
 
-db = dbc.db
-
 now = datetime.datetime.now()
 Path("logs").mkdir(parents=True, exist_ok=True)
 logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
@@ -665,9 +663,6 @@ if __name__ == '__main__':
         
         # writethread.setWriteFlag(False)
         # writethread.start()
-        print('in main load fobs')
-        loadFobs()
-        print('in main after load fobs')
         app.logger.info("Read Thread Started")
         # webview.start(setBaseUrl, debug=True)
         app.logger.info("starting the webview window with a base url")

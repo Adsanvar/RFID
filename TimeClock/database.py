@@ -303,6 +303,7 @@ def createPayroll(recs):
     except:
         db.session.rollback()
         raise
+    
 def searchFob(id):
     try:
         return Fob.query.filter_by(fobid = id).first()

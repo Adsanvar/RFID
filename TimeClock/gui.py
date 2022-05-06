@@ -1,6 +1,7 @@
 import json
 import os
 import requests
+from app import db
 
 success_flag = False
 fobs = None
