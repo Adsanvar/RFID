@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, flash, Blueprint, session, re
 import os
 import api.database as db
 
-home = Blueprint('home', __name__)
+home_page = Blueprint('home_page', __name__)
 
-@home.route('/', methods=['GET'])
+@home_page.route('/', methods=['GET'])
 def index():
     # data = request.args.get('data')
     # if data != None:
