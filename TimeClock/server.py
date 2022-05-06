@@ -665,6 +665,7 @@ if __name__ == '__main__':
         
         # writethread.setWriteFlag(False)
         # writethread.start()
+        loadFobs()
         app.logger.info("Read Thread Started")
         # webview.start(setBaseUrl, debug=True)
         app.logger.info("starting the webview window with a base url")
