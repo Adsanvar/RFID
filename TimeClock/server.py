@@ -21,13 +21,15 @@ import csv
 from flask_apscheduler import APScheduler
 from time import sleep
 from flask_sqlalchemy import SQLAlchemy
-import database as dbc
+# import database as dbc
+from flask_sqlalchemy import SQLAlchemy
 #import pandas as pd
 
 now = datetime.datetime.now()
 Path("logs").mkdir(parents=True, exist_ok=True)
 logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 app = Flask(__name__)
+db = SQLAlchemy()
 # scheduler = APScheduler()
 # scheduler.start()
 
@@ -54,7 +56,7 @@ app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-dbc.db.init_app(app)
+db.init_app(app)
 
 # prod
 window = webview.create_window("TimeClock", app, fullscreen=True)
@@ -85,7 +87,7 @@ def getFobs(api_url=None):
     #     print(e)
     #     app.logger.error("Exception Trying to Get fobs")
     #     return False
-    return dbc.getFobs()
+    return db.getFobs()
 
 def loadFobs():
     try:
