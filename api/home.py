@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, flash, Blueprint, session, re
 import os
 import api.database as db
 
-home_page = Blueprint('home_page', __name__)
+home = Blueprint('home', __name__)
 
-@home_page.route('/', methods=['GET'])
+@home.route('/', methods=['GET'])
 def index():
+    return render_template('index.html')
     # data = request.args.get('data')
     # if data != None:
     #     if data == 'fromStopWrite':
@@ -27,4 +28,3 @@ def index():
     #     # # dbc.createTimeclock(tc)
     #     # # print(dbc.getTimeclockRowById(123))
     #     return render_template('index.html')
-    return render_template('hours.html')
