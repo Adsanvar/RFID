@@ -2,6 +2,7 @@ import json
 import os
 import requests
 import database
+from flask import current_app
 
 success_flag = False
 fobs = None
@@ -42,7 +43,8 @@ def validateFob(payload):
     # except Exception as e:
     #     print(e)
     #     return False
-    print(database.searchFob(payload['id']))
+    # print(database.searchFob(payload['id']))
+    print(current_app)
     return True
 
 def sendWriteRequest(payload, api_url):
