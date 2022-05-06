@@ -3,7 +3,8 @@ import os
 
 
 home = Blueprint('home', __name__)
-@app.route('/', methods=['GET', 'POST'])
+
+@home.route('/', methods=['GET', 'POST'])
 def index():
     # data = request.args.get('data')
     # if data != None:
