@@ -72,31 +72,33 @@ base_url = ""
 # devel
 api_url = ""
 
-def getFobs(api_url):
-    try:
-        payload = {"device": getserial()}
-        sleep(5)
-        headers= {'content-type': 'application/json'}
-        data = json.dumps(payload)
-        res = requests.get(api_url+"getFobs", data=data, headers=headers)
-        res = json.loads(res.text)
-        return res
+def getFobs(api_url=None):
+    # try:
+    #     payload = {"device": getserial()}
+    #     sleep(5)
+    #     headers= {'content-type': 'application/json'}
+    #     data = json.dumps(payload)
+    #     res = requests.get(api_url+"getFobs", data=data, headers=headers)
+    #     res = json.loads(res.text)
+    #     return res
 
-    except Exception as e:
-        print('Exception in getFobs')
-        print(e)
-        app.logger.error("Exception Trying to Get fobs")
-        return False
+    # except Exception as e:
+    #     print('Exception in getFobs')
+    #     print(e)
+    #     app.logger.error("Exception Trying to Get fobs")
+    #     return False
+    return dbc.getFobs()
 
 def loadFobs():
     try:
-        objs = getFobs(api_url)
+        objs = getFobs()
         # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
         print("Response: ", objs, "TYPE: ", type(objs))
-        if type(objs) != dict:
-            print("Response: ", objs)
-            with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
-                json.dump(objs, f, ensure_ascii=False, indent=4)
+        # if type(objs) != dict:
+        #     print("Response: ", objs)
+        #     with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+        #         json.dump(objs, f, ensure_ascii=False, indent=4)
+        
         # else:
         #     for i in range(10):
         #         objs = getFobs(api_url)
@@ -646,19 +648,21 @@ if __name__ == '__main__':
         # startReadThread(True)
         readthread.start()
         # print("loading fobs")
-        import subprocess
-        ps = subprocess.Popen(['iwgetid'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        try:
-            output = subprocess.check_output(('grep', 'ESSID'), stdin=ps.stdout)
-            print("output:", list(output))
-            if len(output) != 0:
-                print("output !=0")
-                print(output)
-                loadFobs()
-        except subprocess.CalledProcessError:
-            # grep did not match any lines
-            print("No wireless networks connected")
-        # print("fobs loaded")
+
+        # Code Block to check for wifi connection
+        # import subprocess
+        # ps = subprocess.Popen(['iwgetid'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        # try:
+        #     output = subprocess.check_output(('grep', 'ESSID'), stdin=ps.stdout)
+        #     print("output:", list(output))
+        #     if len(output) != 0:
+        #         print("output !=0")
+        #         print(output)
+        #         loadFobs()
+        # except subprocess.CalledProcessError:
+        #     # grep did not match any lines
+        #     print("No wireless networks connected")
+        
         # writethread.setWriteFlag(False)
         # writethread.start()
         app.logger.info("Read Thread Started")
