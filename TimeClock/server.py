@@ -146,9 +146,9 @@ def index():
     else:
         print("INDEX:")
         print(dbc.getFobs())
-        tc = dbc.Timeclock(fobid=123, date=datetime.datetime.now(), clockin=datetime.datetime.now(), nolunch=False)
-        dbc.createTimeclock(tc)
-        print(dbc.getTimeclockRowById(123))
+        # tc = dbc.Timeclock(fobid=123, date=datetime.datetime.now(), clockin=datetime.datetime.now(), nolunch=False)
+        # dbc.createTimeclock(tc)
+        # print(dbc.getTimeclockRowById(123))
         return render_template('index.html')
 
 @app.route('/clockin')
@@ -665,7 +665,9 @@ if __name__ == '__main__':
         
         # writethread.setWriteFlag(False)
         # writethread.start()
+        print('in main load fobs')
         loadFobs()
+        print('in main after load fobs')
         app.logger.info("Read Thread Started")
         # webview.start(setBaseUrl, debug=True)
         app.logger.info("starting the webview window with a base url")
