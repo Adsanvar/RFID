@@ -650,8 +650,9 @@ if __name__ == '__main__':
         ps = subprocess.Popen(['iwgetid'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         try:
             output = subprocess.check_output(('grep', 'ESSID'), stdin=ps.stdout)
-            print(list(output))
+            print("output:", list(output))
             if len(output) != 0:
+                print("output !=0")
                 print(output)
                 loadFobs()
         except subprocess.CalledProcessError:
