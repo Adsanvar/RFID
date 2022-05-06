@@ -5,7 +5,7 @@ import api.database as db
 home = Blueprint('home', __name__)
 
 @home.route('/', methods=['GET'])
-def startup():
+def index():
     return render_template('index.html')
     # data = request.args.get('data')
     # if data != None:

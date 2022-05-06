@@ -51,14 +51,14 @@
         {% endwith %}
       <!-- {% if read != False %}
       <div class="box" >
-        <form action="{{ url_for('index') }}" method="post">
+        <form action="{{ url_for('home.index') }}" method="post">
           <input class = "clock-in" type="submit" name="clockIn" value="Entrada">
           <input class = "clock-out" type="submit" name="clockOut" value="Salida">
         </form>
       </div>
       {% else %}
       <div class="box" hidden="True">
-        <form action="{{ url_for('index') }}" method="post">
+        <form action="{{ url_for('home.index') }}" method="post">
           <input type="submit" name="login" value={{read}}>
         </form> 
       </div>
