@@ -51,6 +51,7 @@ try:
         from api.home import home as h_bp
 
         app.register_blueprint(h_bp)
+        
         return app
 except:
     print(os.getcwd())
