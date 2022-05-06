@@ -55,7 +55,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 dbc.db.init_app(app)
-app.app_context().push()
 
 # prod
 window = webview.create_window("TimeClock", app, fullscreen=True)
