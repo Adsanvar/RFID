@@ -1,8 +1,6 @@
 import json
 import os
 import requests
-import database
-from flask import current_app as app
 
 success_flag = False
 fobs = None
@@ -24,27 +22,28 @@ fobs = None
 
 
 def validateFob(payload):
-    # try:
-    #     with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
-    #         fobs = json.load(f)
+    try:
+        # with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
+        #     fobs = json.load(f)
         
-    #     print(fobs)
-    #     print(payload)
-    #     for o in fobs:
-    #         # print(type(o['fobid']))
-    #         # print(type(payload['id']))
-    #         if int(o['fobid']) == payload['id']:
-    #             print("fobid matched payload id")
-    #             if o['text'] == payload['text']:
-    #                 print("text matched payload text")
-    #                 return True
-    #             else:
-    #                 return False
-    # except Exception as e:
-    #     print(e)
-    #     return False
-    # print(database.searchFob(payload['id']))
-    print(app.name)
+        # print(fobs)
+        # print(payload)
+        # for o in fobs:
+        #     # print(type(o['fobid']))
+        #     # print(type(payload['id']))
+        #     if int(o['fobid']) == payload['id']:
+        #         print("fobid matched payload id")
+        #         if o['text'] == payload['text']:
+        #             print("text matched payload text")
+        #             return True
+        #         else:
+        #             return False
+        print(payload)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+    print(database.searchFob(payload['id']))
     return True
 
 def sendWriteRequest(payload, api_url):
