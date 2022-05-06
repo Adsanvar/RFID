@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify, send_file, Response
 import os
-
+import api.database as db
 
 home = Blueprint('home', __name__)
 
-@home.route('/', methods=['GET', 'POST'])
+@home.route('/', methods=['GET'])
 def index():
     # data = request.args.get('data')
     # if data != None:
