@@ -27,4 +27,4 @@ def index():
     #     # # dbc.createTimeclock(tc)
     #     # # print(dbc.getTimeclockRowById(123))
     #     return render_template('index.html')
-    return render_template('index.html')
+    return render_template('hours.html')
