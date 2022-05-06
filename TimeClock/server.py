@@ -53,7 +53,7 @@ fobs = None
 # app.config['SECRET_KEY'] = config['secret_key']
 # devel
 app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:MVTech3.@localhost/mvdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost/mvdb'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 dbc.db.init_app(app)
@@ -98,7 +98,7 @@ def loadFobs():
         #     print("Response: ", objs)
         #     with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
         #         json.dump(objs, f, ensure_ascii=False, indent=4)
-        
+
         # else:
         #     for i in range(10):
         #         objs = getFobs(api_url)
