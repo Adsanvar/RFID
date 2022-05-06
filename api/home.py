@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, flash, Blueprint, session, redirect, url_for, jsonify, send_file, Response
 import os
 
+
+home = Blueprint('home', __name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     # data = request.args.get('data')
