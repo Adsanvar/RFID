@@ -669,13 +669,17 @@ if __name__ == '__main__':
         
         # writethread.setWriteFlag(False)
         # writethread.start()
-        app.logger.info("Read Thread Started")
+        # app.logger.info("Read Thread Started")
+        print("Read Thread Started")
         # webview.start(setBaseUrl, debug=True)
-        app.logger.info("starting the webview window with a base url")
+        # app.logger.info("starting the webview window with a base url")
+        print("starting the webview window with a base url")
         webview.start(setBaseUrl)
         sys.exit()
     except Exception as e:
-        app.logger.error("Error Running the __main__ thread")
-        app.logger.error(e)
+        # app.logger.error("Error Running the __main__ thread")
+        # app.logger.error(e)
+        print("Error Running the __main__ thread")
+        print(e)
         raise
         
