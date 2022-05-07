@@ -20,8 +20,6 @@ import logging
 import csv
 from flask_apscheduler import APScheduler
 from time import sleep
-from flask_sqlalchemy import SQLAlchemy
-import database as dbc
 #import pandas as pd
 
 now = datetime.datetime.now()
@@ -50,11 +48,8 @@ fobs = None
 # prod
 # app.config['SECRET_KEY'] = config['secret_key']
 # devel
-app.config['SECRET_KEY'] = "TEST_SECRET_KEY"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost/mvdb'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-dbc.db.init_app(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost/mvdb'
+app.config['SECRET_KEY'] = "TESTSECRETKEY"
 
 # prod
 window = webview.create_window("TimeClock", app, fullscreen=True)
@@ -68,49 +63,48 @@ base_url = ""
 # api_url = config['api_url']
 
 # devel
-api_url = ""
+api_url = "http://localhost:5000/"
 
-def getFobs(api_url=None):
-    # try:
-    #     payload = {"device": getserial()}
-    #     sleep(5)
-    #     headers= {'content-type': 'application/json'}
-    #     data = json.dumps(payload)
-    #     res = requests.get(api_url+"getFobs", data=data, headers=headers)
-    #     res = json.loads(res.text)
-    #     return res
+# def getFobs(api_url=None):
+#     try:
+#         payload = {"device": getserial()}
+#         sleep(5)
+#         headers= {'content-type': 'application/json'}
+#         data = json.dumps(payload)
+#         res = requests.get(api_url+"getFobs", data=data, headers=headers)
+#         res = json.loads(res.text)
+#         return res
 
-    # except Exception as e:
-    #     print('Exception in getFobs')
-    #     print(e)
-    #     app.logger.error("Exception Trying to Get fobs")
-    #     return False
-    return dbc.getFobs()
+#     except Exception as e:
+#         print('Exception in getFobs')
+#         print(e)
+#         app.logger.error("Exception Trying to Get fobs")
+#         return False
 
-def loadFobs():
-    try:
-        objs = getFobs()
-        # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
-        print("Response: ", objs, "TYPE: ", type(objs))
-        # if type(objs) != dict:
-        #     print("Response: ", objs)
-        #     with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
-        #         json.dump(objs, f, ensure_ascii=False, indent=4)
+# def loadFobs():
+#     try:
+#         objs = getFobs()
+#         # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
+#         print("Response: ", objs, "TYPE: ", type(objs))
+#         if type(objs) != dict:
+#             print("Response: ", objs)
+#             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+#                 json.dump(objs, f, ensure_ascii=False, indent=4)
 
-        # else:
-        #     for i in range(10):
-        #         objs = getFobs(api_url)
-        #         print("Retry Response: ", objs)
-        #         if len(objs) != 1 and len(objs[0]) != 1:
-        #             with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
-        #                 json.dump(objs, f, ensure_ascii=False, indent=4)
-        #             break
-        #         else:
-        #             sleep(10)
-        #             continue
-    except Exception as e:
-        app.logger.error("Exception Trying to load fobs")
-        print(e)
+#         else:
+#             for i in range(10):
+#                 objs = getFobs(api_url)
+#                 print("Retry Response: ", objs)
+#                 if len(objs) != 1 and len(objs[0]) != 1:
+#                     with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+#                         json.dump(objs, f, ensure_ascii=False, indent=4)
+#                     break
+#                 else:
+#                     sleep(10)
+#                     continue
+#     except Exception as e:
+#         app.logger.error("Exception Trying to load fobs")
+#         print(e)
 
 # loadFobs()
 
