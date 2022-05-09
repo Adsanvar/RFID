@@ -543,7 +543,7 @@ def setBaseUrl():
 #         readthread.start()
 
 @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="15", minute='15')
+@scheduler.task('cron', id='csvProcessor', hour="15", minute='36')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
