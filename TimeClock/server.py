@@ -157,8 +157,10 @@ def clockin(data=None):
             dt = datetime.datetime.now().replace(microsecond=0)
             with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
-                # header = ['date', 'name','fobid', 'in/out','time', 'lunch']
-                # clkin.writerow(header)
+                r = f.read(2)
+                if len(r) == 0:
+                    header = ['date', 'name','fobid', 'in/out','time', 'lunch']
+                    clkin.writerow(header)
                 row = [dt.date(), data['text'], data['id'], 'in', dt, False]
                 clkin.writerow(row)
                 f.close()
@@ -566,8 +568,6 @@ def csvProcessor():
             csv_reader = csv.DictReader(f)
             line_count = 0
             upload_dates.append(f'{dt.date()}')
-            r = f.read(5)
-            print(len(r))
             # No failed dates
             for row in csv_reader:
                 #print(row)
