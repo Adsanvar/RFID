@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, Blueprint, redirect, url_for, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from . import bcrypt
-import Landscape.database as database
+import Dashboard.database as database
 # from validate_email import validate_email
 # from email.mime.text import MIMEText
 # import os

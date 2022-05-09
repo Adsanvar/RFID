@@ -4,9 +4,9 @@ import numpy as np
 from flask_login import login_user, logout_user, login_required, current_user
 import Landscape.database as database
 from . import bcrypt
-from Landscape.cEvent import cEvent as cEvent
-from Landscape.Employee import Employee as Employee
-from Landscape.Fob import Fob as Fob
+from Dashboard.cEvent import cEvent as cEvent
+from Dashboard.Employee import Employee as Employee
+from Dashboard.Fob import Fob as Fob
 import json
 # from weasyprint import HTML, CSS
 from flask_weasyprint import HTML, render_pdf, CSS
