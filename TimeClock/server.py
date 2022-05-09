@@ -159,7 +159,7 @@ def clockin(data=None):
                 clkin = csv.writer(f, delimiter=',')
                 r = f.read(2)
                 if len(r) == 0:
-                    header = ['date', 'name','fobid', 'in/out','time', 'lunch']
+                    header = ['date', 'name','fobid', 'in/out','time', 'nolunch']
                     clkin.writerow(header)
                 row = [dt.date(), data['text'], data['id'], 'in', dt, False]
                 clkin.writerow(row)
