@@ -36,13 +36,13 @@ try:
         #initialized bcrypt
         bcrypt.init_app(app)
 
-        from Landscape.home import home as h_bp
-        from Landscape.authenticator import auth as a_bp
+        from Dashboard.home import home as h_bp
+        from Dashboard.authenticator import auth as a_bp
 
         app.register_blueprint(h_bp)
         app.register_blueprint(a_bp)
 
-        from Landscape.database import user_id_query as id_query
+        from Dashboard.database import user_id_query as id_query
 
         @LoginManager.user_loader
         def load_user(id):

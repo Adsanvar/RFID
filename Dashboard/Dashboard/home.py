@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, Blueprint, session, re
 import os
 import numpy as np
 from flask_login import login_user, logout_user, login_required, current_user
-import Landscape.database as database
+import Dashboard.database as database
 from . import bcrypt
 from Dashboard.cEvent import cEvent as cEvent
 from Dashboard.Employee import Employee as Employee
