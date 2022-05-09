@@ -543,7 +543,7 @@ def setBaseUrl():
 #         readthread.start()
 
 @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="14", minute='43')
+@scheduler.task('cron', id='csvProcessor', hour="15", minute='15')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -613,14 +613,16 @@ def csvProcessor():
         
         #Clears file if sent_flag is true
         if sent_flag:
+            print('sent flag')
             f = open(f'/home/pi/Documents/RFID/failed_uploads.csv', "w+")
             f.close()
 
         #Appends Date if sent_flag is false
         if not sent_flag:
+            print("if not sent_flag")
             with open(f'/home/pi/Documents/RFID/failed_uploads.csv', 'a+') as f:
                 failed_uploads = csv.writer(f)
-                row = [dt.date()]
+                row = [dt]
                 failed_uploads.writerow(row)
                 f.close()
                 
@@ -630,6 +632,7 @@ def csvProcessor():
         # return render_template('index.html')
     except Exception as e:
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
+        raise
         return render_template('index.html')
 
 if __name__ == '__main__':
