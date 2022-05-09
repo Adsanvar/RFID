@@ -6,7 +6,7 @@
 # flask run
 # flask run --no-reload
 # flask run -h 192.168.1.65
-python3 TimeClock/server.py
+python3 server.py
 
 # timer=5
 
