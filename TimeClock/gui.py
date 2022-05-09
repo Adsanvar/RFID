@@ -78,7 +78,7 @@ def loadOptions(window, payload, base_url, api_url):
         })"""
         window.evaluate_js(string)
         return False
-    elif validateFob(payload):
+    elif validateFob(payload, api_url):
         if payload['text'] == 'Admin':
             tmp = """ const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
