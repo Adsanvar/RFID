@@ -566,6 +566,7 @@ def csvProcessor():
             csv_reader = csv.DictReader(f)
             line_count = 0
             upload_dates.append(f'{dt.date()}')
+            print(f.read(5))
             # No failed dates
             for row in csv_reader:
                 #print(row)
@@ -633,7 +634,7 @@ def csvProcessor():
     except Exception as e:
         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
         raise
-        return render_template('index.html')
+        # return render_template('index.html')
 
 if __name__ == '__main__':
     try:
