@@ -5,46 +5,43 @@ import requests
 success_flag = False
 fobs = None
 
-# def validateFob(payload, api_url):
-#     try:
-#         headers= {'content-type': 'application/json'}
-#         data = json.dumps(payload)
-#         res = requests.get(api_url+"validateFob", data=data, headers=headers)
-#         res = json.loads(res.text)
-#         if res['message']:
-#             return True
-#         else:
-#             return False
-#     except Exception as e:
-#         print('Exception in /validateFob')
-#         print(e)
-#         return False
-
-
-def validateFob(payload):
+def validateFob(payload, api_url):
     try:
-        # with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
-        #     fobs = json.load(f)
-        
-        # print(fobs)
-        # print(payload)
-        # for o in fobs:
-        #     # print(type(o['fobid']))
-        #     # print(type(payload['id']))
-        #     if int(o['fobid']) == payload['id']:
-        #         print("fobid matched payload id")
-        #         if o['text'] == payload['text']:
-        #             print("text matched payload text")
-        #             return True
-        #         else:
-        #             return False
-        print(payload)
-        return True
+        headers= {'content-type': 'application/json'}
+        data = json.dumps(payload)
+        res = requests.get(api_url+"validateFob", data=data, headers=headers)
+        res = json.loads(res.text)
+        if res['message']:
+            return True
+        else:
+            return False
     except Exception as e:
+        print('Exception in /validateFob')
         print(e)
         return False
-    print(database.searchFob(payload['id']))
-    return True
+
+# Local
+# def validateFob(payload):
+#     try:
+#         with open('/home/pi/Documents/rfid/fobs.json', 'r', encoding='utf-8') as f:
+#             fobs = json.load(f)
+        
+#         print(fobs)
+#         print(payload)
+#         for o in fobs:
+#             # print(type(o['fobid']))
+#             # print(type(payload['id']))
+#             if int(o['fobid']) == payload['id']:
+#                 print("fobid matched payload id")
+#                 if o['text'] == payload['text']:
+#                     print("text matched payload text")
+#                     return True
+#                 else:
+#                     return False
+#     except Exception as e:
+#         print(e)
+#         return False
+#     return True
 
 def sendWriteRequest(payload, api_url):
     headers= {'content-type': 'application/json'}

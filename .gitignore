@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 TimeClock/__pycache__/
+Dashboard/__pycache__/
 *.py[cod]
 *$py.class
 

@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>MV Landscaping</title>
+  <!-- Bootstrap core CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css')}}">
+  <link href="{{ url_for('static', filename='css/fullcalendar.css')}}" rel='stylesheet' />
+  <link href="{{ url_for('static', filename='css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css')}}">
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('home.dashboard')}}">Dashboard</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+          <form class="form-inline my-2 my-lg-0" action="{{ url_for('home.dashboard') }}" method="post">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="logout">Logout</button>
+          </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Hello,
+      <small>{{user}}</small>
+    </h1>
+      <!-- Content Row -->
+      <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-2 mb-4">
+          <div class="list-group">
+            {% if role == 'Admin' %}
+            <a href="{{ url_for('home.dashboard', option='Settings') }}" class="list-group-item">Settings</a>
+            <a href="{{ url_for('home.dashboard', option='Content') }}" class="list-group-item">Content</a>
+            {% endif %}
+            <a href="{{ url_for('home.dashboard', option='Calendar') }}" class="list-group-item">Calendar</a>
+            <!-- <a href="services.html" class="list-group-item">Services</a> -->
+          </div>
+        </div>
+        <!-- /.Sidebar -->
+        <!-- Content Column -->
+        <div class="col-lg-9 mb-4">
+          <h2>{{option}}</h2>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                  <p class="alert-{{category}}">{{ message }}</p>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <!-- Calendar Settings -->
+          {% if option == 'Calendar' %}
+                <div id='wrap'>
+                    <div id='calendar'></div>
+                  <!-- <button id="printCalendar" class="btn btn-outline-success my-2 my-sm-0" type="submit" name="print">Print</button> -->
+                  <div style='clear:both'></div>
+                  {% if role == 'Admin' %}
+                  <!-- Modal Add Event -->
+                  <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="eventModalLabel">Event</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- <form id="eventForm" action="{{ url_for('home.createEvent') }}" method="post"> -->
+                            <!-- <input name="delete_user" id="user" type="text" readonly></input> -->
+                            <!-- <p id="info2"></p> -->
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">Title</label>
+                              <input class="form-control" type="text" name="eventTitle" id="eventTitle" required></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">From</label>
+                              <input class="form-control" type="text" name="fromDate" id="fromDate" readonly></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">To</label>
+                              <input class="form-control" type="text" name="toDate" id="toDate" readonly></input>
+                            </div>
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">Color</label>
+                              <select id="eventColorSelect" name="eventColorSelect" required>
+                                <option value="default">No Color</option>
+                                <option value="info">Blue</option>
+                                <option value="important">Red</option>
+                                <option value="chill">Pink</option>
+                                <option value="success">Green</option>
+                              </select>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">Cancel</button>
+                              <button id="eventDelete" class="btn btn-outline-danger" type="button" name="eventDelete" hidden>Delete</button>
+                              <button id="eventConfirm" name="eventConfirm" class="btn btn-outline-success">Confirm</button>
+                            </div>
+                          <!-- </form> -->
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  <!-- ./end event modal -->
+                </div>
+          {% endif %}
+          <!-- ./END of Calendar Settings -->
+          {% if option == 'Settings' %}
+            {% if role == 'Admin' %}
+              <div class="btn-group-div">
+                  {% if view == 'employees'%}
+                  <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
+                  <a name="Employees" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
+                  <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
+                  {% elif view == 'hours' %}
+                  <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
+                  <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Hours" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
+                  <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
+                  {% elif view == 'payroll'%}
+                  <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
+                  <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
+                  <a name="Payroll" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
+                  {% else %}
+                  <a name="Users" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
+                  <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
+                  <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
+                  {% endif %}
+              </div>
+              {% if view == 'users' or view == 'employees' %}
+                <div class="col-md-12">
+                  {% if view == 'users' %}
+                    <h3>Add User</h3>
+                    <ul class="list-group">
+                      <form action="{{ url_for('home.createMember') }}" method="post">
+                        <div class="form-group">
+                          <input class="list-group-item" type="text" name="member_username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                          <input class="list-group-item" type="password" name="member_password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                          <input class="list-group-item" type="password" name="member_confirm_password" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="form-group">
+                          <input class="list-group-item" type="text" name="member_firstname" placeholder="First Name" required>
+                        </div>
+                        <div class="form-group">
+                          <input class="list-group-item" type="text" name="member_lastname" placeholder="Last Name" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Role:</label>
+                          <select name="mem_role" required>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <!-- <input class="btn-confirm list-group-item" type="submit" name="confirm_member" value="Confirm" required> -->
+                          <button type="submit" name="confirm_member" value="Confirm" class="btn btn-primary">Confirm</button>
+                        </div>
+                      </form>
+                    </ul>
+                  {% else %}
+                    <h3>Add Employee</h3>
+                      <form action="{{ url_for('home.createEmployee') }}" method="post">
+                        <div class="form-group row">
+                          <label for="emp_fname" class="col-sm-2 col-form-label">First Name:</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" id="emp_fname" name="emp_fname" placeholder="First Name" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="emp_lname" class="col-sm-2 col-form-label">Last Name:</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" id="emp_lname" name="emp_lname" placeholder="Last Name" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="emp_payrate" class="col-sm-2 col-form-label">Pay Rate:</label>
+                          <div class="col-sm-3">
+                            <input type="number" class="form-control" id="emp_payrate" name="emp_payrate" step="0.01" min="0" placeholder="rate">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="emp_type" class="col-sm-2 col-form-label">Emp Type:</label>
+                          <select id="emp_type" name="emp_type" required>
+                            <option value="Hourly">Hourly</option>
+                            <option value="Salary">Salary</option>
+                          </select>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-10">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="emp_check" id="emp_check">
+                              <label class="form-check-label" for="emp_check">
+                                Select if cash employee
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-10">
+                            <button type="submit" name="confirm_employee" value="Confirm" class="btn btn-primary">Add</button>
+                          </div>
+                        </div>
+                      </form>
+                  {% endif %}
+                </div>
+              {% elif view == 'hours' %}
+                <!-- HOURS CODE GOES HERE -->
+                <h5>Create A New Timeclock Timeslot</h3>
+                <form method="post" action="{{url_for('home.createTimeclock')}}">
+                  <div class="form-group row">
+                    <label for="emp" class="col-sm-2 col-form-label">Employee:</label>
+                    <select name="emp" id="emp" required>
+                      <option name="default" value="default">Select Employee</option>
+                      {% for emp in employees %}
+                      <option name="emp" value="{{emp.id}}">{{emp}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label for="emp_lname" class="col-sm-2 col-form-label">Date</label>
+                    <div class="col-sm-4">
+                      <div class="input-group date" id="datepicker">
+                        <input name="clk_date" class="form-control" placeholder="MM/DD/YYYY" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="emp_payrate" class="col-sm-2 col-form-label">Clockin</label>
+                    <div class="col-sm-4">
+                      <div class="input-group time" id="timepicker">
+                        <input name="clk_in" class="form-control" placeholder="HH:MM AM/PM" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock"></i></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="emp_payrate" class="col-sm-2 col-form-label">Clockout</label>
+                    <div class="col-sm-4">
+                      <div class="input-group time" id="timepicker2">
+                        <input name="clk_out" class="form-control" placeholder="HH:MM AM/PM" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock"></i></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="no_lunch" id="emp_check">
+                        <label class="form-check-label" for="emp_check">
+                          Select if employee did not take lunch
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <button type="submit" name="confirm_timeclock" value="Confirm" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </form>
+                <h5>Search Timeclock</h5>
+                <div class="mx-auto">
+                  <form autocomplete="off" action="{{url_for('home.dashboard', option='Settings', view='hours', getHours='True')}}" method="post">
+                      <div class="flex-row d-flex justify-content-center">
+                            <div class="col-sm-4">
+                              <div class="input-group date" id="datepicker2">
+                                <input name="start_date" class="form-control" placeholder="START" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="input-group date" id="datepicker3">
+                                <input name="end_date" class="form-control" placeholder="END" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span>
+                              </div>
+                            </div>
+                      </div>
+                      <div class="btn-group-div">
+                        <input type="submit" name="hour_dates" id="hour_dates" value="Search" class="btn btn-lg btn-outline-success"></input>
+                        <!-- <input type="submit" name="hour_dates" id="hour_dates" value="Confirm" class="btn btn-outline-success">Search</input> -->
+                        <input type="submit" name="emp_hours" id="emp_hours" value="Individual Report" class="btn btn-lg btn-outline-success"></input>
+                      
+                      </div>
+                  </form>
+                </div>
+              {% else %}
+              <!-- Payroll Goes Here -->
+              <h3>Payroll</h3>
+                <div class="mx-auto">
+                  <form autocomplete="off" action="{{url_for('home.dashboard', option='Settings', view='payroll', getPayroll='True')}}" method="post">
+                      <div class="flex-row d-flex justify-content-center">
+                            <div class="col-sm-4">
+                              <div class="input-group date" id="datepicker6">
+                                <input name="start_date" class="form-control" placeholder="START" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="input-group date" id="datepicker7">
+                                <input name="end_date" class="form-control" placeholder="END" required/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span>
+                              </div>
+                            </div>
+                      </div>
+                      <div class="btn-group-div">
+                        <button type="submit" name="payroll_dates" id="payroll_dates" value="Confirm" class="btn btn-outline-success">Run Report</input>
+                      </div>
+                  </form>
+                </div>
+              {% endif %}
+              <!-- /.Admin Settings -->
+              <!-- Table Data -->
+              <div class="container">
+              {% if view == 'users' %}
+                <h3 style='text-align: center;'>Users</h3>
+                <table class="table table-hover table-striped table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user in table_data %}
+                    <tr>
+                      <td>{{user.username}}</td>
+                      <td>{{user.role}}</td>
+                      <td>
+                        <div class="btn-toolbar">
+                          <div class="btn-group mr-2">
+                            <button class= "btn btn-outline-warning" type="button" data-toggle="modal" data-target="#exampleModal" data-user="{{user.username}}"><i class="fas fa-edit"></i></button>
+                          </div>
+                          <div class="btn-group mr-2">
+                            <button class= "btn btn-outline-danger" name="btn_delete" data-toggle="modal" data-target="#exampleModalCenter" data-user="{{user.username}}"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% elif view == 'employees' %}
+                <h3 style='text-align: center;'>Employees</h3>
+                <div>
+                <table class="table table-hover table-striped table-bordered" id="employeeTable">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">First Name</th>
+                      <th scope="col">Last Name</th>
+                      <th scope="col">Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for emp in table_data %}
+                    <tr>
+                      <td>{{emp.firstname}}</td>
+                      <td>{{emp.lastname}}</td>
+                      <td>
+                        <div class="btn-toolbar">
+                          <div class="btn-group mr-2">
+                            <button class= "btn btn-outline-warning" type="button" id="edit_emp" data-toggle="modal" data-target="#exampleModal" data-name="{{emp.firstname}} {{emp.lastname}}" data-payrate="{{emp.payrate}}" data-cash="{{emp.cash}}" data-fobid="{{emp.fobid}}" data-id="{{emp.id}}" data-emptype="{{emp.employment_type}}"><i class="far fa-edit"></i></button>
+                          </div>
+                          <div class="btn-group mr-2">
+                            <button class= "btn btn-outline-danger" name="btn_delete" id="btn_delete" data-toggle="modal" data-target="#exampleModalCenter" data-emp="{{emp}}" data-id="{{emp.id}}"><i class="fas fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    <!-- <tr> -->
+                  </tbody>
+                </table>
+                </div>
+              {% elif view == 'hours' %}
+                {% if table_data != None %}
+                  <h3 style='text-align: center;'>Hours</h3>
+                  <input class="form-control" id="hoursSearch" type="text" placeholder="Search Table..">
+                  <br>
+                  <div>
+                    <table id="hours_table" class="table table-hover table-striped table-bordered">
+                      <thead class="thead-dark">
+                        <tr>
+                          <td scope="col"></td>
+                          <th scope="col">Name</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Clockin</th>
+                          <th scope="col">Clockout</th>
+                          <th scope="col">Lunch</th>
+                          <th scope="col">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody id="hoursTable">
+                        {% for obj in table_data %}
+                          {% for emp in employees%}
+                            {% if obj.fobid == emp.fobid %}
+                              <tr>
+                                <td><input type="checkbox" class="checkbox_hours" name="cbx_{{obj.id}}" id="{{obj.id}}"></td>
+                                <td>{{emp.firstname}} {{emp.lastname}}</td>
+                                <td>{{obj.date}}</td>
+                                <td>{{obj.clockin}}</td>
+                                <td>{{obj.clockout}}</td>
+                                <td>
+                                  {% if obj.nolunch %}
+                                    NO
+                                  {% else %}
+                                    YES
+                                  {% endif %}
+                                </td>
+                                <td>
+                                  <div class="btn-toolbar">
+                                    <div class="btn-group mr-2">
+                                      <button class= "btn btn-outline-warning" type="button" id="update_tc" data-toggle="modal" data-target="#exampleModal" data-clkin="{{obj.clockin}}" data-clkout="{{obj.clockout}}" data-nolunch="{{obj.nolunch}}" data-id="{{obj.id}}"><i class="far fa-edit"></i></button>
+                                    </div>
+                                    <div class="btn-group mr-2">
+                                      <button class= "btn btn-outline-danger" style="margin: 2px;" type="button" name="tc_btn_delete" id="tc_btn_delete" data-toggle="modal" data-target="#exampleModalCenter" data-tc="{{emp.firstname}} {{emp.lastname}}, {{obj.clockin}}, {{obj.clockout}}, {{obj.nolunch}}" data-id="{{obj.id}}"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>                            
+                            {% endif %}
+                          {% endfor %}                        
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    <div class="btn-group-div">
+                      <label for="change_hours_selector" class="col-sm-2 col-form-label">Change Hours To: </label>
+                      <select name="change_hours_selector" id="change_hours_selector">
+                        <option name="hour" value="6">6am</option>
+                        <option name="hour" value="7" selected="selected">7am</option>
+                        <option name="hour" value="8">8am</option>
+                        <option name="hour" value="9">9am</option>
+                      </select>
+                      <br/>
+                      <input type="submit" name="change_hours" id="change_hours" value="Change Hours" class="btn btn-lg btn-outline-success"></input>
+                    </div>
+                  </div>
+                {% endif %}
+              {% elif view == 'payroll' %}
+                {% if show_table %}
+                  {% if hours|length > 0 %}
+                  <!-- <form method="POST" action="{{ url_for('home.processPayroll')}}" target="_blank"> -->
+                    <form method="POST" action="{{ url_for('home.processPayroll')}}">
+                    <div class="border border-secondary rounded table-container">
+                    <h3>Regular Employee Hours</h3>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>Employee</th>
+                            <th>Rate</th>
+                            <th>Total Hours</th>
+                            <th>Minus Lunch</th>
+                            <th>Payroll Hours</th>
+                            <th>Cash Hours</th>
+                            <th>Cash Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="table-body" name="regular_body">
+                          {% for h in hours%}
+                          <tr>
+                            <td class="td-emp"><input id ="{{h}}_name" class="form-control" value="{{hours[h]['employee']}}" readonly></input></td>
+                            <td class="td-rate"><input id ="{{h}}_rate" value="{{hours[h]['rate']}}" class="form-control" readonly></input></td>
+                            <td class="td-thours">
+                              <input class="form-control" id ="{{h}}_total_hours" value="{{hours[h]['total_hours']}}" readonly></input>
+                            </td>
+                            <td class="td-thours">
+                              <input id="{{h}}_hours" class="form-control" value="{{hours[h]['hours']}}" readonly></input>
+                            </td>
+                            <td class="td-hours"><input id ="{{h}}" type="number" min="0" step="0.25" class="form-control" oninput="calculateHours(this)" max="300" required></input></td>
+                            <td class="td-hours"><input id ="{{h}}_cash" class="form-control" type="number" min="0" max="300" step="0.01" oninput="calculateHoursCash(this)" required></input></td>
+                            <td class="td-amount"><input id ="{{h}}_cash_amount" class="form-control" readonly></input></td>
+                          </tr>
+                          <input id="{{h}}_submit" name="Hourly_{{h}}" hidden></input>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <h3>Salary Employee</h3>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>Employee</th>
+                            <th>Salary</th>
+                            <th>Employment Type</th>
+                          </tr>
+                        </thead>
+                        <tbody id="table-body" name="salary_body">
+                          {% for h in salary%}
+                          <tr>
+                            <td class="td-emp"><input class="form-control" value="{{salary[h]['employee_name']}}" readonly></input></td>
+                            <td class="td-rate"><input id ="{{h}}_rate" value="{{salary[h]['salary']}}" class="form-control" readonly></input></td>
+                            <td class="td-thours">
+                              <input class="form-control " value="{{salary[h]['emp_type']}}" readonly></input>
+                            </td>
+                          </tr>
+                          <!-- <input name="Salary" value="{{salary[h]['employee_name']}}, {{salary[h]['salary']}}" hidden></input> -->
+                          <input name="Salary_{{h}}" value="{{h}},{{salary[h]['employee_name']}}" hidden></input>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>          
+                  <!-- endif for the tables of hours, cash, salary -->
+                  {%endif%}
+                  {% if cash|length > 0 %}
+                  <div class="border border-secondary rounded table-container">
+                    <h3>Cash Employee Hours</h3>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>Employee</th>
+                            <th>Rate</th>
+                            <th>Total Hours</th>
+                            <th>Minus Lunch</th>
+                            <th>Cash Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="table-body" name="cash_body">
+                          {% for h in cash%}
+                          <tr>
+                            <td class="td-emp"><input class="form-control" value="{{cash[h]['employee']}}" readonly></input></td>
+                            <td class="td-rate"><input id ="{{h}}_rate" value="{{cash[h]['rate']}}" class="form-control" readonly></input></td>
+                            <td class="td-thours">
+                              <input class="form-control " value="{{cash[h]['total_hours']}}" readonly></input>
+                            </td>
+                            <td class="td-thours">
+                              <input id="{{h}}_hours" class="form-control" value="{{cash[h]['hours']}}" readonly></input>
+                            </td>
+                            <td class="td-amount"><input id ="{{h}}_cash_amount" class="form-control" value="{{cash[h]['amount']}}" readonly></input></td>
+                          </tr>
+                          <input name="Cash_{{h}}" value="{{h}},{{cash[h]['employee']}},{{cash[h]['total_hours']}},{{cash[h]['hours']}},{{cash[h]['amount']}}" hidden></input>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>                  
+                  <!-- endif for the tables of hours, cash, salary -->                
+                  {% endif %}
+                  <div class="btn-group-div">
+                    <input name="payroll_dates" value="{{payroll_dates}}" hidden></input>
+                    <button type="submit" name="submit_payroll" id="submit_payroll" value="Confirm" class="btn btn-outline-info">Submit</button>
+                  </div>
+                  </form>
+                {% endif %}            
+              {% endif %}
+              <!-- ./end table container -->
+              </div>
+              <!--Modal For Edit-->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    {% if view == 'users' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Member</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('home.updateMember') }}" method="post">
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Username</label>
+                          <input class="form-control" type="text" name="username" id="username" readonly>
+                          </input>
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Password</label>
+                          <input class="form-control" type="password" name="password" id="password"></input>
+                          <input type="checkbox" onclick="viewPassword()"> Show Password</input>
+                        </div>
+                        <div class="form-group">
+                          <label>Role:</label>
+                          <select id="update_role" name="update_role" required>
+                            <option value="Select" selected disabled>Select</option>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update_user" class="btn btn-primary">Update User</button>
+                        </div>
+                      </form>
+                    </div>
+                    {% elif view == 'employees' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h4 id="empName"></h4>
+                      <form action="{{ url_for('home.updateEmployee') }}" method="post">
+                        <div class="form-group">
+                          <label for="edit_emp_payrate" class="col-form-label">Pay Rate:</label>
+                          <input type="number" class="form-control col-sm-3" id="edit_emp_payrate" name="edit_emp_payrate" step="0.01" min="0" placeholder="rate"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_emp_type" class="col-form-label">Type:</label>
+                            <select id="edit_emp_type" name="emp_type" required>
+                              <option value="Hourly">Hourly</option>
+                              <option value="Salary">Salary</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <input class="form-check-input" type="checkbox" name="edit_emp_check" id="edit_emp_check"/>
+                          <label class="form-check-label" for="edit_emp_check">
+                            Select if cash employee
+                          </label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input class="form-check-input" type="checkbox" name="clear_fobid" id="clear_fobid"/>
+                            <label class="form-check-label" for="clear_fobid">
+                              Clear fobid
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update_emp" id="update_emp" class="btn btn-outline-primary">Update</button>
+                        </div>
+                      </form>
+                    </div>
+                    {% elif view == 'hours' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Hours</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>**Do not populate if no change is needed**</p>
+                      <form action="{{ url_for('home.updateHours') }}" method="post">
+                        <div class="form-group">
+                          <label for="clk_in_date" class="col-form-label">Clock In</label>
+                          <div class="btn-group-div">
+                            <div class="input-group date" style="margin: 5px;" id="datepicker4">
+                              <input name="clk_in_date" id="clk_in_date" class="form-control" placeholder="SELECT DATE AND TIME"/>
+                              <span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                              </span>
+                            </div>
+                            <div class="input-group time" style="margin: 5px;" id="timepicker3">
+                              <input name="clk_in_time" id="clk_in_time"class="form-control" placeholder="HH:MM AM/PM"/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock"></i></span></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="clk_out_date" class="col-form-label">Clock Out</label>
+                          <div class="btn-group-div">
+                            <div class="input-group date" style="margin: 5px;" id="datepicker5">
+                              <input name="clk_out_date" id="clk_out_date" class="form-control" placeholder="SELECT DATE AND TIME"/>
+                              <span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                              </span>
+                            </div>
+                            <div class="input-group time" style="margin: 5px;" id="timepicker4">
+                              <input name="clk_out_time" id="clk_out_time" class="form-control" placeholder="HH:MM AM/PM"/><span class="input-group-append input-group-addon"><span class="input-group-text"><i class="fa fa-clock"></i></span></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input class="form-check-input" type="checkbox" name="nolunch_cbx" id="nolunch_cbx"/>
+                            <label class="form-check-label" for="nolunch_cbx">
+                              No Lunch
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update_timeclock" id="update_timeclock" class="btn btn-outline-primary">Update</input>
+                        </div>
+                      </form>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <!--Modal For Delete-->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    {% if view == 'users' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Member</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('home.dashboard') }}" method="post">
+                        <p id="info1"></p>
+                        <input name="delete_user" id="user" type="text" readonly></input>
+                        <p id="info2"></p>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                          <button type="submit" name="member_delete" class="btn btn-outline-danger">Yes</button>
+                        </div>
+                      </form>
+                    </div>
+                    {% elif view == 'employees' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Employee</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('home.dashboard') }}" method="post">
+                        <p id="info1"></p>
+                        <input name="delete_emp" id="emp" type="text" readonly></input>
+                        <p id="info2"></p>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                          <button type="submit" name="emp_delete" id="emp_delete" class="btn btn-outline-danger">Yes</button>
+                        </div>
+                      </form>
+                    </div>
+                    {% elif view == 'hours' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Timeclock Record</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('home.dashboard') }}" method="post">
+                        <p id="info1"></p>
+                        <label name="delete_tc" id="tc"readonly></label>
+                        <p id="info2"></p>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                          <button type="submit" name="tc_delete" id="tc_delete" class="btn btn-outline-danger">Yes</button>
+                        </div>
+                      </form>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <!-- /.End of Delete Modal -->
+              <a class="btn btn-outline-info btn-btm-right" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+              </a>
+            <!-- Endif for Admin -->
+            {% endif %}
+          <!-- Endif for Settings -->
+          {% endif %}
+        <!-- /.Content Column -->
+        </div>
+    <!-- /.row -->
+    </div>
+  <!-- /.container -->
+  </div>
+  <!-- Footer -->
+  <footer class="py-5 bg-light">
+    <div class="container">
+      <p class="m-0 text-center text-black">Copyright &copy; MV Landscaping LLC 2021 All Rights Reserved</p>
+      <p class="m-0 text-center text-black">Powered By <a href="https://www.kleene.dev/">Kleene Development</a> </p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.10.2.js')}}" ></script> -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.custom.min.js')}}" ></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/fullcalendar.js')}}" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+      var id = null;
+
+      var string = {{events|tojson}}; //Its okay to see the errors here due to jinja objs into js
+      var objs = ""
+      if(string !== "None")
+      {
+        var objs = JSON.parse(string);
+      }
+      // console.log(objs);
+
+      // function checkObjects(objects)
+      // {
+      //   for (index = 0; index < objects.length; index++) {
+      //     var d1 = objects[index]['start'];
+      //     var d2 = objects[index]['end'];
+      //     var diff = moment(d2).diff(d1, 'days');
+      //     console.log("diff: " + diff);
+      //     if (diff > 7)
+      //     {
+      //       var r = diff - 1;
+      //       var tmp = objects[index];
+      //       var tmp_end_date = new Date(tmp['end']);
+      //       console.log(tmp_end_date);
+      //       var new_end_date = tmp_end_date.getDate() - r;
+
+      //       console.log(new_end_date);
+      //     }
+      //   }
+      //   // return objects;
+      // };
+      // checkObjects(objs);
+
+      /*  className colors
+
+      className: default(transparent), important(red), chill(pink), success(green), info(blue)
+
+      */
+
+
+      /* initialize the external events
+      -----------------------------------------------------------------*/
+
+      $('#external-events div.external-event').each(function() {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        };
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject);
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 999,
+          revert: true,      // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        });
+
+      });
+
+
+      /* initialize the calendar
+      -----------------------------------------------------------------*/
+
+      var calendar =  $('#calendar').fullCalendar({
+        header: {
+          left: 'title',
+          center: 'month',
+          right: 'prev,next today'
+        },
+        editable: true,
+        firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+        selectable: true,
+        defaultView: 'month',
+        axisFormat: 'h:mm',
+        columnFormat: {
+                  month: 'ddd',    // Mon
+                  week: 'ddd d', // Mon 7
+                  day: 'dddd M/d',  // Monday 9/7
+                  agendaDay: 'dddd d'
+              },
+              titleFormat: {
+                  month: 'MMMM yyyy', // September 2009
+                  week: "MMMM yyyy", // September 2009
+                  day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
+              },
+        allDaySlot: false,
+        selectHelper: true,
+        select: function(start, end, allDay, date, jsEvent, view) {
+          // $("#eventForm").attr("action", "{{ url_for('home.createEvent') }}" );
+          // $("#eventForm").attr("method", "post");
+          // $("#eventConfirm").attr("type", "submit" );
+          $("#eventModalLabel").text("Create Event");
+          $("#eventTitle").val('');
+          $("#fromDate").attr("readonly", true);
+          $("#eventDelete").attr("hidden", true);
+          $("#toDate").attr("readonly", true);
+          $("#fromDate").val(start.toISOString().slice(0, 10));
+          $("#toDate").val(end.toISOString().slice(0,10));
+          $("#eventModal").modal("show");
+          // var title = prompt("Title:");
+          // if (title) {
+          //   calendar.fullCalendar('renderEvent',
+          //     {
+          //       title: title,
+          //       start: start,
+          //       end: end,
+          //       allDay: allDay,
+          //       // className: 'important',
+          //     },
+          //     true // make the event "stick"
+          //   );
+          // }
+          calendar.fullCalendar('unselect');
+        },
+        droppable: true, // this allows things to be dropped onto the calendar !!!
+        drop: function(date, allDay) { // this function is called when something is dropped
+          // retrieve the dropped element's stored Event Object
+          var originalEventObject = $(this).data('eventObject');
+
+          // we need to copy it, so that multiple events don't have a reference to the same object
+          var copiedEventObject = $.extend({}, originalEventObject);
+
+          // assign it the date that was reported
+          copiedEventObject.start = date;
+          copiedEventObject.allDay = allDay;
+
+          // render the event on the calendar
+          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+          $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+          // is the "remove after drop" checkbox checked?
+          if ($('#drop-remove').is(':checked')) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
+          }
+
+        },
+        eventDrop: function(event, date, allDay) {
+          if ({{role|tojson}} === 'Admin')
+          {
+            var xhttp = new XMLHttpRequest();
+            // console.log(event);
+            if (event['end'] == null)
+            {
+              var para = 'id=' + event['id'] +'&start='+event['start'].toISOString().slice(0, 10)+'&end='+event['start'].toISOString().slice(0, 10)+'&title='+event['title']+'&className='+event['className'];
+              xhttp.open("POST", "/dashboard/updateEvent", true);
+              xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhttp.send(para);
+            }
+            else{
+              var para = 'id=' + event['id'] +'&start='+event['start'].toISOString().slice(0, 10)+'&end='+event['end'].toISOString().slice(0, 10)+'&title='+event['title']+'&className='+event['className'];
+              xhttp.open("POST", "/dashboard/updateEvent", true);
+              xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhttp.send(para);
+            }
+          }
+        },
+        eventClick: function(calEvent, jsEvent, view){
+          // $(this).toggleClass('newColor');
+          console.log(calEvent); // "id" if it is set by the event object, will be here.
+          // $("#eventForm").removeAttr("action");
+          // $("#eventForm").removeAttr("method");
+          // $("#eventConfirm").attr("type", "button" );
+          $("#eventModalLabel").text("Update Event");
+          $("#eventDelete").attr("hidden", false);
+          $("#fromDate").attr("readonly", false);
+          $("#toDate").attr("readonly", false);
+          $("#eventTitle").val(calEvent['title']);
+          $("#fromDate").val(calEvent['start'].toISOString().slice(0, 10));
+          id = calEvent['id'];
+          if (calEvent['end'] == null)
+          {
+            $("#toDate").val(calEvent['start'].toISOString().slice(0,10));
+          }
+          else{
+            $("#toDate").val(calEvent['end'].toISOString().slice(0,10));
+          }
+
+          $("#eventModal").modal("show");
+        },
+        // events: [
+        //   {
+        //     title: 'All Day Event',
+        //     start: new Date(y, m, 1)
+        //   },
+        //   {
+        //     id: 999,
+        //     title: 'Repeating Event 1',
+        //     start: new Date(y, m, d-3, 16, 0),
+        //     allDay: false,
+        //     className: 'info'
+        //   },
+        //   {
+        //     id: 999,
+        //     title: 'Repeating Event 2',
+        //     start: new Date(y, m, d+4, 16, 0),
+        //     allDay: false,
+        //     className: 'info'
+        //   },
+        //   {
+        //     title: 'Meeting',
+        //     start: new Date(y, m, d, 10, 30),
+        //     allDay: false,
+        //     className: 'important'
+        //   },
+        //   {
+        //     title: 'Lunch',
+        //     start: new Date(y, m, d, 12, 0),
+        //     end: new Date(y, m, d, 14, 0),
+        //     allDay: false,
+        //     className: 'important'
+        //   },
+        //   {
+        //     title: 'Birthday Party',
+        //     start: new Date(y, m, d+1, 19, 0),
+        //     end: new Date(y, m, d+1, 22, 30),
+        //     allDay: false,
+        //   },
+        //   {
+        //     title: 'Birthday Party 2',
+        //     start: new Date(y, m, d),
+        //     end: new Date(y, m, d+10,),
+        //     allDay: true,
+        //   },
+        //   {
+        //     title: 'Click for Google',
+        //     start: new Date(y, m, 28),
+        //     end: new Date(y, m, 29),
+        //     url: 'http://google.com/',
+        //     className: 'success'
+        //   }
+        // ],
+        events: objs,
+      });
+      $("#eventConfirm").click(function(){
+        var text = $("#eventModalLabel").text();
+        if(text === 'Update Event')
+        {
+          var xhttp = new XMLHttpRequest();
+          var para = 'id=' + id +'&start='+$("#fromDate").val()+'&end='+$("#toDate").val()+'&title='+$("#eventTitle").val()+'&className='+$("#eventColorSelect").val();
+          xhttp.open("POST", "/dashboard/updateEvent", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          console.log("Sending Request");
+          xhttp.send(para);
+          $("#eventModal").modal("hide");
+          xhttp.onreadystatechange = function() {
+            console.log(xhttp.responseText);
+            if (xhttp.readyState == XMLHttpRequest.DONE) {
+              if( xhttp.responseText === "success")
+              {
+                console.log("Got Successfull Request");
+                console.log("Sending Request to get calendar events");
+                $.get("/getCalendarEvents", function(responseText) {
+                  console.log("jQuery Request Success");
+                  $("#calendar").fullCalendar('removeEvents');
+                  $("#calendar").fullCalendar('addEventSource', JSON.parse(responseText));
+                });
+              }
+            }
+          };
+        }
+        if(text === 'Create Event')
+        {
+          var xhttpx = new XMLHttpRequest();
+          var para = 'start='+$("#fromDate").val()+'&end='+$("#toDate").val()+'&title='+$("#eventTitle").val()+'&className='+$("#eventColorSelect").val();
+          xhttpx.open("POST", "/dashboard/createEvent", true);
+          xhttpx.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          console.log("Sending Request");
+          xhttpx.send(para);
+          $("#eventModal").modal("hide");
+          xhttpx.onreadystatechange = function() {
+            console.log(xhttpx.responseText);
+            if (xhttpx.readyState == XMLHttpRequest.DONE) {
+              if(xhttpx.responseText === "success")
+              {
+                console.log("Got Successfull Request");
+                console.log("Sending Request to get calendar events");
+                $.get("/getCalendarEvents", function(responseText) {
+                  console.log("jQuery Request Success");
+                  $("#calendar").fullCalendar('removeEvents');
+                  $("#calendar").fullCalendar('addEventSource', JSON.parse(responseText));
+                });
+              }
+            }
+          };
+        }
+      });
+      $("#eventDelete").click(function(){
+          // $("#calendar").fullCalendar('removeEvents', $("#eventConfirm").data('id'));
+          var xhttp = new XMLHttpRequest();
+          var p = 'id=' + id;
+          xhttp.open("POST", "/dashboard/deleteEvent", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.send(p);
+          $("#eventModal").modal("hide");
+          xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == XMLHttpRequest.DONE) {
+              $("#calendar").fullCalendar('removeEvents', id);
+            }
+          };
+      });
+
+      $("#printCalendar").click(function()
+      {
+        console.log('print calendar');
+        var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function(responseText) {
+            if (xhttp.readyState == XMLHttpRequest.DONE) {
+            // $.get("/RIO/getPDF", function() { // JQUERY way
+              // var file = new Blob([xhttp.response], { type: 'application/pdf' });
+              // var fileURL = URL.createObjectURL(file);
+              // window.open(fileURL);
+            // });
+              var enc = new TextDecoder("utf-8");
+              res = enc.decode(xhttp.response);
+              if(res === "failed")
+              {
+                // console.log("Operation Failed")
+                alert("OPERATION FAILED, Please Check QuickBooks");
+                // location.reload(true);
+              }
+              else
+              {
+                // console.log(xhttp.response);
+                var file = new Blob([xhttp.response], { type: 'application/pdf' });
+                var fileURL = URL.createObjectURL(file);
+                window.open(fileURL);
+              }
+            }
+          }
+          // param = document.getElementById('calendarContainer').innerHTML;
+          // param = $("#calendar").html()
+          param = document.getElementById('calendar').outerHTML;
+          console.log(param)
+          xhttp.open("GET", "{{url_for('home.printCalendar', html = 'val')}}".replace("val", param), true);
+          xhttp.responseType = "arraybuffer";
+          // xhttp.responseType = "blob";
+          xhttp.send();
+      });
+
+    });
+
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      if (/Mobi/.test(navigator.userAgent)) {
+        // if mobile device, use native pickers
+        $(".date input").attr("type", "date");
+        $(".time input").attr("type", "time");
+      } else {
+        // if desktop device, use DateTimePicker
+        $("#datepicker").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker2").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker3").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker4").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker5").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker6").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+        $("#datepicker7").datetimepicker({
+          useCurrent: false,
+          format: "L",
+          showTodayButton: true,
+          icons: {
+            next: "fa fa-chevron-right",
+            previous: "fa fa-chevron-left",
+            today: 'todayText',
+          }
+        });
+
+        $("#timepicker").datetimepicker({
+          format: "LT",
+          icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+          }
+        });
+        $("#timepicker2").datetimepicker({
+          format: "LT",
+          icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+          }
+        });
+        $("#timepicker3").datetimepicker({
+          format: "LT",
+          icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+          }
+        });
+        $("#timepicker4").datetimepicker({
+          format: "LT",
+          icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+          }
+        });
+      }
+    })
+  </script>
+
+  <!--Gets Data From Table and puts in Model-->
+  <script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      console.log(button)
+      if(button[0].id === "edit_emp")
+      {
+        var recipient = button.data('name') // Extract info from data-* attributes
+        var payrate = button.data('payrate')
+        var fobid = button.data('fobid')
+        var cash = button.data('cash')
+
+        if(cash === "True"){
+          $("#edit_emp_check").prop('checked', true);
+        }
+        else{
+          $("#edit_emp_check").prop('checked', false);
+        }
+
+        if(fobid === "None")
+        {
+          $("#clear_fobid").prop('disabled', true);
+        }
+        else{
+          $("#clear_fobid").prop('disabled', false);
+        }
+
+        $("#edit_emp_payrate").val(payrate)
+
+        $("#empName").text(recipient)
+        $("#update_emp").val(button.data('id'))
+        $("#edit_emp_type").val(button.data('emptype'))
+
+      }
+      else if (button[0].id === "update_tc")
+      {
+        var clkin = button.data('clkin')
+        var clkout = button.data('clkout')
+        var nolunch = button.data('nolunch')
+        var tcid = button.data('id')
+        var cin = clkin.split(" ")
+        var cout = clkout.split(" ")
+        console.log(clkin, clkout, nolunch, tcid)
+        $("#clk_in_date").prop('value', cin[0])
+        $("#clk_in_time").prop('value', cin[1])
+        $("#clk_out_date").prop('value', cout[0])
+        $("#clk_out_time").prop('value', cout[1])
+        $("#update_timeclock").prop('value', tcid)
+        if(nolunch === "True")
+        {
+          $("#nolunch_cbx").prop('checked', true)
+        }
+        else{
+          $("#nolunch_cbx").prop('checked', false)
+        }
+
+
+      }
+      else{
+        var recipient = button.data('user') // Extract info from data-* attributes
+        var role = button.data('role')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //var modal = $(this)
+        //modal.find('.modal-body input').val(pas)
+        //modal.find('input p').text(recipient)
+        $("#username").val(recipient)
+      }
+      })
+
+      $('#exampleModalCenter').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      console.log(button)
+      if(button[0].id === "btn_delete")
+      {
+        var recipient = button.data('emp')
+        var id = button.data("id")
+        console.log(recipient);
+        $("#info1").text("You Are About To Delete:")
+        $("#emp").val(recipient)
+        $("#info2").text("Are You Sure?")
+        $("#emp_delete").val(id)
+      }
+      else if(button[0].id === "tc_btn_delete")
+      {
+        var id = button.data("id")
+        var tc = button.data("tc")
+        $("#info1").text("You Are About To Delete:")
+        $("#tc").text(tc)
+        $("#info2").text("Are You Sure?")
+        $("#tc_delete").prop('value',id)
+
+      }
+      else{
+        var recipient = button.data('user') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        // var modal = $(this)
+        //modal.find('.modal-body input').val(pas)
+        //modal.find('input p').text(recipient)
+        $("#info1").text("You Are About To Delete:")
+        $("#user").val(recipient)
+        $("#info2").text("Are You Sure?")
+      }
+
+    })
+  </script>
+  <!-- View In Model Code -->
+  <script>
+    function viewPassword() {
+      var x = document.getElementById("password");
+      if (x.type === "password")
+      {
+        x.type = "text";
+      }
+      else
+      {
+        x.type = "password";
+      }
+    }
+    function calculateHours(x)
+    {
+      id = x.id
+      val = parseFloat(x.value)
+      console.log(id)
+      if($("#"+id+"_rate").val() !== "-"){
+        rate = parseFloat($("#"+id+"_rate").val())
+        cash_hours = (parseFloat($("#"+id+"_hours").val()) - val).toFixed(2)
+        $("#"+id+"_cash").val(cash_hours)
+        $("#"+id+"_cash_amount").val((rate*cash_hours).toFixed(2))
+        str = id+ "," + $("#"+id+"_name").val()+ "," +$("#"+id+"_total_hours").val()+ "," +$("#"+id+"_hours").val()+ "," +val+ "," + cash_hours+ "," +$("#"+id+"_cash_amount").val() 
+        $("#"+id+"_submit").val(str)
+      }
+
+    }
+    function calculateHoursCash(x)
+    {
+      id = (x.id).split('_')[0]
+      val = parseFloat(x.value)
+      if($("#"+id+"_rate").val() !== "-"){
+        rate = parseFloat($("#"+id+"_rate").val())
+        // cash_hours = (parseFloat($("#"+id+"_hours").val()) - val).toFixed(2)
+        // $("#"+id+"_cash").val(cash_hours)
+        cash_hours = val
+        payroll_hours = parseFloat($("#"+id).val())
+        $("#"+id+"_cash_amount").val((rate*cash_hours).toFixed(2))
+        str = id+ "," + $("#"+id+"_name").val()+ "," +$("#"+id+"_total_hours").val()+ "," +$("#"+id+"_hours").val()+ "," +payroll_hours+ "," + cash_hours+ "," +$("#"+id+"_cash_amount").val() 
+        $("#"+id+"_submit").val(str)
+      }
+
+    }
+  </script>
+  <!--TABLE STUFF-->
+  <script>
+    $(document).ready(function(){
+      $("#hoursSearch").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#hoursTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      
+      $("#change_hours").click(function(){
+        var selected = new Array();
+        var hour = $('#change_hours_selector').val()
+        $('#hours_table input[type="checkbox"]:checked').each(function() {
+            selected.push($(this).attr('id'));
+        });
+        console.log(selected);
+        // $.post( "/change_hours_to_7", { 'selected': selected } );
+        // $.post( "/change_hours_to_7", { 'selected': selected } , function( data ) {
+        //   // $( ".result" ).html( data );
+        //   console.log(data)
+        // });
+        $.post( "/change_hours",  { 'selected': selected, 'hour' : hour }).done(function( data ) {
+          // alert( "Data Loaded: " + data );
+          // // $( ".result" ).html( data );
+          // $(this).html(data);
+          location.reload();
+        });
+
+
+
+      }); 
+    });
+  </script>
+
+</body>
+
+</html>

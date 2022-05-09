@@ -137,7 +137,7 @@ def index():
         return 'success'
     else:
         print("INDEX:")
-        print(loadFobs())
+        # print(loadFobs())
         # tc = dbc.Timeclock(fobid=123, date=datetime.datetime.now(), clockin=datetime.datetime.now(), nolunch=False)
         # dbc.createTimeclock(tc)
         # print(dbc.getTimeclockRowById(123))
@@ -353,6 +353,7 @@ def loadWriter(data):
 @app.route('/writer',methods=['GET', 'POST'])
 @app.route('/writer/<string:data>', methods=['GET', 'POST'])
 def writer(data=None):
+    # POST = write request to api
     if request.method == "POST":
         print('inpost')
         data = json.loads(data)
@@ -403,6 +404,7 @@ def writer(data=None):
             flash('error writing key', 'error')
             return render_template('writer.html')
     else:
+        # To display fobs to write
         if data != None:
             print("in data not empty")
             try:

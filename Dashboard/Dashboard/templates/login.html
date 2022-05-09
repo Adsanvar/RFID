@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MV Landscaping</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css')}}">
+  </head>
+  <body>
+    <form class="box" action="{{ url_for('auth.login') }}" method="post">
+    <h1>Login</h1>
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <input type="submit" name="login" value="Login">
+        <!-- Flashes when email is sent -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+                <p class="alert-{{category}}">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </form>
+  </body>
+</html>
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdfprint.css')}}">
+  </head>
+  <body>
+    <h3>{{name}}</h3>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Tiempo</th>
+            <th>Almuerzo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in data%}
+          <tr>
+            <td>{{data[r]['date']}}</td>
+            <td>{{data[r]['clk_in']}}</td>
+            <td>{{data[r]['clk_out']}}</td>
+            <td>{{data[r]['hours']}}</td>
+            <td>{{data[r]['no_lunch']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>  
+    <p>Total de Horas: <b>{{total}}</b> | Total de Horas Despues De Almuerzo: <b>{{after_lunch}}</b></p>
+    <p>Nota: 8:45 significa 8 Horas : 45 Minutos. 
+      <br/>
+      Calculo de horas: <b>8</b>:45, <b>9</b>:32 serian 17 horas. 8:<b>45</b>, 9:<b>32</b> serian 77 minutos / 60 = 1.28 horas. 
+      <br/>
+      Con un total de 18.28 horas
+    </p>
+  </body>
+</html>
+
