@@ -155,7 +155,7 @@ def clockin(data=None):
 
             data = json.loads(data)
             dt = datetime.datetime.now().replace(microsecond=0)
-            with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
+            with open(f'/home/pi/Documents/TimeClock/RFID/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 # header = ['date', 'name','fobid', 'in/out','time', 'lunch']
                 # clkin.writerow(header)
@@ -186,7 +186,7 @@ def clockout(data=None):
 
             data = json.loads(data)
             dt = datetime.datetime.now().replace(microsecond=0)
-            with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'a+') as f:
+            with open(f'/home/pi/Documents/TimeClock/RFID/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 row = [dt.date(), data['text'], data['id'],'out', dt, data['lunch']]
                 clkin.writerow(row)
