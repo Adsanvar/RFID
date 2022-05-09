@@ -26,8 +26,8 @@ now = datetime.datetime.now()
 Path("logs").mkdir(parents=True, exist_ok=True)
 logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DEBUG, format = f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 app = Flask(__name__)
-# scheduler = APScheduler()
-# scheduler.start()
+scheduler = APScheduler()
+scheduler.start()
 
 config = None
 fobs = None
@@ -542,96 +542,95 @@ def setBaseUrl():
 #         print('with global variables from not start, read_flag== True, readthread start')
 #         readthread.start()
 
-
-# @app.route('/csvProcessor', methods=['POST'])
-# @scheduler.task('cron', id='csvProcessor', hour="23", minute='00')
-# def csvProcessor():
-#     now = datetime.datetime.now()
-#     # delta = now + datetime.timedelta(minutes = 1)
-#     # sleep(15)
-#     # app.logger.info("Processing CSV FILE - START: {} ".format(now))
-#     print("Processing CSV FILE - START: {} ".format(now))
-#     dt = datetime.datetime.now()
-#     data = {}
-#     try:
-#         upload_dates = []
-#         with open(f'/home/pi/Documents/rfid/failed_uploads.csv', 'r') as failed_uploads: 
-#             failed = csv.reader(failed_uploads)
+@app.route('/csvProcessor', methods=['POST'])
+@scheduler.task('cron', id='csvProcessor', hour="14", minute='40')
+def csvProcessor():
+    now = datetime.datetime.now()
+    # delta = now + datetime.timedelta(minutes = 1)
+    # sleep(15)
+    # app.logger.info("Processing CSV FILE - START: {} ".format(now))
+    print("Processing CSV FILE - START: {} ".format(now))
+    dt = datetime.datetime.now()
+    data = {}
+    try:
+        upload_dates = []
+        with open(f'/home/pi/Documents/RFID/failed_uploads.csv', 'r') as failed_uploads: 
+            failed = csv.reader(failed_uploads)
             
-#             for failed_date in failed:
-#                 upload_dates.append(failed_date[0])
+            for failed_date in failed:
+                upload_dates.append(failed_date[0])
 
-#             failed_uploads.close()
+            failed_uploads.close()
 
-#         with open(f'/home/pi/Documents/rfid/{dt.year}_TimeClock.csv', 'r') as f: 
-#             csv_reader = csv.DictReader(f)
-#             line_count = 0
-#             upload_dates.append(f'{dt.date()}')
-#             # No failed dates
-#             for row in csv_reader:
-#                 #print(row)
-#                 # print(dt.date())
-#                 #print(row['date'])
-#                 # yesterday = datetime.datetime.today() - datetime.timedelta(days=2)
-#                 # print(d)
-#                 # if row['date'] == f'{yesterday.date()}':
-#                 # if row['date'] == f'{dt.date()}':
-#                 if row['date'] in upload_dates:
-#                     data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
-#                     # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
-#                     # line_count += 1
-#                     line_count += 1
-#             # print(line_count)
-#             f.close()
+        with open(f'/home/pi/Documents/RFID/{dt.year}_TimeClock.csv', 'r') as f: 
+            csv_reader = csv.DictReader(f)
+            line_count = 0
+            upload_dates.append(f'{dt.date()}')
+            # No failed dates
+            for row in csv_reader:
+                #print(row)
+                # print(dt.date())
+                #print(row['date'])
+                # yesterday = datetime.datetime.today() - datetime.timedelta(days=2)
+                # print(d)
+                # if row['date'] == f'{yesterday.date()}':
+                # if row['date'] == f'{dt.date()}':
+                if row['date'] in upload_dates:
+                    data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
+                    # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
+                    # line_count += 1
+                    line_count += 1
+            # print(line_count)
+            f.close()
 
-#         print("uploading dates: ")
-#         print(upload_dates)
-#         data['device'] = getserial()
-#         # print(data)
-#         data = json.dumps(data)
-#         print(data)
-#         headers= {'content-type': 'application/json'}
-#         res = requests.get(api_url+"processCsv", data=data, headers=headers)
-#         print("Status Code: ", res.status_code)
-#         res = json.loads(res.text)
-#         print("Message: ", res['message'])
-#         sent_flag = True
-#         if res['message'] == 'error':
-#             sent_flag = False
-#             for i in range(10):
-#                 resx = requests.get(api_url+"processCsv", data=data, headers=headers)
-#                 restxt = json.loads(resx.text)
-#                 if restxt['message'] == 'error':
-#                     print(resx.status_code)
-#                     sleep(300)
-#                     continue
-#                 elif restxt['message'] == "success":
-#                     sent_flag = True
-#                     break
-#                 else:
-#                     sent_flag = True
-#                     break
+        print("uploading dates: ")
+        print(upload_dates)
+        data['device'] = getserial()
+        # print(data)
+        data = json.dumps(data)
+        print(data)
+        headers= {'content-type': 'application/json'}
+        res = requests.get(api_url+"processCsv", data=data, headers=headers)
+        print("Status Code: ", res.status_code)
+        res = json.loads(res.text)
+        print("Message: ", res['message'])
+        sent_flag = True
+        if res['message'] == 'error':
+            sent_flag = False
+            for i in range(10):
+                resx = requests.get(api_url+"processCsv", data=data, headers=headers)
+                restxt = json.loads(resx.text)
+                if restxt['message'] == 'error':
+                    print(resx.status_code)
+                    sleep(300)
+                    continue
+                elif restxt['message'] == "success":
+                    sent_flag = True
+                    break
+                else:
+                    sent_flag = True
+                    break
         
-#         #Clears file if sent_flag is true
-#         if sent_flag:
-#             f = open(f'/home/pi/Documents/rfid/failed_uploads.csv', "w+")
-#             f.close()
+        #Clears file if sent_flag is true
+        if sent_flag:
+            f = open(f'/home/pi/Documents/RFID/failed_uploads.csv', "w+")
+            f.close()
 
-#         #Appends Date if sent_flag is false
-#         if not sent_flag:
-#             with open(f'/home/pi/Documents/rfid/failed_uploads.csv', 'a+') as f:
-#                 failed_uploads = csv.writer(f)
-#                 row = [dt.date()]
-#                 failed_uploads.writerow(row)
-#                 f.close()
+        #Appends Date if sent_flag is false
+        if not sent_flag:
+            with open(f'/home/pi/Documents/RFID/failed_uploads.csv', 'a+') as f:
+                failed_uploads = csv.writer(f)
+                row = [dt.date()]
+                failed_uploads.writerow(row)
+                f.close()
                 
 
-#         print("Processing CSV FILE - ENDED: {}".format(now))
-#         # app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
-#         # return render_template('index.html')
-#     except Exception as e:
-#         print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
-#         return render_template('index.html')
+        print("Processing CSV FILE - ENDED: {}".format(now))
+        # app.logger.info("Processing CSV FILE - ENDED: {}".format(now))
+        # return render_template('index.html')
+    except Exception as e:
+        print("Processing CSV FILE - FAILED: {}, {}".format(now, e))
+        return render_template('index.html')
 
 if __name__ == '__main__':
     try:
