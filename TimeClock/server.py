@@ -543,7 +543,7 @@ def setBaseUrl():
 #         readthread.start()
 
 @app.route('/csvProcessor', methods=['POST'])
-@scheduler.task('cron', id='csvProcessor', hour="15", minute='39')
+@scheduler.task('cron', id='csvProcessor', hour="15", minute='42')
 def csvProcessor():
     now = datetime.datetime.now()
     # delta = now + datetime.timedelta(minutes = 1)
@@ -566,7 +566,8 @@ def csvProcessor():
             csv_reader = csv.DictReader(f)
             line_count = 0
             upload_dates.append(f'{dt.date()}')
-            print(f.read(5))
+            r = f.read(5)
+            print(len(r))
             # No failed dates
             for row in csv_reader:
                 #print(row)
