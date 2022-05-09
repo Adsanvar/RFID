@@ -17,7 +17,7 @@ try:
         # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Database13.@localhost/MVLandscape'
 
         # Prod
-        f = open('~/Documents/Dashboard/config.json')
+        f = open('/home/pi/Documents/RFID/Dashboard/config.json')
         obj = json.load(f)
         f.close()
         app.config['SECRET_KEY'] = obj['secret_key']
