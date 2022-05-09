@@ -1,3 +1,4 @@
+#!/bin/bash
 export FLASK_APP=Dashboard
 export FLASK_DEBUG=1
 export FLASK_ENV=Development
