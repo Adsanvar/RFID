@@ -32,24 +32,23 @@ app = Flask(__name__)
 config = None
 fobs = None
 
-# prod - pending
-# try:
-#     f = open('/home/pi/Documents/rfid/timeClockConfig.json', 'r')
-#     # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
-#     config = json.load(f)
-#     app.logger.info('Config File Loaded')
-#     f.close()
-# except Exception as e:
-#     print('error occurred reading file')
-#     app.logger.error('Config File Error')
-#     app.logger.error(e)
-#     raise
+# prod
+try:
+    f = open('/home/pi/Documents/rfid/TimeClock/config.json', 'r')
+    # f = open('/home/pi/Documents/rfid/devTimeClockConfig.json', 'r')
+    config = json.load(f)
+    app.logger.info('Config File Loaded')
+    f.close()
+except Exception as e:
+    print('error occurred reading file')
+    app.logger.error('Config File Error')
+    app.logger.error(e)
+    raise
     
 # prod
-# app.config['SECRET_KEY'] = config['secret_key']
+app.config['SECRET_KEY'] = config['secret_key']
 # devel
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MVTech3.@localhost/mvdb'
-app.config['SECRET_KEY'] = "TESTSECRETKEY"
+# app.config['SECRET_KEY'] = "TESTSECRETKEY"
 
 # prod
 window = webview.create_window("TimeClock", app, fullscreen=True)
@@ -60,10 +59,10 @@ window = webview.create_window("TimeClock", app, fullscreen=True)
 
 # prod
 base_url = ""
-# api_url = config['api_url']
+api_url = config['api_url']
 
 # devel
-api_url = "http://localhost:5000/"
+# api_url = "http://localhost:5000/"
 
 # def getFobs(api_url=None):
 #     try:
