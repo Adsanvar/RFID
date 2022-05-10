@@ -651,6 +651,7 @@ if __name__ == '__main__':
             # print("output:", list(output))
             if len(output) != 0:
                 print(output)
+                print("LOADING FOBS")
                 loadFobs()
         except subprocess.CalledProcessError:
             # grep did not match any lines
