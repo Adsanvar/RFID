@@ -72,6 +72,8 @@ def getFobs(api_url=None):
         data = json.dumps(payload)
         res = requests.get(api_url+"getFobs", data=data, headers=headers)
         res = json.loads(res.text)
+        app.logger.info('getFobs REPONSE:')
+        app.logger.info(res)
         return res
 
     except Exception as e:
@@ -85,6 +87,8 @@ def loadFobs():
     try:
         objs = getFobs(api_url)
         print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
+        app.logger.info('loadFobs()')
+        app.logger.info(objs)
         # print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
             print("Response: ", objs)
@@ -102,6 +106,8 @@ def loadFobs():
                     sleep(10)
                     continue
     except Exception as e:
+        app.logger.info('loadFobs()')
+        app.logger.info(objs)
         app.logger.error("Exception Trying to load fobs")
         app.logger.error(e)
         print(e)
