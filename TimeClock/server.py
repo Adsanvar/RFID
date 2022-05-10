@@ -78,7 +78,8 @@ def getFobs(api_url=None):
         print('Exception in getFobs')
         print(e)
         app.logger.error("Exception Trying to Get fobs")
-        return False
+        app.logger.error(e)
+        raise
 
 def loadFobs():
     try:
@@ -104,6 +105,7 @@ def loadFobs():
         app.logger.error("Exception Trying to load fobs")
         app.logger.error(e)
         print(e)
+        raise
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
