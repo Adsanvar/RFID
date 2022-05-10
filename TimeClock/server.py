@@ -86,10 +86,10 @@ def getFobs(api_url=None):
 def loadFobs():
     try:
         objs = getFobs(api_url)
-        print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
+        # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
         app.logger.info('loadFobs()')
         app.logger.info(objs)
-        # print("Response: ", objs, "TYPE: ", type(objs))
+        print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
             app.logger.info('type objs != dict')
             app.logger.info(objs)
