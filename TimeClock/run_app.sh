@@ -17,4 +17,4 @@ do
     timer=$((timer-1))
 done
 
-python3 server.py
+python3 /home/pi/Documents/RFID/TimeClock/server.py
