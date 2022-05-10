@@ -4,7 +4,8 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3:/usr/bin/bash /home/pi/Documents/RFID/Dashboard/run.sh
+WorkingDirectory=/home/pi/Documents/RFID/Dashboard
+ExecStart=/usr/bin/bash /home/pi/Documents/RFID/Dashboard/run.sh
 Restart=always
 
 [Install]
