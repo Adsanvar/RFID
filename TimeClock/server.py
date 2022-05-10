@@ -82,14 +82,13 @@ def getFobs(api_url=None):
 
 def loadFobs():
     try:
-        objs = getFobs()
+        objs = getFobs(api_url)
         print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
         # print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
             print("Response: ", objs)
             with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
-
         else:
             for i in range(10):
                 objs = getFobs(api_url)
@@ -104,8 +103,6 @@ def loadFobs():
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
         print(e)
-
-# loadFobs()
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
