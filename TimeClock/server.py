@@ -81,7 +81,7 @@ def getFobs(api_url=None):
         print(e)
         app.logger.error("Exception Trying to Get fobs")
         app.logger.error(e)
-        raise
+        return False
 
 def loadFobs():
     try:
@@ -91,10 +91,14 @@ def loadFobs():
         app.logger.info(objs)
         # print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
+            app.logger.info('type objs != dict')
+            app.logger.info(objs)
             print("Response: ", objs)
             with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
         else:
+            app.logger.info('retrying')
+            app.logger.info(objs)
             for i in range(10):
                 objs = getFobs(api_url)
                 print("Retry Response: ", objs)
@@ -109,9 +113,8 @@ def loadFobs():
         app.logger.info('loadFobs()')
         app.logger.info(objs)
         app.logger.error("Exception Trying to load fobs")
-        app.logger.error(e)
+        app.logger.exception("something happened")
         print(e)
-        raise
 
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
