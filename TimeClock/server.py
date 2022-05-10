@@ -84,9 +84,9 @@ def loadFobs():
     try:
         objs = getFobs()
         # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
-        # print("Response: ", objs, "TYPE: ", type(objs))
+        print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
-            # print("Response: ", objs)
+            print("Response: ", objs)
             with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
 
