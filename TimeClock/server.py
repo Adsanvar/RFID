@@ -102,6 +102,7 @@ def loadFobs():
                     continue
     except Exception as e:
         app.logger.error("Exception Trying to load fobs")
+        app.logger.error(e)
         print(e)
 
 readthread = Reader(window = window, api_url = api_url)
