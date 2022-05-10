@@ -26,8 +26,8 @@ def validateFob(payload):
         with open('/home/pi/Documents/RFID/fobs.json', 'r', encoding='utf-8') as f:
             fobs = json.load(f)
         
-        print("validate", fobs)
-        print("validate", payload)
+        # print("validate", fobs)
+        # print("validate", payload)
         for o in fobs:
             # print(type(o['fobid']))
             # print(type(payload['id']))
