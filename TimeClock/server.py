@@ -87,7 +87,7 @@ def loadFobs():
         # print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
             # print("Response: ", objs)
-            with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+            with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
 
         else:
@@ -95,7 +95,7 @@ def loadFobs():
                 objs = getFobs(api_url)
                 print("Retry Response: ", objs)
                 if len(objs) != 1 and len(objs[0]) != 1:
-                    with open('/home/pi/Documents/rfid/fobs.json', 'w+', encoding='utf-8') as f:
+                    with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                         json.dump(objs, f, ensure_ascii=False, indent=4)
                     break
                 else:
