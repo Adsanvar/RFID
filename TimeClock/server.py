@@ -86,15 +86,15 @@ def loadFobs():
     try:
         objs = getFobs(api_url)
         # print("Response: ", objs, "TYPE: ", type(objs), type(objs['message']))
-        print("Response: ", objs, "TYPE: ", type(objs))
+        # print("Response: ", objs, "TYPE: ", type(objs))
         if type(objs) != dict:
-            print("Response: ", objs)
+            # print("Response: ", objs)
             with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                 json.dump(objs, f, ensure_ascii=False, indent=4)
         else:
             for i in range(10):
                 objs = getFobs(api_url)
-                print("Retry Response: ", objs)
+                # print("Retry Response: ", objs)
                 if len(objs) != 1 and len(objs[0]) != 1:
                     with open('/home/pi/Documents/RFID/fobs.json', 'w+', encoding='utf-8') as f:
                         json.dump(objs, f, ensure_ascii=False, indent=4)
@@ -169,6 +169,7 @@ def clockin(data=None):
             print('Exception in /clockin')
             print(e)
             app.logger.error('Exception in /clockin, {}'.format(e))
+            app.logger.exception("Exception in /clocking")
             return jsonify(message='Error')
     else:
         app.logger.warning('No Data in clockin')
@@ -586,7 +587,6 @@ def csvProcessor():
         print("uploading dates: ")
         print(upload_dates)
         data['device'] = getserial()
-        # print(data)
         data = json.dumps(data)
         print(data)
         headers= {'content-type': 'application/json'}
