@@ -135,7 +135,6 @@ def index():
             readthread.not_in_hours()
         return 'success'
     else:
-        print("INDEX:")
         # print(loadFobs())
         # tc = dbc.Timeclock(fobid=123, date=datetime.datetime.now(), clockin=datetime.datetime.now(), nolunch=False)
         # dbc.createTimeclock(tc)
@@ -496,7 +495,7 @@ def stopWrite():
     print("Cancel: is readthread stopped? ", readthread.stopped())
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
-    loadFobs()
+    # loadFobs()
     return redirect(url_for('index', data="fromStopWrite"))
 
 
