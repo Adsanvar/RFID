@@ -807,14 +807,14 @@ def getFobs():
             
                     return fobs
                 else:
-                    return jsonify(message=False)            
+                    return jsonify(message="No objects")            
             else:
-                return jsonify(message=False)
+                return jsonify(message="Failed to validate")
         else:
-            return jsonify(message=False)
+            return jsonify(message="Data is none")
     except Exception as e:
         print(e)
-        return jsonify(message=False)
+        return jsonify(message="Exception in getFobs")
 
 #API Call
 @home.route('/getHours', methods=['GET'])
