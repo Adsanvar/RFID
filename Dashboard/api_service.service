@@ -5,6 +5,7 @@ After=multi-user.target
 [Service]
 Type=simple
 WorkingDirectory=/home/pi/Documents/RFID/Dashboard
+User=pi
 ExecStart=/usr/bin/bash /home/pi/Documents/RFID/Dashboard/run.sh
 Restart=always
 
