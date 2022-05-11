@@ -207,7 +207,7 @@ def clockout(data=None):
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
     readthread.resume()
-    # readthread.run()
+    readthread.run()
     return jsonify(message='success')
 
 # hours feature has be disabled
