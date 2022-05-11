@@ -874,7 +874,7 @@ def getWrite():
         #validate device
         if validateDevice(codecs.decode(data['device'], 'rot_13')):
             print("API GET WRITE Validated")
-            obj = database.searchFob(data['id'])
+            obj = database.searchFobWrite(data['id'])
             #validate key
             if obj is not None:
                 if obj.text == data['text']:
@@ -894,6 +894,8 @@ def getWrite():
                         return jsonify(message="error")
                 else:
                     return jsonify(message="error")
+            else:
+                return jsonify(message="error")
         else:
             return jsonify(message="error")
     else:
