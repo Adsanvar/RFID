@@ -58,9 +58,17 @@ def dashboard():
         else:
             flash('Error Deleting Employee', 'errors')
         return redirect(url_for('home.dashboard', option='Settings', view='employees'))
+    
+    if 'fob_delete' in request.form:
+        print(request.form)
+        emp = request.form.get('fob_delete') #id
+        if database.deleteEmployee(emp) == "success":
+            flash('Employee Successfully Deleted.', 'success')
+        else:
+            flash('Error Deleting Employee', 'errors')
+        return redirect(url_for('home.dashboard', option='Settings', view='employees'))
 
     if 'tc_delete' in request.form:
-        
         tcid = request.form.get('tc_delete') #id
         if database.delete_Timeclock(tcid) == "success":
             flash('Timeclock Record Successfully Deleted.', 'success')
@@ -72,7 +80,10 @@ def dashboard():
         view = request.args.get('view')
         if view == 'employees':
             emps = database.get_employees()
-            return render_template('dashboard.html', role=user.role,  user=user.firstname, option=option,  table_data=emps, events='None', view=view)
+            return render_template('dashboard.html', role=user.role, user=user.firstname, option=option, table_data=emps, events='None', view=view)
+        elif view == 'fobs':
+            fobs = database.getFobs()
+            return render_template('dashboard.html', role=user.role, user=user.firstname, option=option, table_data=fobs, events='None', view=view)
         elif view == 'hours':
             table_data = None
             employees = database.get_employees()

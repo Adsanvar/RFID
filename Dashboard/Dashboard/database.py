@@ -318,7 +318,17 @@ def createFob(fob):
         db.session.rollback()
         raise
 
-# Gets all members
+def deleteFob(id):
+    try:
+        emp = searchFob(id)
+        db.session.delete(emp)
+        db.session.commit()
+        return "success"
+    except:
+        flash('Error Deleting Fob', 'error')
+        db.session.rollback()
+        raise
+# Gets all fobs
 def getFobs():
     try:
         return Fob.query.all()

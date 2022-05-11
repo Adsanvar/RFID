@@ -6,12 +6,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Adrian Sandoval">
 
   <title>MV Landscaping</title>
   <!-- Bootstrap core CSS -->
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'>
+  <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'> -->
+  <link href="{{ url_for('static', filename='css/all.min.css')}}" rel='stylesheet' />
+  <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'> -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap-datetimepicker.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css')}}">
   <link href="{{ url_for('static', filename='css/fullcalendar.css')}}" rel='stylesheet' />
   <link href="{{ url_for('static', filename='css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
@@ -55,7 +57,6 @@
           <div class="list-group">
             {% if role == 'Admin' %}
             <a href="{{ url_for('home.dashboard', option='Settings') }}" class="list-group-item">Settings</a>
-            <a href="{{ url_for('home.dashboard', option='Content') }}" class="list-group-item">Content</a>
             {% endif %}
             <a href="{{ url_for('home.dashboard', option='Calendar') }}" class="list-group-item">Calendar</a>
             <!-- <a href="services.html" class="list-group-item">Services</a> -->
@@ -137,21 +138,31 @@
                   {% if view == 'employees'%}
                   <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
                   <a name="Employees" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Fobs" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='fobs')}}">Fobs</a>
+                  <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
+                  <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
+                  {% elif view == 'fobs' %}
+                  <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
+                  <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Fobs" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='fobs')}}">Fobs</a>                  
                   <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
                   <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
                   {% elif view == 'hours' %}
                   <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
                   <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Fobs" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='fobs')}}">Fobs</a>
                   <a name="Hours" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
                   <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
                   {% elif view == 'payroll'%}
                   <a name="Users" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
                   <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Fobs" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='fobs')}}">Fobs</a>
                   <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
                   <a name="Payroll" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
                   {% else %}
                   <a name="Users" class="btn btn-lg btn-secondary-portfolio-selected btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings')}}">Users</a>
                   <a name="Employees" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='employees')}}">Employees</a>
+                  <a name="Fobs" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='fobs')}}">Fobs</a>
                   <a name="Hours" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='hours')}}">Hours</a>
                   <a name="Payroll" class="btn btn-lg btn-secondary-portfolio btn-secondary-portfolio-block" href="{{ url_for('home.dashboard', option='Settings', view='payroll')}}">Payroll</a>
                   {% endif %}
@@ -236,9 +247,13 @@
                       </form>
                   {% endif %}
                 </div>
+              {% elif view == 'fobs' %}
+              <div class="col-md-12">
+                <h5>Manage Fobs</h5>
+              </div>
               {% elif view == 'hours' %}
                 <!-- HOURS CODE GOES HERE -->
-                <h5>Create A New Timeclock Timeslot</h3>
+                <h5>Create A New Timeclock Timeslot</h5>
                 <form method="post" action="{{url_for('home.createTimeclock')}}">
                   <div class="form-group row">
                     <label for="emp" class="col-sm-2 col-form-label">Employee:</label>
@@ -395,10 +410,43 @@
                       </td>
                     </tr>
                     {% endfor %}
-                    <!-- <tr> -->
                   </tbody>
                 </table>
                 </div>
+              {% elif view == 'fobs' %}
+              <h3 style='text-align: center;'>Fobs</h3>
+              <div>
+              <table class="table table-hover table-striped table-bordered" id="employeeTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">FobID</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for fob in table_data %}
+                  <tr>
+                    {% if fob.text == 'Admin' %}
+                    <td></td>
+                    <td>{{fob.text}}</td>
+                    <td></td>
+                    {% else %}
+                    <td>{{fob.fobid}}</td>
+                    <td>{{fob.text}}</td>
+                    <td>
+                      <div class="btn-toolbar">
+                        <div class="btn-group mr-2">
+                          <button class= "btn btn-outline-danger" name="fob_btn_delete" id="fob_btn_delete" data-toggle="modal" data-target="#exampleModalCenter" data-text="{{fob.text}}" data-id="{{fob.id}}"><i class="fas fa-trash"></i></button>
+                        </div>
+                      </div>
+                    </td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
               {% elif view == 'hours' %}
                 {% if table_data != None %}
                   <h3 style='text-align: center;'>Hours</h3>
@@ -744,6 +792,24 @@
                         </div>
                       </form>
                     </div>
+                    {% elif view == 'fobs' %}
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Fob</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ url_for('home.dashboard') }}" method="post">
+                        <p id="info1"></p>
+                        <input name="delete_fob" id="fob" type="text" readonly></input>
+                        <p id="info2"></p>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                          <button type="submit" name="fob_delete" id="fob_delete" class="btn btn-outline-danger">Yes</button>
+                        </div>
+                      </form>
+                    </div>
                     {% elif view == 'hours' %}
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLongTitle">Delete Timeclock Record</h5>
@@ -783,7 +849,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-light">
     <div class="container">
-      <p class="m-0 text-center text-black">Copyright &copy; MV Landscaping LLC 2021 All Rights Reserved</p>
+      <p class="m-0 text-center text-black">Copyright &copy; MV Landscaping LLC 2022 All Rights Reserved</p>
       <p class="m-0 text-center text-black">Powered By <a href="https://www.kleene.dev/">Kleene Development</a> </p>
     </div>
     <!-- /.container -->
@@ -792,11 +858,12 @@
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="{{ url_for('static', filename='jquery/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.10.2.js')}}" ></script> -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.custom.min.js')}}" ></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/fullcalendar.js')}}" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/moment.min.js')}}" ></script>
+  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script> -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js')}}" ></script>
 
 
   <script type="text/javascript">
@@ -1319,8 +1386,6 @@
         else{
           $("#nolunch_cbx").prop('checked', false)
         }
-
-
       }
       else{
         var recipient = button.data('user') // Extract info from data-* attributes
@@ -1346,6 +1411,16 @@
         $("#emp").val(recipient)
         $("#info2").text("Are You Sure?")
         $("#emp_delete").val(id)
+      }
+      else if (button[0].id === "fob_btn_delete")
+      {
+        var recipient = button.data('text')
+        var id = button.data("id")
+        console.log(recipient);
+        $("#info1").text("You Are About To Delete Fob Associated To:")
+        $("#fob").val(recipient)
+        $("#info2").text("Are You Sure?")
+        $("#fob_delete").val(id)
       }
       else if(button[0].id === "tc_btn_delete")
       {
