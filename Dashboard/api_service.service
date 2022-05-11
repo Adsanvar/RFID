@@ -1,6 +1,6 @@
 [Unit]
 Description=Dashboard Api Service
-After=multi-user.target
+After=network.target
 
 [Service]
 Type=simple
@@ -8,6 +8,3 @@ WorkingDirectory=/home/pi/Documents/RFID/Dashboard
 User=pi
 ExecStart=/usr/bin/bash /home/pi/Documents/RFID/Dashboard/run.sh
 Restart=always
-
-[Install]
-WantedBy=multi-user.target
