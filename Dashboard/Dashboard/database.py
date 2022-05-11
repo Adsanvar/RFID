@@ -321,7 +321,7 @@ def searchFob(fid):
         db.session.rollback()
         raise
 
-def searchFobWrite(fid)
+def searchFobWrite(fid):
     try:
         return Fob.query.filter_by(fobid = fid).first()
     except:
