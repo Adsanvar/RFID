@@ -104,7 +104,6 @@ class Reader(threading.Thread):
                         GPIO.output(buzzer,GPIO.LOW)
                 else:
                     continue
-                GPIO.cleanup()
         except:
             print('read exception')
             raise
