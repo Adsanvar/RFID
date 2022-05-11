@@ -126,7 +126,7 @@ def index():
             window.load_url(base_url)
             readthread.resume()
             app.logger.info('Resuming ReadThread and Running it again')
-            # readthread.run()
+            readthread.run()
         elif data == 'closeHours':
             app.logger.info('Loading base url from close hours')
             window.load_url(base_url)
