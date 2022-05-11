@@ -302,9 +302,21 @@ def createPayroll(recs):
     except:
         db.session.rollback()
         raise
-def searchFob(id):
+
+def deleteFob(fid):
     try:
-        return Fob.query.filter_by(fobid = id).first()
+        fob = searchFob(fid)
+        db.session.delete(fob)
+        db.session.commit()
+        return "success"
+    except:
+        flash('Error Deleting Fob', 'error')
+        db.session.rollback()
+        raise
+
+def searchFob(fid):
+    try:
+        return Fob.query.filter_by(id = fid).first()
     except:
         db.session.rollback()
         raise
@@ -318,16 +330,6 @@ def createFob(fob):
         db.session.rollback()
         raise
 
-def deleteFob(id):
-    try:
-        emp = searchFob(id)
-        db.session.delete(emp)
-        db.session.commit()
-        return "success"
-    except:
-        flash('Error Deleting Fob', 'error')
-        db.session.rollback()
-        raise
 # Gets all fobs
 def getFobs():
     try:

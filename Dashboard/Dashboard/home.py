@@ -61,12 +61,12 @@ def dashboard():
     
     if 'fob_delete' in request.form:
         print(request.form)
-        emp = request.form.get('fob_delete') #id
-        if database.deleteEmployee(emp) == "success":
-            flash('Employee Successfully Deleted.', 'success')
+        fob = request.form.get('fob_delete') #id
+        if database.deleteFob(fob) == "success":
+            flash(' Successfully Deleted Fob.', 'success')
         else:
-            flash('Error Deleting Employee', 'errors')
-        return redirect(url_for('home.dashboard', option='Settings', view='employees'))
+            flash('Error Deleting Fob', 'errors')
+        return redirect(url_for('home.dashboard', option='Settings', view='fobs'))
 
     if 'tc_delete' in request.form:
         tcid = request.form.get('tc_delete') #id
