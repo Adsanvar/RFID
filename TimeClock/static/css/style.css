@@ -13,7 +13,7 @@
 
 body {
   background: linear-gradient(45deg, #1870ed 0, #f18f88 100%);
-  font-family: "Montserrat", "sans-serif";
+  font-family: "Times", "sans-serif";
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ body {
   width: 150px;
   height: 150px;
   font-size: 24px;
-  font-family: 'Montserrat';
+  font-family: 'Times';
   text-align: center;
   border-radius: 25%;
   border: none;
@@ -104,7 +104,7 @@ body {
   width: 150px;
   height: 150px;
   font-size: 24px;
-  font-family: 'Montserrat';
+  font-family: 'Times';
   text-align: center;
   border-radius: 25%;
   border: none;
@@ -118,7 +118,7 @@ body {
   width: 150px;
   height: 150px;
   font-size: 24px;
-  font-family: 'Montserrat';
+  font-family: 'Times';
   text-align: center;
   border-radius: 25%;
   border: none;
@@ -131,7 +131,7 @@ body {
   width: 100px;
   height: 100px;
   font-size: 24px;
-  font-family: 'Montserrat';
+  font-family: 'Times';
   text-align: center;
   border-radius: 50%;
   border: none;
