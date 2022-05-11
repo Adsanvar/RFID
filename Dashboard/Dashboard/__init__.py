@@ -13,15 +13,15 @@ try:
         app = Flask(__name__)
 
         #DEV
-        app.config['SECRET_KEY'] = 'TESTMVLANDSCAPE'
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Database13.@localhost/MVLandscape'
+        # app.config['SECRET_KEY'] = 'TESTMVLANDSCAPE'
+        # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Database13.@localhost/MVLandscape'
 
         # Prod
-        # f = open('/home/pi/Documents/RFID/Dashboard/config.json')
-        # obj = json.load(f)
-        # f.close()
-        # app.config['SECRET_KEY'] = obj['secret_key']
-        # app.config['SQLALCHEMY_DATABASE_URI'] = obj['database_uri']
+        f = open('/home/pi/Documents/RFID/Dashboard/config.json')
+        obj = json.load(f)
+        f.close()
+        app.config['SECRET_KEY'] = obj['secret_key']
+        app.config['SQLALCHEMY_DATABASE_URI'] = obj['database_uri']
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
         app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
