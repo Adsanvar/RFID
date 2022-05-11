@@ -868,10 +868,12 @@ def getHours():
 def getWrite():
     # get's all the employees with out an associated Fob ID and returns them to Client
     data = request.data
+    print("API GET WRITE:", data)
     if data != None:
         data = json.loads(data)
         #validate device
         if validateDevice(codecs.decode(data['device'], 'rot_13')):
+            print("API GET WRITE Validated")
             obj = database.searchFob(data['id'])
             #validate key
             if obj is not None:

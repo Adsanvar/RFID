@@ -340,11 +340,12 @@ def getWrite(data=None):
             return jsonify(message='Error')
     else:
         app.logger.info("No Data coming into getWrite")
-        return jsonify(message='Error No Data')
+        return jsonify(message='Error No Data'), 400
 
 def loadWriter(data):
     headers= {'content-type': 'application/json'}
     res = requests.get(api_url+"getWrite", data=data, headers=headers)
+    app.logger.warning("loadWriter Info", res)
     # print(json.dumps(res.text))
     # global read_flag
     # read_flag = False
@@ -460,8 +461,6 @@ def write(val, empId):
             res = gui.validateFob(payload, api_url)
             if res:
                 return False
-        
-
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
         print("Now place your tag to write")
