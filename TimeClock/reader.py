@@ -49,6 +49,7 @@ class Reader(threading.Thread):
             while not self._stop_event.isSet():
             # while self.read_flag:
                 # print(self.read_flag)
+                print(threading.current_thread().name)
                 print("Ready For Next")
                 id, text = reader.read()
                 print(id)

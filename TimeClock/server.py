@@ -361,13 +361,12 @@ def loadWriter(data):
 def writer(data=None):
     # POST = write request to api
     if request.method == "POST":
-        print('inpost')
+        app.logger.info('/writer POST')
         data = json.loads(data)
-        print(data)
+        app.logger.info(data)
         emp_id = int(request.form.get('id'))
         for emp in data:
             if emp['id'] == emp_id:
-                print('found')
                 name = emp['firstname'] + ' ' + emp['lastname']
                 # data.pop(data.index(emp))
                 # startWriteThread(name, emp_id)
@@ -412,12 +411,11 @@ def writer(data=None):
     else:
         # To display fobs to write
         if data != None:
-            print("in data not empty")
             try:
-                print("Writer: is readthread alive: ", readthread.is_alive())
-                print("Writer: is readthread stopped? ", readthread.stopped())
+                app.logger.info("Writer: is readthread alive: ", readthread.is_alive())
+                app.logger.info("Writer: is readthread stopped? ", readthread.stopped())
                 data = json.loads(data)
-                print(data)
+                app.logger.info(data)
                 # print("isAlive(): ", readthread.isAlive())
                 # print("is_alive(): ", readthread.is_alive())
                 # global read_flag
@@ -446,10 +444,9 @@ def writer(data=None):
                 return render_template('writer.html', data=data)
             except Exception as e:
                 print('Exception in GET of /Writer')
-                app.logger.error("Exception in GET Writer")
+                app.logger.exception("Exception in GET Writer")
                 app.logger.error(e)
         else:
-            print("no data")
             app.logger.warning("No Data Comming into Writer")
             return jsonify(message='Error No Data')
 
@@ -457,7 +454,6 @@ def write(val, empId):
     try:
         # print(threading.current_thread().name)
         GPIO.cleanup()
-        print('place to read')
         readerx = SimpleMFRC522()
         id, text = readerx.read()
 
@@ -466,9 +462,9 @@ def write(val, empId):
             res = gui.validateFob(payload, api_url)
             if res:
                 return False
+
         GPIO.cleanup()        
         writerx = SimpleMFRC522()
-        print("Now place your tag to write")
         writerx.write(val)
         # GPIO.setwarnings(False)
         # GPIO.setmode(GPIO.BOARD)
@@ -477,14 +473,11 @@ def write(val, empId):
         # GPIO.output(buzzer,GPIO.HIGH)
         # time.sleep(2)
         # GPIO.output(buzzer,GPIO.LOW)
-        print("Base level Written")
         payload = {'id': id, 'text': val, 'device': getserial(), 'employeeId': empId}
         gui.sendWriteRequest(payload, api_url)
         return True
     except Exception as e:     
-        print('write exception')
-        print(e)
-        app.logger.error("Write Function from RFID")
+        app.logger.exception("Write Function from RFID")
         app.logger.error(e)
     finally:
         GPIO.cleanup()
@@ -493,10 +486,9 @@ def write(val, empId):
 @app.route('/stopWrite', methods=["POST"])
 def stopWrite():
     # writethread.stop()
-    print("at stopWrite")
 
-    print("Cancel: is readthread alive: ", readthread.is_alive())
-    print("Cancel: is readthread stopped? ", readthread.stopped())
+    app.logger.info("Cancel: is readthread alive: ", readthread.is_alive())
+    app.logger.info("Cancel: is readthread stopped? ", readthread.stopped())
     # print("Cancel: is writethread alive: ", writethread.is_alive())
     # print("Cancel: is writethread stopped? ", writethread.stopped())
     loadFobs()
