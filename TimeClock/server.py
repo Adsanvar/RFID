@@ -212,8 +212,8 @@ def clockout(data=None):
 
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
-    print("Get Write: is readthread alive? ", readthread.is_alive())
-    print("Get Write: is readthread stopped? ", readthread.stopped())
+    print("Get resume: is readthread alive? ", readthread.is_alive())
+    print("Get resume: is readthread stopped? ", readthread.stopped())
     if readthread.stopped():
         readthread.join()
     
