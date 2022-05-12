@@ -108,8 +108,6 @@ class Reader():
                     # GPIO.output(buzzer,GPIO.HIGH)          
                     time.sleep(2)
                     # GPIO.output(buzzer,GPIO.LOW)
-                else:
-                    continue
         except:
             print('read exception')
             raise
