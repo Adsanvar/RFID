@@ -41,7 +41,8 @@ def validateFob(payload):
     except Exception as e:
         print(e)
         return False
-    return True
+    finally:
+        f.close()
 
 def sendWriteRequest(payload, api_url):
     headers= {'content-type': 'application/json'}
