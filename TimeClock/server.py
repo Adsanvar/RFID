@@ -12,6 +12,7 @@ import os
 import requests
 from reader import Reader
 from writer import Writer
+from read_v2 import Reader as readx
 from utilities import getserial
 import gui 
 import datetime
@@ -108,8 +109,8 @@ def loadFobs():
         app.logger.exception("Exception Trying to load fobs")
         print(e)
 
-readthread = Reader(window = window, api_url = api_url)
-readthread.daemon = True
+# readthread = Reader(window = window, api_url = api_url)
+# readthread.daemon = True
 # writethread = Writer(api_url=api_url)
 # writethread.daemon = True
 
@@ -126,14 +127,14 @@ def index():
         if data == 'fromStopWrite':
             app.logger.info('Stopping From a Write Operation')
             window.load_url(base_url)
-            readthread.resume()
+            # readthread.resume()
             app.logger.info('Resuming ReadThread and Running it again')
             readthread.run()
         elif data == 'closeHours':
             app.logger.info('Loading base url from close hours')
             window.load_url(base_url)
             app.logger.info('Setting not_in_hours flag for reading')
-            readthread.not_in_hours()
+            # readthread.not_in_hours()
         return 'success'
     else:
         # print(loadFobs())
@@ -211,8 +212,8 @@ def clockout(data=None):
 
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
-    readthread.resume()
-    readthread.run()
+    # readthread.resume()
+    # readthread.run()
     return jsonify(message='success')
 
 # hours feature has be disabled
@@ -329,8 +330,14 @@ def getWrite(data=None):
             #     stopReadThread()
             # print("Get Write: is readthread alive? ", readthread.is_alive())
             # print("Get Write: is readthread stopped? ", readthread.stopped())
-            app.logger.info('Get Write: is readthread alive? {}'.format(readthread.is_alive()))
-            app.logger.info('Get Write: is readthread alive? {}'.format(readthread.stopped()))
+
+
+            # ------------- main
+            # app.logger.info('Get Write: is readthread alive? {}'.format(readthread.is_alive()))
+            # app.logger.info('Get Write: is readthread alive? {}'.format(readthread.stopped()))
+            # ------------- end main
+
+
             # if not readthread.stopped():
             #     readthread.stop()
             # print("is readthread alive? ", readthread.is_alive())
@@ -412,8 +419,11 @@ def writer(data=None):
         # To display fobs to write
         if data != None:
             try:
-                app.logger.info("Writer: is readthread alive: ", readthread.is_alive())
-                app.logger.info("Writer: is readthread stopped? ", readthread.stopped())
+                # ---------- MAIN
+                # app.logger.info("Writer: is readthread alive: ", readthread.is_alive())
+                # app.logger.info("Writer: is readthread stopped? ", readthread.stopped())
+                # ---------- END MAIN
+
                 data = json.loads(data)
                 app.logger.info(data)
                 # print("isAlive(): ", readthread.isAlive())
@@ -637,7 +647,13 @@ if __name__ == '__main__':
         # t.daemon = True
         # t.start()
         # startReadThread(True)
-        readthread.start()
+
+        # -------- MAIN
+        # readthread.start()
+        # -------- MAIN END
+
+        readthread = Reader(window = window, api_url = api_url)
+        readthread.daemon = True
         # print("loading fobs")
 
         # Code Block to check for wifi connection

@@ -7,6 +7,7 @@ import json
 import pyautogui
 from gui import loadOptions
 from utilities import getserial
+import multiprocessing
 
 class Reader():
     def __init__(self, window, api_url=None):
@@ -17,7 +18,10 @@ class Reader():
         self.api_url = api_url
         # self.in_hours_flag = False
         # self.read_flag = True
-        print("New Class created")    
+        self.pr = multiprocess.Process(target=self.run())
+        print("New Class created")
+        self.pr.start()
+        print("Reader started")
 
     # def stop(self):
     #     print('Read thread stropped')
@@ -56,53 +60,54 @@ class Reader():
                 print(id)
                 print(text)
                 print(repr(text))
-                    pyautogui.moveTo(512, 300) #moves mouse to center to invoke a wake up rpi if it is sleeping
-                    val = ""
-                    if text == None or text  == '':
-                        val = "Error"
+                pyautogui.moveTo(512, 300) #moves mouse to center to invoke a wake up rpi if it is sleeping
+                val = ""
+                if text == None or text  == '':
+                    val = "Error"
+                else:
+                    # print('\x00' in text)
+                    if '\x00' in text:
+                        val = text.replace('\x00', '')
                     else:
-                        # print('\x00' in text)
-                        if '\x00' in text:
-                            val = text.replace('\x00', '')
-                        else:
-                            val = text.rstrip(' ')
+                        val = text.rstrip(' ')
 
-                    if val == '' or val == None:
-                        val = "Error"
-                        payload = {'id': id, 'text': val}
-                        loadOptions(self.window, payload, self.base_url, self.api_url)
-                        # print(window.get_current_url())
-                        GPIO.output(buzzer,GPIO.HIGH)     
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)            
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                    else:
-                        payload = {'id': id, 'text': val, 'device': getserial()}
-                        res = loadOptions(self.window, payload, self.base_url, self.api_url)
-                        # print(window.get_current_url())
-                        if res:
-                            if val == "Admin":
-                                print("Reader Read Admin, stopping read thread")
-                                # self.read_flag = False
-                                self._stop_event.set()                         
-                        # GPIO.output(buzzer,GPIO.HIGH)          
-                        time.sleep(2)
-                        # GPIO.output(buzzer,GPIO.LOW)
+                if val == '' or val == None:
+                    val = "Error"
+                    payload = {'id': id, 'text': val}
+                    loadOptions(self.window, payload, self.base_url, self.api_url)
+                    # print(window.get_current_url())
+                    GPIO.output(buzzer,GPIO.HIGH)     
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)            
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.HIGH)
+                    time.sleep(.5)
+                    GPIO.output(buzzer,GPIO.LOW)
+                else:
+                    payload = {'id': id, 'text': val, 'device': getserial()}
+                    res = loadOptions(self.window, payload, self.base_url, self.api_url)
+                    # print(window.get_current_url())
+                    if res:
+                        if val == "Admin":
+                            print("Reader Read Admin, stopping read thread")
+                            # self.read_flag = False
+                            # self._stop_event.set() 
+                            self.pr.join()                        
+                    # GPIO.output(buzzer,GPIO.HIGH)          
+                    time.sleep(2)
+                    # GPIO.output(buzzer,GPIO.LOW)
                 else:
                     continue
         except:
