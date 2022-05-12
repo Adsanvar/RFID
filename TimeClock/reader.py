@@ -95,11 +95,13 @@ class Reader(threading.Thread):
                         payload = {'id': id, 'text': val, 'device': getserial()}
                         res = loadOptions(self.window, payload, self.base_url, self.api_url)
                         # print(window.get_current_url())
-                        if res:
-                            if val == "Admin":
-                                print("Reader Read Admin, stopping read thread")
-                                # self.read_flag = False
-                                self._stop_event.set()                         
+
+                        # if res:
+                        #     if val == "Admin":
+                        #         print("Reader Read Admin, stopping read thread")
+                        #         # self.read_flag = False
+                        #         self._stop_event.set()     
+                        #                     
                         # GPIO.output(buzzer,GPIO.HIGH)          
                         time.sleep(2)
                         # GPIO.output(buzzer,GPIO.LOW)
