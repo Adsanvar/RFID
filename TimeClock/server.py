@@ -652,7 +652,7 @@ if __name__ == '__main__':
         # readthread.start()
         # -------- MAIN END
 
-        readthread = Reader(window = window, api_url = api_url)
+        readthread = readerx(window = window, api_url = api_url)
         readthread.daemon = True
         # print("loading fobs")
 
