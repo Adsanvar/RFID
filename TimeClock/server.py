@@ -653,7 +653,6 @@ if __name__ == '__main__':
         # -------- MAIN END
 
         readthread = readx(window = window, api_url = api_url)
-        readthread.daemon = True
         # print("loading fobs")
 
         # Code Block to check for wifi connection

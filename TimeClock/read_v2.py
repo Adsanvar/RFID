@@ -18,10 +18,10 @@ class Reader():
         self.api_url = api_url
         # self.in_hours_flag = False
         # self.read_flag = True
-        self.pr = multiprocessing.Process(target=self.run())
         print("New Class created")
+        self.pr = multiprocessing.Process(target=self.run)
+        self.pr.daemon = True
         self.pr.start()
-        print("Reader started")
 
     # def stop(self):
     #     print('Read thread stropped')
