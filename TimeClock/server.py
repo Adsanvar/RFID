@@ -29,7 +29,6 @@ logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DE
 app = Flask(__name__)
 scheduler = APScheduler()
 scheduler.start()
-readthread = readx(window = window, api_url = api_url)
 
 config = None
 fobs = None
@@ -110,8 +109,17 @@ def loadFobs():
         app.logger.exception("Exception Trying to load fobs")
         print(e)
 
+
+
+# MAIN
+
 # readthread = Reader(window = window, api_url = api_url)
 # readthread.daemon = True
+
+# END MAIN
+
+readthread = readx(window = window, api_url = api_url)
+
 # writethread = Writer(api_url=api_url)
 # writethread.daemon = True
 
