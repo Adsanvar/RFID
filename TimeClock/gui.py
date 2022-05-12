@@ -125,7 +125,6 @@ def loadOptions(window, payload, base_url, api_url):
                 /*Might Not Need Code Here*/
                 if(result.dismiss === Swal.DismissReason.cancel)
                 {
-                    /*
                     let url = '%sresumeRead'
                     return fetch(url).then(response => {
                         if (!response.ok) {
@@ -137,7 +136,7 @@ def loadOptions(window, payload, base_url, api_url):
                             Swal.showValidationMessage(
                             `Request failed: ${error}`
                             )
-                    })*/
+                    })
                 }
             })""" % (payload['text'],payload['id'],payload['text'], payload['device'], base_url, base_url)
 

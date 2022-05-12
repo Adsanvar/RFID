@@ -127,8 +127,8 @@ def index():
             app.logger.info('Stopping From a Write Operation')
             window.load_url(base_url)
             readthread.resume()
-            app.logger.info('Resuming ReadThread and Running it again')
-            # readthread.run()
+            # app.logger.info('Resuming ReadThread and Running it again')
+            readthread.run()
         elif data == 'closeHours':
             app.logger.info('Loading base url from close hours')
             window.load_url(base_url)
@@ -212,7 +212,7 @@ def clockout(data=None):
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
     readthread.resume()
-    # readthread.run()
+    readthread.run()
     return jsonify(message='success')
 
 # hours feature has be disabled
