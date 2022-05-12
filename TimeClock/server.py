@@ -211,7 +211,16 @@ def clockout(data=None):
 
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
-    readthread.resume()
+    print("Get Write: is readthread alive? ", readthread.is_alive())
+    print("Get Write: is readthread stopped? ", readthread.stopped())
+    if readthread.stopped():
+        readthread.join()
+    
+    global readthread
+    readthread = Reader(window = window, api_url = api_url)
+    readthread.daemon = True
+    
+    # readthread.resume()
     # readthread.run()
     return jsonify(message='success')
 
