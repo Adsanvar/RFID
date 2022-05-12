@@ -108,6 +108,7 @@ def loadFobs():
         app.logger.exception("Exception Trying to load fobs")
         print(e)
 
+global readthread
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 # writethread = Writer(api_url=api_url)
@@ -216,7 +217,6 @@ def resumeRead():
     if readthread.stopped():
         readthread.join()
     
-    global readthread
     readthread = Reader(window = window, api_url = api_url)
     readthread.daemon = True
     
