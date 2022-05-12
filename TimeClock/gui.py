@@ -102,7 +102,7 @@ def loadOptions(window, payload, base_url, api_url):
             showCancelButton: true,
             cancelButtonText: 'Cancel',
             width: 600,
-            allowOutsideClick: true,
+            allowOutsideClick: false,
             html:
                 '<hr/>',
             preConfirm: () => {
