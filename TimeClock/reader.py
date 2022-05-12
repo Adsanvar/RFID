@@ -72,25 +72,25 @@ class Reader(threading.Thread):
                         payload = {'id': id, 'text': val}
                         loadOptions(self.window, payload, self.base_url, self.api_url)
                         # print(window.get_current_url())
-                        GPIO.output(buzzer,GPIO.HIGH)     
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)            
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.HIGH)
-                        time.sleep(.5)
-                        GPIO.output(buzzer,GPIO.LOW)
+                        # GPIO.output(buzzer,GPIO.HIGH)     
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.LOW)            
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.HIGH)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.LOW)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.HIGH)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.LOW)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.HIGH)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.LOW)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.HIGH)
+                        # time.sleep(.5)
+                        # GPIO.output(buzzer,GPIO.LOW)
                     else:
                         payload = {'id': id, 'text': val, 'device': getserial()}
                         res = loadOptions(self.window, payload, self.base_url, self.api_url)
@@ -105,8 +105,9 @@ class Reader(threading.Thread):
                         # GPIO.output(buzzer,GPIO.LOW)
                 else:
                     continue
-        except:
+        except Exception as e:
             print('read exception')
+            print(e)
             raise
         finally:
             GPIO.cleanup()
