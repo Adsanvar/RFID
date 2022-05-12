@@ -29,6 +29,7 @@ logging.basicConfig(filename = '{}/{}.log'.format('logs', now), level=logging.DE
 app = Flask(__name__)
 scheduler = APScheduler()
 scheduler.start()
+readthread = readx(window = window, api_url = api_url)
 
 config = None
 fobs = None
@@ -652,7 +653,6 @@ if __name__ == '__main__':
         # readthread.start()
         # -------- MAIN END
 
-        readthread = readx(window = window, api_url = api_url)
         # print("loading fobs")
 
         # Code Block to check for wifi connection
