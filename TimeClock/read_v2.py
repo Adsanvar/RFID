@@ -19,9 +19,6 @@ class Reader():
         # self.in_hours_flag = False
         # self.read_flag = True
         print("New Class created")
-        self.pr = multiprocessing.Process(target=self.run)
-        self.pr.daemon = True
-        self.pr.start()
 
     # def stop(self):
     #     print('Read thread stropped')
@@ -114,6 +111,9 @@ class Reader():
         finally:
             GPIO.cleanup()
     
-    def setBaseUrl(self, base_url):
+    def start(self, base_url):
         self.base_url = base_url
         print("base url set: ", self.base_url)
+        self.pr = multiprocessing.Process(target=self.run)
+        self.pr.daemon = True
+        self.pr.start()

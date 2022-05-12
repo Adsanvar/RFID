@@ -518,7 +518,7 @@ def setBaseUrl():
     global base_url
     base_url = window.get_current_url()
     print("base url: ", base_url)
-    readthread.setBaseUrl(base_url)
+    readthread.start(base_url)
 
 # def getWriteThread():
 #     global writethread
