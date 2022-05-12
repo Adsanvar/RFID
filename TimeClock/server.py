@@ -108,7 +108,6 @@ def loadFobs():
         app.logger.exception("Exception Trying to load fobs")
         print(e)
 
-global readthread
 readthread = Reader(window = window, api_url = api_url)
 readthread.daemon = True
 # writethread = Writer(api_url=api_url)
@@ -212,16 +211,8 @@ def clockout(data=None):
 
 @app.route('/resumeRead', methods=['GET'])
 def resumeRead():
-    print("Get resume: is readthread alive? ", readthread.is_alive())
-    print("Get resume: is readthread stopped? ", readthread.stopped())
-    if readthread.stopped():
-        readthread.join()
-    
-    readthread = Reader(window = window, api_url = api_url)
-    readthread.daemon = True
-    
-    # readthread.resume()
-    # readthread.run()
+    readthread.resume()
+    readthread.run()
     return jsonify(message='success')
 
 # hours feature has be disabled
