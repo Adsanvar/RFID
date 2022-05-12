@@ -156,6 +156,8 @@ def clockin(data=None):
             with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
                 r = f.read(2)
+                print(r)
+                print(len(r))
                 if len(r) == 0:
                     header = ['date', 'name','fobid', 'in/out','time', 'nolunch']
                     clkin.writerow(header)
