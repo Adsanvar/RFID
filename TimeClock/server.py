@@ -155,6 +155,7 @@ def clockin(data=None):
             dt = datetime.datetime.now().replace(microsecond=0)
             with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'a+') as f:
                 clkin = csv.writer(f, delimiter=',')
+                f.seek(0)
                 r = f.read(2)
                 print(r)
                 print(len(r))
