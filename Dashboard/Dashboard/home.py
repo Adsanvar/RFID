@@ -19,6 +19,7 @@ import datetime
 from decimal import Decimal
 from werkzeug.wsgi import FileWrapper
 from pathlib import Path
+import sys
 
 home = Blueprint('home', __name__)
 
@@ -311,6 +312,7 @@ def dashboard():
 def get_todays_timeclock():
     dt = datetime.datetime.now()
     print("Processing CSV FILE - START: {} ".format(dt))
+    sys.stdout.flush()
     data = {}
     try:
         with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'r') as f: 
@@ -333,6 +335,7 @@ def get_todays_timeclock():
             # print(line_count)
             f.close()
         print(data)
+        sys.stdout.flush()
     except Exception as e:
         print(e)
         raise
