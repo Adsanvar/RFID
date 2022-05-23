@@ -303,9 +303,39 @@ def dashboard():
     if option == 'Calendar':
         return render_template('dashboard.html', role=user.role,  user=user.firstname, option=option, events=getEvents())
     
+    print(get_todays_timeclock())
     return render_template('dashboard.html', role=user.role,  user=user.firstname, events='None')
     # else:
     #     return redirect(url_for('home.login'))
+
+def get_todays_timeclock():
+    print("Processing CSV FILE - START: {} ".format(now))
+    dt = datetime.datetime.now()
+    data = {}
+    try:
+        with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'r') as f: 
+            csv_reader = csv.DictReader(f)
+            line_count = 0
+            # No failed dates
+            for row in csv_reader:
+                #print(row)
+                # print(dt.date())
+                #print(row['date'])
+                # yesterday = datetime.datetime.today() - datetime.timedelta(days=2)
+                # print(d)
+                # if row['date'] == f'{yesterday.date()}':
+                if row['date'] == f'{dt.date()}':
+                # if row['date'] in upload_dates:
+                    data[line_count] = row['date'], row['name'], row['fobid'], row['in/out'], row['time'], row['nolunch']
+                    # print(f"\t{row['date']}, {row['name']}, {row['fobid']}, {row['in/out']}, {row['time']}, {row['lunch']}")
+                    # line_count += 1
+                    line_count += 1
+            # print(line_count)
+            f.close()
+        print(data)
+    except Exception as e:
+        print(e)
+        raise
 
 def getEvents():
     events = []
