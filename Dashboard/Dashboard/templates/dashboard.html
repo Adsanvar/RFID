@@ -842,6 +842,27 @@
             {% endif %}
           <!-- Endif for Settings -->
           {% endif %}
+          <h3 style='text-align: center;'>{{table_data[0][1][0]}}'s Time Clock</h3>
+          <div>
+            <table class="table table-hover table-striped table-bordered" id="employeeTable">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Employee</th>
+                  <th scope="col">In/Out</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tc in table_data %}
+                <tr>
+                  <td>{{tc[1][1]}}</td>
+                  <td>{{tc[1][3]}}</td>
+                  <td>{{tc[1][4]}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         <!-- /.Content Column -->
         </div>
     <!-- /.row -->
