@@ -305,7 +305,7 @@ def dashboard():
         return render_template('dashboard.html', role=user.role,  user=user.firstname, option=option, events=getEvents())
     
     print(get_todays_timeclock())
-    return render_template('dashboard.html', role=user.role,  user=user.firstname, events='None')
+    return render_template('dashboard.html', role=user.role,  user=user.firstname, table_data=get_todays_timeclock(), events='None')
     # else:
     #     return redirect(url_for('home.login'))
 
@@ -334,8 +334,9 @@ def get_todays_timeclock():
                     line_count += 1
             # print(line_count)
             f.close()
-        print(data)
-        sys.stdout.flush()
+        # print(data)
+        # sys.stdout.flush()
+        return data
     except Exception as e:
         print(e)
         raise
