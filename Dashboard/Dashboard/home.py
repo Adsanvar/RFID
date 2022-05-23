@@ -309,8 +309,8 @@ def dashboard():
     #     return redirect(url_for('home.login'))
 
 def get_todays_timeclock():
-    print("Processing CSV FILE - START: {} ".format(now))
     dt = datetime.datetime.now()
+    print("Processing CSV FILE - START: {} ".format(dt))
     data = {}
     try:
         with open(f'/home/pi/Documents/RFID/TimeClock/{dt.year}_TimeClock.csv', 'r') as f: 
