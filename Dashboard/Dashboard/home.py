@@ -304,7 +304,7 @@ def dashboard():
     if option == 'Calendar':
         return render_template('dashboard.html', role=user.role,  user=user.firstname, option=option, events=getEvents())
 
-    return render_template('dashboard.html', role=user.role,  user=user.firstname, table_data=get_todays_timeclock(), events='None')
+    return render_template('dashboard.html', role=user.role,  user=user.firstname, option='home', table_data=get_todays_timeclock(), events='None')
     # else:
     #     return redirect(url_for('home.login'))
 
